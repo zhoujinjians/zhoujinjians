@@ -1,4 +1,4 @@
-####可以在 GitHub.dev 做的十件有趣的事
+#### 可以在 GitHub.dev 做的十件有趣的事
 
 ![可以在 GitHub.dev 做的十件有趣的事😎](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/42910201ead3408a9882aa108cf95306~tplv-k3u1fbpfcp-zoom-crop-mark:1304:1304:1304:734.awebp)  
 
@@ -75,9 +75,12 @@ VS Code 是世界一流的 Markdown 编辑器，因此，您可以开始使用 g
 
 除了编码 playgrounds 之外，另一种流行的学习和共享代码的方式是 Jupyter 笔记本。 如果你在 github.dev 中打开一个 `.ipynb` 文件，你可以立即查看笔记本的单元格和缓存输出。 更好的是，您可以安装 [Pyodide 扩展](https://link.juejin.cn/?target=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Djoyceerhl.vscode-pyodide "https://marketplace.visualstudio.com/items?itemName=joyceerhl.vscode-pyodide")，以便实际运行 Python 代码，且是完全在您的浏览器中运行的！
 
-## 10\. 🛠 创建您自己的扩展！
+## 10. 🛠 创建您自己的扩展！
 
 您可能已经注意到，上面的大多数功能都是通过扩展启用的，这是别人创建并发布到市场的。由于 VS Code [完全可扩展](https://link.juejin.cn/?target=https%3A%2F%2Fcode.visualstudio.com%2Fapi%2Freferences%2Fvscode-api "https://code.visualstudio.com/api/references/vscode-api")，使用简单的 JavaScript API，您可以创建自己的扩展，不仅支持 VS Code 桌面，而且还支持 [github.dev](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fmicrosoft%2Fvscode-docs%2Fblob%2Fvnext%2Fapi%2Fextension-guides%2Fweb-extensions.md "https://github.com/microsoft/vscode-docs/blob/vnext/api/extension-guides/web-extensions.md")。所以，如果你有一个很棒的想法，关于如何使在 GitHub 上编码更高效和有趣，那么你现在已经拥有起步所需的一切🏃
+
+## 11\. 🛠 PicGo Github图床测试！
+![](https://raw.githubusercontent.com/zhoujinjianmsn/imagehosting/master/Pic/PicGo.png)
 
 ## 🔮 期待
 
@@ -92,6 +95,3 @@ ___
 ![](https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/00ba359ecd0075e59ffbc3d810af551d.svg) 赞
 
 ![](https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/3d482c7a948bac826e155953b2a28a9e.svg) 收藏
-
-#### PicGo Github图床测试
-![](https://raw.githubusercontent.com/zhoujinjianmsn/imagehosting/master/Pic/PicGo.png)
