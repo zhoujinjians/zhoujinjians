@@ -92,3 +92,6 @@ ___
 ![](https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/00ba359ecd0075e59ffbc3d810af551d.svg) 赞
 
 ![](https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/3d482c7a948bac826e155953b2a28a9e.svg) 收藏
+
+#### PicGo Github图床测试
+![](https://raw.githubusercontent.com/zhoujinjianmsn/imagehosting/master/Pic/PicGo.png)
