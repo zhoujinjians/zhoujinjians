@@ -62,7 +62,7 @@ int main(){
 
 那内核是如何知道什么时候才能释放内存的呢，当然是等网络发送完毕之后。网卡在发送完毕的时候，会给 CPU 发送一个硬中断来通知 CPU。更完整的流程看图：
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![](https://mmbiz.qpic.cn/mmbiz_png/BBjAFF4hcwqUG6AE07rYfdAq7rDK2kZNHO50EyzavTV4lzNMXbgmqXBzwibOH4fe4SEpTMYX93nHYf1MUDiaAPgw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
 
 注意，我们今天的主题虽然是发送数据，但是硬中断最终触发的软中断却是 NET\_RX\_SOFTIRQ，而并不是 NET\_TX\_SOFTIRQ ！！！（T 是 transmit 的缩写，R 表示 receive）  
 
@@ -146,7 +146,7 @@ int igb_setup_tx_resources(struct igb_ring *tx_ring)
 
 这个时候它们之间还没有啥联系。将来在发送的时候，这两个环形数组中相同位置的指针将都将指向同一个 skb。这样，内核和硬件就能共同访问同样的数据了，内核往 skb 里写数据，网卡硬件负责发送。
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![](https://mmbiz.qpic.cn/mmbiz_png/BBjAFF4hcwqUG6AE07rYfdAq7rDK2kZNshNxj7ESgnlCGrw6pp71S9AmZKBZNzibib8HyZ5BMOlO1noHLCDImBUg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
 
 最后调用 netif\_tx\_start\_all\_queues 开启队列。另外，对于硬中断的处理函数 igb\_msix\_ring 其实也是在 \_\_igb\_open 中注册的。  
 
@@ -158,7 +158,7 @@ int igb_setup_tx_resources(struct igb_ring *tx_ring)
 
 假设服务器进程通过 accept 和客户端建立了两条连接，我们来简单看一下这两条连接和进程的关联关系。
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![](https://mmbiz.qpic.cn/mmbiz_png/BBjAFF4hcwqUG6AE07rYfdAq7rDK2kZNf9vlJUUicDicIQQRX6Gm7sibzKTxeCPeXLkmNNszwdy512ny7LFmdYhXw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
 
 其中代表一条连接的 socket 内核对象更为具体一点的结构图如下。  
 
@@ -181,7 +181,7 @@ send 系统调用的源码位于文件 net/socket.c 中。在这个系统调用�
 
 剩下的事情就交给下一层，协议栈里的函数 inet\_sendmsg 了，其中 inet\_sendmsg 函数的地址是通过 socket 内核对象里的 ops 成员找到的。大致流程如图。
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![](https://mmbiz.qpic.cn/mmbiz_png/BBjAFF4hcwqUG6AE07rYfdAq7rDK2kZNVf6gq2hiawPInMbFBzuKPB0yediaicpl4nsKwicpYj4JUWFFPibXZzIGL5A/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
 
 有了上面的了解，我们再看起源码就要容易许多了。源码如下：  
 
@@ -240,7 +240,7 @@ static inline int __sock_sendmsg_nosec(...)
 
 在这个函数中，内核会申请一个内核态的 skb 内存，将用户待发送的数据拷贝进去。注意这个时候不一定会真正开始发送，如果没有达到发送条件的话很可能这次调用直接就返回了。大概过程如图：
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![](https://mmbiz.qpic.cn/mmbiz_png/BBjAFF4hcwqUG6AE07rYfdAq7rDK2kZN02G9vIU8FIBvo1gkvLKQt1w8HBbupcpW28g7qmibEicVFbAISSnoP77g/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
 
 我们来看 inet\_sendmsg 函数的源码。  
 
@@ -328,7 +328,7 @@ int tcp_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 
 这个函数比较长，不过其实逻辑并不复杂。其中 msg->msg\_iov 存储的是用户态内存的要发送的数据的 buffer。接下来在内核态申请内核内存，比如 skb，并把用户内存里的数据拷贝到内核态内存中。**这就会涉及到一次或者几次内存拷贝的开销**。
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![](https://mmbiz.qpic.cn/mmbiz_png/BBjAFF4hcwqUG6AE07rYfdAq7rDK2kZN1Ueyic8TiaLVOjSsmdfCOHFtgcsdbhBuF2p9RxBA2Mj2nmeam2ba60BQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
 
 至于内核什么时候真正把 skb 发送出去。在 tcp\_sendmsg 中会进行一些判断。  
 
@@ -420,7 +420,7 @@ static int tcp_transmit_skb(struct sock *sk, struct sk_buff *skb, int clone_it,
 
 第二件事是修改 skb 中的 TCP header，根据实际情况把 TCP 头设置好。这里要介绍一个小技巧，skb 内部其实包含了网络协议中所有的 header。在设置 TCP 头的时候，只是把指针指向 skb 的合适位置。后面再设置 IP 头的时候，在把指针挪一挪就行，避免频繁的内存申请和拷贝，效率很高。
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![](https://mmbiz.qpic.cn/mmbiz_png/BBjAFF4hcwqUG6AE07rYfdAq7rDK2kZNRqslNiblOrkbl9qQmlBLyDa20xUCALE5QsAlD7uyCOia0IChPZqUDP9A/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
 
 tcp\_transmit\_skb 是发送数据位于传输层的最后一步，接下来就可以进入到网络层进行下一层的操作了。调用了网络层提供的发送接口icsk->icsk\_af\_ops->queue\_xmit()。  
 
@@ -477,9 +477,7 @@ int ip_queue_xmit(struct sk_buff *skb, struct flowi *fl)
 ip\_queue\_xmit 已经到了网络层，在这个函数里我们看到了网络层相关的功能路由项查找，如果找到了则设置到 skb 上（没有路由的话就直接报错返回了）。
 
 在 Linux 上通过 route 命令可以看到你本机的路由配置。
-
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
-
+![](https://mmbiz.qpic.cn/mmbiz_png/BBjAFF4hcwqUG6AE07rYfdAq7rDK2kZNdr7Zib9CBF65ARWmR1v6V4PnTXbMDibNGicC3icd7iaLObnhqIIPzomcY2g/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
 在路由表中，可以查到某个目的网络应该通过哪个 Iface（网卡），哪个 Gateway（网卡）发送出去。查找出来以后缓存到 socket 上，下次再发送数据就不用查了。  
 
 接着把路由表地址也放到 skb 里去。
@@ -494,7 +492,7 @@ struct sk_buff {
 
 接下来就是定位到 skb 里的 IP 头的位置上，然后开始按照协议规范设置 IP header。
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![](https://mmbiz.qpic.cn/mmbiz_png/BBjAFF4hcwqUG6AE07rYfdAq7rDK2kZNqIZkibKCHoqCAiapVUqdMrAryG98I9muj6CMkfvGu45rFOYcM3l27wTg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
 
 再通过 ip\_local\_out 进入到下一步的处理。  
 
@@ -579,12 +577,10 @@ static inline int ip_finish_output2(struct sk_buff *skb)
 邻居子系统是位于网络层和数据链路层中间的一个系统，其作用是对网络层提供一个封装，让网络层不必关心下层的地址信息，让下层来决定发送到哪个 MAC 地址。
 
 而且这个邻居子系统并不位于协议栈 net/ipv4/ 目录内，而是位于 net/core/neighbour.c。因为无论是对于 IPv4 还是 IPv6 ，都需要使用该模块。
-
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![](https://mmbiz.qpic.cn/mmbiz_png/BBjAFF4hcwqUG6AE07rYfdAq7rDK2kZNJZBziacZ2g4pYHa8A4TFHnfumx1Tmz21BrRnVMmhAWmCP9wr9JYUtog/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
 
 在邻居子系统里主要是查找或者创建邻居项，在创造邻居项的时候，有可能会发出实际的 arp 请求。然后封装一下 MAC 头，将发送过程再传递到更下层的网络设备子系统。大致流程如图。  
-
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![](https://mmbiz.qpic.cn/mmbiz_png/BBjAFF4hcwqUG6AE07rYfdAq7rDK2kZNL6qiaV60wqwUvibIQpj5vic8vNREQq1jTEwhOdn5zzN5YedSmiccaUFXNQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
 
 理解了大致流程，我们再回头看源码。在上面小节 ip\_finish\_output2 源码中调用了 \_\_ipv4\_neigh\_lookup\_noref。它是在 arp 缓存中进行查找，其第二个参数传入的是路由下一跳 IP 信息。  
 
@@ -659,8 +655,7 @@ int neigh_resolve_output(){
 当获取到硬件 MAC 地址以后，就可以封装 skb 的 MAC 头了。最后调用 dev\_queue\_xmit 将 skb 传递给 Linux 网络设备子系统。
 
 ### 4.5 网络设备子系统
-
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![](https://mmbiz.qpic.cn/mmbiz_png/BBjAFF4hcwqUG6AE07rYfdAq7rDK2kZNWlqeL1lcN9nsJ7J4cX1v3yYPYED4gV6uyBBlpwfCFDzPp3abYrT47Q/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
 
 邻居子系统通过 dev\_queue\_xmit 进入到网络设备子系统中来。  
 

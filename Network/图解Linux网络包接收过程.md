@@ -27,7 +27,11 @@ int main(){
 
 上面代码是一段udp server接收收据的逻辑。当在开发视角看的时候，只要客户端有对应的数据发送过来，服务器端执行`recv_from`后就能收到它，并把它打印出来。我们现在想知道的是，当网络包达到网卡，直到我们的`recvfrom`收到数据，这中间，究竟都发生过什么？
 
-通过本文，你将深入理解Linux网络系统内部是如何实现的，以及各个部分之间如何交互。相信这对你的工作将会有非常大的帮助。本文基于Linux 3.10，源代码参见https://mirrors.edge.kernel.org/pub/linux/kernel/v3.x/，网卡驱动采用Intel的igb网卡举例。
+通过本文，你将深入理解Linux网络系统内部是如何实现的，以及各个部分之间如何交互。相信这对你的工作将会有非常大的帮助。本文基于Linux 3.10，源代码参见:
+
+https://mirrors.edge.kernel.org/pub/linux/kernel/v3.x/
+
+网卡驱动采用Intel的igb网卡举例。
 
 友情提示，本文略长，可以先Mark后看！
 
