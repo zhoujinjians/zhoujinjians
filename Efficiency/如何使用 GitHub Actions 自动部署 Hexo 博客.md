@@ -29,11 +29,11 @@ GitHub Actions 是 GitHub 的持续集成服务。持续集成由很多操作组
 
 -   **私有仓库**用来存储 Hexo 项目源代码。（保证你的重要信息不泄露）
     
-    ![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/SCR-20220410-vrk.png)
+    ![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/others/SCR-20220410-vrk.png)
     
 -   **公共仓库**用来存储编译之后的静态页面。
     
-    ![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/SCR-20220410-vsg.png)
+    ![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/others/SCR-20220410-vsg.png)
     
 
 本例：
@@ -47,7 +47,7 @@ GitHub Actions 是 GitHub 的持续集成服务。持续集成由很多操作组
 
 创建一个有 **repo** 和 **workflow** 权限的 [GitHub Token](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fsettings%2Ftokens%2Fnew "https://github.com/settings/tokens/new") 。
 
-![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/SCR-20220410-vvq.png)
+![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/others/SCR-20220410-vvq.png)
 
 新生成的 Token 只会显示一次，需要先复制保存，如有遗失，重新生成即可。
 
@@ -59,7 +59,7 @@ GitHub Actions 是 GitHub 的持续集成服务。持续集成由很多操作组
 
 步骤：私有仓库 -> `settings` -> `Secrets` ->`Dependabot` ->`New repository secret`。
 
-![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/SCR-20220410-vo6.png)
+![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/others/SCR-20220410-vo6.png)
 
 > 新创建的 secret `HEXO_DEPLOY` 在 Actions 配置文件要用到，需跟配置文件保持一致！
 
@@ -67,7 +67,7 @@ GitHub Actions 是 GitHub 的持续集成服务。持续集成由很多操作组
 
 1.  点击创建workflow：main.yml。
 
-![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/SCR-20220410-vlq.png)
+![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/others/SCR-20220410-vlq.png)
 
 `main.yml` 文件的内容如下：
 
@@ -151,9 +151,9 @@ jobs:
     
     > `main` 分支是 GitHub Pages 服务的自动生成的分支，你只需在 `main.yml` 文件正确填写，会自动创建。
     
-4.  在私有仓库的 Actions 可以查看到你配置的 action ![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/Hexo_Butterfly_Blog_Source.png)
+4.  在私有仓库的 Actions 可以查看到你配置的 action ![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/others/Hexo_Butterfly_Blog_Source.png)
     
-5.  通过 GitHub Actions 自动部署成功的效果图： ![image](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/zhoujinjianmsn.github.io.png)
+5.  通过 GitHub Actions 自动部署成功的效果图： ![image](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/others/zhoujinjianmsn.github.io.png)
     
 
 > ❤ 如果对你有帮助，点赞支持下作者~
