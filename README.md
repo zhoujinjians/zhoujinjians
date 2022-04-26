@@ -28,9 +28,14 @@ Here are some ideas to get you started:
 ## Kernel
 
 [Linux学习系列0：裸机.md](https://github.com/zhoujinjianmsn/zhoujinjianmsn/blob/main/Kernel/Linux%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%970%EF%BC%9A%E8%A3%B8%E6%9C%BA.md)
+
 [Linux学习系列1：clk子系统.md](https://github.com/zhoujinjianmsn/zhoujinjianmsn/blob/main/Kernel/Linux%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%971%EF%BC%9ACommon%20Clock%20Framework.md)
+
 [Linux学习系列2：i2c子系统.md](https://github.com/zhoujinjianmsn/zhoujinjianmsn/blob/main/Kernel/Linux%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%972%EF%BC%9Ai2c%E5%AD%90%E7%B3%BB%E7%BB%9F.md)
+
 [Linux学习系列3：pinctrl子系统.md](https://github.com/zhoujinjianmsn/zhoujinjianmsn/blob/main/Kernel/Linux%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%973%EF%BC%9Apinctrl%E5%AD%90%E7%B3%BB%E7%BB%9F.md)
+
+
 
 ## Android
 
