@@ -1,13 +1,14 @@
-title: Linux学习系列1：Common Clock Framework
+---
+title: Linux学习系列1：clk子系统
 cover: https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.41.jpg
-categories: 
-
+categories:
  - Linux
 tags:
  - Linux
 toc: true
 abbrlink: 20220615
 date: 2022-06-15 00:00:00
+---
 
 注：文章都是通过阅读各位前辈总结的资料 Android 10.0 && Linux（Kernel 4.19）Rockchip平台源码、加上自己的思考分析总结出来的，其中难免有理解不对的地方，欢迎大家批评指正。文章为个人学习、研究、欣赏之用，图文内容整理自互联网，如有侵权，请联系删除（◕‿◕），转载请注明出处（©Rockchip ©Android @Linux 版权所有），谢谢。
 
