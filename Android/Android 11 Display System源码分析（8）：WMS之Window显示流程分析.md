@@ -100,10 +100,6 @@ date: 2023-02-16 16:16:16
 
 ## （二）、App测量布局与绘制
 
-![image-20221019134934965](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display08/image-20221019134934965.png)
-
-![image-20221019135046614](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display08/image-20221019135046614.png)
-
 ### （1）、ViewRootImpl.relayoutWindow()
 
 ![image-20221019140312543](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display08/image-20221019140312543.png)
@@ -202,6 +198,10 @@ WindowAnimator属于WMS的。
 ![image-20221019142701745](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display08/image-20221019142701745.png)
 
 ### （5）、ViewRootImpl .measureHierarchy()
+
+![image-20221019134934965](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display08/image-20221019134934965.png)
+
+![image-20221019135046614](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display08/image-20221019135046614.png)
 
 ![image-20221019135218716](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display08/image-20221019135218716.png)
 
