@@ -1,6 +1,6 @@
 ---
 title: Android P Graphics System（五）：GraphicBuffer和Gralloc分析（转载）
-cover: https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/hexo.themes/bing-wallpaper-2018.04.40.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/hexo.themes/bing-wallpaper-2018.04.40.jpg
 categories:
   - Graphics
 tags:
@@ -19,7 +19,7 @@ date: 2019-07-24 09:25:00
 注：文章都是通过阅读各位前辈总结的资料 Android 9.0 && Linux（Kernel 3.18）Qualcomm平台源码、加上自己的思考分析总结出来的，其中难免有理解不对的地方，欢迎大家批评指正。文章为个人学习、研究、欣赏之用，图文内容整理自互联网，如有侵权，请联系删除（◕‿◕），转载请注明出处（©Qualcomm ©Android @Linux 版权所有），谢谢。
 （==**文章基于 Kernel-3.18**==）&&（==**文章基于 Android 9.0**==）
  [【开发板 Intrinsyc Open-Q™ 820 µSOM Development Kit】](https://www.intrinsyc.com/snapdragon-embedded-development-kits/open-q-820-usom-development-kit/)
-[【开发板 Android 9.0 && Linux（Kernel 3.18）源码链接】](https://gitlab.com/zhoujinjianmsn/apq8096_la.um.7.5.r1-03100-8x96.0_p_v5.0)
+[【开发板 Android 9.0 && Linux（Kernel 3.18）源码链接】](https://gitlab.com/zhoujinjianx/apq8096_la.um.7.5.r1-03100-8x96.0_p_v5.0)
 
 正是由于前人的分析和总结，帮助我节约了大量的时间和精力，特别感谢！！！
 
@@ -360,7 +360,7 @@ status_t GraphicBufferAllocator::allocate(uint32_t width, uint32_t height,
 }
 ```
 在看allocate函数之前，我们先来看一下GraphicBuffer相关的类：
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG5.GraphicBuffer-Class.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG5.GraphicBuffer-Class.png)
 GraphicBuffer的左膀右臂，GraphicBufferAllocator和GraphicBufferMapper！从Android 8.0开始，Android 操作系统框架在架构方面的一项重大改变，提出了treble 项目。Vendor的实现和Androd的实现分开，Android和HAL，采用HwBinder进行通信，减少Android对HAL的直接依赖。这里的Allocator和Mapper，就是对HAL结合的包装；IAllocator，IMapper的HAL的接口。V2_1::IMapper是一个对Gralloc HAL的2.1版本。
 回到allocate函数～
 BufferDescriptorInfo，对Buffer的描述，在HAL层也通用。根据需要，生成BufferDescriptorInfo，再通过Gralloc2的Allocator进行allocate。allocate出来的Buffer 句柄，保存在sAllocList中。
@@ -1202,7 +1202,7 @@ mapper的HAL实现，只要实现上述的gralloc1_function_descriptor_t。
 我们来看一下Gralloc1的相关类似关系～
 
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG5.gralloc1.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG5.gralloc1.png)
 
 
 最终，Gralloc1都是在gralloc1_device_t中去实现的。当然，如果HAL没有实现对应地Gralloc1，而是Gralloc0。Android这边也是提供适配的。对应的代码在：
@@ -1384,7 +1384,7 @@ gralloc1_function_pointer_t GrallocImpl::GetFunction(gralloc1_device_t *device, 
 }
 ```
 来看看Qcom Gralloc1的整体架构～
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG5.gralloc1-class.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG5.gralloc1-class.png)
 - GrallocImpl继承gralloc1_device_t，这个Gralloc1具体的实现！
 - GrallocImpl采用一个BufferManager，管理Buffer，自己当领导！
 - BufferManager，抽像了一个Allocator，负责具体的Buffer分配！
@@ -1396,7 +1396,7 @@ gralloc1_function_pointer_t GrallocImpl::GetFunction(gralloc1_device_t *device, 
 ##### allocate相关流程
 我们来看下allocate Buffer的流程，代码就不贴了，给个流程图吧～
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG5.gralloc1-allocate.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG5.gralloc1-allocate.png)
 
 这个流程图中，包括了release的流程～
 Android中的importBuffer函数，在default中变为registerBuffer，在HAL中变成retain，高通对应的实现为RetainBuffer，IonAlloc中又变为ImportBuffer。（...不止72变了...比孙悟空还厉害）
@@ -2221,7 +2221,7 @@ ION_IOC_DRAIN
 ION是通过handle而非buffer地址来实现驱动间共享内存，用户空间共享内存也是利用同样原理，所以，map，import都是通过handle来完成。另外，Ion Buffer创建后，映射到 DMA Buffer，后续通过DMA Buffer来处理。
 我们我们来看他们之间的关系类图～
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG5.ion.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG5.ion.png)
 
 
 

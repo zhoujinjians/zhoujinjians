@@ -1,6 +1,6 @@
 ---
 title: Android 10 Camera源码分析8：openCamera流程
-cover: https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.38.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.38.jpg
 categories: 
  - Camera
 tags:
@@ -13,7 +13,7 @@ date: 2022-04-15 04:15:00
 
 （==**文章基于 Kernel-4.19**==）&&（==**文章基于 Android 10.0**==）
 
-[【blog.zhoujinjian.cn博客原图链接】](https://github.com/zhoujinjianmsn) 
+[【blog.zhoujinjian.cn博客原图链接】](https://github.com/zhoujinjianx) 
 
 [【开发板 Khadas Edge V】](https://www.khadas.cn/edge-v)
 
@@ -41,7 +41,7 @@ date: 2022-04-15 04:15:00
 
 #### （1）、总体概览图
 
-![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/Android.10.Camera.08/openCamera.png)
+![](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/Android.10.Camera.08/openCamera.png)
 
 ```java
 07-07 10:04:17.368  1450  1540 I CameraManager: openCameraDeviceUserAsync
@@ -356,7 +356,7 @@ Status CameraService::makeClient(const sp<CameraService>& cameraService,
 }
 ```
 
-![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/Android.10.Camera.08/app_camera_service.png)
+![](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/Android.10.Camera.08/app_camera_service.png)
 
 
 
@@ -729,4 +729,4 @@ Stack Trace: openCameraHardware()
   00060087  __start_thread+30            
 ```
 
-![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/Android.10.Camera.08/cameraservice_provider.png)
+![](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/Android.10.Camera.08/cameraservice_provider.png)

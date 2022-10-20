@@ -1,6 +1,6 @@
 ---
 title: Android 10 Display System源码分析（4）：DRM/KMS分析（Android 10.0 && Kernel 4.15）
-cover: https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.25.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.25.jpg
 categories: 
   - Display
 tags:
@@ -19,7 +19,7 @@ DRM 是 Linux 目前主流的图形显示框架，相比 FB 架构，DRM 更能�
 
 DRM 从模块上划分，可以简单分为 3 部分：**libdrm、KMS、GEM**
 
-![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/Android10.Display.4/drm_user_kernel_space.svg)
+![](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/Android10.Display.4/drm_user_kernel_space.svg)
 
 #### 1.1、libdrm
 对底层接口进行封装，向上层提供通用的 API 接口，主要是对各种 IOCTL 接口进行封装。
@@ -32,7 +32,7 @@ DRM 框架涉及到的元素很多，大致如下：
 KMS：**CRTC，ENCODER，CONNECTOR，PLANE，FB，VBLANK，property**
 GEM：**DUMB、PRIME、fence**
 
-![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/Android10.Display.4/drm_architecture.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/Android10.Display.4/drm_architecture.jpg)
 
 | 元素 | 说明 |
 | --- | --- |
@@ -54,14 +54,14 @@ Kernel Mode Setting，所谓 Mode setting，其实说白了就两件事：更新
 
 ## (二)、DRM/KMS驱动分析
 首先看看RK3399 DRM Kernel启动框图：
-![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/Android10.Display.4/rockchip_drm_kernel_boot_up.png)
+![](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/Android10.Display.4/rockchip_drm_kernel_boot_up.png)
 
 
 
 
 首先看看RK3399DRM Kernel启动UML流程图：
 
-![](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/Android10.Display.4/Android10.Display.4.Kernel.Display.Flow.png)
+![](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/Android10.Display.4/Android10.Display.4.Kernel.Display.Flow.png)
 
 
 
@@ -1132,6 +1132,6 @@ static int panel_simple_probe(struct device *dev, const struct panel_desc *desc)
 
 [（2）【The DRM/KMS subsystem from a newbie’s point of view】](https://events.static.linuxfound.org/sites/events/files/slides/brezillon-drm-kms.pdf)
 
-[（3）【Anatomy of an Atomic KMS Driver】](https://elinux.orghttps://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/4/45/Atomic_kms_driver_pinchart.pdf)
+[（3）【Anatomy of an Atomic KMS Driver】](https://elinux.orghttps://raw.githubusercontent.com/zhoujinjianx/PicGo/master/4/45/Atomic_kms_driver_pinchart.pdf)
 
 [（4）【Why and How to use KMS】](https://events.static.linuxfound.org/sites/events/files/lcjpcojp13_pinchart.pdf)

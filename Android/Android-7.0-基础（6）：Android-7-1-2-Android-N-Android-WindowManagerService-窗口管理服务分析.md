@@ -1,6 +1,6 @@
 ---
 title: Android N 基础（6）：Android 7.1.2 Android WindowManagerService 窗口管理服务分析
-cover: https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/hexo.themes/bing-wallpaper-2018.04.08.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/hexo.themes/bing-wallpaper-2018.04.08.jpg
 categories: 
   - Android
 tags:
@@ -53,13 +53,13 @@ date: 2018-01-08 09:25:00
 
 
 我们先看一下窗口启动、退出过程动态图，之后再详细分析： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/01-Android-WMS-ezgif.com-gif-maker-WindowManagerService-resize.gif)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/01-Android-WMS-ezgif.com-gif-maker-WindowManagerService-resize.gif)
 
 
 ## （一）、Window 组织方式
 
 ActivityManagerService（AMS），WindowManagerService（WMS），SurfaceFlinger（SF）等几个模块相互合作。App负责业务逻辑，绘制自己的视图；AMS管理组件、进程信息和Activity的堆栈及状态等等；WMS管理Activity对应的窗口及子窗口，还有系统窗口等；SF用于管理图形缓冲区，将App绘制的东西合成渲染在屏幕上。 窗口管理系统主要框架： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/02-Android-WMS-AMS-SurfaceFlinger-Conn.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/02-Android-WMS-AMS-SurfaceFlinger-Conn.png)
 
 > 主要对象功能介绍：
 
@@ -79,14 +79,14 @@ Token是ActivityRecord的内部静态类，我们先来看下Token的继承关�
 
 Token梳理： 分析源码，我们发现，大多数 token 的对象，都表示一个 IBinder 对象。提到 IBinder，大家一点也不陌生，就是 Android 的 IPC 通信机制。在创建窗口过程中，涉及到的 IPC 通信，无非包含两方面，一个是 WmS 用来跟应用所在的进程进行通信的 ViewRootImpl.W 类的对象，另一个是指向一个 ActivityRecord 的对象，自然应该是WMS用来跟 AMS进行通信的了。我们梳理了一下，token 以下几处的定义，分别来讲讲这里的 token 代表什么。
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/03-Android-WMS-Token-Detail.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/03-Android-WMS-Token-Detail.png)
 
 分析一下 View 的 AttachInfo 的赋值。ViewRootImpl 在构建方法里，会初始化一个 AttachInfo 实例，把它的 Session，以及 W类对象赋值给 AttachInfo。分析可以看到，AttachInfo 中的 mWindowToken，与mWindow 都是指向 ViewRootImpl 中的 mWindow(W类实例)。当一个 View attach 到窗口后，ViewRootImpl会执行performTraversals，如果发现是首次调用会，会把自己的 mAttachInfo 传递给根 View（通过dispatchAttachedToWindow），告诉 View 树现在已经 attch to Window 了，马上可以显示了。根 View（一般是 ViewGroup）会把这个信息，遍历地传递给 View 树中的每一个子 View，这样每个 View 的 mAttachInfo 都被赋值为 ViewRootImp 的 mAttachInfo了。
 
 ### 1.1.1、Token对象的创建
 
 下面这个图是Token的传递，首先会传递到WMS中，接着会传递到应用进程ActivityThread中，下面来具体分析这个传递流程。 总体流程图： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/04-Android-WMS-Token.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/04-Android-WMS-Token.png)
 
 我们之前分析：【Android 7.1.2 (Android N) Activity启动流程分析】 在启动Activity过程中会调用ActivityStarter.startActivityLocked()
 
@@ -348,7 +348,7 @@ Activity管理服务ActivityManagerService中每一个ActivityRecord对象在Win
 
 在Window管理服务WindowManagerService中，无论是AppWindowToken对象，还是WindowToken对象，它们都是用来描述一组有着相同令牌的窗口的，每一个窗口都是通过一个WindowState对象来描述的。例如，一个Activity组件窗口可能有一个启动窗口（Starting Window），还有若干个子窗口，那么这些窗口就会组成一组，并且都是以Activity组件在Window管理服务WindowManagerService中所对应的AppWindowToken对象为令牌的。从抽象的角度来看，就是在Window管理服务WindowManagerService中，每一个令牌（AppWindowToken或者WindowToken）都是用来描述一组窗口（WindowState）的，并且每一个窗口的子窗口也是与它同属于一个组，即都有着相同的令牌。
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/05-Android-WMS-AppWindowToken.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/05-Android-WMS-AppWindowToken.png)
 其中，Activity Stack是在ActivityManagerService服务中创建的，Token List和Window Stack是在WindowManagerService中创建的，而Binder for IM和Binder for WP分别是在InputMethodManagerService服务和WallpaperManagerService服务中创建的，用来描述一个输入法窗口和一个壁纸窗口。
 
 ### 1.3、WMS窗口类型
@@ -528,10 +528,10 @@ performTraversals()函数相当复杂，其主要实现以下几个重要步骤�
 
 首先来看relayoutWindow()。relayoutWindow() 是Window Manager Service 重要工作之一，它的流程如下图所示：
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/06-Android-WMS-relayoutWindow-flow.png.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/06-Android-WMS-relayoutWindow-flow.png.png)
 
 每个View将期望窗口尺寸交给WMS（WindowManager Service). WMS 将所有的窗口大小以及当前的Overscan区域传给WPM （WindowManager Policy). WPM根据用户配置确定每个Window在最终Display输出上的位置以及需要分配的Surface大小。 返回这些信息给每个View，他们将在给会的区域空间里绘图。 Android里定义了很多区域,如下图所示 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/07-Android-WMS-OverSan-area.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/07-Android-WMS-OverSan-area.png)
 
 **Overscan:** Overscan 是电视特有的概念，上图中黄色部分就是Overscan区域，指的是电视机屏幕四周某些不可见的区域（因为电视特性，这部分区域的buffer内容显示时被丢弃），也意味着如果窗口的某些内容画在这个区域里，它在某些电视上就会看不到。为了避免这种情况发生，通常要求UI不要画在屏幕的边角上，而是预留一定的空间。因为Overscan的区域大小随着电视不 同而不同，它一般由终端用户通过UI指定，（比如说GoogleTV里就有确定Overscan大小的应用）。
 
@@ -542,22 +542,22 @@ performTraversals()函数相当复杂，其主要实现以下几个重要步骤�
 **mFrame, mDisplayFrame, mContainingFrame** Frame指的是一片内存区域, 对应于屏幕上的一块矩形区域. mFrame的大小就是Surface的大小, 如上上图中的蓝色区域. mDisplayFrame 和 mContainingFrame 一般和mFrame 大小一致. mXXX 是Window(ViewRootImpl, Windowstate) 里面定义的成员变量.
 
 **mContentFrame, mVisibleFrame** 一个Surface的所有内容不一定在屏幕上都得到显示, 与Overscan重叠的部分会被截掉, 系统的其他窗口也会遮挡掉部分区域 (比如短信窗口，ContentFrame是800x600(没有Status Bar), 但当输入法窗口弹出是，变成了800x352), 剩下的区域称为Visible Frame, UI内容只有画在这个区域里才能确保可见. 所以也称为Content Frame. mXXX也是Window(ViewRootImpl, WindowState) 里面定义的成员变量. 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/08-Android-WMS-Content-Insets.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/08-Android-WMS-Content-Insets.png)
 
 **Insets** insets的定义如上图所示, 用了表示某个Frame的边缘大小.
 
 ### 2.2、 Window 大小位置计算过程
 
 在Android系统中，Activity窗口的大小是由WindowManagerService服务来计算的。WindowManagerService服务会根据屏幕及其装饰区的大小来决定Activity窗口的大小。一个Activity窗口只有知道自己的大小之后，才能对它里面的UI元素进行测量、布局以及绘制。 一般来说，Activity窗口的大小等于整个屏幕的大小，但是它并不占据着整块屏幕。为了理解这一点，我们首先分析一下Activity窗口的区域是如何划分的。 我们知道，Activity窗口的上方一般会有一个状态栏，用来显示3G信号、电量使用等图标，如图 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/09-Android-WMS-Content-Visible-Frame.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/09-Android-WMS-Content-Visible-Frame.png)
 
 从Activity窗口剔除掉状态栏所占用的区域之后，所得到的区域就称为内容区域（Content Region）。顾名思义，内容区域就是用来显示Activity窗口的内容的。我们再抽象一下，假设Activity窗口的四周都有一块类似状态栏的区域，那么将这些区域剔除之后，得到中间的那一块区域就称为内容区域，而被剔除出来的区域所组成的区域就称为内容边衬区域（Content Insets）。Activity窗口的内容边衬区域可以用一个四元组（content-left, content-top, content-right, content-bottom）来描述，其中，content-left、content-right、content-top、content-bottom分别用来描述内容区域与窗口区域的左右上下边界距离。 我们还知道，Activity窗口有时候需要显示输入法窗口，如图。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/10-Android-WMS-InputMethod-Content-Frame.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/10-Android-WMS-InputMethod-Content-Frame.png)
 
 这时候Activity窗口的内容区域的大小有可能没有发生变化，这取决于它的Soft Input Mode。我们假设Activity窗口的内容区域没有发生变化，但是它在底部的一些区域被输入法窗口遮挡了，即它在底部的一些内容是不可见的。从Activity窗口剔除掉状态栏和输入法窗口所占用的区域之后，所得到的区域就称为可见区域（Visible Region）。同样，我们再抽象一下，假设Activity窗口的四周都有一块类似状态栏和输入法窗口的区域，那么将这些区域剔除之后，得到中间的那一块区域就称为可见区域，而被剔除出来的区域所组成的区域就称为可见边衬区域（Visible Insets）。Activity窗口的可见边衬区域可以用一个四元组（visible-left, visible-top, visible-right, visible-bottom）来描述，其中，visible-left、visible-right、visible-top、visible-bottom分别用来描述可见区域与窗口区域的左右上下边界距离。
 
 在大多数情况下，Activity窗口的内容区域和可见区域的大小是一致的，而状态栏和输入法窗口所占用的区域又称为屏幕装饰区。理解了这些概念之后，我们就可以推断，WindowManagerService服务实际上就是需要根据屏幕以及可能出现的状态栏和输入法窗口的大小来计算出Activity窗口的整体大小及其内容区域边衬和可见区域边衬的大小。有了这三个数据之后，Activity窗口就可以对它里面的UI元素进行测量、布局以及绘制等操作了。 总体流程图： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/11-Android-WMS-relayoutWindow-time-diagram.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/11-Android-WMS-relayoutWindow-time-diagram.png)
 
 这个过程可以分为13个步骤，接下来我们就详细分析每一个步骤。
 
@@ -1395,7 +1395,7 @@ public void finishLayoutLw() {
 ## （三）、Window Z-Order 计算和调整过程
 
 口的UI最终是需要通过SurfaceFlinger服务来统一渲染的，而SurfaceFlinger服务在渲染窗口的UI之前，需要计算基于各个窗口的Z轴位置来计算它们的可见区域。因此，WindowManagerService服务计算好每一个窗口的Z轴位置之后，还需要将它们设置到SurfaceFlinger服务中去，以便SurfaceFlinger服务可以正确地渲染每一个窗口的UI。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/12-Android-WMS-Z-Order.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/12-Android-WMS-Z-Order.png)
 
 ### 3.1、需要重新计算窗口Z轴位置的情景
 
@@ -2000,7 +2000,7 @@ status_t Composer::setFlags(const sp<SurfaceComposerClient>& client,
 ### 4.1、Activity组件的启动窗口(Starting Window)的添加过程
 
 时序图： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/13-Android-WMS-Starting-Window-addview.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/13-Android-WMS-Starting-Window-addview.png)
 
 ### 4.1.1、 ActivityStack.startActivityLocked()
 
@@ -2198,10 +2198,10 @@ wm.addView(view, params)，一个新创建的Activity组件的启动窗口就增
 ## （五）、WMS切换Activity窗口（App Transition）过程
 
 WindowManagerService服务在执行Activity窗口的切换操作的时候，会给参与切换操作的Activity组件的设置一个动画，以便可以向用户展现一个Activity组件切换效果，从而提高用户体验。 首先看一下App Transition动态图： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/14-Android-WMS-ezgif.com-video-to-gif-WMS-App-Transition.gif)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/14-Android-WMS-ezgif.com-video-to-gif-WMS-App-Transition.gif)
 
 时序图： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/15-Android-WMS-executeAppTransition.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/15-Android-WMS-executeAppTransition.png)
 
 我们直接分析App Transition过程的prepareAppTransition、executeAppTransition 关于Activity启动过程请参考：【Android-7-1-2-Android-N-Activity启动流程分析】
 
@@ -2389,7 +2389,7 @@ Animation loadAnimation(WindowManager.LayoutParams lp, int transit, boolean ente
 ```
 
 最后通过**loadAnimationAttr**加载xml文件加载动画，动画xml文件的存放路径（/frameworks/base/core/res/res/anim/） 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/16-Android-WMS-executeAppTransition-xml.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/16-Android-WMS-executeAppTransition-xml.png)
 
 ### 5.3、executeAppTransition过程
 
@@ -2442,7 +2442,7 @@ boolean reportResumedActivityLocked(ActivityRecord r) {
 ### 6.1、动画的设置过程
 
 在Android系统中，窗口动画的本质就是对原始窗口施加一个变换（Transformation）。在线性数学中，对物体的形状进行变换是通过乘以一个矩阵（Matrix）来实现，目的就是对物体进行偏移、旋转、缩放、切变、反射和投影等。因此，给窗口设置动画实际上就给窗口设置一个变换矩阵（Transformation Matrix）。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/17-Android-WMS-Transformation-matrix.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/17-Android-WMS-Transformation-matrix.png)
 
 窗口被设置的动画虽然可以达到三个，但是这三个动画可以归结为两类，一类是普通动画，例如，窗口在打开过程中被设置的进入动画和在关闭过程中被设置的退出动画，另一类是切换动画。其中，Self Transformation和Attached Transformation都是属于普通动画，而App Transformation属于切换动画。前面已经分析过App Transformation的设置过程 接下来分析普通动画的设置过程。
 
@@ -2558,7 +2558,7 @@ boolean applyAnimationLocked(int transit, boolean isEntrance) {
 
 ### 6.2、窗口动画的显示框架
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/19-Android-WMS-animationLocked.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/19-Android-WMS-animationLocked.png)
 通过堆栈信息可以看到，由Vsync信号驱动，然后调用Choreographer.doFrame完成动画的相关操作，关于Vsync这部分之前文章已经分析过，这里不再分析了。
 
 ```java
@@ -2917,7 +2917,7 @@ if (hasPendingLayoutChanges || doRequest) {
 ```
 
 最终经过SurfaceFlinger合成显示到屏幕上。 总体流程图(...)： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/android.wms/20-Android-WMS-animation_Locked-time-diagram.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/android.wms/20-Android-WMS-animation_Locked-time-diagram.png)
 
 ## （七）、参考文档(特别感谢各位前辈的分析和图示)：
 

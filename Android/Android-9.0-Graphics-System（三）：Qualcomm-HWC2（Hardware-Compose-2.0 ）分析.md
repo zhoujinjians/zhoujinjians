@@ -1,6 +1,6 @@
 ---
 title: Android P Graphics System（三）：Qualcomm HWC2（Hardware Composer 2.0 ）分析
-cover: https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/hexo.themes/bing-wallpaper-2018.04.38.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/hexo.themes/bing-wallpaper-2018.04.38.jpg
 categories:
   - Graphics
 tags:
@@ -18,7 +18,7 @@ date: 2019-07-08 09:25:00
 （==**文章基于 Kernel-3.18**==）&&（==**文章基于 Android 9.0**==）
 
 [【开发板 Intrinsyc Open-Q™ 820 µSOM Development Kit】](https://www.intrinsyc.com/snapdragon-embedded-development-kits/open-q-820-usom-development-kit/)
-[【开发板 Android 9.0 && Linux（Kernel 3.18）源码链接】](https://gitlab.com/zhoujinjianmsn/apq8096_la.um.7.5.r1-03100-8x96.0_p_v5.0)
+[【开发板 Android 9.0 && Linux（Kernel 3.18）源码链接】](https://gitlab.com/zhoujinjianx/apq8096_la.um.7.5.r1-03100-8x96.0_p_v5.0)
 
 正是由于前人的分析和总结，帮助我节约了大量的时间和精力，特别感谢！！！
 
@@ -91,9 +91,9 @@ HWC专注于优化，智能地选择要发送到叠加硬件的 Surface，以最
 从Android 8.0开始的Treble项目，对Android的架构做了重大的调整，让制造商以更低的成本更轻松、更快速地将设备更新到新版 Android 系统。这就对 HAL 层有了很大的调整，利用提供给Vendor的接口，将Vendor的实现和Android上层分离开来。
 这样的架构让HWC的架构也变的复杂，HWC属于Binderized的HAL类型。Binderized类型的HAL，将上层Androd和底层HAL分别采用两个不用的进程实现，中间采用Binder进行通信，为了和前面的Binder进行区别，这里采用HwBinder。
 因此，我们可以将HWC再进行划分，可以分为下面这几个部分，如下图：
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HW2_Pipeline.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HW2_Pipeline.png)
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HW2_Arc.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HW2_Arc.png)
 
 - **Client端**
 Client也就是SurfaceFlinger，不过SurfaceFlinger采用前后端的设计，以后和HWC相关的逻辑应该都会放到SurfaceFlinger后端也就是SurfaceFlingerBE中。代码位置：
@@ -249,7 +249,7 @@ status_t defaultPassthroughServiceImplementation(std::string name,
     return UNKNOWN_ERROR;
 }
 ```
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HW2_Composer_registerAsService.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HW2_Composer_registerAsService.png)
 
 
 ##### 2.2.0 、Hal进程获取IComposer类对象
@@ -365,7 +365,7 @@ hidl服务对象获取方式包括2中：
 > 
 >    《2》当hal传输模式为Passthru或Legacy时，则采用PassthroughServiceManager来获取；
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HW2_HIDL_arc.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HW2_HIDL_arc.png)
 
 sp<Interface> service = Interface::getService(name, true /* getStub */)所以getStub=true. 这里通过PassthroughServiceManager来获取IComposer对象。其实所有的Hal 进程都是通过PassthroughServiceManager来得到hidl服务对象的，而作为Hal进程的Client端Framework进程在获取hidl服务对象时，需要通过hal的Transport类型来选择获取方式。
 
@@ -452,7 +452,7 @@ struct PassthroughServiceManager : IServiceManager1_1 {
 
 这里只是简单的创建了一个PassthroughServiceManager对象。PassthroughServiceManager也实现了IServiceManager接口。然后通过PassthroughServiceManager询服务：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HW2_HIDL_registerReference.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HW2_HIDL_registerReference.png)
 
 
 根据传入的fqName=(android.hardware.graphics.composer@2.1::IComposer")获取当前的接口名IComposer，拼接出后面需要查找的函数名HIDL_FETCH_IComposer和库名字android.hardware.graphics.composer@2.1-impl.so,然后查找"/system/lib64/hw/"、"/vendor/lib64/hw/"、"/odm/lib64/hw/"下是否有对应的so库。接着通过dlopen载入/vendor/lib/hw/android.hardware.graphics.composer@2.1-impl.so，然后通过dlsym查找并调用HwcLoader::load()函数，最后调用registerReference(fqName, name)向hwservicemanager注册。
@@ -831,7 +831,7 @@ void HidlService::registerPassthroughClient(pid_t pid) {
 ```
 因此registerPassthroughClient在hwservicemanager中插入一个HidlService对象而已，并没有注册对应的IBase对象。getService最后将HwcHal对象返回给registerPassthroughServiceImplementation()函数，然后再次调用registerAsService注册该IBase对象。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HW2_HIDL_registerPassthroughClient.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HW2_HIDL_registerPassthroughClient.png)
 
 
 ##### 2.4.0 、registerAsService注册
@@ -1034,7 +1034,7 @@ android\out\soong\.intermediates\system\libhidl\transport\manager\1.0\android.hi
 }
 ```
 wservicemanager进程通过_hidl_err = _hidl_data.readNullableStrongBinder(&_hidl_service_binder);拿到client进程发送过来的BnHwComposer对象，binder实体到达目的端进程将变为binder代理对象，然后通过fromBinder函数将binder代理对象转换为业务代理对象BpHwBase，这个过程在后续进行详细分析，接下来继续调用_hidl_mImpl的add函数，而我们知道_hidl_mImpl其实就是ServiceManager：
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HW2_HIDL_add.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HW2_HIDL_add.png)
 
 
 ``` cpp
@@ -1090,9 +1090,9 @@ Return<bool> ServiceManager::add(const hidl_string& name, const sp<IBase>& servi
 ```
 ##### 2.5.0 、IComposer服务注册
 如果服务注册进程有权限向hwservicemanager注册服务，接下来将完成服务添加。
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HW2_HIDL_mServiceMap.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HW2_HIDL_mServiceMap.png)
 每个服务接口对应多个实例，比如android.hidl.manager@1.1::IServiceManager可以注册多个实例，每个实例名称不同。
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HW2_HIDL_mInstanceMap.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HW2_HIDL_mInstanceMap.png)
 
 ``` cpp
 PackageInterfaceMap &ifaceMap = mServiceMap[fqName];
@@ -1124,12 +1124,12 @@ if (hidlService == nullptr) {
 	hidlService->setService(service, pid);
 }
 ```
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HW2_HIDL_registerSuccess.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HW2_HIDL_registerSuccess.png)
 
 ##### 2.6.0 、IComposer服务查询
 通过前面的分析我们知道，Hal进程启动时，会向hwservicemanager进程注册hidl服务，那么当Framework Server需要通过hal访问硬件设备时，首先需要查询对应的hidl服务，那么Client进程是如何查询hidl服务的呢？这篇文章将展开分析，这里再次以IComposer为例进行展开。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HW2_HIDL_BpHwComposer.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HW2_HIDL_BpHwComposer.png)
 
 ``` cpp
 frameworks\native\services\surfaceflinger\DisplayHardware\ComposerHal.cpp
@@ -1255,7 +1255,7 @@ android\out\soong\.intermediates\hardware\interfaces\graphics\composer\2.1\andro
 }
 ```
 这里通过sm->get(IComposer::descriptor, serviceName)查询IComposer这个hidl服务，得到IBase对象后，在通过IComposer::castFrom转换为IComposer对象。
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HW2_HIDL_castFrom.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HW2_HIDL_castFrom.png)
 
 **服务查询**
 
@@ -1474,7 +1474,7 @@ BnHwServiceManager通过ServiceManager对象查询到对应的hidl服务，返�
 
 由于在hwservicemanager这边，保存的是IComposer的BpHwBase对象，因此在toBinder函数中将调用IInterface::asBinder来得到BpHwBase的成员变量中的BpHwBinder对象。
 fromBinder和toBinder函数在之前的文章中已经详细分析了，这里就不再展开。
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HW2_HIDL_hwbinder.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HW2_HIDL_hwbinder.png)
 
 服务查询过程其实就是根据接口包名及服务名称，从hwservicemanager管理的表中查询对应的IBase服务对象，然后在Client进程空间分别创建BpHwBinder和BpHwBase对象。
 **接口转换**
@@ -1557,7 +1557,7 @@ Return<sp<IComposer>> castInterface(sp<IBase> parent, const char *childIndicator
 因此最终会创建一个BpHwComposer对象。
 
 new BpHwComposer(toBinder<IBase, BpParent>(parent))
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HW2_HIDL_Get_BpHwComposer.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HW2_HIDL_Get_BpHwComposer.png)
 
 
 #### （三）、SurfaceFlinger 与 HWC2 通信
@@ -1592,7 +1592,7 @@ main                                                                            
 ```
 
 ##### 3.1.0 、SurfaceFlinger 与 HWC2 通信框架图
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HW2_SurfaceFlinger.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HW2_SurfaceFlinger.png)
 
 ##### 3.1.1 、SurfaceFlinger 合成图层
 通过Log来初略看下SurfaceFlinger合并图层流程。
@@ -1610,7 +1610,7 @@ main                                                                            
 ```
 ##### 3.2.0 、SurfaceFlinger 与 HWC2 通信流程
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HW2_present.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HW2_present.png)
 
 
 
@@ -2527,9 +2527,9 @@ DisplayError HWDevice::Init() {
 ```
 
 #### （六）、Hardware Composer Sync Fences
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HWC_1.x_sync_fences.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HWC_1.x_sync_fences.png)
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmsn/PicGo/master/display.system/Android.PG3.HWC_2.x_sync_fences.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG3.HWC_2.x_sync_fences.png)
 
 
  Sync Fences暂不分析，以后有时间再做分析。
