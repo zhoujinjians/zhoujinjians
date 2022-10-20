@@ -140,7 +140,7 @@ SurfaceComposerClient将Surface创建请求转交给保存在其成员变量中�
 
 BufferQueue 类是 Android 中所有图形处理操作的核心。它的是将生成图形数据缓冲区的一方（生产者Producer）连接到接受数据以进行显示或进一步处理的一方（消费者Consumer）。几乎所有在系统中移动图形数据缓冲区的内容都依赖于 BufferQueue。
 从上图APP与SurfaceFlinger交互中可以看出，BufferQueue内部维持着64个BufferSlot，每一个BufferSlot内部有一个GraphicBuffer指向分配的Graphic Buffer。
-![Alt text](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\Android-Graphics-SurfaceFlinger-BufferQueue.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/Android-Graphics-SurfaceFlinger-BufferQueue.png)
 
 
 先来看一下图中几个状态代表的含义：
@@ -194,7 +194,7 @@ ACQUIRED表示缓冲区已被消费者（Consumer）获取。 如与QUEUED，内
 #### （2）、生产者Producer
 
 生产者Producer实现IGraphicBufferProducer的接口，在实际运作过程中，应用（Client端）存在代理端BpGraphicBufferProducer，SurfaceFlinger（Server端）存在Native端BnGraphicBufferProducer。生产者代理端Bp通过Binder通信，不断的dequeueBuffer和queueBuffer操作，Native端同样响应这些操作请求，这样buffer就转了起来了。 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\Android-Graphics-SurfaceFlinger-IGraphicsBufferProducer.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/Android-Graphics-SurfaceFlinger-IGraphicsBufferProducer.png)
 
 
 这里介绍几个非常重要的函数：
@@ -255,7 +255,7 @@ attachBuffer尝试将缓冲区的所有权转移给缓冲区队列。 如果这�
 
 #### （3）、消费者Consumer
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\Android-Graphics-SurfaceFlinger-IGraphicsBufferConsumer.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/Android-Graphics-SurfaceFlinger-IGraphicsBufferConsumer.png)
 
 
 这里介绍几个非常重要的函数：
