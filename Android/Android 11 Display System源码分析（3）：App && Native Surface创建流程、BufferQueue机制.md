@@ -48,25 +48,25 @@ app中Activity回调onCreate()，setContentView最终会走到ViewRootImpl的set
 
 进一步会请求system_server创建Surface（SurfaceControl）。
 
-![image-20220830135743625](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830135743625.png)
+![image-20220830135743625](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830135743625.png)
 
-![image-20220830135838170](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830135838170.png)
+![image-20220830135838170](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830135838170.png)
 
-![image-20220830135913055](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830135913055.png)
+![image-20220830135913055](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830135913055.png)
 
-![image-20220830135945276](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830135945276.png)
+![image-20220830135945276](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830135945276.png)
 
-![image-20220830140054180](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830140054180.png)
+![image-20220830140054180](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830140054180.png)
 
-![image-20220830140124481](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830140124481.png)
+![image-20220830140124481](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830140124481.png)
 
-![image-20220830140158063](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830140158063.png)
+![image-20220830140158063](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830140158063.png)
 
-![image-20220830140228359](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830140228359.png)
+![image-20220830140228359](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830140228359.png)
 
-![image-20220830140444916](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830140444916.png)
+![image-20220830140444916](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830140444916.png)
 
-![image-20220830140800891](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830140800891.png)
+![image-20220830140800891](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830140800891.png)
 
 走到这里已经到Native 创建Surface了，接下来看看Native Surface创建步骤。
 
@@ -76,48 +76,48 @@ app中Activity回调onCreate()，setContentView最终会走到ViewRootImpl的set
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\base\libs\hwui\tests\common\TestContext.cpp
 
-![image-20220830112758948](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830112758948.png)
+![image-20220830112758948](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830112758948.png)
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\native\libs\gui\SurfaceComposerClient.cpp
 
-![image-20220830111100693](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830111100693.png)
+![image-20220830111100693](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830111100693.png)
 
-![image-20220830111125226](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830111125226.png)
+![image-20220830111125226](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830111125226.png)
 
 SurfaceComposerClient将Surface创建请求转交给保存在其成员变量中的Bp SurfaceComposerClient对象来完成。
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\native\libs\gui\ISurfaceComposerClient.cpp
 
-![image-20220830111201710](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830111201710.png)
+![image-20220830111201710](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830111201710.png)
 
-![image-20220830111235170](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830111235170.png)
+![image-20220830111235170](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830111235170.png)
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\native\services\surfaceflinger\Client.cpp
 
-![image-20220830111339855](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830111339855.png)
+![image-20220830111339855](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830111339855.png)
 
-![image-20220830111827145](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830111827145.png)
+![image-20220830111827145](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830111827145.png)
 
 通过Binder通信进入SurfaceFlinger创建Layer。
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\native\services\surfaceflinger\SurfaceFlinger.cpp
 
-![image-20220830112130154](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830112130154.png)
+![image-20220830112130154](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830112130154.png)
 
   SurfaceFlinger根据标志位创建对应类型的Surface，当前系统定义了4种类型的Layer:
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\native\libs\gui\include\gui\ISurfaceComposerClient.h
 
-![image-20220830112219815](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830112219815.png)
+![image-20220830112219815](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830112219815.png)
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\native\services\surfaceflinger\SurfaceFlinger.cpp
 >
 
-![image-20220830112340263](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830112340263.png)
+![image-20220830112340263](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830112340263.png)
 
 在SurfaceFlinger服务端为应用程序创建的Surface创建对应的Layer对象。
 
-![image-20220830112416247](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830112416247.png)
+![image-20220830112416247](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830112416247.png)
 
 
 
@@ -126,11 +126,11 @@ SurfaceComposerClient将Surface创建请求转交给保存在其成员变量中�
 获取CompositionEngine创造对应layer，这个后面用于渲染作用。
 看看Log：
 
-![image-20220830112456785](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830112456785.png)
+![image-20220830112456785](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830112456785.png)
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\native\services\surfaceflinger\BufferLayer.cpp
 
-![image-20220830112644132](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830112644132.png)
+![image-20220830112644132](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830112644132.png)
 
 上面已经创建好Layer，初始化好了GraphicBufferProducer、GraphicBufferConsumer、
 
@@ -353,26 +353,26 @@ Stack Trace:
 
 ```
 
-![image-20220830142844255](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830142844255.png)
+![image-20220830142844255](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830142844255.png)
 
-![image-20220830143243343](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830143243343.png)
+![image-20220830143243343](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830143243343.png)
 
-![image-20220830143404217](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830143404217.png)
+![image-20220830143404217](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830143404217.png)
 
-![image-20220830143427085](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830143427085.png)
+![image-20220830143427085](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830143427085.png)
 
-![image-20220830143542207](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830143542207.png)
+![image-20220830143542207](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830143542207.png)
 
 这里就衔接到《Android 11 Display System源码分析（1）：GraphicBuffer allocate流程》第五步：importBuffer了。
 
 ## （2）、Surface::queueBuffer介绍
 
-![image-20220830143952610](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830143952610.png)
+![image-20220830143952610](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830143952610.png)
 
-![image-20220830144136110](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830144136110.png)
+![image-20220830144136110](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830144136110.png)
 
-![image-20220830144212163](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830144212163.png)
+![image-20220830144212163](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830144212163.png)
 
-![image-20220830144610675](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03\image-20220830144610675.png)
+![image-20220830144610675](https://raw.githubusercontent.com/zhoujinjianx/PicGo2/master/Android_Display_System/Android11_Display03/image-20220830144610675.png)
 
 frameAvailableListener->onFrameAvailable(item)：通知SurfaceFlinger去消费
