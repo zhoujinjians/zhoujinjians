@@ -36,8 +36,10 @@ Here are some ideas to get you started:
 [Linux学习系列3：pinctrl子系统.md](https://github.com/zhoujinjianx/zhoujinjianx/blob/main/Kernel/Linux%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%973%EF%BC%9Apinctrl%E5%AD%90%E7%B3%BB%E7%BB%9F.md)
 
 
-
 ## Android
+
+#### Input
+[Android 11 Input System源码分析（1）：Input流程分析.md](https://github.com/zhoujinjianx/zhoujinjianx/blob/main/Android/Android%2011%20Input%20System%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%881%EF%BC%89%EF%BC%9AInput%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90.md)
 
 #### Graphics
 [Android 11 Display System源码分析（1）：GraphicBuffer allocate流程.md](https://github.com/zhoujinjianx/zhoujinjianx/blob/main/Android/Android%2011%20Display%20System%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%881%EF%BC%89%EF%BC%9AGraphicBuffer%20allocate%E6%B5%81%E7%A8%8B.md)
