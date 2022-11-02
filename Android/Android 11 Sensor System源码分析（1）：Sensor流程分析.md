@@ -39,7 +39,7 @@ date: 2023-04-16 16:16:16
 
 ## （一）、Sensor  Hal  Service初始化
 
-### （1）、android.hardware.sensors@1.0-service.rc
+### （1）、rc启动脚本
 
 ```c++
 Z:\newcc\lagvm\lagvm\LINUX\android\hardware\interfaces\sensors\1.0\default\android.hardware.sensors@1.0-service.rc
