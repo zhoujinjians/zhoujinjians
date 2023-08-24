@@ -1,6 +1,6 @@
 ---
 title: Android P Graphics System（二）：Qualcomm MDSS - MDP、DSI、FrameBuffer分析
-cover: https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/hexo.themes/bing-wallpaper-2018.04.37.jpg
+cover: https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/hexo.themes/bing-wallpaper-2018.04.37.jpg
 categories:
   - Graphics
 tags:
@@ -17,7 +17,7 @@ date: 2019-06-08 09:25:00
 （==**文章基于 Kernel-3.18**==）&&（==**文章基于 Android 9.0**==）
 
 [【开发板 Intrinsyc Open-Q™ 820 µSOM Development Kit】](https://www.intrinsyc.com/snapdragon-embedded-development-kits/open-q-820-usom-development-kit/)
-[【开发板 Android 9.0 && Linux（Kernel 3.18）源码链接】](https://gitlab.com/zhoujinjianx/apq8096_la.um.7.5.r1-03100-8x96.0_p_v5.0)
+[【开发板 Android 9.0 && Linux（Kernel 3.18）源码链接】](https://gitlab.com/zhoujinjiankim/apq8096_la.um.7.5.r1-03100-8x96.0_p_v5.0)
 
 正是由于前人的分析和总结，帮助我节约了大量的时间和精力，特别感谢！！！
 
@@ -435,7 +435,7 @@ LCD相关code所在目录：
 
 
 根据设备树的compatible 可知，当检测到同名的，会调用对应的probe()函数。
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG2.mdp_probe.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG2.mdp_probe.png)
 
 ``` cpp
 /kernel/msm-3.18/arch/arm/boot/dts/qcom/msm8996-mdss.dtsi
@@ -1090,7 +1090,7 @@ int mdss_smmu_init(struct mdss_data_type *mdata, struct device *dev)
 > G:\android9.0\kernel\msm-3.18\Documentation\devicetree\bindings\fb\mdss-dsi-panel.txt
 
 #### (二)、DSI分析
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG2.dsi_probe.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG2.dsi_probe.png)
 
 ``` cpp
 -------------------------------------------------------------
@@ -1825,7 +1825,7 @@ mdss_notfound:
 
 #### (三)、FrameBuffer分析
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG2.fb_probe.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG2.fb_probe.png)
 
 ``` cpp
 =======================================================================================
@@ -2250,10 +2250,10 @@ int mdss_mdp_overlay_init(struct msm_fb_data_type *mfd)
 #### (四)、/dev/graphics/fb0---ioctl重要流程分析
 
 ##### 4.1、device_fd_ = open( "/dev/graphics/fb0", O_RDWR)
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG2.fb_open.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG2.fb_open.png)
 
 ##### 4.2、ioctl(device_fd_, INT(MSMFB_ATOMIC_COMMIT), &mdp_disp_commit_)
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG2.fb_MSMFB_ATOMIC_COMMIT.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG2.fb_MSMFB_ATOMIC_COMMIT.png)
 
 #### (五)、FrameBufferTest测试app分析
 
@@ -2263,7 +2263,7 @@ int mdss_mdp_overlay_init(struct msm_fb_data_type *mfd)
 >|--------------->mdss_fb_pan_display_ex();
 唤醒__mdss_fb_display_thread后流程大概一致，就不分析了。
 ##### 小结：
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/display.system/Android.PG2.mdp.dsi.fb_probe.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG2.mdp.dsi.fb_probe.png)
 
 #### (五)、参考资料(特别感谢)：
 

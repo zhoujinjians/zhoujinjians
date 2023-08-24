@@ -1,6 +1,6 @@
 ---
 title: Android 8.1 Display System源码分析（8）：GraphicBuffer和Gralloc分析（转载）（RK3399）
-cover: https://raw.githubusercontent.com/zhoujinjianx/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.17.jpg
+cover: https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.17.jpg
 categories: 
   - Display
 tags:
