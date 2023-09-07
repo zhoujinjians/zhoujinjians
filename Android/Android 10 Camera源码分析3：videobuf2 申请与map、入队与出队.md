@@ -12,7 +12,7 @@ date: 2022-02-01 02:01:00
 
 注：文章都是通过阅读各位前辈总结的资料 Android 10.0 && Linux（Kernel 4.19）Rockchip平台源码、加上自己的思考分析总结出来的，其中难免有理解不对的地方，欢迎大家批评指正。文章为个人学习、研究、欣赏之用，图文内容整理自互联网，如有侵权，请联系删除（◕‿◕），转载请注明出处（©Rockchip ©Android @Linux 版权所有），谢谢。
 （==**文章基于 Kernel-4.19**==）&&（==**文章基于 Android 10.0**==）
- [【blog.zhoujinjian.cn博客原图链接】](https://github.com/zhoujinjianOS) 
+ [【zhoujinjianOS.com博客原图链接】](https://github.com/zhoujinjianOS) 
  [【开发板 Khadas Edge V】](https://www.khadas.cn/edge-v)
 [【开发板 Khadas Edge V Android 10.0 && Linux（Kernel 4.19）源码链接】](https://github.com/khadas/linux/tree/khadas-edge-Qt)
 

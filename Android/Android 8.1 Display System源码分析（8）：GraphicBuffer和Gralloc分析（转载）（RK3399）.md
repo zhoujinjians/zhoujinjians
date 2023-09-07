@@ -22,5 +22,5 @@ date: 2020-10-09 09:25:00
 #### （一）、参考：
 由于Android Framework之前已经分析过了，请参考：
 
-[【Android 8.1 Display System源码分析（8）：GraphicBuffer和Gralloc分析（转载）（RK3399）】](https://blog.zhoujinjian.cn/posts/20190724/)
+[【Android 8.1 Display System源码分析（8）：GraphicBuffer和Gralloc分析（转载）（RK3399）】](https://zhoujinjianOS.com/posts/20190724/)
 

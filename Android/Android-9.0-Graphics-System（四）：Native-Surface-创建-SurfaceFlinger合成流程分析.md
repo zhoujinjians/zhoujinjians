@@ -2794,7 +2794,7 @@ void DisplayDevice::flip() const
 ##### 五、postFramebuffer()函数
 ![Alt text | center](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/display.system/Android.PG4.HW2_postframebuffer.png)
 可以看到，这就跟前面的分析衔接起来了。
-[Android P Graphics System（三）：Qualcomm HWC2（Hardware Composer 2.0 ）分析](https://blog.zhoujinjian.cn/posts/20190708/)
+[Android P Graphics System（三）：Qualcomm HWC2（Hardware Composer 2.0 ）分析](https://zhoujinjianOS.com/posts/20190708/)
 postFramebuffer函数如下：
 [SurfaceFlinger.cpp]
 

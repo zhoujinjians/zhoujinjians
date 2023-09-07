@@ -13,7 +13,7 @@ date: 2022-04-15 04:15:00
 
 （==**文章基于 Kernel-4.19**==）&&（==**文章基于 Android 10.0**==）
 
-[【blog.zhoujinjian.cn博客原图链接】](https://github.com/zhoujinjianOS) 
+[【zhoujinjianOS.com博客原图链接】](https://github.com/zhoujinjianOS) 
 
 [【开发板 Khadas Edge V】](https://www.khadas.cn/edge-v)
 
