@@ -1,6 +1,6 @@
 ---
 title: Android P Graphics System（四）：Native Surface创建 && SurfaceFlinger合成流程分析
-cover: https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/hexo.themes/bing-wallpaper-2018.04.39.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/hexo.themes/bing-wallpaper-2018.04.39.jpg
 categories:
   - Graphics
 tags:
@@ -19,7 +19,7 @@ date: 2019-07-16 09:25:00
 （==**文章基于 Kernel-3.18**==）&&（==**文章基于 Android 9.0**==）
 
 [【开发板 Intrinsyc Open-Q™ 820 µSOM Development Kit】](https://www.intrinsyc.com/snapdragon-embedded-development-kits/open-q-820-usom-development-kit/)
-[【开发板 Android 9.0 && Linux（Kernel 3.18）源码链接】](https://gitlab.com/zhoujinjiankim/apq8096_la.um.7.5.r1-03100-8x96.0_p_v5.0)
+[【开发板 Android 9.0 && Linux（Kernel 3.18）源码链接】](https://gitlab.com/zhoujinjianOS/apq8096_la.um.7.5.r1-03100-8x96.0_p_v5.0)
 
 正是由于前人的分析和总结，帮助我节约了大量的时间和精力，特别感谢！！！
 
@@ -57,7 +57,7 @@ surface->lock(&outBuffer, NULL);
 surface->unlockAndPost();  
 ```
 下图是Android 7.1.2分析的流程图，大体流程相同，这里就不重新画流程图了。
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG4.ask.SurfaceFlinger.createSurface.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/display.system/Android.PG4.ask.SurfaceFlinger.createSurface.png)
 
 [->SurfaceComposerClient.cpp]
 
@@ -239,7 +239,7 @@ return err;
 ##### 2.1.0 、BufferQueue介绍
 BufferQueue 类是 Android 中所有图形处理操作的核心。它的是将生成图形数据缓冲区的一方（生产者Producer）连接到接受数据以进行显示或进一步处理的一方（消费者Consumer）。几乎所有在系统中移动图形数据缓冲区的内容都依赖于 BufferQueue。
 从上图APP与SurfaceFlinger交互中可以看出，BufferQueue内部维持着64个BufferSlot，每一个BufferSlot内部有一个GraphicBuffer指向分配的Graphic Buffer。
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG4.SurfaceFlinger-BufferQueue.png.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/display.system/Android.PG4.SurfaceFlinger-BufferQueue.png.png)
 
 先来看一下图中几个状态代表的含义：
 
@@ -289,7 +289,7 @@ ACQUIRED表示缓冲区已被消费者（Consumer）获取。 如与QUEUED，内
 4、当消费者已经消费了这块buffer(已经合成，已经编码等)，就进行release操作释放buffer,将buffer归还给BufferQueue,buffer状态由ACQUIRED变成FREE.buffer拥有者由Consumer变成BufferQueue.
 ###### 2.1.1、生产者Producer
 生产者Producer实现IGraphicBufferProducer的接口，在实际运作过程中，应用（Client端）存在代理端BpGraphicBufferProducer，SurfaceFlinger（Server端）存在Native端BnGraphicBufferProducer。生产者代理端Bp通过Binder通信，不断的dequeueBuffer和queueBuffer操作，Native端同样响应这些操作请求，这样buffer就转了起来了。 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG4.SurfaceFlinger-IGraphicsBufferProducer.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/display.system/Android.PG4.SurfaceFlinger-IGraphicsBufferProducer.png)
 
 
 这里介绍几个非常重要的函数：
@@ -343,7 +343,7 @@ attachBuffer尝试将缓冲区的所有权转移给缓冲区队列。 如果这�
 ```
 
 ###### 2.1.2、消费者Consumer
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG4.SurfaceFlinger-IGraphicsBufferConsumer.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/display.system/Android.PG4.SurfaceFlinger-IGraphicsBufferConsumer.png)
 
 这里介绍几个非常重要的函数：
 **1、acquireBuffer**
@@ -674,7 +674,7 @@ mEvents->requestNextVsync();
 }
 ```
 贴一下SurfaceFlinger的初始化请求vsync信号流程图：
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG4.Vsync-surfaceflinger.init.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/display.system/Android.PG4.Vsync-surfaceflinger.init.png)
 
 MessageQueue中分发两个消息，一个INVALIDATE，一个REFRESH，SurfaceFlinger对这两个消息的响应过程，就是合成的过程。
 
@@ -1322,7 +1322,7 @@ mCurrentTextureImage，也是按照slot从mImages中获取的，前面acquireBuf
 到此，Layer中已经获取到Buffer的数据。需要注意的是，这不是对单个的Layer，而是所有的mLayersWithQueuedFrames都会走上面的流程，而每个Layer有自己的BufferLayerConsumer和BufferQueue。
 我们先来看看看这里遇到的几个类间的相互关系：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG4.Layer.Buffer.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/display.system/Android.PG4.Layer.Buffer.png)
 还算比较清晰吧～这里我们只关心Buffer从哪儿来，到哪儿去就行了
 
 拿到Buffer后，更新Layer的Damage，useSurfaceDamage，Damage表示Layer的那些区域被破坏了，被破坏的区域需要重新合成显示。
@@ -2206,7 +2206,7 @@ void SurfaceFlinger::setActiveColorModeInternal(const sp<DisplayDevice>& hw,
 回到setUpHWComposer函数
 
 ##### 4.prepareFrame准备数据
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG4.HW2_present.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/display.system/Android.PG4.HW2_present.png)
 
 ``` cpp
 for (size_t displayId = 0; displayId < mDisplays.size(); ++displayId) {
@@ -2431,9 +2431,9 @@ Error Display::acceptChanges()
     return static_cast<Error>(intError);
 }
 ```
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG4.SurfaceFlinger_HWC_negotiation_design.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/display.system/Android.PG4.SurfaceFlinger_HWC_negotiation_design.png)
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG4.SurfaceFlinger_HWC_negotiation.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/display.system/Android.PG4.SurfaceFlinger_HWC_negotiation.png)
 
 到此setUpHWComposer结束，此时，我们需要显示的数据已经送到HWC，且每一层Layer的合成方式已经确定。如果是HWC能支持更新和显示同时完成，那么此时数据已经开始显示。
 回到handleMessageRefresh函数，接下来是doDebugFlashRegions。doDebugFlashRegions只是一个debug的功能，其目前就是更新的区域不停的闪烁，收mDebugRegion的控制。
@@ -2792,7 +2792,7 @@ void DisplayDevice::flip() const
 到此，我们显示的数据成什么样了？需要Client合成的，已经合成完了，合成后的结果FBTarget已传给HWC。需要Device合成的数据之前也提交给HWC了。但是数据还没有最终合成显示出来。postFramebuffer 函数就是告诉HWC开始做最后的合成了。
 
 ##### 五、postFramebuffer()函数
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG4.HW2_postframebuffer.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/display.system/Android.PG4.HW2_postframebuffer.png)
 可以看到，这就跟前面的分析衔接起来了。
 [Android P Graphics System（三）：Qualcomm HWC2（Hardware Composer 2.0 ）分析](https://blog.zhoujinjian.cn/posts/20190708/)
 postFramebuffer函数如下：
@@ -3073,7 +3073,7 @@ Client端合成，本质是采用GPU进程合成，SurfaceFlinger中封装了Ren
 
 > frameworks/native/services/surfaceflinger/RenderEngine
 我们来看看看相关的类：
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/display.system/Android.PG4.RenderEngine.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/display.system/Android.PG4.RenderEngine.png)
 - RenderEngine 是对GPU渲染的封装，包括了 EGLDisplay，EGLContext， EGLConfig，EGLSurface。注意每个Display的EGLSurface不是同一个，各自有各自的EGLSurface。
 - GLES20RenderEngine 继承RenderEngine，是GELS的2.0版本实现。其Program采用ProgramCache进行cache。状态用Description进描述。
 - 每个BufferLayer 都有专门的Texture进行纹理的描述，GLES20RenderEngine 支持纹理贴图。合成时，将GraphicBuffer转换为纹理，进行混合。

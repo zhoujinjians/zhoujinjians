@@ -1,6 +1,6 @@
 ---
 title: Android 11 Display System源码分析（6）：Skia && hwui简要使用案例分析（V1）
-cover: https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.46.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.46.jpg
 categories: 
  - Display
 tags:
@@ -13,7 +13,7 @@ date: 2022-11-16 16:16:16
 
 （==**文章基于 Android 11.0**==）
 
-[【zhoujinjiankim.com博客原图链接】](https://github.com/zhoujinjiankim) 
+[【zhoujinjianOS.com博客原图链接】](https://github.com/zhoujinjianOS) 
 
 [【开发板】](https://wiki.radxa.com/Rockpi4)
 
@@ -42,7 +42,7 @@ date: 2022-11-16 16:16:16
 
 ### （1）、ExampleLayer1
 
-![image-20220926102748367](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926102748367.png)
+![image-20220926102748367](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926102748367.png)
 
 ```c++
 #include "include/Layers/ExampleLayer1.h"
@@ -65,7 +65,7 @@ void ExampleLayer1::Draw(SkCanvas* canvas)
 
 ### （2）、ExampleLayer2
 
-![image-20220926102826237](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926102826237.png)
+![image-20220926102826237](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926102826237.png)
 
 ```c++
 #include "include/Layers/ExampleLayer2.h"
@@ -90,7 +90,7 @@ void ExampleLayer2::Draw(SkCanvas* canvas)
 
 ### （3）、ExampleLayer3
 
-![image-20220926102928370](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926102928370.png)
+![image-20220926102928370](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926102928370.png)
 
 ```c++
 #include "include/Layers/ExampleLayer3.h"
@@ -130,7 +130,7 @@ void ExampleLayer3::Draw(SkCanvas* canvas)
 
 ### （4）、ExampleLayer4
 
-![image-20220926103024130](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926103024130.png)
+![image-20220926103024130](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926103024130.png)
 
 ```c++
 #include "include/Layers/ExampleLayer4.h"
@@ -176,7 +176,7 @@ void ExampleLayer4::Draw(SkCanvas* canvas)
 
 ### （5）、ExampleLayer5
 
-![image-20220926103332465](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926103332465.png)
+![image-20220926103332465](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926103332465.png)
 
 ```c++
 #include "include/Layers/ExampleLayer5.h"
@@ -244,7 +244,7 @@ void ExampleLayer5::Draw(SkCanvas* canvas)
 
 ### （8）、ExampleLayer8
 
-![image-20220926103616750](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926103616750.png)
+![image-20220926103616750](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926103616750.png)
 
 ```c++
 #include "include/Layers/ExampleLayer8.h"
@@ -298,7 +298,7 @@ bool ExampleLayer8::ProcessKey(Key key, InputState state, ModifierKey modifiers)
 
 ### （9）、ExampleLayer9
 
-![image-20220926133423367](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926133423367.png)
+![image-20220926133423367](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926133423367.png)
 
 ```c++
 #include "include/Layers/ExampleLayer9.h"
@@ -378,7 +378,7 @@ bool ExampleLayer9::ProcessMouseWheel(InputState state, ModifierKey modifiers)
 
 ### （10）、ExampleLayer10
 
-![image-20220926133632108](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926133632108.png)
+![image-20220926133632108](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926133632108.png)
 
 ```c++
 #include "include/Layers/ExampleLayer10.h"
@@ -480,7 +480,7 @@ void ExampleLayer10::Draw(SkCanvas* canvas)
 
 ### （11）、ExampleLayer11
 
-![image-20220926133732992](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926133732992.png)
+![image-20220926133732992](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926133732992.png)
 
 ```c++
 #include "include/Layers/ExampleLayer11.h"
@@ -516,7 +516,7 @@ void ExampleLayer11::Draw(SkCanvas* canvas)
 
 ### （12）、ExampleLayer12
 
-![image-20220926133910683](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926133910683.png)
+![image-20220926133910683](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926133910683.png)
 
 ```c++
 #include "include/Layers/ExampleLayer12.h"
@@ -535,7 +535,7 @@ void ExampleLayer12::Draw(SkCanvas* canvas)
 
 ### （13）、ExampleLayer13
 
-![image-20220926134035499](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926134035499.png)
+![image-20220926134035499](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926134035499.png)
 
 ```c++
 #include "include/Layers/ExampleLayer13.h"
@@ -563,7 +563,7 @@ void ExampleLayer13::Draw(SkCanvas* canvas)
 
 ### （14）、ThankYouLayer
 
-![image-20220926134159354](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926134159354.png)
+![image-20220926134159354](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926134159354.png)
 
 ```c++
 #include "include/Layers/ThankYouLayer.h"
@@ -624,7 +624,7 @@ void ThankYouLayer::Draw(SkCanvas* canvas)
 
 ### （x）、Zero_off_dashing
 
-![image-20220926102558662](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926102558662.png)
+![image-20220926102558662](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926102558662.png)
 
 ```c++
 #include "include/Layers/Zero_off_dashing.h"
@@ -668,7 +668,7 @@ void Zero_off_dashing::Draw(SkCanvas* canvas)
 
 ## （二）、Hwui demo展示：
 
-![image-20220926142343794](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926142343794.png)
+![image-20220926142343794](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926142343794.png)
 
 > ### Y:\home\zhoujinjian\android11_rockpi4\frameworks\base\libs\hwui\tests\common\scenes\OvalAnimation.cpp
 
@@ -709,69 +709,69 @@ public:
 
 ### （1）、DrawFrameTask::syncFrameState
 
-![image-20220926143810860](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926143810860.png)
+![image-20220926143810860](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926143810860.png)
 
-![image-20220926143947295](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926143947295.png)
+![image-20220926143947295](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926143947295.png)
 
-![image-20220926144254764](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926144254764.png)
+![image-20220926144254764](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926144254764.png)
 
 重点看看CanvasContext::prepareTree流程。
 
 #### （1）、CanvasContext::prepareTree
 
-![image-20220926144452156](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926144452156.png)
+![image-20220926144452156](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926144452156.png)
 
-![image-20220926144612444](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926144612444.png)
+![image-20220926144612444](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926144612444.png)
 
 #### （2）、RenderNode::prepareTreeImpl
 
-![image-20220926144937997](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926144937997.png)
+![image-20220926144937997](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926144937997.png)
 
 处理Properties变化，PrepareLayer。
 
-![image-20220926145047378](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926145047378.png)
+![image-20220926145047378](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926145047378.png)
 
-![image-20220926145218464](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926145218464.png)
+![image-20220926145218464](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926145218464.png)
 
-![image-20220926145401131](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926145401131.png)
+![image-20220926145401131](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926145401131.png)
 
 #### （3）、SkiaDisplayList::prepareListAndChildren
 
 ### （2）、CanvasContext::draw()
 
-![image-20220926145954351](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926145954351.png)
+![image-20220926145954351](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926145954351.png)
 
 #### （1）、mRenderPipeline->getFrame() (dequeueBuffer)
 
-![image-20220926150348579](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926150348579.png)
+![image-20220926150348579](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926150348579.png)
 
-![image-20220926152445609](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926152445609.png)
+![image-20220926152445609](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926152445609.png)
 
-![image-20220926152607765](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926152607765.png)
+![image-20220926152607765](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926152607765.png)
 
 #### （2）、mRenderPipeline->draw
 
-![image-20220926152821530](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926152821530.png)
+![image-20220926152821530](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926152821530.png)
 
-![image-20220926152702899](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926152702899.png)
+![image-20220926152702899](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926152702899.png)
 
-![image-20220926152859542](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926152859542.png)
+![image-20220926152859542](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926152859542.png)
 
-![image-20220926153057124](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926153057124.png)
+![image-20220926153057124](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926153057124.png)
 
-![image-20220926160712537](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926160712537.png)
+![image-20220926160712537](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926160712537.png)
 
-![image-20220926160850891](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926160850891.png)
+![image-20220926160850891](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926160850891.png)
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\base\libs\hwui\RecordingCanvas.cpp
 
-![image-20220926161110171](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926161110171.png)
+![image-20220926161110171](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926161110171.png)
 
-![image-20220926161133211](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926161133211.png)
+![image-20220926161133211](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926161133211.png)
 
-![image-20220926161242953](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926161242953.png)
+![image-20220926161242953](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926161242953.png)
 
-![image-20220926161206863](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220926161206863.png)
+![image-20220926161206863](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220926161206863.png)
 
 上述操作还没真正绘制，只是记录各个图元绘制的一系列属性，draw哪些；如何draw。Skia绘制在下一小节分析。
 
@@ -779,117 +779,117 @@ public:
 
 现在绘制完了，交给SurfaceFlinger做进一步渲染合成。
 
-![image-20220927154630554](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927154630554.png)
+![image-20220927154630554](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927154630554.png)
 
 ## （三）、Skia 简要分析
 
-![image-20220927154848983](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927154848983.png)
+![image-20220927154848983](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927154848983.png)
 
 ### （1）、SkCanvas::drawPaint
 
 > Y:\home\zhoujinjian\android11_rockpi4\external\skia\src\core\SkCanvas.cpp
 
-![image-20220927155422585](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927155422585.png)
+![image-20220927155422585](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927155422585.png)
 
 > Y:\home\zhoujinjian\android11_rockpi4\external\skia\src\gpu\SkGpuDevice.cpp
 
-![image-20220927155532529](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927155532529.png)
+![image-20220927155532529](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927155532529.png)
 
 > Y:\home\zhoujinjian\android11_rockpi4\external\skia\src\gpu\GrRenderTargetContext.cpp
 
-![image-20220927155638575](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927155638575.png)
+![image-20220927155638575](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927155638575.png)
 
-![image-20220927155719017](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927155719017.png)
+![image-20220927155719017](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927155719017.png)
 
-![image-20220927155753899](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927155753899.png)
+![image-20220927155753899](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927155753899.png)
 
-![image-20220927155924697](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927155924697.png)
+![image-20220927155924697](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927155924697.png)
 
 > Y:\home\zhoujinjian\android11_rockpi4\external\skia\src\gpu\GrOpsTask.cpp
 
-![image-20220927160024627](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160024627.png)
+![image-20220927160024627](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160024627.png)
 
 可以看到GrOpsTask也只是保存到绘制队列chain中。
 
 ### （2）、SkCanvas::drawOval
 
-![image-20220927160210170](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160210170.png)
+![image-20220927160210170](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160210170.png)
 
-![image-20220927160228567](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160228567.png)
+![image-20220927160228567](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160228567.png)
 
-![image-20220927160254541](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160254541.png)
+![image-20220927160254541](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160254541.png)
 
-![image-20220927160339445](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160339445.png)
+![image-20220927160339445](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160339445.png)
 
-![image-20220927160406063](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160406063.png)
+![image-20220927160406063](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160406063.png)
 
-![image-20220927160440538](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160440538.png)
+![image-20220927160440538](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160440538.png)
 
 ### （3）、SkCanvas::flush()
 
 接下来才是GPU真正绘制的操作了。前面都是记录一系列draw op。
 
-![image-20220927160550120](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160550120.png)
+![image-20220927160550120](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160550120.png)
 
-![image-20220927160910974](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160910974.png)
+![image-20220927160910974](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160910974.png)
 
-![image-20220927160949627](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160949627.png)
+![image-20220927160949627](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927160949627.png)
 
-![image-20220927161011642](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927161011642.png)
+![image-20220927161011642](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927161011642.png)
 
-![image-20220927161130083](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927161130083.png)
+![image-20220927161130083](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927161130083.png)
 
-![image-20220927161244120](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927161244120.png)
+![image-20220927161244120](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927161244120.png)
 
-![image-20220927161337925](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927161337925.png)
+![image-20220927161337925](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927161337925.png)
 
-![image-20220927161733678](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927161733678.png)
+![image-20220927161733678](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927161733678.png)
 
-![image-20220927161810717](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927161810717.png)
+![image-20220927161810717](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927161810717.png)
 
-![image-20220927162507562](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927162507562.png)
+![image-20220927162507562](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927162507562.png)
 
 > Y:\home\zhoujinjian\android11_rockpi4\external\skia\src\gpu\GrOpsRenderPass.h
 
 #### （1）、GrOpsRenderPass->begin()
 
-![image-20220927175928835](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927175928835.png)
+![image-20220927175928835](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927175928835.png)
 
-![image-20220927180051094](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927180051094.png)
+![image-20220927180051094](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927180051094.png)
 
-![image-20220927180136644](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927180136644.png)
+![image-20220927180136644](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927180136644.png)
 
-![image-20220927180313245](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927180313245.png)
+![image-20220927180313245](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927180313245.png)
 
-![image-20220927180938249](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927180938249.png)
+![image-20220927180938249](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927180938249.png)
 
-![image-20220927181127362](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927181127362.png)
+![image-20220927181127362](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927181127362.png)
 
-![image-20220927181151892](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927181151892.png)
+![image-20220927181151892](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927181151892.png)
 
-![image-20220927181234033](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927181234033.png)
+![image-20220927181234033](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927181234033.png)
 
 
 
 #### （2）、GrGLGpu::flushGLState
 
-![image-20220927181820373](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927181820373.png)
+![image-20220927181820373](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927181820373.png)
 
 #### （3）、GrGLGpu::drawMeshes
 
-![image-20220927181919490](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20220927181919490.png)
+![image-20220927181919490](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20220927181919490.png)
 
 #### （4）、GrGLGpu-sendArrayMeshToGpu
 
-![image-20221008151850462](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20221008151850462.png)
+![image-20221008151850462](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20221008151850462.png)
 
-![image-20221008151922180](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20221008151922180.png)
+![image-20221008151922180](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20221008151922180.png)
 
-![image-20221008155202064](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20221008155202064.png)
+![image-20221008155202064](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20221008155202064.png)
 
 #### （5）、GrGLGpu-finishFlush
 
-![image-20221008155427768](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android_Display_System/Android11_Display06/image-20221008155427768.png)
+![image-20221008155427768](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android_Display_System/Android11_Display06/image-20221008155427768.png)
 
 ## （四）、参考资料(特别感谢)：
 

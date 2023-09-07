@@ -1,6 +1,6 @@
 ---
 title: Android 10 Camera源码分析7：Rockchip_Camera_Hal3_User_Manual
-cover: https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.37.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.37.jpg
 categories: 
  - Camera
 tags:
@@ -14,7 +14,7 @@ date: 2022-04-01 04:01:00
 
 （==**文章基于 Kernel-4.19**==）&&（==**文章基于 Android 10.0**==）
 
-[【blog.zhoujinjian.cn博客原图链接】](https://github.com/zhoujinjiankim) 
+[【blog.zhoujinjian.cn博客原图链接】](https://github.com/zhoujinjianOS) 
 
 [【开发板 Khadas Edge V】](https://www.khadas.cn/edge-v)
 
@@ -42,17 +42,17 @@ date: 2022-04-01 04:01:00
 
 #### （1）、Camera Hal3 基本框架
 
-![](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android.10.Camera.07/rk_camera_hal3_base_arc.png)
+![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android.10.Camera.07/rk_camera_hal3_base_arc.png)
 
 Camera hal3 在android框架中所处的位置如上图，对上，主要实现Framework 一整套API接口，响应其控制命令，返回数据与控制参数结果。对下，主要是通V4l2框架实现与kernel的交互。3a控制则是通control loop 接口与camera_engine_isp交互。另外，其中一些组件或功能的实现也会调用到其他一些第三方库，如cameraBuffer 相关，会调用到Galloc相关库，jpeg编码则会调用到Hwjpeg相关库。
 
 #### （2）、代码目录简要说明
 
-![](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android.10.Camera.07/rk_camera_hal3_dir.png)
+![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android.10.Camera.07/rk_camera_hal3_dir.png)
 
 #### （3）、Camera Hal3 基本组件
 
-![](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android.10.Camera.07/rk_camera_hal3_base_comp.png)
+![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android.10.Camera.07/rk_camera_hal3_base_comp.png)
 
 Camera hal3中的模块主要包括AAL与PSL。
 
@@ -64,7 +64,7 @@ Camera hal3中的模块主要包括AAL与PSL。
 
 关于framework 与hal交互的API详细说明文档可以参考：<android_root>/hardware/libhardware/include/hardware/camera3.h
 
-![](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android.10.Camera.07/rk_camera_hal3_call_flow.png)
+![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android.10.Camera.07/rk_camera_hal3_call_flow.png)
 
 Stack Trace:
 
@@ -205,7 +205,7 @@ Stack Trace: openCameraHardware()
 
 
 
-![](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android.10.Camera.07/rk_camera_hal3_call_flow_detailed.png)
+![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android.10.Camera.07/rk_camera_hal3_call_flow_detailed.png)
 
 此图主要描绘了configure_streams流程，process_capture_request流程在Hal3中的具体实现逻辑，时序图以该两个API接口为起始点，直到hal3下发v4l2相关ioctl并返回相关数据结果为止。该流程图基本涵盖了Hal3中的主要模块上图中符号代表循环执行，也即表示此处有线程正在等待事件的到来。Hal层的运行也正是由这些事件驱动（即上面的红色键头
 
@@ -339,11 +339,11 @@ PostProcessUnitDigitalZoom::processFrame(const std::shared_ptr<PostProcBuffer>& 
 }*/
 ```
 
-![](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android.10.Camera.07/IMG_20210701_121858.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android.10.Camera.07/IMG_20210701_121858.jpg)
 
 反之得到正常图像.
 
-![](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android.10.Camera.07/IMG_20210701_121747.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android.10.Camera.07/IMG_20210701_121747.jpg)
 
 
 
@@ -418,7 +418,7 @@ adb shellsetprop persist.vendor.camera.dump.path /data/
 我设置的路径：rk3399_Android10:/data/misc/cameraserver #
 ```
 
-![](https://raw.githubusercontent.com/zhoujinjiankim/PicGo/master/Android.10.Camera.07/rk_cam_dump_path.png)
+![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/Android.10.Camera.07/rk_cam_dump_path.png)
 
 
 
