@@ -1,6 +1,6 @@
 ---
 title: Android N 基础（4）：Android 7.1.2 Activity 启动流程 （AMS）分析
-cover: https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/hexo.themes/bing-wallpaper-2018.04.03.jpg
+cover: https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/hexo.themes/bing-wallpaper-2018.04.03.jpg
 categories: 
   - Android
 tags:
@@ -69,11 +69,11 @@ Activity启动流程概述：
 
 **相关类的类图：** 
 （1）IActivityManager相关类 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/android.startactivity/N1-Android-startActivity-IAM-class.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.startactivity/N1-Android-startActivity-IAM-class.png)
 （2）IApplicationThread相关类
-![Markdown](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/android.startactivity/N2-Android-startActivity-AMS-class.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.startactivity/N2-Android-startActivity-AMS-class.png)
 （3）ActivityManagerService相关类
-![Markdown](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/android.startactivity/N3-Android-startActivity-IAP-class.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.startactivity/N3-Android-startActivity-IAP-class.png)
 
 
 ### 1.1、Task和Stack
@@ -87,7 +87,7 @@ Task管理的意义还在于近期任务列表以及Back栈。 当你通过多�
 Back栈管理了当你在Activity上点击Back键，当前Activity销毁后应该跳转到哪一个Activity的逻辑。关于Task和Back栈，请参见这里：[Tasks and Back Stack](https://developer.android.com/guide/components/tasks-and-back-stack.html)。
 
 其实在ActivityManagerService与WindowManagerService内部管理中，在Task之外，还有一层容器，这个容器应用开发者和用户可能都不会感觉到或者用到，但它却非常重要，那就是Stack。 下文中，我们将看到，Android系统中的多窗口管理，就是建立在Stack的数据结构上的。 一个Stack中包含了多个Task，一个Task中包含了多个Activity（Window），下图描述了它们的关系： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/android.startactivity/Android-_Activity-task_stack.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.startactivity/Android-_Activity-task_stack.png)
  另外还有一点需要注意的是，ActivityManagerService和WindowManagerService中的Task和Stack结构是一一对应的，对应关系对于如下：
 
 ActivityStack <–> TaskStack TaskRecord <–> Task 即，ActivityManagerService中的每一个ActivityStack或者TaskRecord在WindowManagerService中都有对应的TaskStack和Task，这两类对象都有唯一的id（id是int类型），它们通过id进行关联。
@@ -98,7 +98,7 @@ ActivityStack <–> TaskStack TaskRecord <–> Task 即，ActivityManagerService
 
 #### **总体启动流程图：**
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/android.startactivity/N4-Android-startActivity-flow.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.startactivity/N4-Android-startActivity-flow.png)
 
 ### 二、 开始请求执行启动Activity
 
@@ -1068,7 +1068,7 @@ private final void startProcessLocked(ProcessRecord app, String hostingType,
 ```
 
 openZygoteSocketIfNeeded(abi)方法是根据当前的abi来选择与zygote还是zygote64来进行通信。 既然system_server进程的zygoteSendArgsAndGetResult()方法通过socket向Zygote进程发送消息，这是便会唤醒Zygote进程，来响应socket客户端的请求（即system_server端) 具体详细过程可参考大神博客[理解Android进程创建流程](http://gityuan.com/2016/03/26/app-process-create/) 和 [Android四大组件与进程启动的关系](http://gityuan.com/2016/10/09/app-process-create-2/) 大神是基于Android M，之后我会跟着大神的脚步站在巨人的肩膀上，完成Android N进程创建流程，估计变化不大加深自己理解。 进程创建流程图： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/android.startactivity/Android-_Start_Activity-process-create.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.startactivity/Android-_Start_Activity-process-create.jpg)
 
 总结： 可以发现其最终调用了Zygote并通过socket通信的方式让Zygote进程fork除了一个新的进程，并根据我们刚刚传递的"android.app.ActivityThread"字符串，反射出该对象并执行ActivityThread的main方法。这样我们所要启动的应用进程这时候其实已经启动了，但是还没有执行相应的初始化操作。
 
@@ -1378,7 +1378,7 @@ switch (code) {
 LoadedApk.mApplication AT.mInitialApplication
 
 图示总结： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/android.startactivity/N5-Android-startActivity-AMS-AT.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.startactivity/N5-Android-startActivity-AMS-AT.png)
 
 ### 六、执行启动Acitivity
 
@@ -1394,7 +1394,7 @@ Instrumentation.callActivityOnCreate()
 -> Activity.performCreate() Activity.onCreate()
 
 在第五节AMS.startProcessLocked()整个过程，创建完新进程后会在新进程中调用AMP.attachApplication ，该方法经过binder ipc后调用到AMS.attachApplicationLocked。该方法执行了一系列的初始化操作，在执行完bindApplication()之后进入ActivityStackSupervisor.attachApplicationLocked()，这样我们整个应用进程已经启动起来了。终于可以开始activity的启动逻辑了。 关系图： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/android.startactivity/N6-Android-startActivity-arc.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.startactivity/N6-Android-startActivity-arc.jpg)
 [ActivityThread简介](http://blog.csdn.net/myarrow/article/details/14223493) 首先看一下attachApplicationLocked方法的实现：
 
 #### 6.1、ActivityStackSupervisor.attachApplicationLocked()
@@ -2024,7 +2024,7 @@ ActivityStack.startPausingLocked()
 
 #### 启动流程：
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/android.startactivity/Android-start_activity_process.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.startactivity/Android-start_activity_process.jpg)
 
 1、点击桌面App图标，Launcher进程采用Binder IPC向system_server进程发起startActivity请求；
 2、system_server进程接收到请求后，向zygote进程发送创建进程的请求；

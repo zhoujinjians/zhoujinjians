@@ -1,6 +1,6 @@
 ---
 title: Linux学习系列1：clk子系统
-cover: https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.41.jpg
+cover: https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.41.jpg
 categories:
  - Linux
 tags:
@@ -14,7 +14,7 @@ date: 2022-06-15 00:00:00
 
 （==**文章基于 Kernel-4.15**==）&&（==**文章基于 Android 10.0**==）
 
-[【me.zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianOS) 
+[【me.zhoujinjian.com博客原图链接】](https://github.com/zhoujinjiani) 
 
 [【开发板 RockPi4bPlusV1.6】](https://shop.allnetchina.cn/collections/frontpage/products/rock-pi-4-model-b-board-only-2-4-5ghz-wlan-bluetooth-5-0)
 
@@ -40,7 +40,7 @@ Clock子系统是Linux内核中专门管理时钟的子系统。时钟在嵌入�
 1.1 clk的种类说明
 --------------------------------
 
-![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/kernel.clk/clk_source.png)
+![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/kernel.clk/clk_source.png)
 
 如上图所示，时钟源大概可分为如下几种：
 
@@ -70,7 +70,7 @@ Clock子系统是Linux内核中专门管理时钟的子系统。时钟在嵌入�
 
 > 图来源：https://www.kernel.org/doc/html/latest/driver-api/clk.html
 
-![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/kernel.clk/clk_char.png)
+![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/kernel.clk/clk_char.png)
 
 1.2 CCF子系统的框架说明
 --------------------------------
@@ -233,19 +233,19 @@ void __init rockchip_clk_of_add_provider(struct device_node *np,
 
 >include/linux/clk-provider.h
 
-![image-20210824162026412](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/kernel.clk/image-20210824162026412.png)
+![image-20210824162026412](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/kernel.clk/image-20210824162026412.png)
 
 ### **struct** clk_init_data 
 
 >include/linux/clk-provider.h
 
-![image-20210824162137515](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/kernel.clk/image-20210824162137515.png)
+![image-20210824162137515](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/kernel.clk/image-20210824162137515.png)
 
 ### **struct**  clk_ops
 
 >include/linux/clk-provider.h
 
-![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/kernel.clk/struct_clk_ops-16297933295211.png)
+![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/kernel.clk/struct_clk_ops-16297933295211.png)
 
 ## **2.4** 主要 API 说明
 
@@ -960,7 +960,7 @@ int of_clk_add_provider(struct device_node *np,
 
 结构体定义在一个C文件里面 : drivers/clk/clk.c
 
-![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/kernel.clk/struct_clk.png)
+![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/kernel.clk/struct_clk.png)
 
 ### **struct** **clk_core**
 
@@ -978,7 +978,7 @@ struct clk_core则是clock子系统核心层的一个私有数据结构, 在核�
 
 结构体定义在一个C文件里面 : drivers/clk/clk.c
 
-![image-20210824164801849](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/kernel.clk/image-20210824164801849.png)
+![image-20210824164801849](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/kernel.clk/image-20210824164801849.png)
 
 ## **3.3** **关键代码分析**
 
@@ -1641,23 +1641,23 @@ int clk_notifier_unregister(struct clk *clk, struct notifier_block *nb);
 
 **1，PLL** 锁相环，是由 24M 的晶振输入，然后内部锁相环锁出相应的频率。这个是 SOC 所有 CLOCK 的时钟的源。SOC 的所有总线及设备的时钟都是从 PLL 分频下来的。RK 平台主要 PLL 有:
 
-![image-20210826102009375](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/kernel.clk/image-20210826102009375.png)
+![image-20210826102009375](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/kernel.clk/image-20210826102009375.png)
 
 **2，ACLK、PCLK、HCLK**
 
 ACLK 是设备的总线的 CLK，PCLK 跟 HCLK 一般是用于寄存器读写的。而像 CLK_GPU 是 GPU 的控制器的时钟。 我们 SOC 的总线有 ACLK_PERI、HCLK_PERI、PCLK_PERI、ACLK_BUS、HCLK_BUS、 PCLK_BUS.各个设备的总线时钟会挂在上面这些时钟下面，如下图结构：
 
-![image-20210826102204721](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/kernel.clk/image-20210826102204721.png)
+![image-20210826102204721](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/kernel.clk/image-20210826102204721.png)
 
 （如：EMMC 想提高自己设备的总线频率以实现其快速的数据拷贝或者搬移，可以提高 ACLK_PERI 来实现）
 
 RK3399 上设计将高速和低速总线彻底分开，分成高速：ACLK_PERIHP、HCLK_PERIHP、 PCLK_PERIHP；低速：ACLK_PERILP0、HCLK_PERILP0、PCLK_PERILP0、 HCLK_PERILP1、PCLK_PERILP1。这样做是为了功耗最优，根据不同的需求可以设置不同的总 线频率。（具体每个设备在哪条总线下详细见时钟图） 可以参考如下（EMMC、GMAC、USB 等有自己的 ACLK）：
 
-![image-20210826102226714](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/kernel.clk/image-20210826102226714.png)
+![image-20210826102226714](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/kernel.clk/image-20210826102226714.png)
 
 **3，GATING** Clock 的框架中有很多的 Gating，这个主要是为了降低功耗使用，在一些设备关闭，Clock 不 需要维持的时候就可以关闭 Gating，来节省功耗。 我们 Clock 的框架的 Gating 是按照树的结构，有父子属性。Gating 的开关是有一个引用计数 机制的，使用这个计数来实现 Clock 打开时，会遍历打开其父 Clock。在子 Clock 关闭时，父 Clock 会遍历所有的子 Clock，在所有的子都关闭的时候才会关闭父 Clock。 （如：I²S2 在使用的时候，必须要打开下面这三个 Gating，但是软件上只需要开最后一级的 Gating，我们的时钟结构会自动的打开其 Parent 的 Gating）
 
-![image-20210826102344032](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/kernel.clk/image-20210826102344032.png)
+![image-20210826102344032](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/kernel.clk/image-20210826102344032.png)
 
 ## **5.2** 时钟配置
 
@@ -1743,11 +1743,11 @@ static const char *const rk3399_pmucru_critical_clocks[] __initconst = {
 
 - COMPOSITE：描述有 MUX、DIV、GATING 的 CLK，主要包括 CLK ID、类型、MUX、 DIV、GARING 的寄存器偏移地址、BIT 位等。
 
-![image-20210826110739981](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/kernel.clk/image-20210826110739981.png)
+![image-20210826110739981](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/kernel.clk/image-20210826110739981.png)
 
 Clk-rk3xxx.c 中的使用，使用这些 CLK 的注册函数，描述此 CLK 的类型，寄存器及父子关系 等。
 
-![image-20210826110855862](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/kernel.clk/image-20210826110855862.png)
+![image-20210826110855862](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/kernel.clk/image-20210826110855862.png)
 
 ##  **5.3** CLK_OF_DECLARE 解析
 

@@ -1,6 +1,6 @@
 ---
 title: Android 8.1 Display System源码分析（10）： App（"com.android.testgreen"）界面显示流程源码分析（1）：Activity启动流程分析（RK3399）
-cover: https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.19.jpg
+cover: https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.19.jpg
 categories: 
   - Display
 tags:
@@ -23,5 +23,5 @@ date: 2021-01-08 09:25:00
 #### （一）、参考：
 由于Android Framework之前已经分析过了，请参考：
 
-[【Android 8.1 Display System源码分析（10）： App（"com.android.testgreen"）界面显示流程源码分析（1）：Activity启动流程分析（RK3399）】](https://zhoujinjianOS.com/posts/20190726/)
+[【Android 8.1 Display System源码分析（10）： App（"com.android.testgreen"）界面显示流程源码分析（1）：Activity启动流程分析（RK3399）】](https://zhoujinjiani.com/posts/20190726/)
 

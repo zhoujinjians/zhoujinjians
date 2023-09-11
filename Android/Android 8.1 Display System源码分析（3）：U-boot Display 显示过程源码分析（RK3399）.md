@@ -1,6 +1,6 @@
 ---
 title: Android 8.1 Display System源码分析（3）：U-boot Display 显示过程源码分析（RK3399）
-cover: https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/personal.website/post.cover.pictures.00012.jpg
+cover: https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/personal.website/post.cover.pictures.00012.jpg
 categories: 
   - Display
 tags:
@@ -43,14 +43,14 @@ https://hceng.cn/2018/07/19/RK3288%E2%80%94%E2%80%94LCD%E8%A3%B8%E6%9C%BA/)
 --------------------------------------------------------------------------------
 
 显示模块主要分 vop, dsi, panel三大模块，另加gpio, 背光的控制，另外还有logo的解析和加载。整个流程基本上就是解析各个模块参数，然后准备，使能各个模块。
-![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/zjj.sys.display.8.1.uboot/firefly-rk3399-mipi-dsi-framwork.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/zjj.sys.display.8.1.uboot/firefly-rk3399-mipi-dsi-framwork.jpg)
 
 #### (一)、MIPI屏幕配置
 
 #### （1）、LCD使用
 
 Firefly-RK3399开发板外置了两个LCD屏接口，一个是EDP，一个是MIPI，接口对应板子上的位置如下图，我们这里是mipi：
-![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/zjj.sys.display.8.1.uboot/firefly-rk3399-lcd-edp-mipi.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/zjj.sys.display.8.1.uboot/firefly-rk3399-lcd-edp-mipi.jpg)
 
 
 ##### 1.1、Config配置
@@ -252,15 +252,15 @@ I:\RK3399_Android8.1_MIPI\kernel\arch\arm64\boot\dts\rockchip\rk3399-firefly-mip
 都是高电平有效。
 
 Firefly-RK3399硬件文档原理图：
-![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/zjj.sys.display.8.1.uboot/firefly-rk3399-sch-mipi-tx.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/zjj.sys.display.8.1.uboot/firefly-rk3399-sch-mipi-tx.jpg)
 
-![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/zjj.sys.display.8.1.uboot/firefly-rk3399-sch-u1e.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/zjj.sys.display.8.1.uboot/firefly-rk3399-sch-u1e.jpg)
 
 LCD的时序参数（timing），一般在屏的datasheet都可以找到，时序属性参考下图：
-![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/zjj.sys.display.8.1.uboot/firefly-rk3399-mipi-timing.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/zjj.sys.display.8.1.uboot/firefly-rk3399-mipi-timing.jpg)
 
 属性说明图：
-![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/zjj.sys.display.8.1.uboot/firefly-rk3399-dts-property.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/zjj.sys.display.8.1.uboot/firefly-rk3399-dts-property.jpg)
 
 ###### 1.2.7、MIPI-DPHY 
 
@@ -423,7 +423,7 @@ pwms属性：配置PWM，MIPI屏使用的pwm输出是pwm1，25000ns是周期(40 
 
 #### （2）、U-boot Display 显示过程流程图
 
-![](https://raw.githubusercontent.com/zhoujinjianOS/PicGo/master/zjj.sys.display.8.1.uboot/FireFly-Rk3399-Uboot-Display-Flow.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/zjj.sys.display.8.1.uboot/FireFly-Rk3399-Uboot-Display-Flow.jpg)
 
 #### （三）、vop, dsi, panel三大模块init分析
 #### 3.1、panel模块init分析
