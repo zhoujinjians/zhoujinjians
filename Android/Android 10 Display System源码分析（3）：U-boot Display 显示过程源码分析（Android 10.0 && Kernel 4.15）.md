@@ -1,6 +1,6 @@
 ---
 title: Android 10 Display System源码分析（3）：U-boot Display 显示过程源码分析（Android 10.0 && Kernel 4.15）
-cover: https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.24.jpg
+cover: https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.24.jpg
 categories: 
   - Display
 tags:
@@ -21,19 +21,19 @@ date: 2021-05-10 09:25:00
 - X:\u-boot\drivers\pinctrl\pinctrl-rockchip.c
 - X:\u-boot\drivers\video\pwm_backlight.c
 
-![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/Android10.Display.3/Android10.Display.3.TestColor.gif)
+![](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android10.Display.3/Android10.Display.3.TestColor.gif)
 
 显示模块主要分 vop, dsi, panel 三大模块，另加 gpio, 背光的控制，另外还有 logo 的解析和加载。整个流程基本上就是解析各个模块参数，然后准备，使能各个模块。
 
-![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/Android10.Display.3/khadas-edge-v-rk3399-mipi-dsi-framwork.jpg)
+![](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android10.Display.3/khadas-edge-v-rk3399-mipi-dsi-framwork.jpg)
 
 
 ## (一)、MIPI 屏幕配置
 ### （1）、LCD 使用
 Edge-V 开发板外置了 3 个 LCD 屏接口：HDMI + MIPI + EDP。接口对应板子上的位置如下图，我们这里是 mipi：
-![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/Android10.Display.3/edge-v_display_interfaces.jpg)
+![](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android10.Display.3/edge-v_display_interfaces.jpg)
 ### （2）,（MIPI + HDMI）屏幕配置
-![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/Android10.Display.3/edge_v_ts050.jpg)
+![](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android10.Display.3/edge_v_ts050.jpg)
 ### （3）,配置 dts
 #### 3.1,使能对应显示设备节点
 
@@ -91,7 +91,7 @@ rk3399 的 hdmi 所绑定的 vop 时钟需要挂载到 vpll 上，若是双显�
 };
 ```
 #### 3.3,配置 timing
-![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/Android10.Display.3/Android10.Display.3.MIPI-DSI.png)
+![](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android10.Display.3/Android10.Display.3.MIPI-DSI.png)
 
 ``` bash
 &dsi {
@@ -149,8 +149,8 @@ rk3399 的 hdmi 所绑定的 vop 时钟需要挂载到 vpll 上，若是双显�
 };
 ​
 ```
-![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/Android10.Display.3/timing_attribute_reference_figure.png)
-![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/Android10.Display.3/timing_attribute_reference_figure_2.png)
+![](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android10.Display.3/timing_attribute_reference_figure.png)
+![](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android10.Display.3/timing_attribute_reference_figure_2.png)
 
 **命令格式说明**
 
@@ -274,7 +274,7 @@ pwms 属性：配置 PWM，MIPI 屏使用的 pwm 输出是 pwm1，25000ns 是周
 
 ----------
 
-![](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/Android10.Display.3/Android10.Display.3.UBoot.Display.Flow.png)
+![](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android10.Display.3/Android10.Display.3.UBoot.Display.Flow.png)
 
 ## （三）、vop, dsi, panel 三大模块 init 分析
 

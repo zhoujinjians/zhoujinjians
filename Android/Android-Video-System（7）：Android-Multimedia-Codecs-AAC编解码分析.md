@@ -1,6 +1,6 @@
 ---
 title: Android Video System（7）：Android Multimedia Codecs - AAC编解码分析
-cover: https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/hexo.themes/bing-wallpaper-2018.04.29.jpg
+cover: https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/hexo.themes/bing-wallpaper-2018.04.29.jpg
 categories:
   - Multimedia
 tags:
@@ -61,8 +61,8 @@ kComponents[] = {
 - loudsoftaac.aac
 
 Log：
-[AAC-DEcorder-Google-Log.md](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.codecs/AAC-DEcorder-Google-Log.md)
-[AAC-Encorder-Google-Log.md](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.codecs/AAC-Encorder-Google-Log.md)
+[AAC-DEcorder-Google-Log.md](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.codecs/AAC-DEcorder-Google-Log.md)
+[AAC-Encorder-Google-Log.md](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.codecs/AAC-Encorder-Google-Log.md)
 
 --------------------------------------------------------------------------------
 
@@ -98,13 +98,13 @@ ADTS：Audio Data Transport Stream 音频数据传输流。这种格式的特征
 
 ADTS是帧序列，本身具备流特征，在音频流的传输与处理方面更加合适。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.codecs/VS7-01-AAC-ADTS.png)
+![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.codecs/VS7-01-AAC-ADTS.png)
 
 ADTS是AAC音频文件常见的传输格式。当你编码AAC裸流的时候，会遇到写出来的AAC文件并不能在PC和手机上播放，很大的可能就是AAC文件的每一帧里缺少了ADTS头信息文件的包装拼接。只需要加入头文件ADTS即可。一个AAC原始数据块长度是可变的，对原始帧加上ADTS头进行ADTS的封装，就形成了ADTS帧。
 
  图中表示出了ADTS一帧的简明结构，其两边的空白矩形表示一帧前后的数据。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.codecs/VS7-02-AAC-ADTS-hejunlin.png)
+![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.codecs/VS7-02-AAC-ADTS-hejunlin.png)
 
 
 #### （二）、Android AAC音频 解码
@@ -112,11 +112,11 @@ ADTS是AAC音频文件常见的传输格式。当你编码AAC裸流的时候，�
 前面的文章已经分析过音视频录制和播放流程了，首先回忆一下播放流程：
 [android ACodec MediaCodec NuPlayer flow](https://blog.csdn.net/dfhuang09/article/details/54926526)
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.codecs/VS7-03-Media-ACodec.png)
+![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.codecs/VS7-03-Media-ACodec.png)
 
 AAC播放流程基本一致，所以这里专注于分析下Android  AAC编解码流程，首先看看时序图：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.codecs/VS7-04-AAC-Decord-flow.png)
+![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.codecs/VS7-04-AAC-Decord-flow.png)
 
 ##### 2.1、initDecoder()
 从打印Log[]()可以看出，在初始化解码器的时候是用的Google的aac.decoder解码：
@@ -446,7 +446,7 @@ Log:
 
 #### （三）、Android AAC音频 编码
 首先看看时序图：
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.codecs/VS7-05-AAC-Encord-flow.png)
+![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.codecs/VS7-05-AAC-Encord-flow.png)
 
 编码：
 

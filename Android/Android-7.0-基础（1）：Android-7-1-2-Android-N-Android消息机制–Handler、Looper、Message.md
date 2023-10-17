@@ -1,6 +1,6 @@
 ---
 title: Android N 基础（1）：Android 7.1.2 Android消息处理机制分析（从JAVA层到NATIVE层）– Handler、Looper、Message
-cover: https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/hexo.themes/bing-wallpaper-2018.04.01.jpg
+cover: https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/hexo.themes/bing-wallpaper-2018.04.01.jpg
 categories: 
   - Android
 tags:
@@ -50,7 +50,7 @@ date: 2017-08-08 09:25:00
 
 ### 二、类关系图（Java层）
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.message/01-android-handler-looper-message.jpg)
+![Markdown](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.message/01-android-handler-looper-message.jpg)
 
 > ● Looper有一个MessageQueue消息队列；
 ● MessageQueue有一组待处理的Message；
@@ -102,7 +102,7 @@ private static void prepare(boolean quitAllowed) {
 
 ThreadLocal： 线程本地存储区（Thread Local Storage，简称为TLS），每个线程都有自己的私有的本地存储区域，不同线程之间彼此不能访问对方的TLS区域。TLS常用的操作方法：
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.message/02-android-handler-looper-message-_Thread_Local.png)
+![Markdown](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.message/02-android-handler-looper-message-_Thread_Local.png)
 
 ```java
 ThreadLocal.set(T value)：将value存储到当前线程的TLS区域，源码如下：
@@ -480,7 +480,7 @@ Handler类在构造方法中，可指定Looper，Callback回调方法以及消�
 
 第一种方式：sendMessage(Message msg)
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.message/03-android-handler-looper-message-java-sendmessage.png)
+![Markdown](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.message/03-android-handler-looper-message-java-sendmessage.png)
 
 ```java
 //从这里开始
@@ -658,7 +658,7 @@ public void handleMessage(Message msg) {
 
 **（1）简洁总结图示：**
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.message/05-android-handler-looper-message-java.jpg)
+![Markdown](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.message/05-android-handler-looper-message-java.jpg)
 
 图解：
 
@@ -673,7 +673,7 @@ public void handleMessage(Message msg) {
 
 **详细总结图示：**
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.message/06-android-handler-looper-message-detail.jpg)
+![Markdown](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.message/06-android-handler-looper-message-detail.jpg)
 
 ● Looper调用prepare()进行初始化，创建了一个与当前线程对应的Looper对象（通过ThreadLocal实现），并且初始化了一个与当前Looper对应的MessageQueue对象。
 
@@ -698,7 +698,7 @@ public void handleMessage(Message msg) {
 在前面讲解了Java层的消息处理机制，其中MessageQueue类里面涉及到多个native方法，除了MessageQueue的native方法，native层本身也有一套完整的消息机制，用于处理native的消息。在整个消息机制中，而MessageQueue是连接Java层和Native层的纽带，换言之，Java层可以向MessageQueue消息队列中添加消息，Native层也可以向MessageQueue消息队列中添加消息。
 
 Native层类的关系图： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.message/07-android-handler-looper-message-native-message.png)
+![Markdown](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.message/07-android-handler-looper-message-native-message.png)
 
 ### (一) MessageQueue 初始化（Native 层）
 
@@ -714,7 +714,7 @@ MessageQueue(boolean quitAllowed) {
 }
 ```
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.message/08-android-handler-looper-message-native_init.png)
+![Markdown](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.message/08-android-handler-looper-message-native_init.png)
 
 ### Step 2：android_os_MessageQueue_nativeInit()
 
@@ -798,7 +798,7 @@ void Looper::rebuildEpollLocked() {
 
 nativePollOnce用于提取消息队列中的消息，提取消息的调用链，如下：
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.message/09-android-handler-looper-message-poll_once.png)
+![Markdown](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.message/09-android-handler-looper-message-poll_once.png)
 
 下面来进一步来看看调用链的过程：
 
@@ -1231,7 +1231,7 @@ void Looper::sendMessageAtTime(nsecs_t uptime, const sp<MessageHandler>& handler
 ### (四) 唤醒 nativeWake()
 
 在添加消息到消息队列enqueueMessage(), 或者把消息从消息队列中全部移除quit()，再有需要时都会调用 nativeWake方法。包含唤醒过程的添加消息的调用链，nativeWake用于唤醒功能，如下： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.message/10-android-handler-looper-message-native_wake.png)
+![Markdown](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.message/10-android-handler-looper-message-native_wake.png)
 
 下面来进一步来看看调用链的过程：
 
@@ -1553,13 +1553,13 @@ public:
 
 这里又调用SurfaceFlinger的createSurface函数来创建Surface。绕了一圈又回到SurfaceFlinger，为什么要这么做呢？因为在同一时刻可以有多个应用程序请求SurfaceFlinger为其创建Surface，通过消息队列可以实现请求排队，然后SurfaceFlinger依次为应用程序创建Surface。
  **图解：** 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.message/11-android-handler-looper-message-java-c.png)
+![Markdown](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.message/11-android-handler-looper-message-java-c.png)
 
 红色虚线关系：Java层和Native层的MessageQueue通过JNI建立关联，彼此之间能相互调用，搞明白这个互调关系，也就搞明白了Java如何调用C++代码，c代码又是如何调用Java代码。 蓝色虚线关系：Handler/Looper/Message这三大类Java层与Native层并没有任何的真正关联，只是分别在Java层和Native层的handler消息模型中具有相似的功能。都是彼此独立的，各自实现相应的逻辑。 WeakMessageHandler继承于MessageHandler类，NativeMessageQueue继承于MessageQueue类 另外，消息处理流程是先处理Native Message，再处理Native Request，最后处理Java Message。理解了该流程，也就明白有时上层消息很少，但响应时间却较长的真正原因。
 
 ## 总结：
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiani/PicGo/master/android.message/12-android-handler-looper-message-structure.png)
+![Markdown](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/android.message/12-android-handler-looper-message-structure.png)
 
 ## 参考文档（特别感谢）：
 
