@@ -1,6 +1,6 @@
 ---
 title: Android 8.1 Display System源码分析（7）：Native Surface创建 && SurfaceFlinger合成流程分析（RK3399）
-cover: https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.16.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.16.jpg
 categories: 
   - Display
 tags:
@@ -23,5 +23,5 @@ date: 2020-10-08 09:25:00
 #### （一）、参考：
 由于Android Framework之前已经分析过了，请参考：
 
-[【Android 8.1 Display System源码分析（7）：Native Surface创建 && SurfaceFlinger合成流程分析（RK3399）】](https://iizhoujinjian.com/posts/20190716/)
+[【Android 8.1 Display System源码分析（7）：Native Surface创建 && SurfaceFlinger合成流程分析（RK3399）】](https://zhoujinjianin.com/posts/20190716/)
 

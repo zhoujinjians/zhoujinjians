@@ -1,6 +1,6 @@
 ---
 title:  Android 10 Display System源码分析（8）：App（"com.android.testgreen"）界面显示流程源码分析（1）：Activity启动流程分析（Android 10.0 && Kernel 4.15）
-cover: https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.29.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.29.jpg
 categories: 
   - Display
 tags:
@@ -25,12 +25,12 @@ rk3399_Android10:/product/priv-app # rm -rf Launcher3QuickStep/
 ```
 然后等待开机完成App（"com.android.testgreen"），抓取Log。setprop vendor.dump true。抓取的帧会按数字排列，还带分辨率参数。adb pull /data/dump/。抓到的bin文件可以用软件7yuv打开查看，格式设定为RGBA8888
 App（"com.android.testgreen"）渲染图：
-![](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android10.Display.8/dmlayer_fb_com.android.testred.png)
+![](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android10.Display.8/dmlayer_fb_com.android.testred.png)
 FrameBuffer渲染图：
-![](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android10.Display.8/dmlayer_fb_com.android.testred.png)
+![](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android10.Display.8/dmlayer_fb_com.android.testred.png)
 
 效果图：
-![](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android10.Display.8/Android10.com.android.test.takepic.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android10.Display.8/Android10.com.android.test.takepic.jpg)
 
 ----------
 ==源码（部分）==：
@@ -69,7 +69,7 @@ Activity启动模式就是属于Activity配置属性之一，叫它具有四种�
 Back栈管理了当你在Activity上点击Back键，当前Activity销毁后应该跳转到哪一个Activity的逻辑。
 
 其实在ActivityManagerService与WindowManagerService内部管理中，在Task之外，还有一层容器，这个容器应用开发者和用户可能都不会感觉到或者用到，但它却非常重要，那就是ActivityStack。 下文中，我们将看到，Android系统中的多窗口管理，就是建立在Stack的数据结构上的。 一个ActivityStack中包含了多个TaskRecord，一个TaskRecord中包含了多个ActivityRecord，下图描述了它们的关系：
-![](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android10.Display.8/com.android.testred.1.ActivityStack_TaskRecord_ActivityRecord.png)
+![](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android10.Display.8/com.android.testred.1.ActivityStack_TaskRecord_ActivityRecord.png)
 
 
 另外还有一点需要注意的是，ActivityManagerService和WindowManagerService中的Task和Stack结构是一一对应的，对应关系对于如下：
@@ -167,14 +167,14 @@ SparseArray mActivityDisplays //displayId为key
 SparseArray mActivityContainers // mStackId为key
 
 ##### 1.3、相关类重要成员变量
-![](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android10.Display.8/com.android.testred.1.ams_class_member.png)
+![](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android10.Display.8/com.android.testred.1.ams_class_member.png)
 
 
 
 ##### 1.4、小结：
 
 总体概览图：
-![](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android10.Display.8/com.android.testred.1.startActivity_fork_new_process.png)
+![](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android10.Display.8/com.android.testred.1.startActivity_fork_new_process.png)
 
 1、点击桌面App图标，Launcher进程采用Binder IPC向system_server进程发起startActivity请求；
 2、system_server进程接收到请求后，向zygote进程发送创建进程的请求；

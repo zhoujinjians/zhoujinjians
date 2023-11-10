@@ -1,6 +1,6 @@
 ---
 title: Android 11 Display System源码分析（2）：IAllocator IMapper HAL服务获取流程（V1）
-cover: https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.42.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.42.jpg
 categories: 
  - Display
 tags:
@@ -13,7 +13,7 @@ date: 2022-07-16 16:16:16
 
 （==**文章基于 Android 11.0**==）
 
-[【iizhoujinjian.com博客原图链接】](https://github.com/iizhoujinjian) 
+[【zhoujinjianin.com博客原图链接】](https://github.com/zhoujinjianin) 
 
 [【开发板】](https://wiki.radxa.com/Rockpi4)
 
@@ -100,43 +100,43 @@ int main() {
 
 > Y:\home\zhoujinjian\android11_rockpi4\system\libhidl\transport\include\hidl\LegacySupport.h
 
-![image-20220811203557089](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android_Display_System/Android11_Display02/image-20220811203557089.png)
+![image-20220811203557089](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android_Display_System/Android11_Display02/image-20220811203557089.png)
 
 
 
-![image-20220811204440115](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android_Display_System/Android11_Display02/image-20220811204440115.png)
+![image-20220811204440115](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android_Display_System/Android11_Display02/image-20220811204440115.png)
 
 > Y:\home\zhoujinjian\android11_rockpi4\system\libhidl\transport\LegacySupport.cpp
 
-![image-20220811211030918](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android_Display_System/Android11_Display02/image-20220811211030918.png)
+![image-20220811211030918](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android_Display_System/Android11_Display02/image-20220811211030918.png)
 
-![image-20220811205128732](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android_Display_System/Android11_Display02/image-20220811205128732.png)
+![image-20220811205128732](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android_Display_System/Android11_Display02/image-20220811205128732.png)
 
 registerServiceCb即为registerAsServiceInternal
 
 > Y:\home\zhoujinjian\android11_rockpi4\system\libhidl\transport\ServiceManagement.cpp
 
-![image-20220811211423210](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android_Display_System/Android11_Display02/image-20220811211423210.png)
+![image-20220811211423210](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android_Display_System/Android11_Display02/image-20220811211423210.png)
 
 > ## BpHwServiceManager::addWithChain()
 >
 > Y:\home\zhoujinjian\android11_rockpi4\out\soong\.intermediates\system\libhidl\transport\manager\1.2\android.hidl.manager@1.2_genc++\gen\android\hidl\manager\1.2\ServiceManagerAll.cpp
 
-![image-20220829102350669](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android_Display_System/Android11_Display02/image-20220829102350669.png)
+![image-20220829102350669](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android_Display_System/Android11_Display02/image-20220829102350669.png)
 
-![image-20220829103006883](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android_Display_System/Android11_Display02/image-20220829103006883.png)
+![image-20220829103006883](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android_Display_System/Android11_Display02/image-20220829103006883.png)
 
 > ## ServiceManager::addWithChain()
 >
 > Y:\home\zhoujinjian\android11_rockpi4\system\hwservicemanager\ServiceManager.cpp
 
-![image-20220829103242379](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android_Display_System/Android11_Display02/image-20220829103242379.png)
+![image-20220829103242379](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android_Display_System/Android11_Display02/image-20220829103242379.png)
 
-![image-20220829103355828](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android_Display_System/Android11_Display02/image-20220829103355828.png)
+![image-20220829103355828](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android_Display_System/Android11_Display02/image-20220829103355828.png)
 
 > ## ServiceManager::insertService()
 
-![image-20220829103507527](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android_Display_System/Android11_Display02/image-20220829103507527.png)
+![image-20220829103507527](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android_Display_System/Android11_Display02/image-20220829103507527.png)
 
 至此，我们的IAllocator服务注册完成，注册步骤分为以下几个步骤：
 
@@ -163,7 +163,7 @@ registerServiceCb即为registerAsServiceInternal
 
 > ## getService()
 
-![image-20220829133030627](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android_Display_System/Android11_Display02/image-20220829133030627.png)
+![image-20220829133030627](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android_Display_System/Android11_Display02/image-20220829133030627.png)
 
 getService的调用栈如下：
 
@@ -171,7 +171,7 @@ getService的调用栈如下：
 
 > ## getRawServiceInternal()
 
-![image-20220829133159318](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android_Display_System/Android11_Display02/image-20220829133159318.png)
+![image-20220829133159318](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android_Display_System/Android11_Display02/image-20220829133159318.png)
 
 getRawServiceInternal()步骤如下：
 
@@ -183,11 +183,11 @@ getRawServiceInternal()步骤如下：
 
 > Y:\home\zhoujinjian\android11_rockpi4\out\soong\.intermediates\system\libhidl\transport\manager\1.2\android.hidl.manager@1.2_genc++\gen\android\hidl\manager\1.2\ServiceManagerAll.cpp
 
-![image-20220829133519664](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android_Display_System/Android11_Display02/image-20220829133519664.png)
+![image-20220829133519664](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android_Display_System/Android11_Display02/image-20220829133519664.png)
 
 > Y:\home\zhoujinjian\android11_rockpi4\out\soong\.intermediates\system\libhidl\transport\manager\1.0\android.hidl.manager@1.0_genc++\gen\android\hidl\manager\1.0\ServiceManagerAll.cpp
 
-![image-20220829133839642](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android_Display_System/Android11_Display02/image-20220829133839642.png)
+![image-20220829133839642](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android_Display_System/Android11_Display02/image-20220829133839642.png)
 
 > _hidl_get流程如下：
 >
@@ -209,7 +209,7 @@ getRawServiceInternal()步骤如下：
 
 > ## ServiceManager::get()
 
-![image-20220829141027593](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/Android_Display_System/Android11_Display02/image-20220829141027593.png)
+![image-20220829141027593](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/Android_Display_System/Android11_Display02/image-20220829141027593.png)
 
 ```c++
 [/system/hwservicemanager/HidlService.cpp]

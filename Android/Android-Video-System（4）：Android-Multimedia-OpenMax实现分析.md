@@ -1,6 +1,6 @@
 ---
 title: Android Video System（4）：Android Multimedia - OpenMax实现分析
-cover: https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/hexo.themes/bing-wallpaper-2018.04.25.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/hexo.themes/bing-wallpaper-2018.04.25.jpg
 categories:
   - Multimedia
 tags:
@@ -62,7 +62,7 @@ OpenMax实际上分成三个层次，自上而下分别是，OpenMax DL（开发
 > 第三层：OpenMax AL（Appliction Layer，应用层）
 >        OpenMax AL API在应用程序和多媒体中间件之间提供了一个标准化接口，多媒体中间件提供服务以实现被期待的API功能。
 
-![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/video.system/VS-04-01-openmaxsystem.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/VS-04-01-openmaxsystem.png)
 
     OpenMax API将会与处理器一同提供，以**使库和编解码器开发者能够高速有效地利用新器件的完整加速潜能，无须担心其底层的硬件结构。**该标准是针对嵌入式设备和移动设备的多媒体软件架构。在架构底层上为多媒体的编解码和数据处理定义了一套统一的编程接口，对多媒体数据的处理功能进行系统级抽象，为用户屏蔽了底层的细节。因此，**多媒体应用程序和多媒体框架通过OpenMax IL可以以一种统一的方式来使用编解码和其他多媒体数据处理功能，具有了跨越软硬件平台的移植性。**
 
@@ -76,7 +76,7 @@ OpenMax IL 处在中间层的位置，OpenMAX IL 作为音频，视频和图像�
 OpenMax 想做的就是定义一个这样的行业标准，这样媒体应用、硬件厂商都遵循这种标准。硬件厂商将OpenMax 与处理器一并提供，上层的多媒体框架想要用到硬件音视频加速功能时，只需遵循openmax的接口就可以扩平台运行。
        可喜的，现在越来越多的多媒体框架及多媒体应用正在遵循openmax标准，包括各种知名的媒体开源软件。越来越多的芯片厂商也在遵循openmax的标准。对于现在的音视频编解码来说，分辨率越来越高，需要芯片提供硬件加速功能是个大的趋势。我相信 接口的标准化是一定要走的。如下图所示， openmax IL在多媒体框架中的应用：
 
-![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/video.system/VS-04-02-openmaxuse.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/VS-04-02-openmaxuse.png)
 
 
 
@@ -84,7 +84,7 @@ OpenMax 想做的就是定义一个这样的行业标准，这样媒体应用、
 
  OpenMax IL的接口层次结构适中，既不是硬件编解码的接口，也不是应用程序层的接口，因此比较容易实现标准化。OpenMax IL的层次结构如下：
 
-![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/video.system/VS-04-03-openmaxIL.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/VS-04-03-openmaxIL.png)
 
 
 图中的虚线中的内容是OpenMax IL层的内容，其主要实现了OpenMax IL中的各个组件（Component）。**对下层，OpenMax IL可以调用OpenMax DL层的接口，也可以直接调用各种Codec实现。对上层，OpenMax IL可以给OpenMax AL 层等框架层（Middleware）调用，也可以给应用程序直接调用。**
@@ -98,7 +98,7 @@ OpenMax IL主要内容如下所示。
 ☯ 隧道化（Tunneled）：让两个组件直接连接的方式
        OpenMax IL的基本运作过程如图所示：
 	   
-![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/video.system/VS-04-04-openmaxilbase.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/VS-04-04-openmaxilbase.png)
 
 OpenMAL IL的客户端，通过调用四个OpenMAL IL组件，实现了一个功能。四个组件分别是Source组件、Host组件、Accelerator组件和Sink组件。Source组件只有一个输出端口；而Host组件有一个输入端口和一个输出端口；Accelerator组件具有一个输入端口，调用了硬件的编解码器，加速主要体现在这个环节上。Accelerator组件和Sink组件通过私有通讯方式在内部进行连接，没有经过明确的组件端口。
        OpenMAL IL在使用的时候，其数据流也有不同的处理方式：既可以经由客户端，也可以不经由客户端。图中Source组件到Host组件的数据流就是经过客户端的；而Host组件到Accelerator组件的数据流就没有经过客户端，使用了隧道化的方式；Accelerator组件和Sink组件甚至可以使用私有的通讯方式。
@@ -109,7 +109,7 @@ OpenMAL IL的客户端，通过调用四个OpenMAL IL组件，实现了一个功
 
 组件的处理的核心内容是：通过输入端口消耗Buffer，通过输出端口填充Buffer，由此多组件相联接可以构成流式的处理。OpenMAL IL中一个组件的结构如下图所示：
 
-![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/video.system/VS-04-05-openilinternal.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/VS-04-05-openilinternal.jpg)
 
 
        组件的功能和其定义的端口类型密切相关，通常情况下：只有一个输出端口的，为Source组件；只有一个输入端口的，为Sink组件；有多个输入端口，一个输出端口的为Mux组件；有一个输入端口，多个输出端口的为DeMux组件；输入输出端口各一个组件的为中间处理环节，这是最常见的组件。
@@ -123,7 +123,7 @@ OpenMAL IL的客户端，通过调用四个OpenMAL IL组件，实现了一个功
   在Android中，OpenMax IL层，**通常可以用于多媒体引擎的插件**，Android的多媒体引擎OpenCore和StageFright都可以使用OpenMax作为插件，主要用于**编解码（Codec）**处理。
   在Android的框架层，也定义了由Android封装的OpenMax接口，和标准的接口概念基本相同，但是使用C++类型的接口，并且使用了Android的Binder IPC机制。Android封装OpenMax的接口被StageFright使用，OpenCore没有使用这个接口，而是使用其他形式对OpenMax IL层接口进行封装。Android OpenMax的基本层次结构如图：
 
-![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/video.system/VS-04-06-openmaxinandroid.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/VS-04-06-openmaxinandroid.jpg)
 
 
        Android系统的一些部分对OpenMax IL层进行使用，基本使用的是标准OpenMax IL层的接口，只是进行了简单的封装。标准的OpenMax IL实现很容易以插件的形式加入到Android系统中。
@@ -146,7 +146,7 @@ OpenMAL IL的客户端，通过调用四个OpenMAL IL组件，实现了一个功
 ☯   OpenMax IL层：根据OpenMax IL层的标准头文件实现不同功能的组件。
  **Android中还提供了OpenMax的适配层接口（对OpenMax IL的标准组件进行封装适配）**，它作为Android本地层的接口，可以被Android的多媒体引擎调用。上一篇文章末尾，初始化解码器核心调用的两个方法就是适配层的接口。
 
-![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/video.system/VS-04-07-openmaxsult.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/VS-04-07-openmaxsult.jpg)
 
 
 ☯    1.上面已经说过了，android系统中只用openmax来做Codec，所以android向上抽象了一层OMXCodec，提供给上层播放器用。播放器中音视频解码器mVideosource、mAudiosource都是OMXCodec的实例。
@@ -348,7 +348,7 @@ typedef enum OMX_STATETYPE
 
 OpenMax组件的状态机可以由外部的命令改变，也可以由内部发生的情况改变。OpenMax IL组件的状态机的迁移关系如图所示：
 
-![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/video.system/VS-04-08-OMXstate.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/VS-04-08-OMXstate.png)
 
 
  OMX_Core.h中定义的枚举类型OMX_COMMANDTYPE表示对组件的命令类型，内容如下所示：
@@ -458,7 +458,7 @@ public:
 ☯    image：图像处理部分OpenMax IL组件
        TI OpenMax IL实现的结构如图所示:
 
-![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/video.system/VS-04-09-tiopenmaxil.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/VS-04-09-tiopenmaxil.png)
 
 
  在TI OpenMax IL实现中，最上面的内容是OpenMax的管理者用于管理和初始化，中间层是各个编解码单元的OpenMax IL标准组件，下层是LCML层，供各个OpenMax IL标准组件所调用。
@@ -1318,7 +1318,7 @@ MediaCodec类可用于访问Android底层的媒体编解码器，例如，编码
 2、States
 在编解码器的生命周期内有三种理论状态：停止态-Stopped、执行态-Executing、释放态-Released。停止状态（Stopped）包括了三种子状态：未初始化（Uninitialized）、配置（Configured）、错误（Error）。执行状态（Executing）在概念上会经历三种子状态：刷新（Flushed）、运行（Running）、流结束（End-of-Stream）。
 
-![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/video.system/VS-04-10-MediaCodec-states.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/VS-04-10-MediaCodec-states.png)
 
 
 
@@ -1373,14 +1373,14 @@ b.	Synchronous Processing using Buffers
 	ACodec ，CodecObserver和OMXNodeInstance是一一对应的，简单的可以理解它们3个构成了OpenMAX IL的一个Component，每一个node就是一个codec在OMX服务端的标识。当然还有CallbackDispatcher，用于处理codec过来的消息，通过它的post/loop/dispatch来发起接收，从OMX.cpp发送消息，最终通过OMXNodeInstance::onMessage -> CodecObserver::onMessage -> ACodec::onMessage一路往上，当然消息的来源是因为我们有向codec注册OMXNodeInstance::kCallbacks。
 	而在OMXPluginBase创建组件实例的时候，需要传递一个callback给组件，这个callback用于接收组件的消息，它的实现是在OMXNodeInstance.cpp中。而kcallbacks是OMXNodeInstance的静态成员变量，它内部的三个函数指针分别指向了OMXNodeInstance的三个静态方法，也即是这三个方法与组件进行着消息传递
 
-![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/video.system/VS-04-11-OMX-allocateNode.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/VS-04-11-OMX-allocateNode.png)
 
 
 
 
 	对于NuPlayer来说，它并不直接接触解码组件，而是通过创建ACodec来和组件交互。ACode内部有一个id，这个id对应于一个OMXNodeInstance。OMX对象中会对产生的每一个OMXNodeInstance分配一个唯一的node_id。每一个OMXNodeInstance内部又保存着组件实例的指针【OMX_HANDLETYPE mHandle;】，通过这个指针就可以和组件进行交互。交互的流程为：ACodec → OMX → OMXNodeInstance → COMPONENT。
 
-![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/video.system/VS-04-12-NuPlayer-libstagefrighthw.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/VS-04-12-NuPlayer-libstagefrighthw.png)
 
 
 
@@ -1390,7 +1390,7 @@ b.	Synchronous Processing using Buffers
 	Android源码提供了一些软件解码和编码的组件，它们被抽象为SoftOMXComponent。OMXPluginBase扮演者组件的管理者。它负责加载组件库，创建组件实例。而OMXMaster则管理着OMXPluginBase，Android原生提供的组件都是由SoftOMXPlugin类来管理，这个类就是继承自OMXPluginBase。
 	对于厂商来说，如果要实现自己的组件管理模块，需要通过继承实现OMXPluginBase，并将之编译为libstagefrighthw.so。在OMXMaster中会加载这个库文件，然后调用其createOMXPlugin方法获得一个OMXPluginBase指针，然后将其加入OMXPluginBase列表以及与组件名相关的map 【mPluginByComponentName】中，后续都会通过OMXPluginBase来管理组件。
 
-![Alt text | center](https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/video.system/VS-04-13-OMXMaster-addPlugin.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/VS-04-13-OMXMaster-addPlugin.png)
 
 
 

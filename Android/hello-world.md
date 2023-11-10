@@ -1,6 +1,6 @@
 ---
 title: Hello World
-cover: https://raw.githubusercontent.com/iizhoujinjian/PicGo/master/others/imgcover.png
+cover: https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/others/imgcover.png
 categories::
   - Blog
 tags:
