@@ -1,6 +1,6 @@
 ---
 title: Android Video System（2）：音视频分离MediaExtractor、解码Decoder、渲染Renderer源码分析
-cover: https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/hexo.themes/bing-wallpaper-2018.04.17.jpg
+cover: https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/hexo.themes/bing-wallpaper-2018.04.17.jpg
 categories:
   - Multimedia
 tags:
@@ -556,12 +556,12 @@ sp<IMediaSource> MPEG4Extractor::getTrack(size_t index) {
 还记的前面提出的第一点疑问吗，现在我们知道了如何分离音视频了并且得到了相应的文件Source了。
 图示（红线部分）：
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/02-01-source-demux-decoder-output-MediaExtractor.jpg)
+![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/video.system/02-01-source-demux-decoder-output-MediaExtractor.jpg)
 
 #### （二）、多媒体文件 - 音视频解码（Decoder）
 音频解码、视频解码在何处，答案就在mMediaPlayer.start()流程当中，先看看start()总体时序图，然后一步步分析
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/02-02-NuPlayer-Start-instantiateDecoder.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/video.system/02-02-NuPlayer-Start-instantiateDecoder.png)
 
 由于从Java层到JNI前面已多次分析，这里直接从NuPlayer::start()开始分析
 
@@ -1268,7 +1268,7 @@ void ACodec::LoadedState::onStart() {
 ##### 3.1、音视频解码数据处理-emptyBuffer
 还是老样子，先看看时序图，然后一步步分析
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/02-03-acodec-emptyBuffer.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/video.system/02-03-acodec-emptyBuffer.png)
 
 1、	MediaCodec::start()之后ACodec是在LoadedToIdleState状态，此时若ACodec::LoadedToIdleState::onOMXEvent(…)接收到组件转换至Idle状态后的OMX_EventCmdComplete事件，会向IOMX发送状态转换命令，经过OMXNodeInstance最终对将OMX组件状态转换成Executing状态（这里OMX会发送OMX_EventCmdComplete事件），然后ACodec进行changeState至IdleToExecutingState。
 2、	此时ACodec::IdleToExecutingState::onOMXEvent(…)检测到上面的OMX_EventCmdComplete事件后，会首先调用函数ACodec::ExecutingState::resume()，然后对ACodec进行changeState至ExecutingState。
@@ -1574,7 +1574,7 @@ P.S. 2：ACodec::BaseState::onInputBufferFilled(…)的调用：
 ##### 3.2、音视频解码数据处理-fillBuffer
 还是老样子，先看看时序图，然后一步步分析
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/02-04-acodec-fillBuffer.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/video.system/02-04-acodec-fillBuffer.png)
 
 
 ##### 3.2.1、ACodec::ExecutingState::resume()
@@ -2005,7 +2005,7 @@ void NuPlayer::Renderer::onQueueBuffer(const sp<AMessage> &msg) {
 ```
 
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/02-05-source-demux-decoder-output-render.jpg)
+![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/video.system/02-05-source-demux-decoder-output-render.jpg)
 
 
 #### （五）、视频解码输出到SurfaceFlinger
@@ -2179,7 +2179,7 @@ status_t ACodec::allocateOutputBuffersFromNativeWindow() {
 static_cast<Surface*>(mNativeWindow.get())
         ->getIGraphicBufferProducer()->allowAllocation(true);
 ```
-![Alt text](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/02-06-Surface-ANativeWindow.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/video.system/02-06-Surface-ANativeWindow.png)
 
 
 ##### 5.1.1.2、Surface->dequeueBuffer
@@ -2206,7 +2206,7 @@ void ACodec::BaseState::onOutputBufferDrained(const sp<AMessage> &msg) {
         ...
 }
 ```
-![Alt text](https://raw.githubusercontent.com/zhoujinjianin/PicGo/master/video.system/02-07-OpenMax-Based video decode-surfaceflinger.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/video.system/02-07-OpenMax-Based video decode-surfaceflinger.png)
 
 关于SurfaceFlinger的知识请参考：【Android 7.1.2 (Android N) Android Graphics 系统分析】
 
