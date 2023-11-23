@@ -1,6 +1,6 @@
 ---
 title: Android Audio System源码分析（3）：Android Audio 系统源码分析（Android 5.0.2 && Kernel 3.0.86）
-cover: https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/personal.website/post.cover.pictures.00009.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/personal.website/post.cover.pictures.00009.jpg
 categories:
   - Audio
 tags:
@@ -47,7 +47,7 @@ date: 2020-04-08 09:25:00
 
 ##### 1.0、总体框架图
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/31-Audio-system-Android-Linux-arc.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/31-Audio-system-Android-Linux-arc.png)
 
 
 系统启动时将执行 /system/etc/init/audioserver.rc ，运行 /system/bin/ 目录下的 audioserver 服务。audioserver.rc 内容如下：
@@ -618,7 +618,7 @@ Step3@ AudioFlinger::openOutput. 既然通道已经打开，那么由谁来往�
 需要混音
 
 这三种情况分别对应DirectOutputThread、OffloadThread和MixerThread两种线程。我们以后者为例来分析下PlaybackThread的工作模式，也会后面小节打下基础。回放线程（PlaybackThread 及其派生的子类）和录制线程（RecordThread）进行的，先简单看看回放线程和录制线程类关系：
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/32-Audio-system-mixerthread.jpg)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/32-Audio-system-mixerthread.jpg)
 
 ·       ThreadBase：PlaybackThread 和 RecordThread 的基类
 ·       RecordThread：录制线程类，由 ThreadBase 派生
@@ -745,7 +745,7 @@ compress_offload：硬解输出流设备，用于需要硬件解码的数据输�
 可能有人产生这样的疑问：既然 primary_out 设备一直保持打开，那么能耗岂不是很大？这里阐释一个概念：输出流设备属于逻辑设备，并不是硬件设备。所以即使输出流设备一直保持打开，只要硬件设备不工作，那么就不会影响能耗。那么硬件设备什么时候才会打开呢？答案是 PlaybackThread 将音频数据写入到输出流设备时。
 
 下图简单描述 AudioTrack、PlaybackThread、输出流设备三者的对应关系：
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/33-Audio-system-Audio-playback-.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/33-Audio-system-Audio-playback-.png)
 
 我们可以这么说：输出流设备决定了它对应的 PlaybackThread 是什么类型。怎么理解呢？意思是说：只有支持了该类型的输出流设备，那么该类型的 PlaybackThread 才有可能被创建。举个例子：只有硬件上具备硬件解码器，系统才建立 compress_offload 设备，然后播放 mp3 格式的音乐文件时，才会创建 OffloadThread 把数据输出到 compress_offload 设备上；反之，如果硬件上并不具备硬件解码器，系统则不应该建立 compress_offload 设备，那么播放 mp3 格式的音乐文件时，通过 MixerThread 把数据输出到其他输出流设备上。
 
@@ -1061,7 +1061,7 @@ extern "C" AudioPolicyInterface* createAudioPolicyManager(
 
 ##### 2.3、创建AudioPolicyManager()
 总体流程图：
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/34-Audio-system-CreateAudioPolicyManager.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/34-Audio-system-CreateAudioPolicyManager.png)
 
 
 AudioPolicyManager 的构造函数将解析音频策略配置文件，从而获取到设备所支持的音频设备信息（包括设备是否支持 Offload、Direct 模式输出，各输入输出 profile 所支持的采样率、通道数、数据格式等），加载全部 HwModule，为之创建所有非 direct 输出类型的 outputStream 和所有 inputStream，并创建相应的 playbackThread 或 recordThread 线程。需要注意的是，Android 7.0上的音频策略配置文件开始使用 XML 格式，其文件名为 audio_policy_configuration.xml，
@@ -1221,9 +1221,9 @@ AudioPolicyManager对象构造过程中主要完成以下几个步骤：
 5、   更新系统缓存的音频输出设备信息updateDevicesAndOutputs()
 
 ##### 2.3.1、加载audio_policy_configuration.xml或者audio_policy.conf配置文件
-[audio_policy_configuration.xml](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/audio_policy_configuration.xml)
+[audio_policy_configuration.xml](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/audio_policy_configuration.xml)
 audio_policy.conf同时定义了多个audio 接口，每一个audio 接口包含若干output和input，而每个output和input又同时支持多种输入输出模式，每种输入输出模式又支持若干种设备。
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/35-Audio-system-audio_policy.conf.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/35-Audio-system-audio_policy.conf.png)
 
 
 ##### 2.3.2、初始化音量调节点initializeVolumeCurves(speakerDrcEnabled)
@@ -1348,19 +1348,19 @@ static int legacy_adev_open(const hw_module_t* module, const char* name,
 
 ```
 到此就加载完系统定义的所有音频接口，并生成相应的数据对象，如下图所示：'
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/36-Audio-system-audiohwdevice.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/36-Audio-system-audiohwdevice.png)
 
 ##### 2.3.4、打开对应的outputStream和inputStream
 前面一小节已经分析过outputStream，这里不再分析了
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/37-Audio-system-AudioStreamOut.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/37-Audio-system-AudioStreamOut.png)
 
 打开音频输出后，在AudioFlinger与AudioPolicyService中的表现形式如下：
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/38-Audio-system-audiohwdevice-openoutput.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/38-Audio-system-audiohwdevice-openoutput.png)
 
 打开音频输入:
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/39-Audio-system-AudioStreamIn.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/39-Audio-system-AudioStreamIn.png)
 打开音频输入后，在AudioFlinger与AudioPolicyService中的表现形式如下：
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/310-Audio-system-audiohwdevice-openinput.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/310-Audio-system-audiohwdevice-openinput.png)
 
 
 ##### 2.3.5、 更新系统缓存的音频输出设备信息updateDevicesAndOutputs()
@@ -1380,17 +1380,17 @@ void AudioPolicyManager::updateDevicesAndOutputs()
 ->打开音频输出时创建一个audio_stream_out通道，并创建AudioStreamOut对象以及新建PlaybackThread播放线程。
 
 -> 打开音频输入时创建一个audio_stream_in通道，并创建AudioStreamIn对象以及创建RecordThread录音线程。
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/311-Audio-system-audio_stream_in-out.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/311-Audio-system-audio_stream_in-out.png)
 
 #### (三)、深入剖析Android音频之AudioTrack
 现在我们开始分析 AudioTrack 的创建过程，特别留意 AudioTrack 与 AudioFlinger 如何建立联系、用于 AudioTrack 与 AudioFlinger 交换数据的匿名共享内存如何分配。
 
 ##### 3.1. AudioTrack & AudioFlinger 相关类
 时序图：
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/312-Audio-system-create_audiotrack-flow.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/312-Audio-system-create_audiotrack-flow.png)
 
 首先看一下 AudioTrack & AudioFlinger 的类图，理一下 AudioFlinger 的主要类及其关系、AudioTrack 与 AudioFlinger 之间的联系，后面将以该图为脉络展开分析。
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/313-Audio-system-create_audiotrack.jpg)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/313-Audio-system-create_audiotrack.jpg)
 
 ☯ AudioFlinger::PlaybackThread：回放线程基类，不同输出标识的音频流对应不同类型的 PlaybackThread 实例（分为四种：MixerThread、DirectOutputThread、DuplicatingThread、OffloadThread），具体见 3.4. AudioFlinger 回放录制线程 小节，所有的 PlaybackThread 实例都会添加到 AudioFlinger.mPlaybackThreads 向量中；这个向量的定义： DefaultKeyedVector< audio_io_handle_t, sp<PlaybackThread> > mPlaybackThreads;，可见 audio_io_handle_t 是与 PlaybackThread 是一一对应的，由已知的 audio_io_handle_t 就能找到对应的 PlaybackThread；audio_io_handle_t 在创建 PlaybackThread 时由系统分配，这个值是全局唯一的
 ☯ AudioFlinger::PlaybackThread::Track：音频流管理类，创建一块匿名共享内存用于 AudioTrack 与 AudioFlinger 之间的数据交换（方便起见，这块匿名共享内存，以后均简单称为 FIFO），同时实现 start()、stop()、pause() 等音频流常用控制手段；注意，多个 Track 对象可能都注册到同一个 PlaybackThread 中（尤其对于 MixerThread 而言，一个 MixerThread 往往挂着多个 Track 对象），这多个 Track 对象都会添加到 PlaybackThread.mTracks 向量中统一管理
@@ -1444,7 +1444,7 @@ AudioTrack 由此建立了和 AudioFlinger 的全部联系工作：
 构造 1 个 AudioTrack 实例时，AudioFlinger 会有 1 个 PlaybackThread 实例、1 个 Track 实例、1 个 TrackHandle 实例、1 个 AudioTrackServerProxy 实例、1 块 FIFO 与之对应。
 
 当同时构造 1 个 AudioTrack with AUDIO_OUTPUT_FLAG_PRIMARY、1 个 AudioTrack with AUDIO_OUTPUT_FLAG_FAST、3 个 AudioTrack with AUDIO_OUTPUT_FLAG_DEEP_BUFFER、1 个 AudioTrack with AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD、1 个 AudioTrack with AUDIO_OUTPUT_FLAG_DIRECT 时（事实上，Android 音频策略不允许出现这种情形的），AudioFlinger 拥有的 PlaybackThread、Track、TrackHandle 实例如下图所示：
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/314-Audio-system-PlaybackThread-Track-TrackHandle.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/314-Audio-system-PlaybackThread-Track-TrackHandle.png)
 
 最后附上相关代码的流程分析，我本意是不多贴代码的，但不上代码总觉得缺点什么，这里我尽量把代码精简，提取主干，忽略细节。
 
@@ -2090,7 +2090,7 @@ mBuffer = sharedBuffer->pointer()
 ```
 
 FIFO 管理相关的类图：
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/315-Audio-system-FIFO.jpg)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/315-Audio-system-FIFO.jpg)
 
 ☯AudioTrackClientProxy：MODE_STREAM 模式下，生产者 AudioTrack 使用它在 FIFO 中找到可用空间的位置
 ☯AudioTrackServerProxy：MODE_STREAM 模式下，消费者 AudioFlinger::PlaybackThread 使用它在 FIFO 中找到可读数据的位置
@@ -2102,7 +2102,7 @@ FIFO 管理相关的类图：
 
 #### (四)、深入剖析MediaPlayer播放音频流程
 时序图：
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/316-Audio-system-mediaplayer-playback.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/316-Audio-system-mediaplayer-playback.png)
 
 
 

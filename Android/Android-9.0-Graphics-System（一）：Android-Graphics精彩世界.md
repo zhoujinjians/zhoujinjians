@@ -1,6 +1,6 @@
 ---
 title: Android P Graphics System（一）：Android Graphics精彩世界
-cover: https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/hexo.themes/bing-wallpaper-2018.04.36.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/hexo.themes/bing-wallpaper-2018.04.36.jpg
 categories:
   - Graphics
 tags:
@@ -16,7 +16,7 @@ date: 2019-05-08 09:25:00
 注：文章都是通过阅读各位前辈总结的资料 Android 9.0 && Linux（Kernel 3.18）Qualcomm平台源码、加上自己的思考分析总结出来的，其中难免有理解不对的地方，欢迎大家批评指正。文章为个人学习、研究、欣赏之用，图文内容整理自互联网，如有侵权，请联系删除（◕‿◕），转载请注明出处（©Qualcomm ©Android @Linux 版权所有），谢谢。
 （==**文章基于 Kernel-3.18**==）&&（==**文章基于 Android 9.0**==）
  [【开发板 Intrinsyc Open-Q™ 820 µSOM Development Kit】](https://www.intrinsyc.com/snapdragon-embedded-development-kits/open-q-820-usom-development-kit/)
-[【开发板 Android 9.0 && Linux（Kernel 3.18）源码链接】](https://gitlab.com/zhoujinjian777/apq8096_la.um.7.5.r1-03100-8x96.0_p_v5.0)
+[【开发板 Android 9.0 && Linux（Kernel 3.18）源码链接】](https://gitlab.com/zhoujinjianok/apq8096_la.um.7.5.r1-03100-8x96.0_p_v5.0)
 
 正是由于前人的分析和总结，帮助我节约了大量的时间和精力，特别感谢！！！
 
@@ -25,7 +25,7 @@ date: 2019-05-08 09:25:00
 
 --------------------------------------------------------------------------------
 ==源码（部分）==：
-[【测试程序源码提交记录】](https://gitlab.com/zhoujinjian777/apq8096_la.um.7.5.r1-03100-8x96.0_p_v5.0/commit/714c0071b4bc786d00e7a6bcd08face6a28d6c0c) 
+[【测试程序源码提交记录】](https://gitlab.com/zhoujinjianok/apq8096_la.um.7.5.r1-03100-8x96.0_p_v5.0/commit/714c0071b4bc786d00e7a6bcd08face6a28d6c0c) 
 
 >AMS、WMS、SurfaceFlinger test App（Android Apk Java层）
 
@@ -161,10 +161,10 @@ int main()
 > 6、system/bin/FrameBufferTest
 
 ##### 1.3、显示效果
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/display.system/Android.PG1.FrameBufferTest.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/Android.PG1.FrameBufferTest.jpg)
 
 **FrameBuffer 使用**
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/display.system/Android.PG1.FBTest.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/Android.PG1.FBTest.png)
 
 #### 1.4、FrameBuffer 代码分析
 FrameBuffer通常作为LCD控制器或者其他显示设备的驱动，FrameBuffer驱动是一个字符设备，设备节点是/dev/fbX（Android 设备为/dev/graphics/fb0），主设备号为29，次设备号递增，用户可以将Framebuffer看成是显示内存的一个映像，将其映射到进程地址空间之后，就可以直接进行读写操作，而写操作可以立即反应在屏幕上。这种操作是抽象的，统一的。用户不必关心物理显存的位置、换页机制等等具体细节。这些都是由Framebuffer设备驱动来完成的。Framebuffer设备为上层应用程序提供系统调用，也为下一层的特定硬件驱动提供接口；那些底层硬件驱动需要用到这儿的接口来向系统内核注册它们自己。
@@ -230,7 +230,7 @@ struct fb_info {
 ```
 ##### 1.4.1.2、fb_var_screeninfo
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/display.system/Android.PG1.fb_var_screeninfo.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/Android.PG1.fb_var_screeninfo.jpg)
 
 fb_var_screeninfo：用于记录用户可修改的显示控制器参数，包括屏幕分辨率、每个像素点的比特数等
 
@@ -493,7 +493,7 @@ int main(int /*argc*/, char** /*argv*/)
 > 4、system/bin/OpenGLESTexturesRGB
 
 ##### 2.3、显示效果
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/display.system/Android.PG1.OpenGLESTexturesRGB.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/Android.PG1.OpenGLESTexturesRGB.png)
 
 ##### 2.4、OpenGLESTexturesRGB代码分析
 
@@ -511,7 +511,7 @@ int main(int /*argc*/, char** /*argv*/)
 >10、删除 EGLSurface 对象
 >11、删除 EGLContext 对象
 >12、终止与 EGLDisplay 之间的连接
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/display.system/Android.PG1.OpenGLESUse.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/Android.PG1.OpenGLESUse.png)
 
 #### (三)、SurfaceFlinger test App（Android SurfaceFlinger Native层）
 #### （3）、SurfaceFlinger合成图像
@@ -742,16 +742,16 @@ SurfaceFlingerTestsBlue，然后分别进行测试。
 
 ##### 3.3、显示效果
 **SurfaceFlingerTestsRed**
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/display.system/Android.PG1.SurfaceFlingerTestRed.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/Android.PG1.SurfaceFlingerTestRed.png)
 
 **SurfaceFlingerTestsGreen**
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/display.system/Android.PG1.SurfaceFlingerTestGreen.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/Android.PG1.SurfaceFlingerTestGreen.png)
 
 **SurfaceFlingerTestsBlue**
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/display.system/Android.PG1.SurfaceFlingerTestBlue.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/Android.PG1.SurfaceFlingerTestBlue.png)
 
 同时运行三个bin文件
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/display.system/Android.PG1.SurfaceFlingerTestRedGreenBlue.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/Android.PG1.SurfaceFlingerTestRedGreenBlue.png)
 
 ##### 3.4、SurfaceFlingerTest代码分析
 SurfaceFlinger涉及流程复杂，稍后另外博客再继续分析！
@@ -837,18 +837,18 @@ TestViewportBlue.apk，然后分别进行测试。
 ##### 4.3、显示效果
 **TestViewportRed.apk**
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/display.system/Android.PG1.TestViewportRed.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/Android.PG1.TestViewportRed.png)
 
 **TestViewportGreen.apk**
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/display.system/Android.PG1.TestViewportGreen.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/Android.PG1.TestViewportGreen.png)
 
 
 **TestViewportBlue.apk**
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/display.system/Android.PG1.TestViewportBlue.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/Android.PG1.TestViewportBlue.png)
 
 
 同时运行三个apk
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/display.system/Android.PG1.TestViewportRGB.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/Android.PG1.TestViewportRGB.png)
 
 Android 默认运行Activity是全屏
 要实现上述效果，需要修改源码

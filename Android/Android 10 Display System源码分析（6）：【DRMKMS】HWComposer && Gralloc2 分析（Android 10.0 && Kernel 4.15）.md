@@ -1,6 +1,6 @@
 ---
 title: Android 10 Display System源码分析（6）：【DRM/KMS】HWComposer && Gralloc2 分析（Android 10.0 && Kernel 4.15）
-cover: https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.27.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.27.jpg
 categories: 
   - Display
 tags:
@@ -14,21 +14,21 @@ date: 2021-08-10 09:25:00
 
 ## （一）、DRM/KMS for Android介绍
 ### （1）、Pre-DRM world
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/DRM_KMS-android-pre-drm-world.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/DRM_KMS-android-pre-drm-world.png)
 
 **Issues：**
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/DRM_KMS-android-pre-drm-world-Issues.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/DRM_KMS-android-pre-drm-world-Issues.png)
 
 ### （2）、DRM world
 
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-world.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-world.png)
 
 **Objectives：**
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-world-Objectives.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-world-Objectives.png)
 
 
 ### （3）、Future
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-world-future.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-world-future.png)
 
 
 ## （二）、Android drm_hwcomposer介绍
@@ -41,7 +41,7 @@ hardware
 ○ Blit/2D engine
 ● Often device specific and written by the display hardware OEM
 #### Hardware Composer 1.x
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/Android-hardware-composer1.x.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/Android-hardware-composer1.x.png)
 
 #### Key Differences between 1.x and 2.0
 Increases API functions from 12 to 43
@@ -49,25 +49,25 @@ Increases API functions from 12 to 43
 ● Renames prepare() / set() to validate() / present()
 ● Replaces speculative fences with non-speculative fences
 #### Hardware Composer 1.x Sync Fences
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/Android-hardware-composer1.x.Sync-Fences.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/Android-hardware-composer1.x.Sync-Fences.png)
 
 #### Hardware Composer 2.0 Sync Fences
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/Android-hardware-composer2.0.Sync-Fences.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/Android-hardware-composer2.0.Sync-Fences.png)
 
 ### （2）、Android drm_hwcomposer
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-hwcomposer.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-hwcomposer.png)
 
 #### HWC1
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-hwc1.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-hwc1.png)
 
 #### HWC2
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-hwc2.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-hwc2.png)
 
 这里使用的就是HWC2。
 ### （三）、Android drm_hwcomposer Code Overview
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-hwc-code-overview1.png)
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-hwc-code-overview2.png)
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-hwc-code-overview3.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-hwc-code-overview1.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-hwc-code-overview2.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/DRM_KMS-android-drm-hwc-code-overview3.png)
 
 分析hwcomposer之前，先来分析gralloc。
 ## （四）、gralloc代码分析
@@ -124,11 +124,11 @@ ROCKCHIP_GEM_MAP_OFFSET
 
 ```
 
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/Android10.Display.6.Gralloc2.Hwcomposer.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/Android10.Display.6.Gralloc2.Hwcomposer.png)
 
 ## （五）、hwcomposer代码分析
 
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/FireFly-Rk3399-DRM-KMS-drm_hwcomposer-hwcomposer.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/FireFly-Rk3399-DRM-KMS-drm_hwcomposer-hwcomposer.png)
 #### **hwc_prepare:**
 
 ```
@@ -199,20 +199,20 @@ Stack Trace:
 
 ### （2）、adb pull /data/dump/
 >adb pull /data/dump/
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/dumplayer.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/dumplayer.png)
 
 ### （3）、抓到的bin文件可以用软件7yuv打开查看，格式设定为RGBA8888
 **Launcher：**
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/launcher.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/launcher.png)
 **Wallpaper：**
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/wallpaper.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/wallpaper.png)
 **StatusBar：**
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/statusbar.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/statusbar.png)
 **NavigationBar：**
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/navigationbar.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/navigationbar.png)
 
 **最终合成效果图：**
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.6/composer.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.6/composer.png)
 
 ## （七）、参考资料(特别感谢)：
 

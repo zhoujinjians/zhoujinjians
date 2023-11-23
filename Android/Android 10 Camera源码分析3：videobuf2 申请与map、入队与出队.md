@@ -1,6 +1,6 @@
 ---
 title:  Android 10 Camera源码分析3：videobuf2 申请与map、入队与出队
-cover: https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.33.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.33.jpg
 categories: 
   - Camera
 tags:
@@ -12,7 +12,7 @@ date: 2022-02-01 02:01:00
 
 注：文章都是通过阅读各位前辈总结的资料 Android 10.0 && Linux（Kernel 4.19）Rockchip平台源码、加上自己的思考分析总结出来的，其中难免有理解不对的地方，欢迎大家批评指正。文章为个人学习、研究、欣赏之用，图文内容整理自互联网，如有侵权，请联系删除（◕‿◕），转载请注明出处（©Rockchip ©Android @Linux 版权所有），谢谢。
 （==**文章基于 Kernel-4.19**==）&&（==**文章基于 Android 10.0**==）
- [【zhoujinjian.com博客原图链接】](https://github.com/zhoujinjian777) 
+ [【zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianok) 
  [【开发板 Khadas Edge V】](https://www.khadas.cn/edge-v)
 [【开发板 Khadas Edge V Android 10.0 && Linux（Kernel 4.19）源码链接】](https://github.com/khadas/linux/tree/khadas-edge-Qt)
 
@@ -448,4 +448,4 @@ v4l_reqbufs
 
 ### （二）、流程图
 
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android.10.Camera.03/V4L2-IOCTL.png)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android.10.Camera.03/V4L2-IOCTL.png)

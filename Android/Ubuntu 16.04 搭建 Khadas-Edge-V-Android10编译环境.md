@@ -1,6 +1,6 @@
 ---
 title: Ubuntu 16.04 搭建 Khadas-Edge-V-Android10编译环境
-cover: https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.21.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.21.jpg
 categories: 
   - Display
 tags:
@@ -182,7 +182,7 @@ How to enable UART port in Android 10 source
 
 串口连接方法
 
-![](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/Android10.Display.0/How2Connect2SerialForDebug.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/Android10.Display.0/How2Connect2SerialForDebug.jpg)
 
 
 

@@ -1,6 +1,6 @@
 ---
 title: Audio System（2）：Linux ALSA音频系统分析
-cover: https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/hexo.themes/bing-wallpaper-2018.04.14.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/hexo.themes/bing-wallpaper-2018.04.14.jpg
 categories:
   - Audio
 tags:
@@ -81,7 +81,7 @@ AOSP 源码（Android 7.1.2）：
 ☁ Userspace - tinyalsa
 
 Linux ALSA 音频系统架构大致如下：
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/21-Audio-system-Android-Linux-ASoc-arc.png.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/21-Audio-system-Android-Linux-ASoc-arc.png.png)
 
 • Native ALSA Application：tinyplay/tinycap/tinymix，这些用户程序直接调用 alsa 用户库接口来实现放音、录音、控制
 • ALSA Library API：alsa 用户库接口，常见有 tinyalsa、alsa-lib
@@ -139,7 +139,7 @@ static struct snd_soc_dai_link msm8996_common_dai_links[] = {
 	......
 }
 ```
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/22-MSM8996-Linux-Android-Audio-ASoc-Architectre.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/22-MSM8996-Linux-Android-Audio-ASoc-Architectre.png)
 
 高通平台因DSP而存在特殊性，如上图，Frontend 链接 "Platform"，经由 "Platform"->Backend链接到Codec。
 Front-end DAI：
@@ -980,7 +980,7 @@ static int msm8996_asoc_machine_probe(struct platform_device *pdev)
 ```
 设置dailinks后，继而调用 snd_soc_register_card() 注册声卡。由于该过程很冗长，这里不一一贴代码分析了，但整个流程是比较简单的，流程图如下：
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/23-Audio-system-msm8996-probe-snd-card-register.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/23-Audio-system-msm8996-probe-snd-card-register.png)
 
 • 取出 platform_device 的私有数据，该私有数据就是 snd_soc_card ；
 • snd_soc_register_card() 为每个 dai_link 分配一个 snd_soc_pcm_runtime 实例，别忘了之前提过 snd_soc_pcm_runtime 是 ASoC 的桥梁，保存着 codec、codec_dai、cpu_dai、platform 等硬件设备实例。
@@ -993,7 +993,7 @@ static int msm8996_asoc_machine_probe(struct platform_device *pdev)
 
 [->sound/soc/soc-core.c]
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/24-Audio-system-msm8996-probe-snd-card.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/24-Audio-system-msm8996-probe-snd-card.png)
 
 soc_new_pcm 源码分析：
 
@@ -1229,7 +1229,7 @@ crw-rw---- 1 system audio 116,  33 1970-06-19 02:07 timer
  +-----------+    +-----------+    +-----------+
 ```
 这些与声音相关的逻辑设备都在结构体 snd_card 管理之下，可以说 snd_card 是 alsa 中最顶层的结构。我们再看看 alsa 声卡驱动的大致结构图（不是严格的 UML 类图，有结构体定义、模块关系、函数调用，方便标示结构模块的层次及关系）：
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/25-Audio-system-snd-card-uml.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/25-Audio-system-snd-card-uml.png)
 
 
 snd_cards：记录着所注册的声卡实例，每个声卡实例有着各自的逻辑设备，如 PCM 设备、CTL 设备、MIDI 设备等，并一一记录到 snd_card 的 devices 链表上 
@@ -1385,7 +1385,7 @@ int snd_register_device_for_dev(int type, struct snd_card *card, int dev,
 
 ##### 6.4. 声卡的注册
 当声卡下的所有逻辑设备都已经准备就绪后，就可以调用 snd_card_register() 注册声卡了：
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/26-Audio-system-snd-card-register.png.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/26-Audio-system-snd-card-register.png.png)
 
 • 创建声卡的 sysfs 设备；
 • 调用 snd_device_register_all() 注册所有挂在该声卡下的逻辑设备；
@@ -1505,7 +1505,7 @@ SOC_DOUBLE_R_TLV    左右声道有独立寄存器控制的SOC_DOUBLE_TLV版本
 
 ##### 7.1.2、Mixer控件
 Mixer控件用于音频通道的路由控制，由多个输入和一个输出组成，多个输入可以自由地混合在一起，形成混合后的输出：
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/27-Audio-system-mixer-1525417497024.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/27-Audio-system-mixer-1525417497024.png)
 
 对于Mixer控件，我们可以认为是多个简单控件的组合，通常，我们会为mixer的每个输入端都单独定义一个简单控件来控制该路输入的开启和关闭，反应在代码上，就是定义一个soc_kcontrol_new数组：
 
@@ -1718,7 +1718,7 @@ struct snd_soc_dapm_path {
 };
 ```
 当widget之间发生连接关系时，snd_soc_dapm_path作为连接者，它的source字段会指向该连接的起始端widget，而它的sink字段会指向该连接的到达端widget，还记得前面snd_soc_dapm_widget结构中的两个链表头字段：sources和sinks么？widget的输入端和输出端可能连接着多个path，所有输入端的snd_soc_dapm_path结构通过list_sink字段挂在widget的souces链表中，同样，所有输出端的snd_soc_dapm_path结构通过list_source字段挂在widget的sinks链表中。这里可能大家会被搞得晕呼呼的，一会source，一会sink，不要紧，只要记住，连接的路径是这样的：起始端widget的输出-->path的输入-->path的输出-->到达端widget输入。
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/28-Audio-system-snd_soc_dapm_path.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/28-Audio-system-snd_soc_dapm_path.png)
 另外，snd_soc_dapm_path结构的list字段用于把所有的path注册到声卡中，其实就是挂在snd_soc_card结构的paths链表头字段中。如果你要自己定义方法来检查path的当前连接状态，你可以提供自己的connected回调函数指针。
 
 connect，walked，walking，weak是几个辅助字段，用于帮助所有path的遍历。
@@ -1815,7 +1815,7 @@ snd_soc_dapm_new_control(struct snd_soc_dapm_context *dapm,
 	......
 ```
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/29-Audio-system-widget-1525420992983.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/29-Audio-system-widget-1525420992983.png)
 当音频路径发生变化时，power_check回调会被调用，用于检查该widget的电源状态是否需要更新。power_check设置完成后，需要设置widget所属的codec、platform和dapm context，几个用于音频路径的链表也需要初始化，然后，把该widget加入到声卡的widgets链表中：
 
 ``` cpp
@@ -2396,13 +2396,13 @@ static int dapm_connect_mux(struct snd_soc_dapm_context *dapm,
 和mixer类型一样用名字进行匹配，只不过mux类型的kcontrol只需一个，所以要通过private_value字段所指向的soc_enum结构找出匹配的输入脚编号，最后也是通过dapm_set_path_status函数来初始化该输入端的连接状态，因为只有一个kcontrol，所以第三个参数是0。连接两个widget的链表操作和其他widget也是一样的。
 dapm_set_path_status    该函数根据传入widget中的kcontrol编号，读取实际寄存器的值，根据寄存器的值来初始化这个path是否处于连接状态，详细的代码这里就不贴了。
 当widget之间通过path进行连接之后，他们之间的关系就如下图所示：
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/210-Audio-system-snd_soc_dapm_path.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/210-Audio-system-snd_soc_dapm_path.png)
 
 到这里为止，我们为声卡创建并初始化好了所需的widget，各个widget也通过path连接在了一起，接下来，dapm等待用户的指令，一旦某个dapm kcontrol被用户空间改变，利用这些连接关系，dapm会重新创建音频路径，脱离音频路径的widget会被下电，加入音频路径的widget会被上电，所有的上下电动作都会自动完成，用户空间的应用程序无需关注这些变化，它只管按需要改变某个dapm kcontrol即可。
 
 #### （八）、tinyplay playback、capture
 ##### 8.1、tinyplay playback
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/211-tiny-capture.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/211-tiny-capture.png)
 
 
 有时序图可知：主要涉及pcm_open()、pcm_write()、pcm_prepare()、pcm_start()。
@@ -2432,7 +2432,7 @@ tinymix 'PRI_MI2S_RX Audio Mixer MultiMedia1' 0
 
 
 ##### 8.2、tinyplay capture
-![Alt text](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/audio.system/212-tiny-playback.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/audio.system/212-tiny-playback.png)
 
 
 有时序图可知：主要涉及pcm_open()、pcm_read()、pcm_start()。

@@ -1,6 +1,6 @@
 ---
 title: Android L Display System源码分析（2）：LCD显示原理（Android 5.0.2 && Kernel 3.0.86）
-cover: https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/personal.website/post.cover.pictures.00002.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/personal.website/post.cover.pictures.00002.jpg
 categories: 
   - Display
 tags:
@@ -56,7 +56,7 @@ An LCD panel is a matrix of pixels that are divided into rows and columns. These
 
 ##### （2）、您的LCD屏幕内是怎样运作的？
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/personal.website/zjj.display.sys.LCD_Function.gif)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/personal.website/zjj.display.sys.LCD_Function.gif)
 
 当一束光通过LCD屏幕的各个组件时，我们通过它来了解：
 
@@ -72,7 +72,7 @@ An LCD panel is a matrix of pixels that are divided into rows and columns. These
 10. 最后，观看者便能在数字显示器上享受鲜艳的色彩、高对比度和清晰的图像。
 ##### （3）、LCD组件解构
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/personal.website/zjj.display.sys.LCD_Component_Layers.gif)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/personal.website/zjj.display.sys.LCD_Component_Layers.gif)
 
 > **底部底盘：**底部底盘保护LCD显示组件，并作为底座将组件放在一起。
 
@@ -81,7 +81,7 @@ An LCD panel is a matrix of pixels that are divided into rows and columns. These
 
 LED背光式LCD显示器是一种使用LED背光的平板显示器。使用LED背光可使面板更薄、功耗更低、散热更好、显示更亮、对比度更好。发光二极管（LED）为显示器提供光源。当今最常见的背光布置是边缘式LED（更薄型材）或直下式LED（用于高亮度显示器或窄边框视频壁挂式显示器）。背光设计对于确保良好的色彩再现和广泛的色域十分重要。背光看起来是白色的，但并不意味着它具有广泛而均匀的光谱 — 它的“高峰”光谱可能极不规则（CCFL灯通常是这样）。
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/personal.website/zjj.display.sys.Edge_vs_Direct_backlight.png)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/personal.website/zjj.display.sys.Edge_vs_Direct_backlight.png)
 
 
 > **反射片：**反射片提供LCD背光回收。它通常称为DBEF（双亮度增强胶片）。DBEF增加轴上亮度，因此可以通过LCD透射更多的光。通常，一个BEF可将亮度提高40％ - 60％。在一些应用中，使用两个BEF来提高亮度透射率。
@@ -121,14 +121,14 @@ LED背光式LCD显示器是一种使用LED背光的平板显示器。使用LED�
 
 ###### 4.1、**垂直取向(VA)**
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/personal.website/zjj.display.sys.samsungpid-va-technology.jpg)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/personal.website/zjj.display.sys.samsungpid-va-technology.jpg)
 
 在垂直取向(VA)模式中，液晶与玻璃基板自然垂直对齐，也被称为垂面排列。在没有外部电压的情况下，偏振光在无偏光变化的情况下穿过面板，然后被第二组偏光片完全阻挡（与第一组偏光片成90度角），形成完美的黑色。电场的应用会使液晶分子旋转到水平位置，让光线完全穿过并显示白色。
 
 与TFT升级、雾面涂层、现代背光装置和像素设计相结合后，赋予了VA LCD超高的对比度，给人印象深刻的视觉体验。随着技术的进步，其响应时间和像素延迟大幅缩短，显示滞后也不复存在。帧率和动态画面响应时间也变得更加顺畅。VA抗残影的能力更强，因为垂面排列可以加宽散布面。VA还能实现最佳的对比度，很多显示专业人士认为它在商用显示面板的显示品质方面排名第一。
 ###### 4.2、**共面转换(IPS)**
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/personal.website/zjj.display.sys.samsungpid-ips-technology.jpg)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/personal.website/zjj.display.sys.samsungpid-ips-technology.jpg)
 
 共面转换(IPS)模式最初是为克服扭曲向列LCD中出现的窄视角问题而开发的。该技术通过改变施加的电压使液晶在与玻璃基板平行的面上排列，从而可更改共面上液晶分子的方向。IPS也被称为水平排列。[3] 由于偏光片位于同一面上，转换效果由液晶分子围绕垂直于其长度方向的轴旋转而实现的。[2] VA模式中的液晶分子与偏光轴对齐，但IPS中的液晶分子与偏光轴偏离。
 
@@ -139,13 +139,13 @@ IPS矩阵不仅晶体结构不同，而且一个晶圆上电极的位置也不�
 ##### （5）、LCD色彩生成原理
 传统的LCD显示屏有一个由许多**发光二极管(LED)**组成的背光系统。这些LED是蓝色的，但被绿色和红色荧光体覆盖，以产生白光。通过改变荧光体的浓度，还可以改变和控制LED的色温。
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/personal.website/zjj.display.color-displays-wp-color-expression-lcd-panel-red.gif)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/personal.website/zjj.display.color-displays-wp-color-expression-lcd-panel-red.gif)
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/personal.website/zjj.display.sys.color-displays-wp-color-expression-lcd-panel-green.gif)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/personal.website/zjj.display.sys.color-displays-wp-color-expression-lcd-panel-green.gif)
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/personal.website/zjj.display.sys.color-displays-wp-color-expression-lcd-panel-blue.gif)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/personal.website/zjj.display.sys.color-displays-wp-color-expression-lcd-panel-blue.gif)
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/personal.website/zjj.display.sys.color-displays-wp-color-expression-lcd-panel-white.gif)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/personal.website/zjj.display.sys.color-displays-wp-color-expression-lcd-panel-white.gif)
 
 
 从LED发出的光通过偏光滤光片后射到**液晶(LC)**上，液晶挡住光线或让光线通过红、绿、蓝**彩色滤光片(CF)**。这称为**子像素**。因为红色、绿色和蓝色可混合产生任何颜色，由三个子像素形成的每个颜色像素可创造出不同的色彩，然后形成图像。通过控制和改变电压可调节各子像素的强度，从而使其更亮或更暗，进而确定在显示屏上产生什么颜色。通过子像素的不同组合可产生数百万种颜色。
@@ -154,12 +154,12 @@ IPS矩阵不仅晶体结构不同，而且一个晶圆上电极的位置也不�
 
 Macro shot of an LCD monitor showing the red, green and blue elements., with zoom-in(LCD显示器放大):
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/personal.website/zjj.display.sys.Liquid_Crystal_Display_Macro_Example_zoom_2.jpg)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/personal.website/zjj.display.sys.Liquid_Crystal_Display_Macro_Example_zoom_2.jpg)
 
 
 ####  （二）、How a Flat Screen Display works
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/personal.website/zjj.display.sys.flat-panel.gif)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/personal.website/zjj.display.sys.flat-panel.gif)
 
 ####  （三）、LCD displays signals and timing parameters
 
@@ -183,7 +183,7 @@ The LCD controller paints frames from left to right and from top to bottom. Sign
 - **Active frame width (hactive):** Horizontal resolution.
 - **Active frame height (vactive):** Vertical resolution.
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjian777/PicGo/master/personal.website/zjj.display.sys.dwg_lcd_display_signals.jpg)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/personal.website/zjj.display.sys.dwg_lcd_display_signals.jpg)
 
 Every manufacturer provides display timings in a slightly different way and some provide more detail than others. Most LCD panels work with a range of timing parameters.
 
