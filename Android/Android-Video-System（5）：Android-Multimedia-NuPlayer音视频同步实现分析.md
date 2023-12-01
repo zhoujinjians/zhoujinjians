@@ -1,6 +1,6 @@
 ---
 title: Android Video System（5）：Android Multimedia - NuPlayer音视频同步实现分析
-cover: https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/hexo.themes/bing-wallpaper-2018.04.26.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/hexo.themes/bing-wallpaper-2018.04.26.jpg
 categories:
   - Multimedia
 tags:
@@ -432,12 +432,12 @@ void NuPlayer::Renderer::onDrainVideoQueue() {
 ```
 
 到这里，小结下，读完这部分代码发现，NuPlayer::Renderer使用的以视频为基准的同步机制，音频晚了直接丢包，视频需要显示。同步主要位于视频缓冲区处理部分onDrainVideoQueue和音频缓冲区处理部分onDrainVideoQueue中。
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/video.system/VS-05-02-avsync.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-05-02-avsync.jpg)
 
 
 #### （二）、音视频同步时序图
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/video.system/VS-05-01-AudioVideoSync.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-05-01-AudioVideoSync.png)
 
 1：OMX component 集成在ACodec中，ACodec（A/V）解完数据后，通知Nulayer；
 2：NuPlayer通知Render，Render需要A/V的时间同步（另，如果是JPEG的话就不需要这个同步，直接render即可）；

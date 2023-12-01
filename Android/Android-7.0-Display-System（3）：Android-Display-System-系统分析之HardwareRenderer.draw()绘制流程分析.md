@@ -1,6 +1,6 @@
 ---
 title: Android N Display System（3）：Android Display System 系统分析之HardwareRenderer.draw()绘制流程分析
-cover: https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/hexo.themes/bing-wallpaper-2018.04.21.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/hexo.themes/bing-wallpaper-2018.04.21.jpg
 categories: 
   - Display
 tags:
@@ -105,11 +105,11 @@ UI作为用户体验的核心之一，始终是Android每次升级中的重点�
 
 概括下它们和相关类的关系图如下，接下来从DisplayList(RenderNode)的构建和绘制两个阶段分析下具体有哪些改动。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/DS-03-01-android-hw-ops.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/display.system/DS-03-01-android-hw-ops.png)
 
 首先看看总体时序图：然后一步一步分析：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/DS-03-02-HW.Draw.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/display.system/DS-03-02-HW.Draw.png)
 
 
 #### （一）、Android硬件渲染环境初始化ViewRootImpl.enableHardwareAcceleration()
@@ -567,7 +567,7 @@ void EglManager::initialize() {
 
 Android EGL && OpenGL分析请参考【Android Display System（2）：Android Display System 系统分析 之 Android EGL && OpenGL】
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/DS-03-03-UIThread-ThreadRenderer.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/display.system/DS-03-03-UIThread-ThreadRenderer.png)
 
 
 至此，将当前窗口绑定到Render Thread的过程就分析完成了，整个Android应用程序UI硬件加速渲染环境的初始化过程也分析完成了。
@@ -752,7 +752,7 @@ Android EGL && OpenGL分析请参考【Android Display System（2）：Android D
 ```
 这些是通过drawBackground(), onDraw(), dispatchDraw()和onDrawForeground()等函数实现。这些函数本质上就是将相应内容绘制到提供的DisplayListCanvas上。由于View是以树形层次结构组织的，draw()中会通过dispatchDraw()来更新子View的DisplayList。dispatchDraw()为对每个子View调用drawChild()。然后调用子View的draw()函数（这次就是上面说的draw()的三个参数的版本了）。这个版本的draw()函数里会更新其View的DisplayList，然后调用DisplayListCanvas的drawRenderNode()将该子view对应的RenderNode记录到其父view的DisplayList中去。这样便根据View的树型结构生成了DisplayList的树型结构。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/DS-03-04-DisplayList-RootRenderNode.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/display.system/DS-03-04-DisplayList-RootRenderNode.png)
 
 其中onDraw()用于绘制当前View的自定义UI，它是每个View需要自定义的成员函数。比较典型地，在View的绘制函数中会调用canvas的drawXXX函数。比如canvas.drawLine()->drawLines(android_graphics_Canvas.cpp)，它会通过JNI最后调到RecordingCanvas.cpp中的RecordingCanvas::drawLines()：
 
@@ -835,17 +835,17 @@ RecordingCanvas中绝大多数的drawXXX系函数都是类似于这样，通过a
 </LinearLayout>
 ```
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/DS-03-05-activity_main.xml.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/display.system/DS-03-05-activity_main.xml.png)
 
 
 **udpateRootDisplayList()**
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/DS-03-06-updateRootDisplayList.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/display.system/DS-03-06-updateRootDisplayList.jpg)
 
 
 **父View与子View的DisplayList**
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/DS-03-07-rootview-childview-displaylist.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/display.system/DS-03-07-rootview-childview-displaylist.png)
 
 
 #### （四）、RenderNode绘制
@@ -903,7 +903,7 @@ syncFrameState()
 
 这个函数中首先会处理DrawFrameTask中的mLayers。它是DeferredLayerUpdater的vector，顾名思义，就是延迟处理的layer更新任务。这主要用于TextureView。TextureView是比较特殊的类。它通常用于显示内容流，生产者端可以是另一个进程。中间通过BufferQueue进行buffer的传输和交换。当有新的buffer来到（或者有属性变化，如visibility等）是，会通过回调设置标志位(mUpdateLayer)并通过invalidate()调度下一次重绘。当下一次draw()被调用时，先通过applyUpdate()->updateSurfaceTexture()->ThreadedRenderer::pushLayerUpdate()，再调到渲染线程中的 DrawFrameTask::pushLayerUpdate()，将本次更新记录在DrawFrameTask的mLayers中。这样，在后面调用DrawFrameTask::syncFrameState()是会依次调用mLayers中的apply()进行真正的更新。这里调用它的apply()函数就会取新可用buffer（通过doUpdateTexImage()函数），并将相关纹理信息更新到mLayer。在syncFrameState()函数中，接下来，通过CanvasContext的prepareTree()继而调用RenderNode的prepareTree()同步渲染信息。最后会输出TreeInfo结构，其中的prepareTextures代表纹理上传是否成功。如果为false，说明texture cache用完了。这样为了防止渲染线程在渲染过程中使用的资源和主线程竞争，在渲染线程绘制当前帧时就不能让主线程继续往下跑了，也就不能做到真正并行。在sync完数据后，DrawFrameTask::run()最后会调用CanvasContext::draw()来进行接下来的渲染。这部分的大体流程如下：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/DS-03-08-ThreadRender-draw.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/display.system/DS-03-08-ThreadRender-draw.png)
 
 
 接下来瞄下CanvasContext::draw()里做了什么。先要小小准备下EGL环境，比如通过EglManager的beginFrame()函数，
@@ -1059,7 +1059,7 @@ void CanvasContext::draw() {
 ```
 先得到Caches的实例。它是一个单例类，包含了各种绘制资源的cache。然后创建FrameBuilder。该类用于当前帧的构建。FrameBuilder的构造函数中又会创建对应fbo0的LayerBuilder。fbo0即对应通过SurfaceFlinger申请来的on-screen surface，然后将之放入layer stack（通过mLayerBuilders和mLayerStack两个成员维护）。同时还会在initializeSaveStack()函数中创建和初始化Snapshot。就像名字一样，它保存了渲染surface的当前状态的一个“快照”。每个Snapshot有一个指向前继的Snapshot，从而形成一个"栈"。每次调用save()和restore()就相当于压栈和弹栈。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/DS-03-09-frameBuilder.deferLayers.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/display.system/DS-03-09-frameBuilder.deferLayers.png)
 
 接下来deferLayers()函数处理LayerUpdateQueue中的元素。之前在渲染线程每画一帧前同步信息时调用RenderNode::prepareTree()会遍历DisplayList的树形结构，对于子节点递归调用prepareTreeImpl()，如果是render layer，在RenderNode::pushLayerUpdate()中会将该layer的更新操作记录到LayerUpdateQueue中。至于哪些节点是render layer。主要是根据之前提到的view类型（LAYER_TYPE_NONE/SOFTWARE/HARDWARE）。但会有一个优化，如果一个普通view满足promotedToLayer()定义的条件，它会被当做render layer处理。
 
@@ -1161,7 +1161,7 @@ void FrameBuilder::deferNodeOps(const RenderNode& renderNode) {
 ```
 DisplayList以chunk为单位组合RecordedOp。这些RecordedOp的opId代表它们的类型。根据这个类型调用receivers这个查找表（通过BUILD_DEFERABLE_OP_LUT构造）中的函数。它会调用FrameBuilder中相应的deferXXX函数（比如deferArcOp, deferBitmapOp, deferRenderNodeOp等）。这些deferXXX系函数一般会将RecordedOp用BakedOpState封装一下，然后会调用LayerBuilder的deferUnmergeableOp()和deferMergeableOp()函数将BakedOpState组织进mBatches成员。同时还有两个查找表mBatchLookup和mMergingBatchLookup分别用于不能合并的batch（OpBatch）和能合并的batch（MergingOpBatch）。它们分别用于查找特定类型的最近一个OpBatch或者MergingOpBatch。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/DS-03-10-DisplayList-chunk.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/display.system/DS-03-10-DisplayList-chunk.png)
 
 
 先看下deferUnmergeableOp()函数。它会将BakedOpState按batch类型放进mBatches中。mBatches是指向BatchBase对象的vector，每个处理好的BakedOpState都会按类型放进来。如果还未有该类型的batch则创建OpBatch，并把它插入到mBatches的末尾。同时插入mBatchLookup这个查找表（batchId到最近一个该类型的OpBatch对象的映射）。这样之后处理同类型的BakedOpState时候，就会先搜索这个查找表。假如找到了，则进一步在mBatches数组中找到相应的OpBatch并通过它的batchOp()将该BakedOpState加入。
@@ -1334,18 +1334,18 @@ nativeWindow->dequeueBuffer(nativeWindow, &buffer);
 
 总的来说，可以看到一个View上的东西要绘制出来，要经过多步的转化。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/DS-03-11-View-draw-Surface.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/display.system/DS-03-11-View-draw-Surface.png)
 
 
 这样做有几个好处：第一、对绘制操作进行batch/merge可以减少GL的draw call，从而减少渲染状态切换，提高了性能。第二、因为将View层次结构要绘制的东西转化为DisplayList这种“中间语言”的形式，当需要绘制时才转化为GL命令。因此在View中内容没有更改或只有部分属性更改时只要修改中间表示（即RenderNode和RenderProperties）即可，从而避免很多重复劳动。第三、由于DisplayList中包含了要绘制的所有信息，一些属性动画可以由渲染线程全权处理，无需主线程介入，主线程卡住也不会让界面卡住。另一方面，也可以看到一些潜力可挖。比如当前可以合并的操作类型有限。另外主线程和渲染线程间的很多调用还是同步的，并行度或许可以进一步提高。另外Vulkan的引入也可以帮助进一步榨干GPU的能力。
 **例如：**
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/DS-03-12-one_button_draw.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/display.system/DS-03-12-one_button_draw.png)
 
 
 绘制的批次按文本、图片资源、几何图形等进行分类，分批绘制的效果如下图所示:
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianok/PicGo/master/display.system/DS-03-13-BakedOpDispatcher-onMergedBitmapOps.gif)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/display.system/DS-03-13-BakedOpDispatcher-onMergedBitmapOps.gif)
 
 
 
