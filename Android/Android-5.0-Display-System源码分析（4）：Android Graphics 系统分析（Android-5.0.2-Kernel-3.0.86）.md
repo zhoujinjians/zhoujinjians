@@ -1,6 +1,6 @@
 ---
 title: Android L Display System源码分析（4）：Android Graphics 系统分析（Android 5.0.2 && Kernel 3.0.86）
-cover: https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/post.cover.pictures.00004.jpg
+cover: https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/post.cover.pictures.00004.jpg
 categories: 
   - Display
 tags:
@@ -99,7 +99,7 @@ Android系统图形框架由下往上主要的包括HAL(HWComposer和Gralloc两�
 ● WindowManagerService: 作为Window的管理者，掌管着计算窗口大小，窗口切换等任务，同时也会将相应的参数设置给SurfaceFlinger，比如Window的在z-order，和窗口的大小。
 ● View: 作为BufferQueue的生产者，每当执行lockCanvas->draw->unlockCanvas，之后会存入一帧数据进入BufferQueue中。
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.android.graphics.arc.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.android.graphics.arc.png)
 
 **App**
 基于Android系统的GUI框架开发完整的Apk应用。
@@ -135,7 +135,7 @@ Display（显示器）、CPU、GPU、VPU（Video Process Unit）、和内存等�
 
 > android-5.0.2\vendor\friendly-arm\tiny4412\SurfaceFlingerTestsRed\SurfaceFlingerTestsRed.cpp
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.SurfaceFlingerTestsRed.JPG)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.SurfaceFlingerTestsRed.JPG)
 
 我们先看一下主要步骤：
 1、 创建SurfaceComposerClient
@@ -261,13 +261,13 @@ event vsync: count=2636 16.168867 ms (61.847255 Hz)
 #### （四）、Android SurfaceFlinger 内部机制
 
 ##### 4.1、APP与SurfaceFlinger的数据结构
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.App.SurfaceFlinger.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.App.SurfaceFlinger.png)
 
 ###### 4.1.1、BufferQueue介绍
 BufferQueue 类是 Android 中所有图形处理操作的核心。它的是将生成图形数据缓冲区的一方（生产者Producer）连接到接受数据以进行显示或进一步处理的一方（消费者Consumer）。几乎所有在系统中移动图形数据缓冲区的内容都依赖于 BufferQueue。
 从上图APP与SurfaceFlinger交互中可以看出，BufferQueue内部维持着64个BufferSlot，每一个BufferSlot内部有一个GraphicBuffer指向分配的Graphic Buffer。
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.SurfaceFlinger.BufferQueue.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.SurfaceFlinger.BufferQueue.png)
 
 先来看一下图中几个状态代表的含义：
 
@@ -317,7 +317,7 @@ ACQUIRED表示缓冲区已被消费者（Consumer）获取。 如与QUEUED，内
 4、当消费者已经消费了这块buffer(已经合成，已经编码等)，就进行release操作释放buffer,将buffer归还给BufferQueue,buffer状态由ACQUIRED变成FREE.buffer拥有者由Consumer变成BufferQueue.
 ###### 4.1.2、生产者Producer
 生产者Producer实现IGraphicBufferProducer的接口，在实际运作过程中，应用（Client端）存在代理端BpGraphicBufferProducer，SurfaceFlinger（Server端）存在Native端BnGraphicBufferProducer。生产者代理端Bp通过Binder通信，不断的dequeueBuffer和queueBuffer操作，Native端同样响应这些操作请求，这样buffer就转了起来了。 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.SurfaceFlinger.IGraphicsBufferProducer.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.SurfaceFlinger.IGraphicsBufferProducer.png)
 
 
 这里介绍几个非常重要的函数：
@@ -372,7 +372,7 @@ attachBuffer尝试将缓冲区的所有权转移给缓冲区队列。 如果这�
 
 ###### 4.1.3、消费者Consumer
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.SurfaceFlinger.IGraphicsBufferConsumer.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.SurfaceFlinger.IGraphicsBufferConsumer.png)
 
 
 这里介绍几个非常重要的函数：
@@ -552,7 +552,7 @@ return bclient;
 ```
 
 ##### 4.2.3、App（C++层）请求创建SurfaceFlinger客户端(client)的过程
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.App.Ask.SurfaceFlinger.Create.Client.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.App.Ask.SurfaceFlinger.Create.Client.png)
 
 
 继续详细分析AppApp（C++层）请求创建SurfaceFlinger客户端(client)的过程
@@ -721,7 +721,7 @@ return reinterpret_cast<jlong>(surface.get());
 
 该函数首先得到前面创建好的SurfaceComposerClient对象，通过该对象向SurfaceFlinger端的Client对象发送创建Surface的请求，最后得到一个SurfaceControl对象。
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.App.Ask.SurfaceFlinger.CreateSurface.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.App.Ask.SurfaceFlinger.CreateSurface.png)
 
 
 [->SurfaceComposerClient.cpp]
@@ -899,7 +899,7 @@ return err;
 在SurfaceFlinger服务端为应用程序创建的Surface创建对应的Layer对象。应用程序请求创建Surface过程如下：
 
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.App.Ask.SurfaceFlinger.Create.Layer.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.App.Ask.SurfaceFlinger.Create.Layer.png)
 
 
 第一次强引用Layer对象时，onFirstRef()函数被回调
@@ -977,7 +977,7 @@ for (int s = numStartingBuffers; s < BufferQueueDefs::NUM_BUFFER_SLOTS;
 
 BufferQueueCore类中定义了一个64项的数据mSlots，是一个容量大小为64的数组，因此BufferQueueCore可以管理最多64块的GraphicBuffer。
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.App.SurfaceFlinger.BufferSlot.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.App.SurfaceFlinger.BufferSlot.png)
 
 [->ISurfaceComposer.cpp]
 
@@ -1591,7 +1591,7 @@ mSurfaceFlingerConsumer->setConsumerUsageBits(getEffectiveUsage(0));
 mSurfaceFlingerConsumer->setContentsChangedListener(this);
 mSurfaceFlingerConsumer->setName(mName);
 ```
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.App.Ask.SurfaceFlinger.ConsumeLisener.onFrameAvailable.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.App.Ask.SurfaceFlinger.ConsumeLisener.onFrameAvailable.png)
 
 ##### 4.2.11、应用程序本地窗口Surface创建过程
 
@@ -1657,7 +1657,7 @@ mSwapIntervalZero = false;
 
 #### 4.3、APP申请(lock)Buffer的过程
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.App.SurfaceFlinger.lock.unlockpost.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.App.SurfaceFlinger.lock.unlockpost.png)
 
 ``` java
    private boolean drawSoftware(Surface surface, AttachInfo attachInfo, int xoff, int yoff,
@@ -2021,7 +2021,7 @@ return NO_ERROR;
        4）将BufferItem塞进mCore的mQueue队列，依照指定规则；
        5）然后通知SurfaceFlinger去消费。
 Folw：
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.App.WMS.SurfaceFlinger.All.Flow.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.App.WMS.SurfaceFlinger.All.Flow.png)
 
 
 #### （五）、通知SF消费合成
@@ -2062,10 +2062,10 @@ mEvents->requestNextVsync();
 }
 ```
 贴一下SurfaceFlinger的初始化请求vsync信号流程图：
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.vsync.surfaceflinger.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.vsync.surfaceflinger.png)
 
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.sf_use_vsync.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.sf_use_vsync.png)
 
 
 
@@ -2107,7 +2107,7 @@ switch (what) {
 
 SurfaceFlinger收到了VSync信号后，调用了handleMessageRefresh函数
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.handle_vsync.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.handle_vsync.png)
 
 [SurfaceFlinger.cpp]
 
@@ -2997,7 +2997,7 @@ doDisplayComposition函数根据显示设备支持的更新方式，重新设置
 真正的合成工作是在doComposerSurfaces函数中完成，这个函数在layer的类型为HWC_FRAMEBUFFER,或者不支持硬件的composer的情况下，调用layer的draw函数来一层一层低合成最后的图像。
 合成完后，doDisplayComposition函数调用了hw的swapBuffers函数，这个函数前面介绍过了，它将在系统不支持硬件的composer情况下调用eglSwapBuffers来输出图像到显示设备。
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.draw_whith_openGL_queuebuffer.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.draw_whith_openGL_queuebuffer.png)
 
 
 
@@ -3238,11 +3238,11 @@ VSYNC（Vertical Synchronization）是一个相当古老的概念，对于游戏
 谷歌为解决Android系统流畅性问题。在4.1版本引入了一个重大的改进—Project Butter黄油计划。
 Project Butter对Android Display系统进行了重构，引入了三个核心元素，即VSYNC、Triple Buffer和Choreographer。
 VSYNC最重要的作用是防止出现画面撕裂（screentearing）。所谓画面撕裂，就是指一个画面上出现了两帧画面的内容，如下图。
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.view-teaning.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.view-teaning.png)
 
 为什么会出现这种情况呢？这种情况一般是因为显卡输出帧的速度高于显示器的刷新速度，导致显示器并不能及时处理输出的帧，而最终出现了多个帧的画面都留在了显示器上的问题。这也就是我们所说的画面撕裂。
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.Draw-whithout-vsync.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.Draw-whithout-vsync.png)
 
 这个图中有三个元素，Display是显示屏幕，GPU和CPU负责渲染帧数据，每个帧以方框表示，并以数字进行编号，如0、1、2等等。VSync用于指导双缓冲区的交换。
 以时间的顺序来看下将会发生的异常：
@@ -3255,7 +3255,7 @@ Step5. 当第2帧数据准备完成后，它并不会马上被显示，而是要
 
 其实总结上面的这个情况之所以发生，首先的原因就在于第二帧没有及时的绘制（当然即使第二帧及时绘制，也依然可能出现Jank，这就是同时引入三重缓冲的作用。我们将在三重缓冲一节中再讲解这种情况）。那么如何使得第二帧即使被绘制呢？
 这就是我们在Graphic系统中引入VSYNC的原因，考虑下面这张图：
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.Draw-whit-vsync.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.Draw-whit-vsync.png)
 
 
 如上图所示，一旦VSync出现后，立刻就开始执行下一帧的绘制工作。这样就可以大大降低Jank出现的概率。另外，VSYNC引入后，要求绘制也只能在收到VSYNC消息之后才能进行，因此，也就杜绝了另外一种极端情况的出现—-CPU（GPU）一直不停的进行绘制，帧的生成速度高于屏幕的刷新速度，导致生成的帧不能被显示，只能丢弃，这样就出现了丢帧的情况—-引入VSYNC后，绘制的速度就和屏幕刷新的速度保持一致了。
@@ -3475,7 +3475,7 @@ mPrimaryDispSync是什么？addResyncSample有什么作用？
 
 ##### 6.3.1、Surfaceflinger.init()
 先看一下总体flow：
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.Vsync-surfaceflinger.init.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.Vsync-surfaceflinger.init.png)
 
 ```
 void SurfaceFlinger::init() {
@@ -3503,16 +3503,16 @@ void SurfaceFlinger::init() {
 2个EventThread对象分别是mEventThread，给app用，mSFEventThread，给surfaceflinger自己用。
 下面给出这4个Thread关系图。
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.SurfaceFlinger.init.DispSyncThread.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.SurfaceFlinger.init.DispSyncThread.png)
 
 
 这两个DispSyncSource就是KK引入的重大变化。Android 4.4(KitKat)引入了VSync的虚拟化，即把硬件的VSync信号先同步到一个本地VSync模型中，再从中一分为二，引出两条VSync时间与之有固定偏移的线程。示意图如下：
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.SurfaceFlinger-App-Vsync-offset.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.SurfaceFlinger-App-Vsync-offset.png)
 
 Google这样修改的目的又是什么呢？
 =在当前三重缓冲区的架构下，即对于一帧内容，先等App UI画完了，SurfaceFlinger再出场对其进行合并渲染后放入framebuffer，最后整到屏幕上。而现有的VSync模型是让大家一起开始干活。
 这个架构其实会产生一个问题，因为App和SurfaceFlinger被同时唤醒，导致他们二者总是一起工作，必然导致VSync来临的时刻，这二者之间产生了CPU资源的抢占。因此，谷歌给这两个工作都加上一个小小的延迟，让这两个工作并不是同时被唤醒，这样大家就可以错开使用资源的高峰期，提高工作的效率。
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.SurfaceFlinger-Vsync-app-sf.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.SurfaceFlinger-Vsync-app-sf.png)
 
 这两个延迟，其实就分别对应上面代码中的vsyncSrc（绘制延迟）和sfVsyncSrc（合成延迟）。
 在创建了两个DispSyncSource变量后，我们使用它们来初始化了两个EventThread。下面我们来详细看下EventThread的创建流程：
@@ -3609,7 +3609,7 @@ status_t EventThread::registerDisplayEventConnection(
 我们在前面一章也提到了无论是软件方式还是硬件方式，SurfaceFlinger收到VSync信号后，处理函数都是onVSyncReceived函数：
 
 **VSync消息处理——addResyncSample**
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.SF-Vsync-addResyncSample.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.SF-Vsync-addResyncSample.png)
 
 ``` cpp
 bool DispSync::addResyncSample(nsecs_t timestamp) {  
@@ -3796,7 +3796,7 @@ ssize_t DisplayEventReceiver::sendEvents(const sp<BitTube>& dataChannel,
     return BitTube::sendObjects(dataChannel, events, count);  
 }  
 ```
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/personal.website/zjj.display.sys.App-SurfaceFlinger-Vsync-postEvent.png)
+![enter image description here](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/zjj.display.sys.App-SurfaceFlinger-Vsync-postEvent.png)
 
 其实看到这里的BitTube我们就明白了，在本文开始时候我们提到：
 

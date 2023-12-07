@@ -1,6 +1,6 @@
 ---
 title: Android Video System（1）：Video System(视频系统)框架分析
-cover: https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/hexo.themes/bing-wallpaper-2018.04.16.jpg
+cover: https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/hexo.themes/bing-wallpaper-2018.04.16.jpg
 categories:
   - Multimedia
 tags:
@@ -51,19 +51,19 @@ AOSP 源码（文章基于 Android 7.1.2）：
 --------------------------------------------------------------------------------
 #### (一)、Android Video Overview
 基于 OpenMAX 的视频解码 – 数据流
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/01-01-OpenMax-Based video decode - data flow.png)
+![Alt text](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/01-01-OpenMax-Based video decode - data flow.png)
 
 > YUV，是一种颜色编码方法。常使用在各个视频处理组件中。 YUV在对照片或视频编码时，考虑到人类的感知能力，允许降低色度的带宽。[YUV](https://zh.wikipedia.org/wiki/YUV)
 > VPU，Video processing unit 
 
 基于 OpenMAX 的视频编码 – 数据流
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/01-02-OpenMax-Based video encode - data flow.png.png)
+![Alt text](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/01-02-OpenMax-Based video encode - data flow.png.png)
 
 视频框架：
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/01-03-Video Architecture Software Stack.png)
+![Alt text](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/01-03-Video Architecture Software Stack.png)
 
 组件描述：
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/01-04-Q Component Description.png)
+![Alt text](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/01-04-Q Component Description.png)
 
 总结：
     从视频框架可以了解到。视频文件先经Stagefright传到OMX decoder解码（软解或硬解）、OMX decoder将解码后的YUV数据回传到Stagefright，不断循环播放同时经由SurfaceFlinger渲染到LCD屏幕上。
@@ -88,7 +88,7 @@ mediaPlayer.release();
 通常MediaPlayer的调用逻辑是，构造函数-> setDataSource -> SetVideoSurfaceTexture-> prepare/prepareAsync -> start-> stop-> reset-> 析构函数，按照实际需求还会调用pause、isPlaying、getDuration、getCurrentPosition、setLooping、seekTo等方法。
 
 ##### 2.1.1、MediaPlayer状态图:
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/01-05-MediaPlayer-status-turn-.png)
+![Alt text](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/01-05-MediaPlayer-status-turn-.png)
 
 ☯ Idle状态 
 调用new或reset()方法创建MediaPlayer后进入空闲
@@ -118,7 +118,7 @@ mediaserver 启动后会把media相关一些服务添加到servicemanager中，�
 ``` cpp
 [->\frameworks\av\media\mediaserver\main_mediaserver.cpp]
 ```
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/01-06-Main_mediaserver.png)
+![Alt text](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/01-06-Main_mediaserver.png)
 
 
 ##### 2.1.3、创建MediaPlayer
@@ -130,7 +130,7 @@ android_media_MediaPlayer_native_setup()
 ``` cpp
 [->\frameworks\base\media\jni\android_media_MediaPlayer.cpp]
 ```
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/01-07-android_media_MediaPlayer_native_setup.png)
+![Alt text](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/01-07-android_media_MediaPlayer_native_setup.png)
 
 构造Native层的MediaPlayer对象的时候【MediaPlayer.cpp】，也会构造其父类的对象。在MediaPlayer的父类IMediaDeathNotifier中有个很重要的方法getMediaPlayerService()来获取MediaPlayerService，其关系到MediaPlayer和MediaPlayerService之间的通信。
 
@@ -138,21 +138,21 @@ android_media_MediaPlayer_native_setup()
 
 在整个应用程序的进程中，Mediaplayer.cpp 中 setDataSource会从service manager中获得mediaPlayerService 服务，然后通过服务来创建player，这个player就是播放器的真实实例，同时也使MediaPlayer和MediaPlayerService建立了联系。
 在java层MediaPlayer.java中的setDataSource最终会调用_setDataSource方法，对应native层MediaPlayer.cpp中的setDataSource方法。
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/01-08-mp_setDataSource.png)
+![Alt text](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/01-08-mp_setDataSource.png)
 
 通过 getMediaPlayerService 得到的BpMediaPlayerService类型的service，和mediaPlayerService进程中的BnMediaPlayerService 相对应负责binder通讯。
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/01-09-MediaPlayerService_Create.png)
+![Alt text](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/01-09-MediaPlayerService_Create.png)
 
 在create函数中创建了一个MediaPlayerService::Client的实例，是MediaPlayerService的内部类，也就是说MediaPlayerService会为每个client应用进程创建一个相应的MediaPlayerService::Client的实例，来实现播放以及播放过程的控制，向MediaPlayer发事件通知。到这里，在Server端的对象就创建完成了。
 
 然后在MediaPlayer.cpp中就得到了一个sever端的player实例，它和本地其他类的实例没什么用法上的区别，而实际上则是通过binder机制运行在另外一个进程中的。获得此实例后继续player->setDataSource操作。
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/01-10-player-setDataSource.png)
+![Alt text](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/01-10-player-setDataSource.png)
 
 小结：
 Java应用程序中使用MediaPlayer.java的setDataSource()会传递到Native层中MediaPlayer.cpp的setDataSource()去执行，而MediaPlayer.cpp又会把这个方法交给MediaPlayerservice去执行。MediaPlayerService则是使用NuPlayer实现的，最后， setDataSource还是交给了NuPlayer去执行了。这个过程把MediaPlayer和MediaPlayerService之间的联系建立起来，同时又把MediaPlayerService和NuPlayer的关系建立了起来。
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/01-11-GenericSource-setDataSource.png)
+![Alt text](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/01-11-GenericSource-setDataSource.png)
 
 
 ##### 2.1.5、setDisplay()
@@ -242,7 +242,7 @@ static void decVideoSurfaceRef(JNIEnv *env, jobject thiz)
 
 IGraphicBufferProducer是SurfaceFlinger的内容，一个UI完全显示到diplay的过程，SurfaceFlinger扮演着重要的角色但是它的职责是“Flinger”，即把系统中所有应用程序的最终的“绘图结果”进行“混合”，然后统一显示到物理屏幕上，而其他方面比如各个程序的绘画过程，就由其他东西来担任了。这个光荣的任务自然而然地落在了BufferQueue的肩膀上，它是每个应用程序“一对一”的辅导老师，指导着UI程序的“画板申请”、“作画流程”等一系列细节。下面的图描述了这三者的关系：
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/01-12-IGraphicBufferProducer.png)
+![Alt text](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/01-12-IGraphicBufferProducer.png)
 
    虽说是三者的关系，但是他们所属的层却只有两个，app属于Java层，BufferQueue/SurfaceFlinger属于native层。也就是说BufferQueue也是隶属SurfaceFlinger，所有工作围绕SurfaceFlinger展开。
        这里IGraphicBufferProducer就是app和BufferQueue重要桥梁，GraphicBufferProducer承担着单个应用进程中的UI显示需求，与BufferQueue打交道的就是它。
@@ -250,7 +250,7 @@ IGraphicBufferProducer是SurfaceFlinger的内容，一个UI完全显示到diplay
 NuPlayer不管有多么神秘，说到底还是个播放器。在播放器的基本模型上，他与VCL、mplayer、ffmpeg等开源的结构是一致的。只是组织实现的方式不同。
 深入了解NuPlayer之前，把播放器的基本模型总结一下，然后按照模型的各个部分来深入研究NuPlayer的实现方式。
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/01-13-source-demux-decoder-output.jpg)
+![Alt text](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/01-13-source-demux-decoder-output.jpg)
 
 
 
@@ -271,11 +271,11 @@ Android2.3时引入流媒体框架，而流媒体框架的核心是NuPlayer。�
 
 ##### 2.2.1、NuPlayer整体类关系图
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/01-14-NuPlayer-arc.jpg)
+![Alt text](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/01-14-NuPlayer-arc.jpg)
 
 NuPlayer由NuPlayerDriver封装，利用了底层的ALooper/AHandler机制来异步地处理请求，ALooper保存消息请求，然后在AHandler中处理。另外，NuPlayer中利用到了Acodec。
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/01-15-NuPlayer-class.jpg)
+![Alt text](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/01-15-NuPlayer-class.jpg)
 
 ☯ NuPlayer::Source
 解析模块（parser，功能类似FFmpeg的avformat）。其接口与MediaExtractor和
@@ -326,7 +326,7 @@ NuPlayer的框架，其内部实现逻辑。那么最终就落实到如何从一
 实际上在代码中NuPlayer本身继承自AHandler类，而ALooper对象保存在NuPlayerDriver中。
 ALooper/AHandler机制是模拟的消息循环处理方式，通常有三个主要部分：消息（message，通常包含Handler）、消息队列（queue）、消息处理线程（looper thread）。
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/01-16-AHandler-ALooper-AMessage.png)
+![Alt text](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/01-16-AHandler-ALooper-AMessage.png)
 
 对于handler消息机制，构成就必须包括一个Loop，message。那么对应的AHandler，也应该有对应的ALooper、AMessage。
 因此本小节主要涉及到三个类ALooper、AHandler、AMessage。

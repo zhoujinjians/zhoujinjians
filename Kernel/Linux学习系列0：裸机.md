@@ -1,6 +1,6 @@
 ---
 title: Linux学习系列0：裸机
-cover: https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.41.jpg
+cover: https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.41.jpg
 categories:
  - Linux
 tags:
@@ -14,7 +14,7 @@ date: 2022-06-15 00:00:00
 
 （==**文章基于 Kernel-4.15**==）&&（==**文章基于 Android 10.0**==）
 
-[【me.zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianmm) 
+[【me.zhoujinjian.com博客原图链接】](https://github.com/zzhoujinjian) 
 
 [【开发板 RockPi4bPlusV1.6】](https://shop.allnetchina.cn/collections/frontpage/products/rock-pi-4-model-b-board-only-2-4-5ghz-wlan-bluetooth-5-0)
 
@@ -46,7 +46,7 @@ date: 2022-06-15 00:00:00
     　　　　高通骁龙845处理器由4个Cortex-A75和4个Cortex-A55组成，Cortex-A75和Cortex-A55都是ARMv8-A架构。
 *   **发展迭代**：
     
-    ![](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/kernel.embedded/1.jpg)
+    ![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/kernel.embedded/1.jpg)
     
 
 **2.AArch64/AArch32/A64/A32/T32**
@@ -108,18 +108,18 @@ ARMv8规定了CPU有4种运行级别。每种运行级别下标的数字越大�
 
 若底层EL(Exception Level)为32bits，则上层EL的软件就只能是32位。
 
-![](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/kernel.embedded/2-16297118529022.png)
+![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/kernel.embedded/2-16297118529022.png)
 
 若底层的EL为64bits，则上层EL就可以依据需求选择为32bits或是64bits。
 
-![](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/kernel.embedded/3-16297118317991.png)
+![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/kernel.embedded/3-16297118317991.png)
 
 2.RK3399启动
 ======================================
 
 先看一下RK3399的启动流程图\[1\]：
 
-![](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/kernel.embedded/4.png)
+![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/kernel.embedded/4.png)
 
 从图中可以得到以下几个结论：
 
@@ -203,7 +203,7 @@ PATH=rk3399_loader_v1.20.126.bin
 --------------------------------------------
 
 经过分析和测试，现实现了emmc裸机程序，并把整个过程整理了一个工程模板。  
-工程模板见[GitHub](https://github.com/zhoujinjianmm/u_boot_demo)，替换官方u-boot，然后编译update.img
+工程模板见[GitHub](https://github.com/zzhoujinjian/u_boot_demo)，替换官方u-boot，然后编译update.img
 
 ```c
 # u_boot_demo for rockpi4b_plus_v1.6
@@ -278,7 +278,7 @@ https://wiki.radxa.com/Android/android_tool
 
 烧录update.img（每次都烧录update.img好像有点~.~） ：
 
-![](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/kernel.embedded/6.png)
+![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/kernel.embedded/6.png)
 
 3.Uboot启动部分分析
 ===============================================
@@ -784,7 +784,7 @@ save_boot_params_ret:
 
 U-Boot启动流程示意图：
 
-![](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/kernel.embedded/5.png)
+![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/kernel.embedded/5.png)
 
 4.中断
 ====================
@@ -2111,7 +2111,7 @@ int main(void)
 *   测试效果：  
     上电后，蓝色LED1间隔闪烁。
     
-    ![](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/kernel.embedded/u-boot-timer-irq-ok.png)
+    ![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/kernel.embedded/u-boot-timer-irq-ok.png)
 
 5.串口
 ====================
@@ -2431,7 +2431,7 @@ void puts(char *ptr)
 
 *   测试效果：
 
-![](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/kernel.embedded/u-boot-uart-ok.png)
+![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/kernel.embedded/u-boot-uart-ok.png)
 
 6.定时器
 =======================
@@ -2599,7 +2599,7 @@ int get_tsadc_temp(unsigned char channel)
 
 *   测试效果：
 
-![](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/kernel.embedded/u-boot-adc-ok.png)
+![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/kernel.embedded/u-boot-adc-ok.png)
 
 8.I2C
 =======================
@@ -2751,7 +2751,7 @@ void i2c_test(void){
 
 *   测试效果(0x46地址不是连的EEPROM，i2c测试失败，以后填坑)：
 
-![](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/kernel.embedded/u-boot-i2c-read-ok.png)
+![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/kernel.embedded/u-boot-i2c-read-ok.png)
 
 9.SPI
 =======================
@@ -3077,5 +3077,5 @@ int main(void)
 
 *   测试效果：
 
-![](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/kernel.embedded/u-boot-spi-ok.png)
+![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/kernel.embedded/u-boot-spi-ok.png)
 

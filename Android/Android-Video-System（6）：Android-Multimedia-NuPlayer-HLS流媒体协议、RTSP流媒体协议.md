@@ -1,6 +1,6 @@
 ---
 title: Android Video System（6）：Android Multimedia - NuPlayer HLS流媒体协议、RTSP流媒体协议
-cover: https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/hexo.themes/bing-wallpaper-2018.04.27.jpg
+cover: https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/hexo.themes/bing-wallpaper-2018.04.27.jpg
 categories:
   - Multimedia
 tags:
@@ -42,7 +42,7 @@ HTTP Live Streaming（HLS）是苹果公司实现的基于HTTP的流媒体直播
 ##### 1.2、HLS框架介绍
 我们接下来看下HLS系统的整体结构图：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-01-HLS-playback-architecture.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-01-HLS-playback-architecture.png)
 
 我们首先将要直播的视频送到编码器中，编码器分别对视频和音频进行编码，然后输出到一个MPEG-2格式的传输流中，再由分段器将MPEG-2传输流进行分段，产生一系列等间隔的媒体片段，这些媒体片段一般很小并且保存成后缀为.ts的文件，同时生成一个指向这些媒体文件的索引文件，也就是我们很经常听到的.M3U8文件。完成分段之后将这些索引文件以及媒体文件上传到Web服务器上。客户端读取索引文件，然后按顺序请求下载索引文件中列出的媒体文件。下载后是一个ts文件。需要进行解压获得对应的媒体数据并解码后进行播放。由于在直播过程中服务器端会不断地将最新的直播数据生成新的小文件，并上传所以只要客户端不断地按顺序下载并播放从服务器获取到的文件，从整个过程上看就相当于实现了直播。而且由于分段文件的很短，客户端可以根据实际的带宽情况切换到不同码率的直播源，从而实现多码率的适配的目的。
 
@@ -82,25 +82,25 @@ http://hls.ftdp.com/video1_widld/m3u8/01.m3u8
 6、根据当前的带宽决定是否切换视频资源
 7、将下载的分片资源解密后送到解码器进行解码
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-02-HLS-playback-flow.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-02-HLS-playback-flow.png)
 
 
 
 关于NuPlayerDrvier的创建以及SetDataSource的流程和Stagefight Player大体一致，区别在于setDataSource的时候是根据url的不同会创建三种不同的DataSource：HttpLiveSource，RTSPSource，以及GenericSource。这里就不做大篇幅的介绍了，就直接上图吧
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-03-HLS-nuplayer-setdatasource-java.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-03-HLS-nuplayer-setdatasource-java.png)
 
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-04-HLS-nuplayer-setdatasource-native.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-04-HLS-nuplayer-setdatasource-native.png)
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-05-HLS-nuplayer-setdatasource-native-2.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-05-HLS-nuplayer-setdatasource-native-2.png)
 
 
 #### （二）、基于NuPlayer的HLS流媒体播放源码分析
 
 首先看看总体时序图：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-06-HttpLiveStream-flow.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-06-HttpLiveStream-flow.png)
 
 
 ##### 2.1、HTTPLiveSource::prepareAsync()
@@ -1310,23 +1310,23 @@ OPTION 步骤只要服务器客户端约定好，有哪些方法可用，则opti
 如果我们有其他途径得到媒体初始化描述信息，则我们也不需要通过RTSP中的DESCRIPTION请求来完成。
 TEARDOWN，可以根据系统需求的设计来决定是否需要。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-07-RTSP-TEARDOWN.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-07-RTSP-TEARDOWN.png)
 
 ##### 3.1.5、RTSP的主要命令表：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-08-RTSP-option.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-08-RTSP-option.png)
 
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-09-RTSP-describe.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-09-RTSP-describe.png)
 
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-10-RTSP-setup.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-10-RTSP-setup.png)
 
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-11-RTSP-play.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-11-RTSP-play.png)
 
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-12-RTSP-teardowm.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-12-RTSP-teardowm.png)
 
 
 RTSP状态码：
@@ -1426,21 +1426,21 @@ RTP为Internet上端到端的实时传输提供时间信息和流同步，但它
 在Internet环境中，一些会议的参加者可能被隔离在应用级防火墙的外面，这些参加者被禁止直接使用IP组播地址进行访问，虽然他们可能是通过高速链路连接的。在这些情况下，RTP允许使用转换器作为RTP级中继器。在防火墙两端分别安装一个转换器，防火墙之外的转换器过滤所有接收到的组播报文，并通过一条安全的连接传送给防火墙之内的转换器，内部转换器将这些组播报文再转发送给内部网络中的组播组成员
 ##### 3.1.8、RTP协议报头格式
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-13-RTSP-baotou1.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-13-RTSP-baotou1.png)
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-14-RTSP-baotou2.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-14-RTSP-baotou2.png)
 
 ##### 3.1.9、RTCP协议报头格式
 
 如前面所述RTCP的主要功能是：服务质量的监视与反馈、媒体间的同步，以及多播组中成员的标识。在RTP会话期间，各参与者周期性地传送RTCP包。RTCP包中含有已发送的数据包的数量、丢失的数据包的数量等统计资料，因此，各参与者可以利用这些信息动态地改变传输速率，甚至改变有效载荷类型。RTP和RTCP配合使用，它们能以有效的反馈和最小的开销使传输效率最佳化，因而特别适合传送网上的实时数据。RTCP也是用UDP来传送的，但RTCP封装的仅仅是一些控制信息，因而分组很短，所以可以将多个RTCP分组封装在一个UDP包中。
 RTCP有如下五种分组类型：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-15-RTCP-baotou1.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-15-RTCP-baotou1.png)
 
 
 下面是SR分组的格式：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-16-RTCP-baotou2.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-16-RTCP-baotou2.png)
 
 
 ##### 3.2、基于NuPLayer的RTSP 代码流程
@@ -1449,10 +1449,10 @@ setDataSource 阶段的任务这里就不重复介绍了，它主要完成播放
 我们直接来看prepare阶段：
 
 先上图再看代码，结合图看会比较清晰
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-17-ARTSPConnection.png)
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-18-ARTSP-Source.png)
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-19-ARTSP-Source-state.png)
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmm/PicGo/master/video.system/VS-06-20-ARTSP-Source-state2.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-17-ARTSPConnection.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-18-ARTSP-Source.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-19-ARTSP-Source-state.png)
+![Alt text | center](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/video.system/VS-06-20-ARTSP-Source-state2.png)
 
 ##### 3.3、RTSPSource::prepareAsync()流程
 在prepare阶段我们首先会判断是否是SDP，mIsSDP这个变量是在初始化RTSPSource时候传入的，我们这里先分析mIsSDP = false的情况。这种情况下首先创建一个MyHandler，并调用connect，与服务器建立连接。
