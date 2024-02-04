@@ -1,6 +1,6 @@
 ---
 title:  Android 10 Display System源码分析（7）：Native Surface创建 && SurfaceFlinger合成流程分析（Android 10.0 && Kernel 4.15）
-cover: https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.28.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.28.jpg
 categories: 
   - Display
 tags:
@@ -21,11 +21,11 @@ rk3399_Android10:/product/priv-app # rm -rf Launcher3QuickStep/
 ```
 然后等待开机完成SurfaceFlinger_test_red，抓取Log。setprop vendor.dump true。抓取的帧会按数字排列，还带分辨率参数。adb pull /data/dump/。抓到的bin文件可以用软件7yuv打开查看，格式设定为RGBA8888
 Layer test#0渲染图：
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/Android10.Display.7/SurfaceFlinger_test_red_take_picture_Test.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android10.Display.7/SurfaceFlinger_test_red_take_picture_Test.jpg)
 FrameBuffer渲染图：
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/Android10.Display.7/SurfaceFlinger_test_red_take_picture_FB.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android10.Display.7/SurfaceFlinger_test_red_take_picture_FB.jpg)
 效果图：
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/Android10.Display.7/SurfaceFlinger_test_red_take_picture.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android10.Display.7/SurfaceFlinger_test_red_take_picture.jpg)
 #### （一）、Native Surface创建过程
 
 ##### 1.1.0 、Native Surface创建步骤
@@ -379,7 +379,7 @@ BufferLayer::BufferLayer(const LayerCreationArgs& args)
 ##### 2.1.0 、BufferQueue介绍
 BufferQueue 类是 Android 中所有图形处理操作的核心。它的是将生成图形数据缓冲区的一方（生产者Producer）连接到接受数据以进行显示或进一步处理的一方（消费者Consumer）。几乎所有在系统中移动图形数据缓冲区的内容都依赖于 BufferQueue。
 从上图APP与SurfaceFlinger交互中可以看出，BufferQueue内部维持着64个BufferSlot，每一个BufferSlot内部有一个GraphicBuffer指向分配的Graphic Buffer。
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/Android10.Display.7/Android-Graphics-SurfaceFlinger-BufferQueue.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android10.Display.7/Android-Graphics-SurfaceFlinger-BufferQueue.png)
 
 
 先来看一下图中几个状态代表的含义：
@@ -430,7 +430,7 @@ ACQUIRED表示缓冲区已被消费者（Consumer）获取。 如与QUEUED，内
 4、当消费者已经消费了这块buffer(已经合成，已经编码等)，就进行release操作释放buffer,将buffer归还给BufferQueue,buffer状态由ACQUIRED变成FREE.buffer拥有者由Consumer变成BufferQueue.
 ###### 2.1.1、生产者Producer
 生产者Producer实现IGraphicBufferProducer的接口，在实际运作过程中，应用（Client端）存在代理端BpGraphicBufferProducer，SurfaceFlinger（Server端）存在Native端BnGraphicBufferProducer。生产者代理端Bp通过Binder通信，不断的dequeueBuffer和queueBuffer操作，Native端同样响应这些操作请求，这样buffer就转了起来了。 
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/Android10.Display.7/Android-Graphics-SurfaceFlinger-IGraphicsBufferProducer.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android10.Display.7/Android-Graphics-SurfaceFlinger-IGraphicsBufferProducer.png)
 
 
 这里介绍几个非常重要的函数：
@@ -484,7 +484,7 @@ attachBuffer尝试将缓冲区的所有权转移给缓冲区队列。 如果这�
 ```
 
 ###### 2.1.2、消费者Consumer
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/Android10.Display.7/Android-Graphics-SurfaceFlinger-IGraphicsBufferConsumer.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android10.Display.7/Android-Graphics-SurfaceFlinger-IGraphicsBufferConsumer.png)
 
 
 这里介绍几个非常重要的函数：

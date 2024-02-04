@@ -1,6 +1,6 @@
 ---
 title: Android 8.1 Display System源码分析（1）：Display System 精彩世界（RK3399）
-cover: https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/personal.website/post.cover.pictures.00010.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/post.cover.pictures.00010.jpg
 categories: 
   - Display
 tags:
@@ -309,7 +309,7 @@ mmm external/libdrm/tests
 
 
 ##### 1.4、显示输出效果图
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/zjj.sys.display.8.1.shot/modetest.shot.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.shot/modetest.shot.jpg)
 源代码稍后另外博客再继续分析！
 
 
@@ -457,7 +457,7 @@ int main(int /*argc*/, char** /*argv*/)
 > 5、./OpenGLESTexturesRGB
 
 ##### 2.3、显示效果
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/zjj.sys.display.8.1.shot/OpenGLESTexturesRGB.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.shot/OpenGLESTexturesRGB.png)
 
 源代码稍后另外博客再继续分析！
 
@@ -479,7 +479,7 @@ int main(int /*argc*/, char** /*argv*/)
 >12、终止与 EGLDisplay 之间的连接
 
 
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/zjj.sys.display.8.1.shot/zjj.display.sys.OpenGLESUse.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.shot/zjj.display.sys.OpenGLESUse.png)
 
 #### (三)、SurfaceFlinger test App（Android SurfaceFlinger Native层）
 #### （3）、SurfaceFlinger合成图像
@@ -634,16 +634,16 @@ SurfaceFlingerTestsBlue，然后分别进行测试。
 
 ##### 3.3、显示效果
 **SurfaceFlingerTestsRed**
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/zjj.sys.display.8.1.shot/SurfaceFlinger_test_red.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.shot/SurfaceFlinger_test_red.png)
 
 **SurfaceFlingerTestsGreen**
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/zjj.sys.display.8.1.shot/SurfaceFlinger_test_green.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.shot/SurfaceFlinger_test_green.png)
 
 **SurfaceFlingerTestsBlue**
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/zjj.sys.display.8.1.shot/SurfaceFlinger_test_blue.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.shot/SurfaceFlinger_test_blue.png)
 
 同时运行三个bin文件
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/zjj.sys.display.8.1.shot/SurfaceFlinger_test_RGB.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.shot/SurfaceFlinger_test_RGB.png)
 
 ##### 3.4、SurfaceFlingerTest代码分析
 SurfaceFlinger涉及流程复杂，稍后另外博客再继续分析！
@@ -728,16 +728,16 @@ TestViewportBlue.apk，然后分别进行测试。
 
 ##### 4.3、显示效果
 **TestViewportRed.apk**
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/zjj.sys.display.8.1.shot/com.android.testred.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.shot/com.android.testred.png)
 
 **TestViewportGreen.apk**
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/zjj.sys.display.8.1.shot/com.android.testgreen.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.shot/com.android.testgreen.png)
 
 **TestViewportBlue.apk**
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/zjj.sys.display.8.1.shot/com.android.testblue.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.shot/com.android.testblue.png)
 
 同时运行三个APK
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/zjj.sys.display.8.1.shot/com.android.testRGB.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.shot/com.android.testRGB.png)
 
 
 Android 默认运行Activity是全屏
@@ -793,16 +793,16 @@ Android 默认运行Activity是全屏
 ##### 4.4、去掉SystemUI
 假如去掉SystemUI Apk（adb root / adb remount / rm -rf system/priv-app/SystemUI）如下效果
 **TestViewportRed.apk**
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/zjj.sys.display.8.1.shot/nobar_com.android.testred.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.shot/nobar_com.android.testred.png)
 
 **TestViewportGreen.apk**
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/zjj.sys.display.8.1.shot/nobar_com.android.testgreen.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.shot/nobar_com.android.testgreen.png)
 
 **TestViewportBlue.apk**
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/zjj.sys.display.8.1.shot/nobar_com.android.testblue.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.shot/nobar_com.android.testblue.png)
 
 同时运行三个APK
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/zjj.sys.display.8.1.shot/nobar_com.android.testRGB.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.shot/nobar_com.android.testRGB.png)
 
 ##### 4.5、TestViewportX代码分析
 APK涉及AMS,WMS,SurfaceFlinger流程复杂，稍后另外博客再继续分析！

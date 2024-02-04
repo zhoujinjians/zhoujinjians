@@ -1,6 +1,6 @@
 ---
 title: Android 8.1 Display System源码分析（11）： App（"com.android.testgreen"）界面显示流程源码分析（2）：Window加载显示流程分析（RK3399）
-cover: https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.20.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.20.jpg
 categories: 
   - Display
 tags:

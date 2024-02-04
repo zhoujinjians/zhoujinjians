@@ -1,6 +1,6 @@
 ---
 title: Android Input System（2）：Android 7.1.2 (Android N) Android 输入子系统 - Input System分析
-cover: https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/hexo.themes/bing-wallpaper-2018.04.05.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/hexo.themes/bing-wallpaper-2018.04.05.jpg
 categories: 
   - Input
 tags:
@@ -183,7 +183,7 @@ return 0;
 echo > tmp/1 //tmp文件夹新建文件1 echo > tmp/2 //tmp文件夹新建文件2 rm tmp/1 tmp/2 //移除tmp文件1/2
 
 测试结果可以看到，inotify 成功的监测了tmp文件夹。 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N1-Android-Input-System-Inotify-Test.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N1-Android-Input-System-Inotify-Test.jpg)
 
 
 ### 2、Epoll介绍与使用
@@ -381,7 +381,7 @@ epoll , fifo : [o-rdwr-on-named-pipes-with-poll](http://stackoverflow.com/questi
 **编译与验证：** gcc -o epoll epoll.c //GCC编译 mkdir tmp //创建tmp文件夹 mkfifo tmp/1 tmp/2 tmp/3 //创建文件1、2、3 ./epoll tmp/1 tmp/2 tmp/3 & //epoll后台监测文件1、2、3 echo aaa > tmp/1 //写人aaa到1 echo bbb > tmp/2 //写入bbb到2
 
 测试结果可以看到，epoll成功的监测了文件内容的改变。 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N2-Android-Input-System-epoll-test.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N2-Android-Input-System-epoll-test.jpg)
 
 ### 3、INotify与Epoll的小结
 
@@ -475,13 +475,13 @@ return 0;
 ```
 
 使用方法： gcc socketpair.c -o socketpair -pthread 注：出现少量警告，可以忽略 ./socketpair 可以看到main线程 和 thread1双向通信。 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N3-Android-Input-System-socketpair.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N3-Android-Input-System-socketpair.jpg)
 
 main 和 thread1属于两个线程： 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N4-Android-Input-System-socketpair-thread.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N4-Android-Input-System-socketpair-thread.jpg)
 
 父子进程通信： 利用socketpair创建一对无名管道，然后通过sendmsg由服务器进程发送文件的fd给客户端进程，客户端进程通过recvmsg接收服务器进程发来的fd [socketpair实现父子进程通信](http://blog.csdn.net/yankai0219/article/details/8453377) **图示：** 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N5-Android-Input-System-socketpair-father-son.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N5-Android-Input-System-socketpair-father-son.jpg)
 
 ## （三）、必备Linux知识_实现任意进程间双向通信(scoketpair+binder)
 
@@ -490,7 +490,7 @@ main 和 thread1属于两个线程：
 由第二节最后可知socketpair可实现父子进程通信，图中父进程和子进程可双向通信，假如此时通过binder通信将文件句柄Fd[1]传给另外一个独立进程，我们知道Linux一切皆文件，那个独立进程就可以对Fd[1]读写了，也就是说父进程 就可以和 那个独立进程双向通信了，具体实现请研究上面的代码。
 
 测试： 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N6-Android-Input-System-socketpair-binder.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N6-Android-Input-System-socketpair-binder.jpg)
 
 可以看到两个没有任何关系的进程使用socketpair实现了双向通信。
 
@@ -503,7 +503,7 @@ main 和 thread1属于两个线程：
 ### （一）、输入子系统分层解析
 
 输入子系统的系统架构如下图所示： 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N7-Android-Input-System--all-arc.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N7-Android-Input-System--all-arc.png)
 
 Android输入系统系统综述： Linux内核会在/dev/input/下创建对应的名为event0~n或其他名称的设备节点。而当输入设备不可用时，则会将对应的节点删除。在用户空间可以通过ioctl的方式从这些设备节点中获取其对应的输入设备的类型、厂商、描述等信息。
 
@@ -526,14 +526,14 @@ Input Core（核心层）：为事件处理层和设备驱动层提供接口API�
 Event Handler： Event Handler 层以通用的 evdev.c 为例来解析，上层和 Kernel 层的交互在此文件完成。
 
 ● Framework 层 Android系统中Framework 层负责管理输入事件的主要是InputManagerService（IMS）。它主要的任务就是从设备中读事件数据，然后将输入事件发送到焦点窗口中去，另外还需要让系统有机会来处理一些系统按键。显然，要完成这个工作，IMS需要与其它模块打交道，其中最主要的就是WMS和ViewRootImpl。主要的几个模块示意如下： 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N8-Android-Input-System-framwork-arc.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N8-Android-Input-System-framwork-arc.png)
 
 ● App层
 
 --------------------------------------------------------------------------------
 
 WindowManagerService(WMS)是窗口管理服务，核心维护了一个有序的窗口堆栈。PhoneWindowManager(PWM)里有关于手机策略的实现，和输入相关的主要是对系统按键的处理。InputManagerService是输入管理服务，主要干活的是Native层的InputManager。InputManager中的InputReader负责使用EventHub从Input driver中拿事件，然后让InputMapper解析。接着传给InputDispatcher，InputDispatcher负责一方面将事件通过InputManager，InputMonitor一路传给PhoneWindowManager来做系统输入事件的处理，另一方面将这些事件传给焦点及监视窗口。NativeInputManager实现InputReaderPolicyInterface和InputDispatcherPolicyInterface接口，在Native层的InputManager和Java层的IMS间起到一个胶水层的作用。InputMonitor实现了WindowManagerCallbacks接口，起到了IMS到WMS的连接作用。App这边，ViewRootImpl相当于App端一个顶层View的Controller。这个顶层View在WMS中对应一个窗口，用WindowState描述。WindowState中有InputWindowHandle代表一个接收输入事件的窗口句柄。InputDispatcher中的mFocusedWindowHandle指示了焦点窗口的句柄。InputDispatcher管理了一坨连接（一个连接对应一个注册到WMS的窗口），通过这些个连接InputDispatcher可以直接将输入事件发往App端的焦点窗口。输入事件从Driver开始的处理过程大致如下： 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N9-Android-Input-System-app-arc.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N9-Android-Input-System-app-arc.png)
 
 事件发往App端后，就进入事件分发阶段，这里简单提下，不做详细分析。
 
@@ -687,7 +687,7 @@ sendevent /dev/input/event5 1 3 1 // 1 3 1 : EV_KEY, KEY_2, down sendevent /dev/
 上一节讲述了输入事件的源头是位于/dev/input/下的设备节点，而输入系统的终点是由WMS管理的某个窗口。最初的输入事件为内核生成的原始事件，而最终交付给窗口的则是KeyEvent或MotionEvent对象。因此Android输入系统的主要工作是读取设备节点中的原始事件，将其加工封装，然后派发给一个特定的窗口以及窗口中的控件。这个过程由InputManagerService（以下简称IMS）系统服务为核心的多个参与者共同完成。
 
 输入系统的总体流程和参与者如图3-1所示。 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N10-Android-Input-System-framwork-arc.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N10-Android-Input-System-framwork-arc.png)
 
 上图描述了输入事件的处理流程以及输入系统中最基本的参与者。它们是：
 
@@ -724,7 +724,7 @@ IMS分为Java层与Native层两个部分，其启动过程是从Java部分的初
 · 调用IMS对象的start()函数完成启动。
 
 我们先看下整个启动过程的序列图，然后根据序列图来一步步分析。 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N11-Android-Input-System-input-create-thread.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N11-Android-Input-System-input-create-thread.png)
 
 ## Step 1、 SystemServer.startOtherServices()
 
@@ -850,7 +850,7 @@ mDispatcherThread = new InputDispatcherThread(mDispatcher);
 
 ### 图3-1：
 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N12-Android-Input-System-IMS-system.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N12-Android-Input-System-IMS-system.png)
 
 InputManager的构造函数也比较简洁，它创建了四个对象，分别为IMS的核心参与者InputReader与InputDispatcher，以及它们所在的线程InputReaderThread与InputDispatcherThread。注意InputManager的构造函数的参数readerPolicy与dispatcherPolicy，它们都是NativeInputManager。
 
@@ -864,7 +864,7 @@ InputManager的构造函数也比较简洁，它创建了四个对象，分别�
 
 ## IMS的成员关系
 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N13-Android-Input-System-IMS-membership.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N13-Android-Input-System-IMS-membership.png)
 
 ## （三）、IMS启动
 
@@ -1010,7 +1010,7 @@ mLooper->pollOnce(timeoutMillis);
 
 当两个线程启动后，InputReader在其线程循环中不断地从EventHub中抽取原始输入事件，进行加工处理后将加工所得的事件放入InputDispatcher的派发发队列中。InputDispatcher则在其线程循环中将派发队列中的事件取出，查找合适的窗口，将事件写入到窗口的事件接收管道中。窗口事件接收线程的Looper从管道中将事件取出，交由事件处理函数进行事件响应。整个过程共有三个线程首尾相接，像三台水泵似的一层层地将事件交付给事件处理函数。如下图所示。
 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N14-Android-Input-System-input-event-pop.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N14-Android-Input-System-input-event-pop.png)
 
 InputManagerService.start()函数的作用，就像为Reader线程、Dispatcher线程这两台水泵按下开关，而Looper这台水泵在窗口创建时便已经处于运行状态了。自此，输入系统动力十足地开始运转，设备节点中的输入事件将被源源不断地抽取给事件处理者。
 
@@ -1035,7 +1035,7 @@ size_tcount = mEventHub->getEvents(timeoutMillis,mEventBuffer, EVENT_BUFFER_SIZE
 ```
 
 首先贴一张EventHub->getEvents()工作时序图，跟着时序图一步步介绍。 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N15-Android-Input-System-input-reader-thread.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N15-Android-Input-System-input-reader-thread.png)
 
 ## （1）、深入理解EventHub
 
@@ -1426,7 +1426,7 @@ returnevent – buffer;
 
 经过以上分析可知，EventHub可以产生的设备增删事件一共有三种，而且这三种事件拥有固定的优先级，DEVICE_REMOVED事件的优先级最高，DEVICE_ADDED事件次之，FINISHED_DEVICE_SCAN事件最低。而且，getEvents()完成当前高优先级事件的生成之前，不会进行低优先级事件的生成。因此，当发生设备的加载与卸载时，EventHub所生成的完整的设备增删事件序列如图5-5所示，其中R表示DEVICE_REMOVED，A表示DEVICE_ADDED，F表示FINISHED_DEVICE_SCAN。
 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N16-Android-Input-System-input-device-add-del.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N16-Android-Input-System-input-device-add-del.png)
 
 图：设备增删事件的完整序列
 
@@ -1601,7 +1601,7 @@ getEvents()函数的本质是通过epoll_wait()获取Epoll事件到事件池，�
 
 在本节中出现了很多种事件，有原始输入事件、设备增删事件、Epoll事件、INotify事件等，存储事件的结构体有RawEvent、epoll_event、inotify_event、input_event等。图5-6可以帮助读者理清这些事件之间的关系。
 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N17-Android-Input-System-epoll.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N17-Android-Input-System-epoll.png)
 
 图 5-6 EventHub的事件关联
 
@@ -1609,14 +1609,14 @@ getEvents()函数的本质是通过epoll_wait()获取Epoll事件到事件池，�
 
 至此，相信读者对EventHub的工作原理，以及EventHub的事件监听与读取机制有了深入的了解。接下来的内容将讨论EventHub所提供的原始输入事件如何被加工为Android输入事件，这个加工者就是Reader子系统中的另一员大将：InputReader。
 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N18-Android-Input-System-EventHub-Kernel.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N18-Android-Input-System-EventHub-Kernel.png)
 
 --------------------------------------------------------------------------------
 
 ## 五、Input Reader
 
 根据第四节的分析。输入设备扫描完成，并加入epoll中，监听事件。从前面的getEvents函数分析得知，当按键事件发生后，getEvents函数返回。 这里再贴一下Input 处理时间流程图，然后按步骤详细分析。 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N15-Android-Input-System-input-reader-thread.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N15-Android-Input-System-input-reader-thread.png)
 
 以一次键盘按键为例，得到下面的6个事件
 
@@ -1962,11 +1962,11 @@ InputDisptacher的主要任务是把前面收到的输入事件发送到PWM及Ap
 其中dispatchOnceInnerLocked()会根据拿出的EventEntry类型调用相应的处理函数，以Key事件为例会调用dispatchKeyLocked()
 
 它会找到目标窗口，然后通过之前和App间建立的连接发送事件。如果是个需要系统处理的Key事件，这里会封装成CommandEntry插入到mCommandQueue队列中，后面的runCommandLockedInterruptible()函数中会调用doInterceptKeyBeforeDispatchingLockedInterruptible()来让PWM有机会进行处理。最后dispatchOnce()调用pollOnce()从和App的连接上接收处理完成消息。那么，InputDispatcher是怎么确定要往哪个窗口中发事件呢？这里的成员变量mFocusedWindowHandle指示了焦点窗口，然后findFocusedWindowTargetsLocked()会调用一系列函数（handleTargetsNotReadyLocked(), checkInjectionPermission(), checkWindowReadyForMoreInputLocked()等）检查mFocusedWindowHandle是否能接收输入事件。如果可以，将之以InputTarget的形式加到目标窗口数组中。然后就会调用dispatchEventLocked()进行发送。那么，这个mFocusedWindowHandle是如何维护的呢？为了更好地理解，这里回头分析下窗口连接的管理及焦点窗口的管理。 总体流程图： 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N19-Android-Input-System-InputDispatcher-structure.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N19-Android-Input-System-InputDispatcher-structure.png)
 
 再贴一张详细的总体流程图，然后根据步骤详细分析；
 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N20-Android-Input-System-input-dispatcher-thread.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N20-Android-Input-System-input-dispatcher-thread.png)
 
 ## Step 1、InputDispatcher.dispatchOnce()
 
@@ -2050,7 +2050,7 @@ void InputDispatcher::dispatchOnceInnerLocked(nsecs_t* nextWakeupTime) {
 从前文InputReader读取键盘消息过程分析 InputReader读取到一个消息后会调用KeyboardInputMapper的processKey，该函数会调用InputDispatcher的notifyKey函数，然后InputDispatcher会调用enqueueInboundEventLocked函数，将EventEntry加入到mInboundQueue中，然后调用mLooper->wake函数会唤醒InputDispatcherThread线程，InputDispatcher中把队列的第一个事件取出来，因为这里是键盘事件，所以mPendingEvent->type是EventEntry::TYPE_KEY，然后调用dispatchKeyLocked函数
 
 惯例先贴出序列图，按步骤一步步介绍。 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N21-Android-Input-System-dispatch-input-event.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N21-Android-Input-System-dispatch-input-event.png)
 
 ## Step 3、InputDispatcher.dispatchKeyLocked()
 
@@ -2236,7 +2236,7 @@ status_t InputChannel::sendMessage(const InputMessage* msg) {
 ## 七、App注册消息监听过程分析
 
 总体流程图 InputDispatcher会找到目标窗口，然后通过之前和App间建立的连接发送事件。如果是个需要系统处理的Key事件，这里会封装成CommandEntry插入到mCommandQueue队列中，后面的runCommandLockedInterruptible()函数中会调用doInterceptKeyBeforeDispatchingLockedInterruptible()来让PWM有机会进行处理。最后dispatchOnce()调用pollOnce()从和App的连接上接收处理完成消息。那么，InputDispatcher是怎么确定要往哪个窗口中发事件呢？这里的成员变量mFocusedWindowHandle指示了焦点窗口，然后findFocusedWindowTargetsLocked()会调用一系列函数（handleTargetsNotReadyLocked(), checkInjectionPermission(), checkWindowReadyForMoreInputLocked()等）检查mFocusedWindowHandle是否能接收输入事件。如果可以，将之以InputTarget的形式加到目标窗口数组中。然后就会调用dispatchEventLocked()进行发送。那么，这个mFocusedWindowHandle是如何维护的呢？为了更好地理解，这里回头分析下窗口连接的管理及焦点窗口的管理。 在App端，新的顶层窗口需要被注册到WMS中，这是在ViewRootImpl::setView()中做的。 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N22-Android-Input-System-inputchannel.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N22-Android-Input-System-inputchannel.png)
 
 ## Step 1、ViewRootImpl.setView()
 
@@ -2696,7 +2696,7 @@ InputDispatcher::Connection::Connection(const sp<InputChannel>& inputChannel,
 
 将InputWindowHandle, InputChanel封装成Connection对象，然后fd作为key，Connection作为Value，保存在mConnectionsByFd中，如果传入的monitor是true，则需要将InputChannel放到mMonitoringChannels中,从上面的InputManagerService的registerInputChannel函数里传入的monitor是false，所以这里不加入到mMonitoringChannels。同时把fd加入到mLooper的监听中，并指定当该fd有内容可读时，Looper就会调用handleReceiveCallback函数。至此server端的InputChannel注册完成，InputDispatcher睡眠在监听的fds上，当有按键事件发生时，InputDispatcher就会往这些fd写入InputMessage对象，进而回调handleReceiveCallback函数。
 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N23-Android-Input-System-InputDispatcher-viewrootimpl.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N23-Android-Input-System-InputDispatcher-viewrootimpl.png)
 
 至此，server端的InputChannel就注册完成了，再回到前面的WindowManagerService.addWindow上的第二步inputChannels[1].transferTo(outInputChannel);，这个是将创建的一对InputChannel的client端复制到传入的参数InputChannel上，当addWindow返回时，就回到ViewRootImpl.setView()方法中，执行应用程序这一侧的键盘消息接收通道。
 
@@ -2782,7 +2782,7 @@ void NativeInputEventReceiver::setFdEvents(int events) {
 ```
 
 这里调用传入的MessageQueue获取Looper对象，如果events是0，则表示要移除监听fd，如果events不为0，表示要监听fd，这个fd是前面WindowManagerService创建的一对InputChannel的client端，这样当Server端写入事件时，client端的looper就能被唤醒，并调用handleEvent函数（Looper::addFd函数可以指定LooperCallback对象，当fd可读时，会调用LooperCallback的handleEvent，而NativeInputEventReceiver继承自LooperCallback，所以这里会调用NativeInputEventReceiver的handleEvent函数） 贴上事件处理序列图。 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N24-Android-Input-System-Process-input-event.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N24-Android-Input-System-Process-input-event.png)
 
 ## Step 20、NativeInputEventReceiver.handleEvent()
 
@@ -2962,7 +2962,7 @@ return mChannel->sendMessage(&msg);
 
 然后通过和IMS中InputDispacher的通信管道InputChannel发了处理完成通知。那InputDispatcher这边收到后如何处理呢？
 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N25-Android-Input-System-InputDispatcher-handleReceiveCallback.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N25-Android-Input-System-InputDispatcher-handleReceiveCallback.jpg)
 
 由前面分析 InputDispatcher会调用handleReceiveCallback()来处理TYPE_FINISHED信号。这里先是往Command队列里放一个处理事务执行doDispatchCycleFinishedLockedInterruptible()，后面在runCommandsLockedInterruptible()中会取出执行。在doDispatchCycleFinishedLockedInterruptible()函数中，会先调用afterKeyEventLockedInterruptible()。Android中可以定义一些Fallback键，即如果一个Key事件App没有处理，可以Fallback成另外默认的Key事件，这是在这里的dispatchUnhandledKey()函数中进行处理的。接着InputDispatcher会将该收到完成信号的事件项从等待队列中移除。同时由于上一个事件已被App处理完，就可以调用startDispatchCycleLocked()来进行下一轮事件的处理了。
 
@@ -2980,7 +2980,7 @@ if (dispatchEntry == connection->findWaitQueueEntry(seq)) {
 startDispatchCycleLocked函数会检查相应连接的输出缓冲中(connection->outboundQueue)是否有事件要发送的，有的话会通过InputChannel发送出去。
 
 总结： 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N26-Android-Input-System-Input-kernel-driver-framwork-app.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N26-Android-Input-System-Input-kernel-driver-framwork-app.png)
 
 ## 8、Android Input子系统之java层按键传递
 
@@ -2989,7 +2989,7 @@ Android开发中在自定义Activity以及View时经常会重写onKeyDown,onKeyU
 java层的按键分发从ViewRootImpl.java的WindowInputEventReceiver中的onInputEvent开始，从前面的应用程序注册消息监听过程分析和Input Dispatcher分析，InputDispatcher在处理按键事件时，会通过InputChannel::sendMessage函数将按键消息从server端写入，这里的InputChannel是当前获取焦点的窗口的InputChannel对的server端，这样应用程序端就可以收到该消息，然后调用NativeInputEventReceiver的handleEvent,最后调用到InputEventReceiver的onInputEvent函数（具体的可以看应用程序注册消息监听过程分析 的Step20-Step23）
 
 序列图： 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N27-Android-Input-System-input-stage.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N27-Android-Input-System-input-stage.png)
 
 ## Step 1、WindowInputEventReceiver.onInputEvent()
 
@@ -3084,7 +3084,7 @@ private void deliverInputEvent(QueuedInputEvent q) {
 ```
 
 这里调用了InputStage的deliver方法分发，这里的InputStage代表了输入事件的处理阶段，是一种责任链模式 InputStage将输入事件的处理分成若干个阶段（Stage）, 如果当前有输入法窗口，则事件处理从 NativePreIme 开始，否则的话，从EarlyPostIme 开始。事件会依次经过每个Stage，如果该事件没有被标识为 "Finished"， 该Stage就会处理它，然后返回处理结果，Forward 或 Finish， Forward 运行下一Stage继续处理，而Finished事件将会简单的Forward到下一级，直到最后一级 Synthetic InputStage。流程图和每个阶段完成的事情如下图所示 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N28-Android-Input-System-input-stage-GUI.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N28-Android-Input-System-input-stage-GUI.png)
 
 责任链模式： 责任链模式（Chain of Responsibility）的目标是使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连成一条链，并沿着这条链传递请求，直到有一个对象处理它为止。
 
@@ -3377,13 +3377,13 @@ public boolean onKeyUp(int keyCode, KeyEvent event) {
 ```
 
 而Android常见Touch事件是通过dispatchPointerEvent(MotionEvent event)分发的，主要跟底层传上来的 输入事件相关，不同类型事件分别处理。 具体Touch事件分发机制可参考博客： [Android事件分发机制完全解析，带你从源码的角度彻底理解(上)](http://blog.csdn.net/guolin_blog/article/details/9097463/) [Android事件分发机制完全解析，带你从源码的角度彻底理解(下)](http://blog.csdn.net/guolin_blog/article/details/9153747/) [Android触摸屏事件派发机制详解与源码分析一(View篇)](http://blog.csdn.net/yanbober/article/details/45887547) [Android触摸屏事件派发机制详解与源码分析二(ViewGroup篇)](http://blog.csdn.net/yanbober/article/details/45912661) [Android触摸屏事件派发机制详解与源码分析三(Activity篇)](http://blog.csdn.net/yanbober/article/details/45932123) [Android Deeper(00) - Touch事件分发响应机制](http://hukai.me/android-deeper-touch-event-dispatch-process/) 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N29-Android-Input-System-touch-event.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N29-Android-Input-System-touch-event.png)
 
 ## 九、总结：
 
 再贴一下Input system总体框架图： 
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N30-Android-Input-System-input-system-framwork.png)
-![Markdown](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/android.input/N31-Android-Input-System-Input-kernel-driver-framwork-app.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N30-Android-Input-System-input-system-framwork.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/android.input/N31-Android-Input-System-Input-kernel-driver-framwork-app.png)
 
 ## （一）、IMS初始化&& IMS与App建立通信：
 

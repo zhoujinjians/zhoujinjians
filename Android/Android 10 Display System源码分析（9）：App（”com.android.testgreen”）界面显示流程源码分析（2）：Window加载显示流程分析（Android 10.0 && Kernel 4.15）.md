@@ -1,6 +1,6 @@
 ---
 title:  Android 10 Display System源码分析（9）：App（"com.android.testgreen"）界面显示流程源码分析（2）：Window加载显示流程分析（Android 10.0 && Kernel 4.15）
-cover: https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.30.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.30.jpg
 categories: 
   - Display
 tags:
@@ -674,7 +674,7 @@ static class W extends IWindow.Stub {
     ......
     }
 ```
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/Android10.Display.9/zjj.display.sys.IWindow_session.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android10.Display.9/zjj.display.sys.IWindow_session.png)
 #####  5.1.3、Choreographer创建
 
 ``` java
@@ -1807,7 +1807,7 @@ sp<ISurfaceComposerClient> SurfaceFlinger::createScopedConnection(
 }
 
 ```
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/Android10.Display.9/zjj.display.sys.SurfaceFlinger-Create-Layer.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android10.Display.9/zjj.display.sys.SurfaceFlinger-Create-Layer.png)
 
 ###### 5.3.1.5、win.mToken.addWindow(win)
 
@@ -4673,7 +4673,7 @@ void BufferLayer::onFirstRef() {
 ```
 
 
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/Android10.Display.9/zjj.display.sys.SurfaceFlinger-ConsumeLisener-onFrameAvailable.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android10.Display.9/zjj.display.sys.SurfaceFlinger-ConsumeLisener-onFrameAvailable.png)
 
 ###### 2.1.1.4、BufferQueue::createBufferQueue()
 所以核心都是这个BufferQueueCore，他是管理图形缓冲区的中枢。
@@ -4788,7 +4788,7 @@ ConsumerBase::ConsumerBase(const sp<IGraphicBufferConsumer>& bufferQueue, bool c
 }
 ```
 
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/Android10.Display.9/zjj.display.sys.consumerbase.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android10.Display.9/zjj.display.sys.consumerbase.png)
 
 #####  2.2、winAnimator.createSurfaceLocked()
 饶了一大圈，现在Surface创建好了，现象看看如何传回App进程
@@ -5107,7 +5107,7 @@ static jlong nativeReadFromParcel(JNIEnv* env, jclass clazz,
 }
 
 ```
-![](https://raw.githubusercontent.com/zzhoujinjian/PicGo/master/Android10.Display.9/zjj.display.sys.Surface-SurfaceControl.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android10.Display.9/zjj.display.sys.Surface-SurfaceControl.png)
 
 
 
