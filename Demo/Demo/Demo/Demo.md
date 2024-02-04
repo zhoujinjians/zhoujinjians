@@ -79,12 +79,12 @@ VS Code 是世界一流的 Markdown 编辑器，因此，您可以开始使用 g
 
 您可能已经注意到，上面的大多数功能都是通过扩展启用的，这是别人创建并发布到市场的。由于 VS Code [完全可扩展](https://link.juejin.cn/?target=https%3A%2F%2Fcode.visualstudio.com%2Fapi%2Freferences%2Fvscode-api "https://code.visualstudio.com/api/references/vscode-api")，使用简单的 JavaScript API，您可以创建自己的扩展，不仅支持 VS Code 桌面，而且还支持 [github.dev](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fmicrosoft%2Fvscode-docs%2Fblob%2Fvnext%2Fapi%2Fextension-guides%2Fweb-extensions.md "https://github.com/microsoft/vscode-docs/blob/vnext/api/extension-guides/web-extensions.md")。所以，如果你有一个很棒的想法，关于如何使在 GitHub 上编码更高效和有趣，那么你现在已经拥有起步所需的一切🏃
 
-## 11\. 🛠 PicGo Github图床测试！
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/others/Microsoft.png)
+## 11\. 🛠 zhoujinjian.com.images Github图床测试！
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/others/Microsoft.png)
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/others/Google.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/others/Google.png)
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/others/Apple.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/others/Apple.png)
 
 ## 🔮 期待
 

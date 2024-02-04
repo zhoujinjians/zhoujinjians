@@ -1,6 +1,6 @@
 ---
 title:  Android 10 Camera源码分析2：V4L2简介
-cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.32.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.32.jpg
 categories: 
   - Camera
 tags:
@@ -54,7 +54,7 @@ V4L2支持的设备十分广泛，但是其中只有很少一部分在本质上�
 *   **Radio device** ： FM/AM发送和接收设备。设备名/dev/radio0~radio63,主设备号81，子设备号64~127
 
 V4L2在Linux系统中的结构图如下：
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.02/CAMERAOverview.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.02/CAMERAOverview.png)
 
 
 ### （二）、从应用层看V4L2
@@ -1335,7 +1335,7 @@ struct v4l2_fh {
 *   sequence:序列号，此数据域会**一直自加下去**，直到内核对象消亡。
 
 写到这里消息队列、订阅消息、就绪消息的存在形式和依赖关系应该初步了解了，他们的组织结构大体如下所示：  
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.02/v4l2_fh.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.02/v4l2_fh.png)
 
 
 **注意：** 
@@ -1467,7 +1467,7 @@ static void __v4l2_event_queue_fh(struct v4l2_fh *fh, const struct v4l2_event *e
 *   3.将新消息挂接到v4l2_fh可用链表中，以进行后续其它处理
 
 注意：下图是`struct v4l2_subscribed_event`结构体中的`struct v4l2_kevent`子消息在订阅消息结构体中的存放形态。  
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.02/v4l2_subscribed_event.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.02/v4l2_subscribed_event.png)
 
 上面子消息队列中已经入队了２个消息，此时in_use=2,而此时记录指针指向1,则first=1,剩下的红色都是空闲子消息缓存。子消息的结构如下所示：
 
@@ -1529,9 +1529,9 @@ static int __v4l2_event_dequeue(struct v4l2_fh *fh, struct v4l2_event *event)
 看了半天代码就总结一句话“消息必须先订阅，才允许入队列”。同时也需要知道下面几点。
 
 *   .订阅消息对象默认元素数量为１，如果设置的话就按设置的来分配内存。
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.02/V4L2_dev_node.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.02/V4L2_dev_node.png)
 
- ![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.02/v4l2-framework.png)
+ ![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.02/v4l2-framework.png)
 
 
 
@@ -1882,4 +1882,4 @@ __must_check int media_pipeline_start(struct media_entity *entity,
 
 ```
 #### 5、Rockchip-isp1-v4l2：
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.02/Rockchip-isp1-v4l2.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.02/Rockchip-isp1-v4l2.png)

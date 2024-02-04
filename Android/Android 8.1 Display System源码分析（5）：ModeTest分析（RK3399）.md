@@ -1,6 +1,6 @@
 ---
 title: Android 8.1 Display System源码分析（5）：ModeTest分析（RK3399）
-cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/post.cover.pictures.00014.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/post.cover.pictures.00014.jpg
 categories: 
   - Display
 tags:
@@ -186,7 +186,7 @@ int main(int argc, char **argv)
 > 4.  DRM 驱动的 Connector 至少包含 1 个有效的 drm_display_mode。
 
 **运行结果：**
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.modetest/modetest.shot.single.buffer.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/zjj.sys.display.8.1.modetest/modetest.shot.single.buffer.jpg)
 描述：程序运行后，显示全屏白色，等待用户输入按键；当用户按下任意按键后，程序退出，显示黑屏。
 
 > 注意：程序运行之前，请确保没有其它应用或服务占用 / dev/dri/card0 节点，否则将出现 **Permission Denied** 错误。
@@ -338,9 +338,9 @@ int main(int argc, char **argv)
 > 有的同学可能会担心，重复调用`drmModeSetCrtc()`会导致硬件链路被重复初始化。其实不必担心，因为 DRM 驱动框架会对传入的参数进行检查，只要 display mode 和 pipeline 链路连接关系没有发生变化，就不会重新初始化硬件。
 
 **运行结果：**
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.modetest/modetest.shot.double.buffer.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/zjj.sys.display.8.1.modetest/modetest.shot.double.buffer.jpg)
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.modetest/modetest.shot.double.buffer2.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/zjj.sys.display.8.1.modetest/modetest.shot.double.buffer2.jpg)
 
 描述：程序运行后，屏幕显示红色；输入回车后，屏幕显示蓝色(Firefly-RK3399 Android 8.1异常，显示成绿色了)；再次输入回车后，程序退出。
 
@@ -533,7 +533,7 @@ int main(int argc, char **argv)
 从上面的代码可以看出，要使用`drmModePageFlip()`，就必须依赖`drmHandleEvent()`函数，该函数内部以阻塞的形式等待底层驱动返回相应的 vblank 事件，以确保和 VSYNC 同步。**需要注意的是，`drmModePageFlip()`不允许在 1 个 VSYNC 周期内被调用多次，否则只有第一次调用有效，后面几次调用都会返回`-EBUSY`错误（-16）**。
 
 **运行结果：**
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.modetest/modtest.shot.page.flip.gif)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/zjj.sys.display.8.1.modetest/modtest.shot.page.flip.gif)
 描述：程序运行后，屏幕在红色和蓝色(Firefly-RK3399 Android 8.1异常，显示成绿色了)之间来回切换；当输入`CTRL+C`后，程序退出。
 
 > 注意：程序运行之前，请确保没有其它应用或服务占用 / dev/dri/card0 节点，否则将出现 **Permission Denied** 错误。
@@ -571,7 +571,7 @@ int main(void)
 
 先来了解一下`drmModeSetPlane()`参数含义：
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.modetest/modetest.shot.plane-draft.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/zjj.sys.display.8.1.modetest/modetest.shot.plane-draft.png)
 （上图实现了裁剪、平移和放大的效果）
 
 > 当 SRC 与 CRTC 的 X/Y 不相等时，则实现了平移的效果；  
@@ -733,8 +733,8 @@ int main(int argc, char **argv)
 以上代码参考 Google Android 工程中 [external/libdrm/tests/planetest/planetest.c](https://github.com/zhoujinjianmax/libdrm/blob/master/tests/planetest/planetest.c) 文件，为了演示方便，仅仅实现了一个最简单的`drmModeSetPlane()`调用。**需要注意的是，该函数调用之前，必须先通过`drmModeSetCrtc()`初始化整个显示链路，否则 Plane 设置将无效。**
 
 **运行结果：**（模拟效果）  
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.modetest/modetest.shot.plane.test.jpg)
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.modetest/modetest.shot.plane.test2.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/zjj.sys.display.8.1.modetest/modetest.shot.plane.test.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/zjj.sys.display.8.1.modetest/modetest.shot.plane.test2.jpg)
 
 描述：程序运行后，屏幕显示全屏白色；当输入回车后，屏幕将 framebuffer 中的（100，150）的矩形，显示到屏幕的（50，50）位置；再次输入回车后，程序退出。
 
@@ -855,7 +855,7 @@ Blob 类型的 property，它的值用 blob object ID 来表示。所谓 blob，
 
 概念图，还是习惯性的上一张图吧：
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.modetest/modetest.shot.property.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/zjj.sys.display.8.1.modetest/modetest.shot.property.png)
 
 ###### 总结
 
@@ -1090,7 +1090,7 @@ req = drmModeAtomicAlloc();
 
 
 以上代码运行的效果如下：  
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.modetest/modetest.shot.atomic.crtc.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/zjj.sys.display.8.1.modetest/modetest.shot.atomic.crtc.jpg)
 > 注意：程序运行之前，请确保没有其它应用或服务占用 / dev/dri/card0 节点，否则将出现 **Permission Denied** 错误。
 
 描述：
@@ -1366,7 +1366,7 @@ int main(int argc, char **argv)
 > 3.  plane update 操作时，可以只 add 发生变化的 property，其它未发生变化的 properties 即使没有被 add，在 commit 时底层驱动仍然会取上一次的值来配置硬件寄存器。
 
 运行结果，以上代码运行的效果如下：  
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.modetest/modetest.shot.atomic.plane.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/zjj.sys.display.8.1.modetest/modetest.shot.atomic.plane.jpg)
 
 > 注意：程序运行之前，请确保没有其它应用或服务占用 / dev/dri/card0 节点，否则将出现 **Permission Denied** 错误。
 
@@ -1379,7 +1379,7 @@ int main(int argc, char **argv)
 **源码下载：**[modeset-plane-test](https://github.com/zhoujinjianmax/sample-code)
 #### （八）、ModeTest显示流程图Flow
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.modetest/FireFly-Rk3399-DRM-KMS-ModeTest.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/zjj.sys.display.8.1.modetest/FireFly-Rk3399-DRM-KMS-ModeTest.png)
 #### （九）、ModeTest显示图像
 
 >//modetest
@@ -1399,7 +1399,7 @@ static void set_mode(struct device *dev, struct pipe_arg *pipes, unsigned int co
 		       UTIL_PATTERN_SMPTE);
 }
 ```
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.modetest/modetest.shot.pattern_smpte.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/zjj.sys.display.8.1.modetest/modetest.shot.pattern_smpte.jpg)
 ##### 8.2、显示图像（模式为UTIL_PATTERN_TILES时）：
 ``` c
 I:\RK3399_Android8.1_MIPI\external\libdrm\tests\modetest\modetest.c
@@ -1412,7 +1412,7 @@ static void set_mode(struct device *dev, struct pipe_arg *pipes, unsigned int co
 }
 ```
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/zjj.sys.display.8.1.modetest/modetest.shot.pattern_tiles.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/zjj.sys.display.8.1.modetest/modetest.shot.pattern_tiles.jpg)
 
 #### （十）、参考资料(特别感谢)：
 [（1）【DRM（Direct Rendering Manager）】](https://docs.nvidia.com/drive/nvvib_docs/NVIDIA%20DRIVE%20Linux%20SDK%20Development%20Guide/baggage/group__direct__rendering__manager.html) 

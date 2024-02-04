@@ -1,6 +1,6 @@
 ---
 title: Android L Display System源码分析（5）：App 界面显示流程源码分析 之 Activity启动流程分析（Android 9.0 && Kernel 3.18）
-cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/post.cover.pictures.00005.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/post.cover.pictures.00005.jpg
 categories: 
   - Display
 tags:
@@ -43,11 +43,11 @@ date: 2019-12-01 09:25:00
 ####  App（"com.android.testred"）分析准备工作
 分析学习Android源码，最好有编译源码环境并有开发板。
 ##### ①、App运行效果图
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.test_red.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.test_red.png) 
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.test_green.png)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.test_green.png)
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.test_blue.png)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.test_blue.png)
 
 以上时三个App运行效果图，我们这里分析App（"com.android.testred"），流程学习最好的办法就是打开Debug开关跟着log分析。
 ##### ②、打开Debug开关，抓取Log
@@ -614,7 +614,7 @@ index de7ff36..f2ba5cc 100644
 
 ```
 ##### ③完整Log
-[mainsystem-ams-wms-red-startActivity.log](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/others/mainsystem-ams-wms-red-startActivity.log)
+[mainsystem-ams-wms-red-startActivity.log](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/others/mainsystem-ams-wms-red-startActivity.log)
 
 
 ####  一、Activity概述
@@ -643,7 +643,7 @@ Back栈管理了当你在Activity上点击Back键，当前Activity销毁后应�
 
 其实在ActivityManagerService与WindowManagerService内部管理中，在Task之外，还有一层容器，这个容器应用开发者和用户可能都不会感觉到或者用到，但它却非常重要，那就是ActivityStack。 下文中，我们将看到，Android系统中的多窗口管理，就是建立在Stack的数据结构上的。 一个ActivityStack中包含了多个TaskRecord，一个TaskRecord中包含了多个ActivityRecord，下图描述了它们的关系：
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.ActivityStack_TaskRecord_ActivityRecord.png)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.ActivityStack_TaskRecord_ActivityRecord.png)
 
 
 另外还有一点需要注意的是，ActivityManagerService和WindowManagerService中的Task和Stack结构是一一对应的，对应关系对于如下：
@@ -742,14 +742,14 @@ SparseArray mActivityContainers // mStackId为key
 
 ##### 1.3、相关类重要成员变量
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.ams_class_member.png)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.ams_class_member.png)
 
 
 
 ##### 1.4、小结：
 
 总体概览图：
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.startActivity_fork_new_process.png)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.startActivity_fork_new_process.png)
 
 
 1、点击桌面App图标，Launcher进程采用Binder IPC向system_server进程发起startActivity请求；
@@ -3094,7 +3094,7 @@ G:\android9.0\frameworks\base\services\core\java\com\android\server\am\ActivityS
 system_server进程：是用于管理整个Java framework层，包含ActivityManager，PowerManager等各种系统服务;
 Zygote进程：是Android系统的首个Java进程，Zygote是所有Java进程的父进程，包括 system_server进程以及所有的App进程都是Zygote的子进程，注意这里说的是子进程，而非子线程。
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.Process.start.png)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.Process.start.png)
 
 
 图解：

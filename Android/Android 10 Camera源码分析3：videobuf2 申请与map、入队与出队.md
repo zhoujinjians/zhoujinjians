@@ -1,6 +1,6 @@
 ---
 title:  Android 10 Camera源码分析3：videobuf2 申请与map、入队与出队
-cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.33.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.33.jpg
 categories: 
   - Camera
 tags:
@@ -448,4 +448,4 @@ v4l_reqbufs
 
 ### （二）、流程图
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.03/V4L2-IOCTL.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.03/V4L2-IOCTL.png)

@@ -1,6 +1,6 @@
 ---
 title: Android O Treble 架构 - HIDL源代码分析➺➺➺(๑乛◡乛๑)➺➺➺
-cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/hexo.themes/bing-wallpaper-2018.04.28.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.28.jpg
 categories: 
   - HIDL
 tags:
@@ -105,9 +105,9 @@ AOSP 源码（==**文章基于 Android 8.x**==）：
 #### （一）、Android O Treble 架构介绍
 ###### 1.0、Android整体架构变化（VNDK、VINTF、HIDL）
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-01-HIDL-treble-after.png.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-01-HIDL-treble-after.png.png)
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-02-HIDL-treble-architecture.png.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-02-HIDL-treble-architecture.png.png)
 
 AndroidO引入Treble架构后的变化:
 
@@ -121,7 +121,7 @@ AndroidO引入Treble架构后的变化:
 
 Treble架构的引入足以说明Binder通信的重要性，之前APP和Framework之间通过binder实现跨进程调用，当然这个调用对开发者来说是透明的，相当于函数本地调用。Treble引入后，Framework和HAL又实现了进程分离，Framework和HAL之间依然使用binder通信，通过HIDL来定义通信接口。那binder通信有什么变化呢？ 在Treble中，引入了多个binder域，主要是增加了多个binder设备，binder驱动实现原理基本没变，变化了一些细节。增加binder设备应该是为了实现更换的权限控制，使用不同binder设备的主体和客体之间的selinux权限有所不同，同时，Android 框架和 HAL 现在使用 Binder 互相通信。由于这种通信方式极大地增加了 Binder 流量。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-03-HIDL-Binder-enhancement.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-03-HIDL-Binder-enhancement.png)
 
 
 为了明确地拆分框架（与设备无关）和供应商（与具体设备相关）代码之间的 Binder 流量，Android O 引入了“Binder 上下文”这一概念。每个 Binder 上下文都有自己的设备节点和上下文（服务）管理器。您只能通过上下文管理器所属的设备节点对其进行访问，并且在通过特定上下文传递 Binder 节点时，只能由另一个进程从相同的上下文访问上下文管理器，从而确保这些域完全互相隔离。为了显示 /dev/vndbinder，请确保内核配置项 CONFIG_ANDROID_BINDER_DEVICES 设为"binder,hwbinder,vndbinder"
@@ -178,7 +178,7 @@ static int __init init_binder_device(const char *name)
 ###### 1.2.1、vndbinder
 Android O 支持供应商服务使用新的 Binder 域，这可通过使用 /dev/vndbinder（而非 /dev/binder）进行访问。添加 /dev/vndbinder 后，Android 现在拥有以下 3 个 IPC 域：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-04-HIDL-hwbinder-vndbinder.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-04-HIDL-hwbinder-vndbinder.png)
 
 
 通常，供应商进程不直接打开 Binder 驱动程序，而是链接到打开 Binder 驱动程序的 libbinder 用户空间库。为 ::android::ProcessState() 添加方法可为 libbinder 选择 Binder 驱动程序。供应商进程应该在调用 ProcessState,、IPCThreadState 或发出任何普通 Binder 调用之前调用此方法。要使用该方法，请在供应商进程（客户端和服务器）的 main() 后放置以下调用：
@@ -186,7 +186,7 @@ Android O 支持供应商服务使用新的 Binder 域，这可通过使用 /dev
 ProcessState::initWithDriver("/dev/vndbinder");
 ###### 1.2.2、vndservicemanager
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-05-HIDL-hwservicemanager.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-05-HIDL-hwservicemanager.png)
 
 
 以前，Binder 服务通过 servicemanager 注册，其他进程可从中检索这些服务。在 Android O 中，servicemanager 现在专用于框架和应用进程，供应商进程无法再对其进行访问。
@@ -279,30 +279,30 @@ service servicemanager /system/bin/servicemanager
 ```
 ###### 1.2.3、servicemanager
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-05-HIDL-servicemanager.png.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-05-HIDL-servicemanager.png.png)
 
 
 ###### 1.3、hwservicemanager
 hwservicemanager用于管理hidl服务，因此其实现和servicemanager完全不同，使用的binder库也完全不同。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-05-HIDL-vndservicemanager.png.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-05-HIDL-vndservicemanager.png.png)
 
 ###### 1.4、Binder库变化
 servicemanager和vndservicemanager都使用libbinder库，只是他们使用的binder驱动不同而已，而hwservicemanager使用libhwbinder库，binder驱动也不同。
 
 libbinder库源码(\frameworks\native\libs\binder)
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-06-libbinder-sourcecode.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-06-libbinder-sourcecode.png)
 
 libhwbinder库源码：
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-07-libhwbinder-sourcecode.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-07-libhwbinder-sourcecode.png)
 
 文件对比：
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-08-HIDL-binder-hwbinder-file-compare.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-08-HIDL-binder-hwbinder-file-compare.png)
 
 
 ###### 1.5、Binder通信框架变化
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-09-HIDL-binder-binder_ipc_process.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-09-HIDL-binder-binder_ipc_process.jpg)
 
 
 1.在普通Java Binder框架中，Client端Proxy类完成数据打包，然后交给mRemotebinder代理来完成数据传输。Server端Stub类完成数据解析，然后交给其子类实现。
@@ -313,8 +313,8 @@ libhwbinder库源码：
 
 ###### 1.6、框架层Binder对象变化
 参考：[【AndroidO Treble架构下的变化】](https://blog.csdn.net/yangwen123/article/details/79836109)
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-10-HIDL-binder-hwbinder-fw-compare.png)
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-11-HIDL-hwbinder-object.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-10-HIDL-binder-hwbinder-fw-compare.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-11-HIDL-hwbinder-object.png)
 
 #### （二）、Android O Treble 之 HIDL文件（.hal文件）接口文件编译
 
@@ -351,22 +351,22 @@ Updating ….
 4.执行hidl-gen命令.将c步骤里面获取的参数和包名还有类名传入hidl-gen命令，在\hardware\interfaces\light\2.0目录下产生Android.mk和Android.bp文件。
     Android.mk: hidl-gen -Lmakefile -r android.hardware:hardware/interfaces -r android.hidl:system/libhidl/transport android.hardware.light@2.0
     
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-12-HIDL-android-hal-make.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-12-HIDL-android-hal-make.png)
 
 
 编译最终在./out/target/common/gen/JAVA_LIBRARIES目录下生成Java源文件。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-13-HIDL-android-make-java.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-13-HIDL-android-make-java.png)
 
     Android.bp: hidl-gen -Landroidbp -r android.hardware:hardware/interfaces -r android.hidl:system/libhidl/transport android.hidl.manager@1.0
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-14-HIDL-android-hal-manager.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-14-HIDL-android-hal-manager.png)
 
 
 
 
 编译最终在./out/soong/.intermediates/hardware/interfaces目录下生成C++源文件。
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-15-HIDL-android-hal-manager-gen-c++.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-15-HIDL-android-hal-manager-gen-c++.png)
 
 
 
@@ -409,7 +409,7 @@ service light-hal-2-0 /vendor/bin/hw/android.hardware.light@2.0-service
 
 也就是说AndroidO的Treble架构下，所有hal都运行在独立的进程空间：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-16-HIDL-hal-process-.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-16-HIDL-hal-process-.png)
 
 
 
@@ -614,7 +614,7 @@ status_t IPCThreadState::getAndExecuteCommand()
 hwservicemanager进程中的servicemanager作为hidl服务，同样适用了hwbinder框架，其类继承关系图如下：
 
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-17-HIDL-binder-bnservicemanager.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-17-HIDL-binder-bnservicemanager.png)
 
 
 #### （四）、Android O Treble 之 hwservicemanager 添加服务（add）过程
@@ -740,7 +740,7 @@ sp<Interface> service = Interface::getService(name, true /* getStub */)所以get
     </hal>
 ```
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-18-HIDL-treble_cpp_legacy_hal_progression.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-18-HIDL-treble_cpp_legacy_hal_progression.png)
 
 
 ``` cpp
@@ -824,7 +824,7 @@ ILight* HIDL_FETCH_ILight(const char* /* name */) {
 }
 ```
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-19-HIDL-binder-ILight-so-dlopen.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-19-HIDL-binder-ILight-so-dlopen.png)
 
 
 
@@ -1035,7 +1035,7 @@ status_t IPCThreadState::transact(int32_t handle,
 
 waitForResponse()会通过底层binder 驱动进入到服务端，服务端监听消息来到处理过后会调用onTransact()函数
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-20-HIDL-ioctl-kernel.png.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-20-HIDL-ioctl-kernel.png.png)
 
 ``` cpp
 [->/system/libhwbinder/Binder.cpp]
@@ -1212,7 +1212,7 @@ void IPCThreadState::joinThreadPool(bool isMain)
 到此就完成了hidl服务注册。
 
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-21-HIDL-hwbinder-ILight-add.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-21-HIDL-hwbinder-ILight-add.png)
 
 
 #### （五）、Android O Treble 之 hwservicemanager 查询服务（get）过程
@@ -1220,7 +1220,7 @@ void IPCThreadState::joinThreadPool(bool isMain)
 通过前面的分析我们知道，Hal进程启动时，会向hwservicemanager进程注册hidl服务，那么当Framework Server需要通过hal访问硬件设备时，首先需要查询对应的hidl服务，那么Client进程是如何查询hidl服务的呢？这篇文章将展开分析，这里再次以ILight为例进行展开。
 
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-22-android-hwservicemanager-get.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-22-android-hwservicemanager-get.png)
 
 
 
@@ -1340,7 +1340,7 @@ associate() 会获取ILight::getService();这里通过ILight::getService()函数
 
 这里通过sm->get(ILight::descriptor, serviceName)查询ILight这个hidl服务，得到IBase对象后，在通过ILight::castFrom转换为ILight对象。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-23-HIDL-castFrom.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-23-HIDL-castFrom.png)
 
 
 ##### 5.1、服务查询_hidl_get()
@@ -1571,7 +1571,7 @@ Return<sp<ILight>> castInterface(sp<IBase> parent, const char *childIndicator, b
 因此最终会创建一个BpHwLight对象。new BpHwLight(toBinder<IBase, BpParent>(parent))
 
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-24-HIDL-binder-bphwxxxx.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-24-HIDL-binder-bphwxxxx.png)
 
 
 
@@ -1579,12 +1579,12 @@ Return<sp<ILight>> castInterface(sp<IBase> parent, const char *childIndicator, b
 
 前面介绍了HIDL服务在native层的实现过程，包括HIDL服务加载创建、服务注册、服务查询过程等，那么Java层是否也实现了相关的服务框架呢？ 通常情况下，所有的Hal都实现在native层面，每个hal进程都是一个native进程，由init进程启动，在hal进程启动时会完成HIDL服务注册，Framework Server进程不一定完全是native进程，比如system_server进程，它运行在虚拟机环境中，由zygote进程fork而来，这时，Java层也需要请求HIDL服务，因此Android不仅在native层HIDL化了hal，在Java层同样也定义了相关的服务框架。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-25-Java-binder.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-25-Java-binder.png)
 
 
 上图是Java层binder和hwbinder之间的类基础图对比。当我们定义一个.hal接口文件时，通过hidl-gen编译为Java文件后，将按上图中的类继承关系自动生成代码。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-26-Java-binder-class-inherit.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-26-Java-binder-class-inherit.png)
 
 
 如上图所示，当我们定义IXXX.hal文件后，通过编译将在out/target/common/gen/JAVA_LIBRARIES目录下生成对应的IXXX.java，该文件按上述类继承关系自动生成相关代码，我们只需要定义一个XXXImp类，继承Stub并实现所有方法，然后在某个服务进程中创建一个XXXImp对象，并调用registerService（）函数进行hidl服务注册，如下所示：
@@ -1603,7 +1603,7 @@ mXXXImp.registerAsService("XXXImp");
 ##### 6.1、Java hidl服务创建过程
 从上面的类继承图可知，hidl服务实现类继承于Stub，Stub又继承于HwBinder，因此创建一个XXXImp对象时，会调用HwBinder的构造函数。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-27-HwBinder.java.setup.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-27-HwBinder.java.setup.png)
 
 frameworks\base\core\java\android\os\HwBinder.java
 
@@ -1665,12 +1665,12 @@ sp<JHwBinderHolder> JHwBinder::SetNativeContext(
 
 这里出现了多个binder类型：HwBinder、JHwBinderHolder、JHwBinder他们的类继承图如下：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-28-Java-binder---.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-28-Java-binder---.png)
 
 
 红线标识了这3个类对象之间的关系，为了更加清晰地描述他们之间的关联关系，如下图所示：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-29-HIDL-java-object.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-29-HIDL-java-object.png)
 
 
 ##### 6.2、Java层服务注册（add）查询（get）过程
@@ -1679,7 +1679,7 @@ sp<JHwBinderHolder> JHwBinder::SetNativeContext(
 到此Treble架构下的hwBinder实现过程就基本介绍完成。
 总体架构：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/o.hidl.system/Treble-09-HIDL-binder-binder_ipc_process.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/o.hidl.system/Treble-09-HIDL-binder-binder_ipc_process.jpg)
 
 
 #### （七）、参考资料(特别感谢各位前辈的分析和图示)：

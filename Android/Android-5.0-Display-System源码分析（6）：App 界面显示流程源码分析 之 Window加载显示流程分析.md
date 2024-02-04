@@ -1,6 +1,6 @@
 ---
 title: Android L Display System源码分析（6）：App 界面显示流程源码分析 之 Window加载显示流程分析（Android 9.0 && Kernel 3.18）
-cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/post.cover.pictures.00006.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/post.cover.pictures.00006.jpg
 categories: 
   - Display
 tags:
@@ -37,7 +37,7 @@ date: 2020-01-01 09:25:00
 **frameworks/native/libs/ui/**
 
 --------------------------------------------------------------------------------
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.Android-Graphics-Architecture.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.Android-Graphics-Architecture.png) 
 
 ####  （一）、Window添加过程
 
@@ -608,7 +608,7 @@ static class W extends IWindow.Stub {
     }
 ```
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.IWindow_session.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.IWindow_session.png) 
 
 
 ##### 5.1.3、Choreographer创建
@@ -1769,7 +1769,7 @@ sp<ISurfaceComposerClient> SurfaceFlinger::createScopedConnection(
 
 ```
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.SurfaceFlinger-Create-Layer.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.SurfaceFlinger-Create-Layer.png) 
 
 
 
@@ -4301,7 +4301,7 @@ void BufferLayer::onFirstRef() {
 
 ```
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.SurfaceFlinger-ConsumeLisener-onFrameAvailable.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.SurfaceFlinger-ConsumeLisener-onFrameAvailable.png) 
 
 
 ###### 2.1.1.8、BufferQueue::createBufferQueue()
@@ -4418,7 +4418,7 @@ ConsumerBase::ConsumerBase(const sp<IGraphicBufferConsumer>& bufferQueue, bool c
 }
 ```
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.consumerbase.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.consumerbase.png) 
 
 
 
@@ -4741,7 +4741,7 @@ static jlong nativeReadFromParcel(JNIEnv* env, jclass clazz,
 
 ```
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.Surface-SurfaceControl.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.Surface-SurfaceControl.png) 
 
 
 
@@ -7256,7 +7256,7 @@ WindowSurfaceController.java
 
 关于SurfaceFlinger合成显示之前已经分析过很多次啦，这里就不再分析啦。请参考：[{ Android P Graphics System（四）：Native Surface 创建 && SurfaceFlinger合成流程分析 }](http://charlesvincent.cc/2019/05/13/Android%20P%20Graphics%20System%EF%BC%88%E5%9B%9B%EF%BC%89%EF%BC%9ANative%20Surface%20%E5%88%9B%E5%BB%BA%20&&%20SurfaceFlinger%E5%90%88%E6%88%90%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90/)
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.com.android.test_red.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.com.android.test_red.png) 
 
 
 

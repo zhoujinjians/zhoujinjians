@@ -1,6 +1,6 @@
 ---
 title: Android 9.0 App（"com.android.testgreen"）界面显示流程源码分析（2）：Window加载显示流程分析
-cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/hexo.themes/bing-wallpaper-2018.04.43.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.43.jpg
 categories:
   - Graphics
 tags:
@@ -36,7 +36,7 @@ date: 2019-07-28 09:25:00
 **frameworks/native/libs/ui/**
 
 --------------------------------------------------------------------------------
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.Android-Graphics-Architecture.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.Android-Graphics-Architecture.png) 
 
 ####  （一）、Window添加过程
 
@@ -650,7 +650,7 @@ static class W extends IWindow.Stub {
     ......
     }
 ```
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.IWindow_session.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.IWindow_session.png) 
 
 
 ##### 5.1.3、Choreographer创建
@@ -1810,7 +1810,7 @@ sp<ISurfaceComposerClient> SurfaceFlinger::createScopedConnection(
 }
 
 ```
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.SurfaceFlinger-Create-Layer.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.SurfaceFlinger-Create-Layer.png) 
 
 
 
@@ -4339,7 +4339,7 @@ void BufferLayer::onFirstRef() {
 ```
 
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.SurfaceFlinger-ConsumeLisener-onFrameAvailable.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.SurfaceFlinger-ConsumeLisener-onFrameAvailable.png) 
 
 
 ###### 2.1.1.8、BufferQueue::createBufferQueue()
@@ -4455,7 +4455,7 @@ ConsumerBase::ConsumerBase(const sp<IGraphicBufferConsumer>& bufferQueue, bool c
 }
 ```
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.consumerbase.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.consumerbase.png) 
 
 
 ##### 2.2、winAnimator.createSurfaceLocked()
@@ -4775,7 +4775,7 @@ static jlong nativeReadFromParcel(JNIEnv* env, jclass clazz,
 }
 
 ```
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.Surface-SurfaceControl.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.Surface-SurfaceControl.png) 
 
 
 ##### （3）、焦点窗口更新updateFocusedWindowLocked()
@@ -7277,7 +7277,7 @@ WindowSurfaceController.java
 ```
 
 关于SurfaceFlinger合成显示之前已经分析过很多次啦，这里就不再分析啦。请参考：{ Android P Graphics System（四）：Native Surface 创建 && SurfaceFlinger合成流程分析 }
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/personal.website/zjj.display.sys.com.android.test_red.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/zjj.display.sys.com.android.test_red.png) 
 
 
 ---

@@ -1,6 +1,6 @@
 ---
 title: Android 10 Camera源码分析6：Camera HAL3简介 && Camera Provider分析
-cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.36.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.36.jpg
 categories: 
  - Camera
 tags:
@@ -59,7 +59,7 @@ date: 2022-03-15 03:15:00
 
 Camera Provider通过提供标准的HIDL接口给Camera Service进行调用，保持与Service的正常通信，其中谷歌将HIDL接口的定义直接暴露给平台厂商进行自定义实现，其中为了极大地减轻并降低开发者的工作量和开发难度，谷歌很好地封装了其跨进程实现细节，同样地，Camera Provider通过标准的HAL3接口，向下控制着具体的Camera HAL Module，而这个接口依然交由平台厂商负责去实现，而进程内部则通过简单的函数调用，将HIDL接口与HAL3接口完美的衔接起来，由此构成了Provider整体架构。
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.06/camera_provider_arc.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.06/camera_provider_arc.png)
 
 由图中可以看出Camera Provider进程由两部分组成，一是运行在系统中的主程序通过提供了标准的HIDL接口保持了与Camera Service的跨进程通讯，二是为了进一步扩展其功能，通过dlopen方式加载了一系列So库，而其中就包括了实现了Camera HAL3接口的So库，而HAL3接口主要定义了主要用于实现图像控制的功能，其实现主要交由平台厂商或者开发者来完成，所以Camera HAL3 So库的实现各式各样，在Rockchip平台上，这里的实现就是camera.rk30board.so。
 
@@ -71,7 +71,7 @@ Camera Provider通过提供标准的HIDL接口给Camera Service进行调用，�
 
 首先需要明确一个概念，就是HIDL是一种自定义语言，其核心是接口的定义，而谷歌为了使开发者将注意力落在接口的定义上而不是机制的实现上，主动封装了HIDL机制的实现细节，开发者只需要通过*.hal文件定义接口，填充接口内部实际的实现即可，接下来来看下具体定义的几个主要接口：
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.06/cmaera_hidl.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.06/cmaera_hidl.png)
 
 因为HIDL机制本身是跨进程通讯的，所以Camera Service本身通过HIDL接口获取的对象都会有Bn端和Bp端，分别代表了Binder两端，接下来为了方便理解，我们都省略掉Bn/Bp说法,直接用具体接口类代表，忽略跨进程两端的区别。
 
@@ -440,7 +440,7 @@ interface ICameraDeviceSession {
 
 接下来进入到Provider内部去看看，整个进程是如何运转的，这个服务进程的启动很简单，主要动作是注册该 CameraProvider，以便 CameraServer 启动时能找到它。需要注意的是，此时 CameraProvider 还未实例化与初始化。以下图为例进行分析:
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.06/android.hardware.camera.provider@2.4-service.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.06/android.hardware.camera.provider@2.4-service.png)
 
 ```
 F:\Khadas_Edge_Android_Q\hardware\interfaces\camera\provider\2.4\default\android.hardware.camera.provider@2.4-service_64.rc
@@ -880,7 +880,7 @@ bool ServiceManager::addImpl(const std::string& name,
 
 
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.06/Camera_Provider_Interface.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.06/Camera_Provider_Interface.png)
 
 接下来以上图为例简单介绍下Provider中几个重要流程：
 
@@ -1486,7 +1486,7 @@ typedef struct camera3_callback_ops {
 系统启动时，就会启动 CameraProvider 服务。它将 Camera HAL 从 cameraserver 进程中分离出来，作为一个独立进程 android.hardware.camera.provider@2.4-service 来控制 HAL。
 这两个进程之间通过 HIDL 机制进行通信。它的主要功能（如下图所示）是将 service 与 HAL 隔离，以方便 HAL 部分进行独立升级。这其实和 APP 与 Framework 之间的 Binder 机制类似，通过引入一个进程间通信机制而针对不同层级进行解耦（从 Local call 变成了 Remote call）。
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.06/Cameraserver_treble.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.06/Cameraserver_treble.png)
 
 总体逻辑顺序：
 
@@ -1497,7 +1497,7 @@ typedef struct camera3_callback_ops {
 - cameraserver 获取远端 provider（此时实例化 CameraProvider 并初始化）。
   上图中，实线箭头是调用关系。左边是 cameraserver 进程中的动作，右边则是 provider 进程中的动作，它们之间通过 ICameraProvider 联系在了一起，而这个东西与 HIDL 相关，我们可以不用关心它的实现方式。
 
-  ![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.06/cameraserver_hidl_cameraprovier.png)
+  ![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.06/cameraserver_hidl_cameraprovier.png)
 
 由图可见：
 

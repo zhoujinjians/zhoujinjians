@@ -1,6 +1,6 @@
 ---
 title: Android P Graphics System（六）：Activity启动流程 && Surface创建分析
-cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/hexo.themes/bing-wallpaper-2018.04.41.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.41.jpg
 categories:
   - Graphics
 tags:
@@ -49,7 +49,7 @@ Back栈管理了当你在Activity上点击Back键，当前Activity销毁后应�
 
 其实在ActivityManagerService与WindowManagerService内部管理中，在Task之外，还有一层容器，这个容器应用开发者和用户可能都不会感觉到或者用到，但它却非常重要，那就是Stack。 下文中，我们将看到，Android系统中的多窗口管理，就是建立在Stack的数据结构上的。 一个Stack中包含了多个Task，一个Task中包含了多个Activity（Window），下图描述了它们的关系：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/display.system/Android.PG6.Stack_Task.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/display.system/Android.PG6.Stack_Task.png)
 
 另外还有一点需要注意的是，ActivityManagerService和WindowManagerService中的Task和Stack结构是一一对应的，对应关系对于如下：
 

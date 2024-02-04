@@ -1,6 +1,6 @@
 ---
 title: Android 8.1 Display System源码分析（9）：Activity启动流程 && Surface创建分析（RK3399）
-cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.18.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.18.jpg
 categories: 
   - Display
 tags:

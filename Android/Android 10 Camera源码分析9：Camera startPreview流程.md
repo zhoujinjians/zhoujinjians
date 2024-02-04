@@ -1,6 +1,6 @@
 ---
 title: Android 10 Camera源码分析9：Camera startPreview流程
-cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.39.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.39.jpg
 categories: 
  - Camera
 tags:

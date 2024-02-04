@@ -1,6 +1,6 @@
 ---
 title:  Android 10 Camera源码分析5：rkisp_demo分析
-cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.35.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.35.jpg
 categories: 
   - Camera
 tags:
@@ -53,14 +53,14 @@ date: 2022-03-01 03:01:00
 
 整个采集图像数据的流程现在看来还是比较简单的，接口的控制逻辑很清晰，主要原因是为了提供给用户的接口简单而且抽象，这样方便用户进行集成开发，其中的大部分复杂的业务处理都被V4L2很好的封装了，接下来我们来详细了解下V4L2框架内部是如何表达以及如何运转的。
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.05/rkisp_demo_flow.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.05/rkisp_demo_flow.png)
 
 
 ## （二）、rkisp_demo分析
 
 #### 1、流程图
 流程图根据rkisp_demo源码分析得出：
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.05/V4L2-IOCTL.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.05/V4L2-IOCTL.png)
 
 
 #### 2、源码
@@ -307,4 +307,4 @@ rkisp_demo -d /dev/video0 -w 1280 -h 960 -f NV21 --count 16 -o /data/misc/camera
 adb pull /data/misc/cameraserver/rk3399_1280_960_16.nv21
 ```
 使用RawView打开(没经过算法优化感觉画质不好)：
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.05/rkisp-demo-camera-data.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.05/rkisp-demo-camera-data.png)

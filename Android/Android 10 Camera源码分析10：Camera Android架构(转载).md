@@ -1,6 +1,6 @@
 ---
 title: Android 10 Camera源码分析10：Camera Android架构(基于Q)转载.md
-cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/post.cover.pictures/bing-wallpaper-2018.04.40.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.40.jpg
 categories: 
  - Camera
 tags:
@@ -47,7 +47,7 @@ date: 2022-05-15 05:15:00
 
 ### 1.1 Android Camera 基本分层
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.10/Android_Camera_basic_layering01.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.10/Android_Camera_basic_layering01.png)
 
 从上图得知,Android手机中Camera软件主要有大体上有4层:
 
@@ -65,7 +65,7 @@ Android要适应各个手机组装厂商的不同配置,不同sensor,不管怎�
 
 ### 1.2 Android Camera工作大体流程
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.10/The_general_process_of_Android_Camera_work02.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.10/The_general_process_of_Android_Camera_work02.png)
 
 绿色框中是应用开发者需要做的操作,蓝色为AOSP提供的API,黄色为Native Framework Service,紫色为HAL层Service.  
 描述一下步骤:  
@@ -84,7 +84,7 @@ Android要适应各个手机组装厂商的不同配置,不同sensor,不管怎�
 7 录制视频可以参考该篇,这里不再赘述:[\[Android\]\[MediaRecorder\] Android MediaRecorder框架简洁梳理](https://blog.csdn.net/TaylorPotter/article/details/104878815)
 
 再简单一张图如下:  
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.10/The_general_process_of_Android_Camera_work03.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.10/The_general_process_of_Android_Camera_work03.png)
 
 二. Camera App层简述
 ----------------
@@ -128,33 +128,33 @@ service cameraserver /system/bin/cameraserver
 ```
 
 CameraServer由init启动,简单过程如下:  
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.10/CameraProvider04.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.10/CameraProvider04.png)
 
 详细过程如下:  
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.10/CameraService_init05.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.10/CameraService_init05.png)
 
 ### 3.2 App调用CameraServer的相关操作
 
 简单过程如下:  
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.10/App_CameraServer06.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.10/App_CameraServer06.png)
 
 详细过程如下:
 
 #### 3.2.1 open Camera:
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.10/OpenCamera07.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.10/OpenCamera07.png)
 
 #### 3.2.2 configurestream
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.10/Configurestream08.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.10/Configurestream08.png)
 
 #### 3.2.3 preview and capture request:
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.10/preview_and_capture_request09.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.10/preview_and_capture_request09.png)
 
 #### 3.2.4 flush and close
 
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.10/flush_and_close10.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.10/flush_and_close10.png)
 
 四 Camera Hal3 子系统
 -----------------
@@ -163,7 +163,7 @@ Android 官方讲解 [HAL 子系统](https://source.android.google.cn/devices/ca
 Android 的相机硬件抽象层 (HAL) 可将 android.hardware.camera2 中较高级别的相机框架 API 连接到底层的相机驱动程序和硬件。  
 Android 8.0 引入了 Treble，用于将 CameraHal API 切换到由 HAL 接口描述语言 (HIDL) 定义的稳定接口。  
 盗图一张:  
-![](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/Android.10.Camera.10/Camera_Hal3_Subsystem11.png)
+![](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/Android.10.Camera.10/Camera_Hal3_Subsystem11.png)
 
 1.应用向相机子系统发出request,一个request对应一组结果.request中包含所有配置信息。其中包括分辨率和像素格式；手动传感器、镜头和闪光灯控件；3A 操作模式；RAW 到 YUV 处理控件；以及统计信息的生成等.一次可发起多个请求，而且提交请求时不会出现阻塞。请求始终按照接收的顺序进行处理。
 

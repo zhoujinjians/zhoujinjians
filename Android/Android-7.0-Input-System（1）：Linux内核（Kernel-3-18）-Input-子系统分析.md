@@ -1,6 +1,6 @@
 ---
 title: Android Input System（1）：Linux内核（Kernel-3.18） - Linux Input 子系统分析
-cover: https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/hexo.themes/bing-wallpaper-2018.04.09.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.09.jpg
 categories: 
   - Input
 tags:
@@ -47,7 +47,7 @@ Google Pixel、Pixel XL 内核代码（Kernel-3.18）：
 
 input子系统框架： 
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/linux.input/01-Linux-kernel-input-subsystem-framework.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/linux.input/01-Linux-kernel-input-subsystem-framework.png)
 
 (1) "硬件驱动层"负责操作具体的硬件设备，这层的代码是针对具体的驱动程序的，比如你的设备是触摸输入设备，还是鼠标输入设备，还是键盘输入设备，这些不同的设备，自然有不同的硬件操作，驱动工程师往往只需要完成这层的代码编写。
 
@@ -272,12 +272,12 @@ static int input_attach_handler(struct input_dev *dev, struct input_handler *han
 ```
 
 我们可以看到，input_device和input_handler中都有一个h_list,而input_handle拥有指向input_dev和input_handler的指针，也就是说input_handle是用来关联input_dev和input_handler的。 那么为什么一个input_device和input_handler中拥有的是h_list而不是一个handle呢？因为一个device可能对应多个handler,而一个handler也不能只处理一个device,比如说一个鼠标，它可以对应even handler，也可以对应mouse handler,因此当其注册时与系统中的handler进行匹配，就有可能产生两个实例，一个是evdev,另一个是mousedev,而任何一个实例中都只有一个handle。至于以何种方式来传递事件，就由用户程序打开哪个实例来决定。后面一个情况很容易理解，一个事件驱动不能只为一个甚至一种设备服务，系统中可能有多种设备都能使用这类handler,比如event handler就可以匹配所有的设备。在input子系统中，有8种事件驱动，每种事件驱动最多可以对应32个设备，因此dev实例总数最多可以达到256个。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/linux.input/02-Linux-kernel-input-dev-handler.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/linux.input/02-Linux-kernel-input-dev-handler.png)
 
 ## （三）、Input 核心层（Input.c）
 
 这一节主要介绍核心层的初始化，input_device、input_handle、input_handler之间的关系(稍后回头看更佳)。 总体概览图： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/linux.input/03-Linux-kernel-input-core-h_list.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/linux.input/03-Linux-kernel-input-core-h_list.png)
 
 ## 3.1、输入核心层：初始化
 
@@ -640,11 +640,11 @@ int input_register_handle(struct input_handle *handle)
 这个注册是把handle 本身的链表加入到它自己的input_dev 以及 input_handler的h_list链表中，这样以后就可以通过h_list遍历到这个handle，这样就实现了三者的绑定联系。
 
 以上是输入设备驱动注册的全过程，纵观整个过程，输入设备驱动最终的目的就是能够与事件处理层的事件驱动相互匹配，但是在drivers/input目录下有evdev.c事件驱动、mousedev.c事件驱动、joydev.c事件驱动等等，我们的输入设备产生的事件应该最终上报给谁，然后让事件被谁去处理呢？知道了这么个原因再看上面代码就会明白，其实evdev.c、mousedev.c等根据硬件输入设备的处理方式的不同抽象出了不同的事件处理接口帮助上层去调用，而我们写的设备驱动程序只不过是完成了硬件寄存器中数据的读写，但提交给用户的事件必须是经过事件处理层的封装和同步才能够完成的，事件处理层提供给用户一个统一的界面来操作。 整个关联注册的过程： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/linux.input/04-Linux-kernel-input-reg-device.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/linux.input/04-Linux-kernel-input-reg-device.png)
 
 ## （四）、Input 事件处理层 Event handler （以evdev事件处理器为例）
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/linux.input/05-Linux-kernel-input-event-hardware.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/linux.input/05-Linux-kernel-input-event-hardware.png)
 
 ## 4.1、主要数据结构
 
@@ -723,7 +723,7 @@ static const struct file_operations evdev_fops = {
 
 如果匹配上了就会创建一个evdev，它里边封装了一个handle，会把input_dev和input_handler关联到一起。关系如下：
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/linux.input/06-Linux-kernel-input-evdev-connect.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/linux.input/06-Linux-kernel-input-evdev-connect.png)
 
 ## 4.3、evdev设备结点的open()操作
 
@@ -1126,14 +1126,14 @@ copy_to_user(buffer, event, sizeof(struct input_event))
 ## （六）、Android Input子系统
 
 输入子系统的系统架构如下图所示： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/linux.input/07-Linux-kernel-android-input-system.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/linux.input/07-Linux-kernel-android-input-system.png)
 
 详细分析请参考：Android 7.1.2 (Android N) Android 输入子系统-Input System 分析
 
 ## （七）、Input 设备驱动层实例（Synaptics）
 
 触摸屏也是用上面这一套框架来操作的。右边需要一个"evdev.c"文件。左边要分配一个"input_dev"结构。接着就看上图的硬件设备左边的过程：分配一个"input_dev"结构体 --> 设置这个"input_dev"结构体 --> 注册这个"input_dev"结构体 --> 硬件相关的操作。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/PicGo/master/linux.input/08-Linux-kernel-input-drivers-fw.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/linux.input/08-Linux-kernel-input-drivers-fw.png)
 
 
 编写Input驱动一般框架:
