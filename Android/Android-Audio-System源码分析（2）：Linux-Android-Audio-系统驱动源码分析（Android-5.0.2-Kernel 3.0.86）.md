@@ -1,6 +1,6 @@
 ---
 title: Android Audio System源码分析（2）：Linux && Android Audio 系统驱动源码分析（Android 5.0.2 && Kernel 3.0.86）
-cover: https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/post.cover.pictures.00008.jpg
+cover: https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/post.cover.pictures.00008.jpg
 categories:
   - Audio
 tags:
@@ -578,7 +578,7 @@ ASoC：ALSA System on Chip，是建立在标准 ALSA 驱动之上，为了更好
 
 
 #####  2.2、ASoC音频驱动框架图
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/asoc_audio_arc.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/asoc_audio_arc.png)
 
 
 #####  2.3、ASoC音频驱动代码分析
@@ -893,7 +893,7 @@ static int s3c2440_uda1341_init(void)
 latform_device 还有个好伙伴 platform_driver 跟它配对。而 .name="soc-audio" 的 platform_driver 定义在 soc-core.c 中：
 两者匹配后，soc_probe() 会被调用，继而调用 snd_soc_register_card() 注册声卡。由于该过程很冗长，这里不一一贴代码分析了，但整个流程是比较简单的，流程图如下：
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/snd_soc_register_card.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/snd_soc_register_card.png)
 
 
 - 取出 platform_device 的私有数据，该私有数据就是 snd_soc_card ；
@@ -995,10 +995,10 @@ int soc_new_pcm(struct snd_soc_pcm_runtime *rtd, int num)
 ##### （1）、snd_kcontrol结构体
 首先看看录音电路原理图：
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/audio_codec_elec.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/audio_codec_elec.png)
 我们对着mic说话，声音会经过一系列线路进入声卡芯片的LINPUT1。看看声卡芯片wm8960
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/wm8960.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/wm8960.png)
 
 LINPUT1 经过一系列部件经过ADC，对于这些部件我们需要设置相应的寄存器来启动他们，让声音转换成数字信号。
 怎么设置这些寄存器呢？有没有统一的接口来设置他们？既是Kcontrol。
@@ -1012,11 +1012,11 @@ LINPUT1 经过一系列部件经过ADC，对于这些部件我们需要设置相
 > 一个kcontrol对应一个功能，比如：音量，开关声音。
 >  kcontrol有函数来设置功能
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/snd_kcontrol.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/snd_kcontrol.png)
 
 ##### （2）、tinymix 设置kcontrol
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/tinymix_kcontrol.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/tinymix_kcontrol.png)
 可以看到有50个kcontrol，我们可以使用tinymix 来设置kcontrol
 tinymix "Left Input Mixer Boost Switch" 1
 tinymix "Capture Switch" 0
@@ -1180,7 +1180,7 @@ static struct snd_kcontrol *snd_ctl_new(struct snd_kcontrol *control,
 部件上下电都是 dapm 根据策略自主控制的，外部无法干预，可以说 dapm 是一个专门为音频系统设计的自成体系的电源管理模块，独立于 Linux 电源管理之外。即使 SoC 休眠了，Codec 仍可以在正常工作，试想下这个情景：语音通话，modem_dai 连接到 codec_dai，语音数据不经过 SoC，因此这种情形下 SoC 可以进入睡眠以降低功耗，只保持 Codec 正常工作就行了。
 
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/LINPUT1.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/LINPUT1.png)
 
 
 
@@ -1189,13 +1189,13 @@ static struct snd_kcontrol *snd_ctl_new(struct snd_kcontrol *control,
 Mixer有多个输入源，只要其中的某个开关使能，顺便把其他三个也使能
 
 ##### （1）、widget Route Path概念：
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/dapm_widget_route_path.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/dapm_widget_route_path.png)
 
 
 ####  （五）、DAPM的kcontrol注册过程
 
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/snd_soc_dapm_new_controls.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/snd_soc_dapm_new_controls.png)
 
 
 
@@ -1550,7 +1550,7 @@ err:
 }
 ```
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/snd_soc_dapm_add_route.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/snd_soc_dapm_add_route.png)
 
 
 ##### （2）、route分类
@@ -1563,17 +1563,17 @@ err:
 > {"Mux"，name1，"source1"}    
 > {"Mux"，name2，"source2"}    
 (name1,name2)snd_kcontrol_new的名，可以通过操作某个kcontrol来打开某条path
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/route_sink_widget_mixer.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/route_sink_widget_mixer.png)
 
 #####  2.3、sink widget是Mux
 > {"Mux"，value1，"source1"}    
 > {"Mux"，value1，"source2"}    
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/route_sink_widget_mux.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/route_sink_widget_mux.png)
 
 ####  （七）、DAPM的情景分析_构造过程
 
 a. kcontrol,route,path注册过程情景演示
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/dapm_how_to_create_and_use.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/dapm_how_to_create_and_use.png)
 
 #####   （1）、普通的kcontrol
 
@@ -1808,7 +1808,7 @@ int snd_soc_dapm_new_controls(struct snd_soc_dapm_context *dapm,
 ```
 
 #####   （5）、widget上电过程
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/dapm_power_check.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/dapm_power_check.png)
 
 
 
@@ -1892,12 +1892,12 @@ dapm_seq_run
 
 ####  （九）、tinycap && tinyplay调用流程源码分析
 #####  （1）、tiny4412声卡驱动录音功能调试
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/WM8940_ADC_DAC.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/WM8940_ADC_DAC.png)
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/tiny4412_wm8960_fix_record.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/tiny4412_wm8960_fix_record.png)
 
 #####  （2）、tinycap && tinyplay调用流程源码分析
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/personal.website/tinycap_tinyplay.png)
+![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/tinycap_tinyplay.png)
 
 tinycap /data/charlesvincent.wav   // 录音ok
 tinyplay /data/charlesvincent.wav   // 播放ok

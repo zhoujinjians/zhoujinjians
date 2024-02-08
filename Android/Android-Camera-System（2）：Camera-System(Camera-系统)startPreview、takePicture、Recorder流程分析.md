@@ -1,6 +1,6 @@
 ---
 title: Android Camera System（2）：Camera 系统 startPreview、takePicture、Recorder流程分析
-cover: https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.19.jpg
+cover: https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.19.jpg
 categories:
   - Camera
 tags:
@@ -243,7 +243,7 @@ public void onReadyStateChanged(boolean readyForCapture) {
 ```
 如代码所示，当其状态变成准备好拍照，则将会调用CameraActivity的setShutterEnabled方法，即使能快门按键，此时也就是说预览成功结束，可以按快门进行拍照了，所以，到这里，应用层的preview的流程基本分析完毕，下图是应用层的关键调用的流程时序图： 
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/camera.system/02-01-preview_java_flow.png)
+![Alt text](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/camera.system/02-01-preview_java_flow.png)
 
 ##### 1.2、Camera2 startPreview的Native层流程分析
 分析Preview的Native的代码真是费了九牛二虎之力，若有分析不正确之处，请各位大神指正，在第一小节的后段最后会调用CameraDeviceImpl的setRepeatingRequest方法来提交请求，而在android6.0源码分析之Camera API2.0简介中，分析了Camera2框架Java IPC通信使用了CameraDeviceUser来进行通信，所以看Native层的ICameraDeviceUser的onTransact方法来处理请求的提交：
@@ -378,7 +378,7 @@ status_t Camera3Device::submitRequestsHelper(const List<const CameraMetadata> &r
 }
 ```
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/camera.system/02-02-preview_native_architecture.png)
+![Alt text](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/camera.system/02-02-preview_native_architecture.png)
 
 从代码可知，在Camera3Device里创建了要给RequestThread线程，调用它的setRepeatingRequests或者queueRequestList方法来将应用层发送过来的Request提交，继续看setRepeatingRequests方法：
 
@@ -403,7 +403,7 @@ status_t Camera3Device::RequestThread::setRepeatingRequests(const RequestList &r
 ```
 至此，Native层的preview过程基本分析结束，下面的工作将会交给Camera HAL层来处理，先给出Native层的调用时序图： 
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/camera.system/02-03-preview_native_flow.png)
+![Alt text](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/camera.system/02-03-preview_native_flow.png)
 
 ##### 1.3、Camera2 startPreview的HAL层流程分析
 
@@ -736,17 +736,17 @@ private final CameraCaptureSession.CaptureCallback mCaptureCallback =
 
 > camera工作时，存在了５中流处理线程和一个专门向hal发送请求的request线程。线程之间通过信号来同步，稍不注意就搞不明白代码是如何运行的了。其中很容易让我们忽视的就是在流发送之前的parent->registerInFlight()该操作将当前的请求保存到一个数组(可以理解成)中。这个数组对象在后续回帧操作中，会将相应帧的shutter,时间戳信息填充到对应的request中，紧接着就把对应帧的信息返回给app。好了先到这吧，下一篇分析Camera recording流程。
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/camera.system/02-04-preview_hal_architecture.png)
+![Alt text](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/camera.system/02-04-preview_hal_architecture.png)
 
 
 注意：Capture,preview以及autoFocus都是使用的这个回调，而Capture调用的时候，其RequestTag为CAPTURE，而autoFocus的时候为TAP_TO_FOCUS,而preview请求时没有对RequestTag进行设置，所以回调到onCaptureStarted方法时，不需要进行处理，但是到此时，preview已经启动成功，可以进行预览了，其数据都在buffer里。所以到此时，preview的流程全部分析结束，下面给出HAL层上的流程时序图 
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/camera.system/02-05-preview_hal_flow.png)
+![Alt text](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/camera.system/02-05-preview_hal_flow.png)
 
 #### （二）、Camera System takePicture流程分析
 与TakePicture息息相关的主要有4个线程CaptureSequencer,JpegProcessor,Camera3Device::RequestThread,FrameProcessorBase如下面的代码可以发现，在Camera2client对象初始化后，已经有３个线程已经run起来了，还有有一个RequestThread线程会在Camera3Device初始化时创建的。他们工作非常密切，如下大概画了一个他们的工作机制，４个线程都是通过Conditon条件变量来同步的。 
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/camera.system/02-06-Camera3Device-RequestThread.png)
+![Alt text](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/camera.system/02-06-Camera3Device-RequestThread.png)
 
 前面分析preview的时候，当预览成功后，会使能ShutterButton，即可以进行拍照，定位到ShutterButton的监听事件为onShutterButtonClick方法：
 
@@ -1032,13 +1032,13 @@ public void notifyNewMedia(Uri uri){
 
 由代码可知，这里有两种数据的处理，一种是video，另一种是image。而我们这里分析的是capture图片数据，所以首先会根据在回调函数传入的参数Uri和PhotoItemFactory来查询到相应的拍照数据，然后再开启一个异步的Task来对此数据进行处理，即通过MetadataLoader的loadMetadata来加载数据，并返回。至此，capture的流程就基本分析结束了，下面将给出capture流程的整个过程中的时序图： 
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/camera.system/02-07-capture_over_flow.png)
+![Alt text](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/camera.system/02-07-capture_over_flow.png)
 
 #### （三）、Camera System takepicture(ZSL)流程分析（本小节基于 Android 5.1 API11源码）
 ZSL(zear shutter lag)即零延时，就是在拍照时不停预览就可以拍照.由于有较好的用户体验度，该feature是现在大部分手机都拥有的功能。 
 面不再贴出大量代码来描述过程，直接上图。下图是画了2个小时整理出来的Android5.1 Zsl的基本流程，可以看到与ZSL密切相关的有5个线程frameprocessor、captureSequencer、ZslProcessor3、JpegProcessor、Camera3Device:requestThread。其实还有一个主线程用于更新参数。针对Android5.1看代码所得，ZSL过程中大概分成下面7个流程.
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/camera.system/02-08-ZSL_takepicture.png)
+![Alt text](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/camera.system/02-08-ZSL_takepicture.png)
 
 
 更正：图中左上角的FrameProcessor线程起来后会在waitForNextFrame中执行mResultSignal.waitRelative()，图中没有更改过来。
@@ -1290,7 +1290,7 @@ camera Video.虽然标题是recording流程分析，但这里很多和preview是
 
 ##### 4.1、认识video(mediaRecorder)状态机
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/camera.system/02-09-mediaRecorder-status.png)
+![Alt text](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/camera.system/02-09-mediaRecorder-status.png)
 
 > Used to record audio and video. The recording control is based on a 
 simple state machine (see below).状态机请看上面源码中给的流程图。 
@@ -1392,7 +1392,7 @@ Looper running (the main UI thread by default already has a Looper running).
 ##### 4.3、与MediaPlayerService相关的类接口之间的关系简介
 ##### 4.3.1、mediaRecorder何时与MediaPlayerService发送关系
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/camera.system/02-10-MediaRecorder.png)
+![Alt text](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/camera.system/02-10-MediaRecorder.png)
 
 
 ``` cpp
@@ -1414,7 +1414,7 @@ MediaRecorder::MediaRecorder() : mSurfaceMediaSource(NULL)
 
 ##### 4.3.2、mediaPlayerService类和接口之间关系
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/camera.system/02-11-mediaPlayerService.png)
+![Alt text](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/camera.system/02-11-mediaPlayerService.png)
 
 
 | 接口类型 |     接口说明|  
@@ -1425,7 +1425,7 @@ MediaRecorder::MediaRecorder() : mSurfaceMediaSource(NULL)
 
 ##### 4.3.3、MediaRecorder类和接口之间关系
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/camera.system/02-12-IMediaRecorder.png)
+![Alt text](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/camera.system/02-12-IMediaRecorder.png)
 
 mediaRecorder功能就是来录像的。其中MediaRecorder类中，包含了BpMediaRecorder代理对象引用。MediaRecorderClient本地对象驻留在mediaPlayService中。它的接口比较多，这里就列出我们今天关注的几个接口。其它接口查看源码吧 
 详细介绍可以参考源码：frameworks/av/include/media/IMediaRecorder.h
@@ -1628,7 +1628,7 @@ status_t Camera::RecordingProxy::startRecording(const sp<ICameraRecordingProxyLi
 ##### 4.4、阶段小结
 到这里Camera如何使用medaiRecorder录像的基本流程已经清楚了，这里我画了一个流程图，大概包含下面9个流程。
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianmax/zhoujinjian.com.images/master/camera.system/02-13-medaiRecorder-java-native.png)
+![Alt text](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/camera.system/02-13-medaiRecorder-java-native.png)
 
 ☯ 过程1：上层点击了录像功能，或者录像preview模式下，会创建一个mediaRecorDer Java层对象。
 ☯ 过程2:java层mediaRecorder对象调用native_jni native_setup方法，创建一个native的mediaRecorder对象。创建的过程中连接mediaPlayerService,并通过匿名binder通信方式获取到一个mediaRecorderClient代理对象，并保存到mediaRecorder对象的成员变量mMediaRecorder中。
