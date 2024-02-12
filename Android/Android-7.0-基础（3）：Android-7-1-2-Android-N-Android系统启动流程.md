@@ -1,6 +1,6 @@
 ---
 title: Android N 基础（3）：Android 7.1.2 Android 系统启动流程分析
-cover: https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.02.jpg
+cover: https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.02.jpg
 categories: 
   - Android
 tags:
@@ -89,14 +89,14 @@ date: 2017-10-08 09:25:00
 ### 一、Android概述
 
 Android系统非常庞大，底层是采用Linux作为基底，上层采用带有虚拟机的Java层，通过通过JNI技术，将上下打通，融为一体。下图是Google提供的一张经典的4层架构图，从下往上，依次分为Linux内核，系统库和Android Runtime，应用框架层，应用程序层这4层架构，每一层都包含大量的子模块或子系统。 
-![Markdown](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/android.boot/N01-android-system-start-arch.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/android.boot/N01-android-system-start-arch.png)
 
 ### 二、系统启动
 
 Google提供的4层架构图，是非常经典，但只是如垒砖般的方式，简单地分层，而不足表达Android整个系统的启动过程，环环相扣的连接关系，本文更多的是以进程的视角，以分层的架构来诠释Android系统的全貌。 系统启动架构图 
-![Markdown](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/android.boot/N02-android-system-start-arch.png)
-![Markdown](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/android.boot/N03-android-system-start-arch.png)
-![Markdown](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/android.boot/N04-android-system-start-arch.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/android.boot/N02-android-system-start-arch.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/android.boot/N03-android-system-start-arch.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/android.boot/N04-android-system-start-arch.png)
 
 ### 三、设备启动过程
 
@@ -658,7 +658,7 @@ if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, fd, &ev) == -1) {
 根据代码，我们知道：当epoll句柄监听到signal_read_fd中有数据可读时，将调用handle_signal进行处理。
 
 至此，结合上文我们知道：当init进程调用signal_handler_init后，一旦收到子进程终止带来的SIGCHLD消息后，将利用信号处理者SIGCHLD_handler向signal_write_fd写入信息； epoll句柄监听到signal_read_fd收消息后，将调用handle_signal进行处理。整个过程如下图所示。 
-![Markdown](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/android.boot/N05-android-system-start-signal_handler.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/android.boot/N05-android-system-start-signal_handler.jpg)
 
 ```c
 static void handle_signal() {
@@ -803,7 +803,7 @@ pid_t waitpid(pid_t pid, int *status, int options)
 其中，第一个参数pid为预等待的子进程的识别码，pid=-1表示等待任何子进程是否发出SIGCHLD。第二个参数status，用于返回子进程的结束状态。第三个参数决定waitpid函数是否处于阻塞处理方式，WNOHANG表示若pid指定的子进程没有结束，则waitpid()函数返回0，不予等待；若子进程结束，则返回子进程的pid。waitpid如果出错，则返回-1。
 
 总结一下：整个signal_handler_init其实就是为了重启子进程用的，上述过程其实最终可以简化为下图： 
-![Markdown](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/android.boot/N06-android-system-start-signal.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/android.boot/N06-android-system-start-signal.jpg)
 
 #### 4.1.10、设置默认系统属性
 
@@ -1512,7 +1512,7 @@ service zygote_secondary /system/bin/app_process64 -Xzygote /system/bin --zygote
 Zygote进程能够重启的地方:
 
 servicemanager进程被杀; (onresart) surfaceflinger进程被杀; (onresart) Zygote进程自己被杀; (oneshot=false) system_server进程被杀; (waitpid) 从App_main()开始，Zygote启动过程的函数调用类大致流程如下： 
-![Markdown](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/android.boot/N07-android-system-start-zygote_process.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/android.boot/N07-android-system-start-zygote_process.jpg)
 #### 4.2.2、Zygote启动过程
 
 ##### 4.2.2.1、App_main.main()
@@ -1892,7 +1892,7 @@ static JNINativeMethod gMethods[] = {
 };
 ```
 
-![Markdown](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/android.boot/N08-android-system-start-ZygoteInit.main.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/android.boot/N08-android-system-start-ZygoteInit.main.png)
 
 #### 4.2.2.5、进入Java层
 
@@ -1999,7 +1999,7 @@ static void preload() {
 
 zygote进程内加载了preload()方法中的所有资源，当需要fork新进程时，采用copy on write技术，如下：
 
-![Markdown](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/android.boot/N09-android-system-start-zygote_fork.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/android.boot/N09-android-system-start-zygote_fork.jpg)
 
 ##### 4.2.2.5.3、ZygoteInit.startSystemServer()
 
@@ -2169,7 +2169,7 @@ try {
 
 Zygote启动过程的调用流程图：
 
-![Markdown](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/android.boot/N10-android-system-start-zygote_start.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/android.boot/N10-android-system-start-zygote_start.jpg)
 
 > 1、解析init.zygote.rc中的参数，创建AppRuntime并调用AppRuntime.start()方法；
 2、 调用AndroidRuntime的startVM()方法创建虚拟机，再调用startReg()注册JNI函数；
@@ -2178,14 +2178,14 @@ Zygote启动过程的调用流程图：
 5、preload()预加载通用类、drawable和color资源、openGL以及共享库以及WebView，用于提高app启动效率；
 6、zygote完毕大部分工作，接下来再通过startSystemServer()，fork得力帮手system_server进程，也是上层framework的运行载体。
 7、 zygote功成身退，调用runSelectLoop()，随时待命，当接收到请求创建新进程请求时立即唤醒并执行相应工作。 
-![Markdown](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/android.boot/N11-android-system-start-System_Server.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/android.boot/N11-android-system-start-System_Server.png)
 
 ### （3）、启动SystemServer上篇
 
 #### 4.3.1、启动流程
 
 SystemServer的在Android体系中所处的地位，SystemServer由Zygote fork生成的，进程名为system_server，该进程承载着framework的核心服务。 Android系统启动-zygote篇中讲到Zygote启动过程中会调用startSystemServer()，可知startSystemServer()函数是system_server启动流程的起点， 启动流程图如下： 
-![Markdown](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/android.boot/N12-android-system-start-system_server_.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/android.boot/N12-android-system-start-system_server_.jpg)
 
 #### 4.3.2、ZygoteInit.startSystemServer()
 
@@ -2864,7 +2864,7 @@ private void startCoreServices() {
 #### 4.4.7、服务启动阶段
 
 SystemServiceManager的startBootPhase()贯穿system_server进程的整个启动过程： 
-![Markdown](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/android.boot/N13-android-system-start-system_server_boot_process.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/android.boot/N13-android-system-start-system_server_boot_process.jpg)
 
 其中PHASE_BOOT_COMPLETED=1000，该阶段是发生在Boot完成和home应用启动完毕。系统服务更倾向于监听该阶段，而不是注册广播ACTION_BOOT_COMPLETED，从而降低系统延迟。
 
@@ -3054,7 +3054,7 @@ system_server进程，从源码角度划分为引导服务、核心服务、其�
 > DevicePolicyManagerService PrintManagerService BackupManagerService UserManagerService AccountManagerService TrustManagerService SensorService LocationManagerService VibratorService CountryDetectorService GestureLauncherService PersistentDataBlockService EthernetService WebViewUpdateService ClipboardService TelephonyRegistry TelecomLoaderService NsdService UpdateLockService SerialService SearchManagerService CommonTimeManagementService AssetAtlasService ConsumerIrService MidiServiceCameraService TwilightService RestrictionsManagerService MmsServiceBroker RttService UsbService
 
 Service类别众多，其中表中加粗项是指博主挑选的较重要或者较常见的Service，并且在本博客中已经展开或者计划展开讲解的Service，当然如果有精力会讲解更多service，后续再更新。 
-![Markdown](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/android.boot/N15-android-system-start-AMS.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/android.boot/N15-android-system-start-AMS.jpg)
 
 ### （5）、启动ActivityManagerService
 
@@ -3063,7 +3063,7 @@ Service类别众多，其中表中加粗项是指博主挑选的较重要或者�
 ActivityManagerService(AMS)是Android中最核心的服务，主要负责系统中四大组件的启动、切换、调度及应用程序的管理和调度等工作。
 
 AMS通信结构如下图所示：
-![Markdown](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/android.boot/N14-android-system-start-.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/android.boot/N14-android-system-start-.png)
 
 #### 4.5.2、SystemServer.startBootstrapServices()
 
@@ -3585,7 +3585,7 @@ final ProcessRecord addAppLocked(ApplicationInfo info, boolean isolated,
 
 对于整个AMS启动过程而言，博客中涉及的内容可能只是极小的一部分。 但即使我们尽可能的简化，整个过程的内容还是非常多。
 
-![Markdown](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/android.boot/N16-android-system-start-flow.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/android.boot/N16-android-system-start-flow.jpg)
 不过我们回头看看整个过程，还是能比较清晰地将AMS的启动过程分为四步，如上图所示： 1、创建出SystemServer进程的Android运行环境。 在这一部分，SystemServer进程主要创建出对应的ActivityThread和ContextImpl，构成Android运行环境。 AMS的后续工作依赖于SystemServer在此创建出的运行环境。
 
 2、完成AMS的初始化和启动。 在这一部分，单纯地调用AMS的构造函数和start函数，完成AMS的一些初始化工作。

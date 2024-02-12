@@ -1,6 +1,6 @@
 ---
 title: Android L Display System源码分析（3）：LCD驱动分析（Android 5.0.2 && Kernel 3.0.86）
-cover: https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/post.cover.pictures.00003.jpg
+cover: https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/personal.website/post.cover.pictures.00003.jpg
 categories: 
   - Display
 tags:
@@ -50,7 +50,7 @@ date: 2019-10-01 09:25:00
 --------------------------------------------------------------------------------
 
 ####  （一）、LCD设备驱动框架图
-![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/zjj.display.sysfbmem_s3cfb_main.png)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/personal.website/zjj.display.sysfbmem_s3cfb_main.png)
 
 - 核心层是通用的，不需要任何修改。驱动开发者只需要实现硬件设备驱动层
 - 帧缓冲设备可以看做是一个完整的子系统，主要由核心层的fbmem.c和硬件设备驱动层构成
@@ -1580,7 +1580,7 @@ if (pdata->lcd_on)
 	pdata->lcd_on(pdev);
 ```
 
-![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/zjj.display.sys.s3cfb_probe.png)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/personal.website/zjj.display.sys.s3cfb_probe.png)
 
 
 

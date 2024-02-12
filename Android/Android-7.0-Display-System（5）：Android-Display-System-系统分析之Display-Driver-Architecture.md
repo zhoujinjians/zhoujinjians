@@ -1,6 +1,6 @@
 ---
 title: Android N Display System（5）：Android Display System 系统分析之Display Driver Architecture
-cover: https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.23.jpg
+cover: https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.23.jpg
 categories: 
   - Display
 tags:
@@ -61,7 +61,7 @@ interface relatedhandling
 **注：**首先说明，由于博主不是kernel开发方向的，可能理解不够透彻，还请看官见谅，主要是为了理解Kernel Display原理。为了加深对显示屏工作原理的理解，首先先看两个操作LCD显示屏的例子
 绪论（总体架构图）：
 
-![Alt text | center](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/display.system/DS05-01-Display-Architecture.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/display.system/DS05-01-Display-Architecture.png)
 
 
 #### （一）、直接操作framebuffer显示图像
@@ -199,7 +199,7 @@ include $(BUILD_EXECUTABLE)
 include $(call first-makefiles-under,$(LOCAL_PATH))
 ```
 **yellow_face.zif**
-[yellow_face.zif](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/display.system/DS05-yellow_face.zif)
+[yellow_face.zif](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/display.system/DS05-yellow_face.zif)
 
 ##### 1.1.2、编译测试
 编译会生成panel_test，然后进行测试。
@@ -217,23 +217,23 @@ include $(call first-makefiles-under,$(LOCAL_PATH))
 
 ##### 1.1.3、显示效果
 
-![Alt text | center](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/display.system/DS05-02-Qcom_FrameBuffer_test_.gif)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/display.system/DS05-02-Qcom_FrameBuffer_test_.gif)
 
-![Alt text | center](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/display.system/DS05-03-yellow_face_zif_test.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/display.system/DS05-03-yellow_face_zif_test.jpg)
 
 ##### 1.1.4、视频（加深理解、自☯备☯梯☯子）
 [Android Frame Buffer and Screen Shots Tutorial](https://www.youtube.com/watch?v=BUPPyR6VasI)
 [Mplayer on Android Through Chroot and Frame Buffer](https://www.youtube.com/watch?v=7n_hDZ6kHjc)
 ##### 1.1.5、驱动总体概览图
 
-![Alt text | center](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/display.system/DS05-04-msm8x25-display-overview.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/display.system/DS05-04-msm8x25-display-overview.png)
 
 
 #### （二）、FrameBuffer驱动程序分析
 
 FrameBuffer通常作为LCD控制器或者其他显示设备的驱动，FrameBuffer驱动是一个字符设备，设备节点是/dev/fbX（Android 设备为/dev/graphics/fb0），主设备号为29，次设备号递增，用户可以将Framebuffer看成是显示内存的一个映像，将其映射到进程地址空间之后，就可以直接进行读写操作，而写操作可以立即反应在屏幕上。这种操作是抽象的，统一的。用户不必关心物理显存的位置、换页机制等等具体细节。这些都是由Framebuffer设备驱动来完成的。Framebuffer设备为上层应用程序提供系统调用，也为下一层的特定硬件驱动提供接口；那些底层硬件驱动需要用到这儿的接口来向系统内核注册它们自己。
 
-![Alt text | center](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/display.system/DS05-05-mdss-driver-architecture.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/display.system/DS05-05-mdss-driver-architecture.png)
 
 
 Linux中的PCI设备可以将其控制寄存器映射到物理内存空间，而后，对这些控制寄存器的访问变成了对理内存的访问，因此，这些寄存器又被称为"memio"。一旦被映射到物理内存，Linux的普通进程就可以通过mmap将这些内存I/O映射到进程地址空间，这样就可以直接访问这些寄存器了。
@@ -300,7 +300,7 @@ struct fb_info {
 ```
 ##### 2.1.2、fb_var_screeninfo
 
-![Alt text | center](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/display.system/DS05-06-xres-yres.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/display.system/DS05-06-xres-yres.png)
 
 
 fb_var_screeninfo：用于记录用户可修改的显示控制器参数，包括屏幕分辨率、每个像素点的比特数等
@@ -734,7 +734,7 @@ static int do_register_framebuffer(struct fb_info *fb_info)
 ```
 注册过程就是将指定的设备驱动信息fb_info存放到registered_fb数组中。因此在注册具体的fb_info时，首先要构造一个fb_info数据结构，并初始化该数据结构，该结构用于描述一个特定的FrameBuffer驱动。
 
-![Alt text | center](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/display.system/DS05-07-fb-device-create.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/display.system/DS05-07-fb-device-create.jpg)
 
 
 #### （三）、MDP driver
@@ -898,7 +898,7 @@ static int mdp3_probe(struct platform_device *pdev)
 msm_dsi_v2_driver_init执行驱动程序初始化。 msm_dsi_v2_driver_init调用 msm_dsi_v2_register_driver注册驱动程序。
 总体时序图：
 
-![Alt text | center](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/display.system/DS05-08-dsi-host-v2.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/display.system/DS05-08-dsi-host-v2.png)
 
 
 ``` cpp
@@ -1112,7 +1112,7 @@ dsi-panel-fl10802-fwvga-video.dtsi
 ##### 5.2、mdss_mdp 和 mdss_dsi0 的关系
 mdss_mdp 相当于一个数组，里面定义了很多不同lcd显示屏的配置项包括分辨率等等
 
-![Alt text | center](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/display.system/DS05-09-mdss_mdp-mdss_dsi0.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/display.system/DS05-09-mdss_mdp-mdss_dsi0.jpg)
 
 
 
@@ -1133,7 +1133,7 @@ rc | =面板→event_handler（面板，MDSS_EVENT_PANEL_ON，NULL）;
 
 ##### 5.3.1、启动
 
-![Alt text | center](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/display.system/DS05-10-display-subsystem-on-bootup.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/display.system/DS05-10-display-subsystem-on-bootup.png)
 
 
 按照上面的部分所述注册设备后：
@@ -1144,7 +1144,7 @@ mdss_fb_open→mdss_fb_blank_sub→pdata→on（面板ON功能）
 
 ##### 5.3.2.1、暂停序列
 
-![Alt text | center](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/display.system/DS05-11-suspend sequence.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/display.system/DS05-11-suspend sequence.png)
 
 
 Kernelcall→mdss_fb_release_all→mdss_fb_blank→mdss_fb_blank_sub→mdp3_ctrl_off→
@@ -1156,7 +1156,7 @@ mdss_dsi_off。
 * Kernelcall→mdp3_suspend - 未使用
 ##### 5.3.2.2、恢复序列
 
-![Alt text | center](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/display.system/DS05-12-resume sequence.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/display.system/DS05-12-resume sequence.png)
 
 
 Kernelcall→mdss_fb_blank→mdss_fb_blank_sub→mdp3_ctrl_on→
@@ -1169,7 +1169,7 @@ Kernelcall→mdp3_resume - 未使用
 
 ##### 5.4、图像更新到面板
 
-![Alt text | center](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/display.system/DS05-13-flow for display subsystem commit.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/display.system/DS05-13-flow for display subsystem commit.png)
 
 
  用户必须确保MSMFB_OVERLAY_SET IOCTL在呼叫之前至少被调用一次 到MSMFB_OVERLAY_PLAY IOCLT（例如ioctl(fd, MSMFB_OVERLAY_PLAY, &od)）。MSMFB_OVERLAY_PLAY队列缓冲区 显示在面板上。 用户使用MSMFB_DISPLAY_COMMIT调用fb IOCLT。这会启动一个呼叫

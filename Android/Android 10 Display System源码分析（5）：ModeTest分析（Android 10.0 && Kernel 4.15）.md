@@ -1,6 +1,6 @@
 ---
 title: Android 10 Display System源码分析（5）：ModeTest分析（Android 10.0 && Kernel 4.15）
-cover: https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.26.jpg
+cover: https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.26.jpg
 categories: 
   - Display
 tags:
@@ -26,11 +26,11 @@ date: 2021-07-10 09:25:00
 >modetest -M rockchip -s 89@56:1088x1920 -v
 >                        //connector@crtc = 89@56
 
-![](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/Android10.Display.5/modetest.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/Android10.Display.5/modetest.jpg)
 
 ## （二）、ModeTest显示流程图Flow
 
-![](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/Android10.Display.5/ModeTestFlow.png)
+![](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/Android10.Display.5/ModeTestFlow.png)
 
 ```
 X:\external\libdrm\tests\modetest\modetest.c

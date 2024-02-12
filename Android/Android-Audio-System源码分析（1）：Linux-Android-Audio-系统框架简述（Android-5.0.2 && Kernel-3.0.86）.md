@@ -1,6 +1,6 @@
 ---
 title: Android Audio System 源码分析（1）：Linux && Android Audio 系统框架简述（Android 5.0.2 && Kernel 3.0.86）
-cover: https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/post.cover.pictures.00007.jpg
+cover: https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/personal.website/post.cover.pictures.00007.jpg
 categories:
   - Audio
 tags:
@@ -38,11 +38,11 @@ date: 2020-02-08 09:25:00
 
 如何将各种媒体源数字化呢？
 
-![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/Audio-system-1024px-A-D-A_Flow.svg.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/personal.website/Audio-system-1024px-A-D-A_Flow.svg.png) 
 
 将声波波形信号通过ADC转换成计算机支持的二进制的过程叫做音频采样(Audio Sampling)。采样(Sampling)的核心是把连续的模拟信号转换成离散的数字信号。
 
-![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/Audio-system-sampling.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/personal.website/Audio-system-sampling.png) 
 
 ##### 1.4、样本(Sample)
 这是我们进行采样的初始资料，比如一段连续的声音波形。
@@ -60,7 +60,7 @@ date: 2020-02-08 09:25:00
 
 采样就是把模拟信号数字化的过程，不仅仅是音频需要采样，所有的模拟信号都需要通过采样转换为可以用0101来表示的数字信号，示意图如下所示：
 
-![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/Audio-system-sampling-rate.png.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/personal.website/Audio-system-sampling-rate.png.png) 
 
 蓝色代表模拟音频信号，红色的点代表采样得到的量化数值。
 
@@ -116,12 +116,12 @@ MP3，AAC，OGG，WMA，Opus，FLAC，APE，M4A，AMR，等等
 换句话说，如果我们要完整重构原始的模拟信号，则采样频率就必须是它的两倍以上。比如人的声音范围是2~ 20kHZ,那么选择的采样频率就应该在40kHZ左右，数值太小则声音将产生失真现象，而数值太大也无法明显提升人耳所能感知的音质。
 
 ##### 1.15、总结（音频处理和播放过程）：
-![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/Audio-system-how-audio-works.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/personal.website/Audio-system-how-audio-works.png) 
 
 
 #### （二）、Audio 系统框架
 #####  总体Audio框架图
-![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/Audio-system-Android-Linux-arc.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/personal.website/Audio-system-Android-Linux-arc.png) 
 
 ##### 2.1、APP
 音乐播放器软件等等。
@@ -183,7 +183,7 @@ ASoC被分为Machine、Platform和Codec三大部分。其中的Machine驱动负�
 
 ASoC对Codec的这些功能都定义好了一些列相应的接口，以方便地对Codec进行控制。ASoC对Codec驱动的一个基本要求是：驱动程序的代码必须要做到平台无关性，以方便同一个Codec的代码不经修改即可用在不同的平台上。
 
-![enter image description here](https://raw.githubusercontent.com/zjjzhoujinjian/zhoujinjian.com.images/master/personal.website/Audio-system-asoc-pcm-control.png) 
+![enter image description here](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/personal.website/Audio-system-asoc-pcm-control.png) 
 ASoC对于Alsa来说，就是分别注册PCM/CONTROL类型的snd_device设备，并实现相应的操作方法集。图中DAI是数字音频接口，用于配置音频数据格式等。
 
 ☁ Codec驱动向ASoC注册snd_soc_codec和snd_soc_dai设备。
