@@ -1,6 +1,6 @@
 ---
 title: Android 10 Display System源码分析（2）：Display System 精彩世界（Android 10.0 && Kernel 4.15）
-cover: https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.23.jpg
+cover: https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.23.jpg
 categories: 
   - Display
 tags:
@@ -185,7 +185,7 @@ int main()
 
 #### **1.3、显示效果**
 
-![](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.FrameBufferTest.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.FrameBufferTest.jpg)
 
 
 ## (二)、OpenGLES test App（Android OpenGLES Native层）
@@ -299,7 +299,7 @@ int main(int /*argc*/, char** /*argv*/)
 ```
 
 #### 2.3、显示效果
-![](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.OpenGLESTestRGB.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.OpenGLESTestRGB.jpg)
 
 ## (三)、SurfaceFlinger test App（Android SurfaceFlinger Native层）
 ### （3）、SurfaceFlinger合成图像
@@ -520,16 +520,16 @@ SurfaceFlingerTestsBlue，然后分别进行测试。
 
 #### 3.3、显示效果
 **SurfaceFlingerTestsRed​​​​​​​**
-![](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.SurfaceFlingerTestsRed.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.SurfaceFlingerTestsRed.jpg)
 
 **SurfaceFlingerTestsGreen​​​​​​​**
-![](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.SurfaceFlingerTestsGreen.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.SurfaceFlingerTestsGreen.jpg)
 
 **SurfaceFlingerTestsBlue**
-![](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.SurfaceFlingerTestsBlue.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.SurfaceFlingerTestsBlue.jpg)
 
 **同时运行三个bin文件**
-![](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.OpenGLESTestRGB.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.OpenGLESTestRGB.jpg)
 
 ## (四)、AMS、WMS test App（Android Apk Java层）
 ### （4）、Apk测试AMS,WMS,SurfaceFlinger
@@ -617,10 +617,10 @@ TestViewportBlue.apk，然后分别进行测试。
 
 
 **TestViewportRed.apk**
-![](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.TestViewortRed.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.TestViewortRed.jpg)
 
 **​​​​​​​TestViewportGreen.apk**
-![](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.TestViewortGreen.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.TestViewortGreen.jpg)
 
 **TestViewportBlue.apk**
-![](https://raw.githubusercontent.com/zhoujinjiancc/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.TestViewortBlue.jpg)
+![](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/Android10.Display.2/Android10.0.Dispaly.Sys.TestViewortBlue.jpg)
