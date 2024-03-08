@@ -1,6 +1,6 @@
 ---
 title: Android N 基础（2）：Android 7.1.2 Android Binder 系统分析
-cover: https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.06.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.06.jpg
 categories: 
   - Android
 tags:
@@ -78,10 +78,10 @@ Android Binder系统概述： Binder是Android系统中大量使用的IPC（Inte
 Android系统中，每个应用程序是由Android的Activity，Service，Broadcast，ContentProvider这四组件的中一个或多个组合而成，这四组件所涉及的多进程间的通信底层都是依赖于Binder IPC机制。
 
 从进程角度来看IPC机制 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/01-Android-binder-binder_interprocess_communication.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/01-Android-binder-binder_interprocess_communication.png)
 
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/02-Android-binder-IPC-Binder.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/02-Android-binder-IPC-Binder.jpg)
 
 现在Client进程需要访问Server进程中的服务，会经过以下步骤：
 1、Server进程首先向ServiceManager注册服务（ServiceManager先于Server启动）
@@ -150,10 +150,10 @@ void binder_loop(struct binder_state *bs, binder_handler func)
 binder_loop()主要工作： (1)、通过ioctl(,BINDER_WRITE_READ,)进入消息循环，休眠等待Client请求 (2)、当Client通过驱动请求服务时，binder驱动会唤醒ServiceManager，通过binder_parse()解析处理数据，回复信息
 
 代码调用关系图： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/03-Android-binder-ServiceManager-main.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/03-Android-binder-ServiceManager-main.jpg)
 
 时序流程图： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/04-Android-binder-ServiceManager-main-flow.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/04-Android-binder-ServiceManager-main-flow.jpg)
 
 main()主要进行了三项工作： (1) 、通过binder_open()打开"/dev/binder"文件，即打开Binder设备文件。 (2) 、调用binder_become_context_manager()，通过ioctl()告诉Binder驱动程序自己是Binder上下文管理者。 (3) 、调用binder_loop()进入消息循环，等待Client的请求。如果没有Client请求，则进入睡眠等待状态；当有Client请求时，就被唤醒，然后读取并处理Client请求。
 
@@ -181,17 +181,17 @@ int main(int argc, char **argv)
 #### 1.3、示例程序（bctest.c）注册服务、获取服务过程
 
 注册服务的过程（bctest.c）: 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/06-Android-binder-ServiceManager-main-SM-Publish.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/06-Android-binder-ServiceManager-main-SM-Publish.png)
 
 (1) 、bs = binder_open(128*1024) (2) 、binder_call(bs, &msg, &reply, 0, SVC_MGR_ADD_SERVICE) 参数说明： // msg含有服务的名字 // reply它会含有servicemanager回复的数据 // target为0表示servicemanager // code: 表示要调用servicemanager中的"addservice函数"
 
 获取服务的过程（bctest.c）: 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/05-Android-binder-ServiceManager-LookUp.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/05-Android-binder-ServiceManager-LookUp.png)
 
 (1) 、bs = binder_open(128*1024) (2) 、binder_call(bs, &msg, &reply, target, SVC_MGR_CHECK_SERVICE) 参数说明： // msg含有服务的名字 // reply它会含有servicemanager回复的数据, 表示提供服务的进程 // target为0表示servicemanager // code: 表示要调用servicemanager中的"getservice函数"
 
 binder_call远程实现： 根据msg、target、code就知道需要调用哪个服务的哪一个函数。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/07-Android-binder-Binder_call.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/07-Android-binder-Binder_call.png)
 
 ```c
 int binder_call(struct binder_state *bs,
@@ -234,14 +234,14 @@ int binder_call(struct binder_state *bs,
 ```
 
 > 注： 结构体简介 binder_io 封装一次发送的数据 binder_write_read 存储一次读写操作的数据 binder_transaction_data 存储一次事务的数据 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/08-Android-binder-binder_io_struct.png)
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/09-Android-binder-binder_write_read.png)
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/10-Android-binder-binder_transaction_data.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/08-Android-binder-binder_io_struct.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/09-Android-binder-binder_write_read.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/10-Android-binder-binder_transaction_data.jpg)
 
 （1）构造参数，使用binder_io 描述
 （2）数据转换binder_io -> binder_write_read；首先根据binder_io 、target、code三者构造binder_transaction_data，然后将binder_write_read.write_buffer指向binder_transaction_data
 （3）调用ioctl(bs->fd, BINDER_WRITE_READ, &bwr);发送数据 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/11-Android-Binder-binder_call.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/11-Android-Binder-binder_call.png)
 
 ### （2）、Android Binder系统_ServiceManager
 
@@ -256,11 +256,11 @@ struct svcinfo *svclist = 0;
 ```
 
 它记录着所有添加进系统的"Service"信息，这些信息被组织成一条单向链表，我们不妨称这条链表为"Service向量表"。示意图如下： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/12-Android-Binder-SM-svclist.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/12-Android-Binder-SM-svclist.jpg)
 
 链表节点类型为svcinfo
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/13-Android-Binder-SM-svcinfo.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/13-Android-Binder-SM-svcinfo.png)
 
 添加服务简单理解就是 新建svcinfo节点插入到单链表中，查询服务就是看单链表是否有此服务。
 
@@ -433,12 +433,12 @@ binder_send_reply(bs, &reply, txn->data.ptr.buffer, res)
 #### 3.1、Android Binder系统C程序_框架
 
 总结bctest.c注册服务获取服务的一般流程框架： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/14-Android-Binder-binder_C_app_client_server_Arc.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/14-Android-Binder-binder_C_app_client_server_Arc.png)
 
 #### 3.2、Android Binder系统C程序_编码
 
 参考bctest.c编码： test_server：向ServiceManager添加服务"hello" && "goodbye" Service test_client ：查询获取服务(ServiceManager) [链接：Binder_C_App](https://github.com/weidongshan/APP_0003_Binder_C_App) 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/15-Android-binder-C-Test-App.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/15-Android-binder-C-Test-App.png)
 
 #### 3.3、Android Binder系统C程序_测试
 
@@ -453,12 +453,12 @@ binder_send_reply(bs, &reply, txn->data.ptr.buffer, res)
 #### 1.1 概述
 
 Binder驱动是Android专用的，但底层的驱动架构与Linux驱动一样。binder驱动在以misc设备进行注册，作为虚拟字符设备，没有直接操作硬件，只是对设备内存的处理。主要是驱动设备的初始化(binder_init)，打开 (binder_open)，映射(binder_mmap)，数据操作(binder_ioctl)。如启动ServiceManager调用: 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/16-Android-Binder-start_service_manager.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/16-Android-Binder-start_service_manager.jpg)
 
 #### 1.2 系统调用
 
 用户态的程序调用Kernel层驱动是需要陷入内核态，进行系统调用(syscall)，比如打开Binder驱动方法的调用链为： open-> **open() -> binder_open()。 open()为用户空间的方法，**open()便是系统调用中相应的处理方法，通过查找，对应调用到内核binder驱动的binder_open()方法，至于其他的从用户态陷入内核态的流程也基本一致。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/17-Android-binder_driver_interface.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/17-Android-binder_driver_interface.png)
 
 ### （2）、Binder核心方法
 
@@ -601,7 +601,7 @@ BR_FINISHED                      | 暂未实现                      |          
 单独看上面的协议可能很难理解，这里我们以一次Binder请求过程来详细看一下Binder协议是如何通信的，就比较好理解了。
 
 这幅图的说明如下： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/18-Android-binder_transaction_ipc.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/18-Android-binder_transaction_ipc.jpg)
 
 Binder是C/S架构的，通信过程牵涉到：Client，Server以及Binder驱动三个角色 Client对于Server的请求以及Server对于Client回复都需要通过Binder驱动来中转数据 BC_XXX命令是进程发送给驱动的命令 BR_XXX命令是驱动发送给进程的命令 整个通信过程由Binder驱动控制
 
@@ -650,7 +650,7 @@ static int binder_open(struct inode *nodp, struct file *filp)
 在实现过程中，为了便于查找，这些结构体互相之间都留有字段存储关联的结构。
 
 下面这幅图描述了这里说到的这些内容： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/19-Android-binder_main_struct.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/19-Android-binder_main_struct.png)
 
 #### 2.5、binder_mmap()
 
@@ -661,7 +661,7 @@ static int binder_open(struct inode *nodp, struct file *filp)
 前文我们说到，使用Binder机制，数据只需要经历一次拷贝就可以了，其原理就在这个函数中。
 
 binder_mmap这个函数中，会申请一块物理内存，然后在用户空间和内核空间同时对应到这块内存上。在这之后，当有Client要发送数据给Server的时候，只需一次，将Client发送过来的数据拷贝到Server端的内核空间指定的内存地址即可，由于这个内存地址在服务端已经同时映射到用户空间，因此无需再做一次复制，Server即可直接访问，整个过程如下图所示： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/20-Android-mmap_and_transaction.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/20-Android-mmap_and_transaction.png)
 
 这幅图的说明如下：
 
@@ -770,7 +770,7 @@ static int binder_update_page_range(struct binder_proc *proc, int allocate,
 ```
 
 binder_update_page_range主要完成工作：分配物理空间，将物理空间映射到内核空间，将物理空间映射到进程空间. 另外，不同参数下该方法也可以释放物理页面。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/21-Android-binder_mmap.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/21-Android-binder_mmap.png)
 
 #### 2.6、binder_ioctl()内存管理
 
@@ -787,7 +787,7 @@ binder_update_page_range主要完成工作：分配物理空间，将物理空�
 这里的bs->fd对应了打开Binder设备时的fd。BINDER_WRITE_READ对应了具体要做的操作码，这个操作码将由Binder驱动解析。bwr存储了请求数据，其类型是binder_write_read。
 
 binder_write_read其实是一个相对外层的数据结构，其内部会包含一个binder_transaction_data结构的数据。binder_transaction_data包含了发出请求者的标识，请求的目标对象以及请求所需要的参数。它们的关系如下图所示： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/22-Android-binder_write_read.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/22-Android-binder_write_read.png)
 
 binder_ioctl函数对应了ioctl系统调用的处理。这个函数的逻辑比较简单，就是根据ioctl的命令来确定进一步处理的逻辑，具体如下:
 
@@ -1005,37 +1005,37 @@ if (tr->target.handle) {
 
 Binder实体，是各个Server以及ServiceManager在内核中的存在形式。 Binder实体实际上是内核中binder_node结构体的对象，它的作用是在内核中保存Server和ServiceManager的信息(例如，Binder实体中保存了Server对象在用户空间的地址)。简言之，Binder实体是Server在Binder驱动中的存在形式，内核通过Binder实体可以找到用户空间的Server对象。 在上图中，Server和ServiceManager在Binder驱动中都对应的存在一个Binder实体。
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/26-Android-Binder_node_struct.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/26-Android-Binder_node_struct.png)
 
 **2\. Binder引用binder_ref**
 
 说到Binder实体，就不得不说"Binder引用"。所谓Binder引用，实际上是内核中binder_ref结构体的对象，它的作用是在表示"Binder实体"的引用。换句话说，每一个Binder引用都是某一个Binder实体的引用，通过Binder引用可以在内核中找到它对应的Binder实体。 如果将Server看作是Binder实体的话，那么Client就好比Binder引用。Client要和Server通信，它就是通过保存一个Server对象的Binder引用，再通过该Binder引用在内核中找到对应的Binder实体，进而找到Server对象，然后将通信内容发送给Server对象。
 
 Binder实体和Binder引用都是内核(即，Binder驱动)中的数据结构。每一个Server在内核中就表现为一个Binder实体，而每一个Client则表现为一个Binder引用。这样，每个Binder引用都对应一个Binder实体，而每个Binder实体则可以多个Binder引用。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/24-Android-binder_ref.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/24-Android-binder_ref.png)
 
 **3、Binder buffer：binder_buffer** 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/99-Android-Binder-IPCall.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/99-Android-Binder-IPCall.png)
 
 **4、Binder进程binder_proc**
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/25-Android-binder_proc.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/25-Android-binder_proc.png)
 
 **5、Binder线程binder_thread** 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/27-Android-binder_thread.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/27-Android-binder_thread.png)
 
 binder机制到底是如何从Binder对象找到其对应的Binder实体呢？ 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/28-Android-Bp-Bbinder.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/28-Android-Bp-Bbinder.png)
 
 注意其中的那4个rb_root域，"rb"的意思是"red black"，可见binder_proc里搞出了4个红黑树。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/29-Android-binder_proc_red_root.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/29-Android-binder_proc_red_root.png)
 
 其中，nodes树用于记录binder实体，refs_by_desc树和refs_by_node树则用于记录binder代理。之所以会有两个代理树，是为了便于快速查找，我们暂时只关心其中之一就可以了。threads树用于记录执行传输动作的线程信息。
 
 在一个进程中，有多少"被其他进程进行跨进程调用的"binder实体，就会在该进程对应的nodes树中生成多少个红黑树节点。另一方面，一个进程要访问多少其他进程的binder实体，则必须在其refs_by_desc树中拥有对应的引用节点。
 
 这4棵树的节点类型是不同的，threads树的节点类型为binder_thread，nodes树的节点类型为binder_node，refs_by_desc树和refs_by_node树的节点类型相同，为binder_ref。这些节点内部都会包含rb_node子结构，该结构专门负责连接节点的工作，和前文的hlist_node有点儿异曲同工，这也是linux上一个常用的小技巧。我们以nodes树为例 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/30-Android-binder_proc_hlist_node.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/30-Android-binder_proc_hlist_node.png)
 
 nodes树是用于记录binder实体的，所以nodes树中的每个binder_node节点，必须能够记录下相应binder实体的信息。因此请大家注意binder_node的ptr域和cookie域。
 
@@ -1045,10 +1045,10 @@ nodes树是用于记录binder实体的，所以nodes树中的每个binder_node�
 
 > binder_node.ptr对应于flat_binder_object.binder； binder_node.cookie对应于flat_binder_object.cookie。
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/31-Android-binder_ref-find-binder_node.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/31-Android-binder_ref-find-binder_node.png)
 OK，现在我们可以更深入地说明binder句柄的作用了，比如进程1的BpBinder在发起跨进程调用时，向binder驱动传入了自己记录的句柄值，binder驱动就会在"进程1对应的binder_proc结构"的引用树中查找和句柄值相符的binder_ref节点，一旦找到binder_ref节点，就可以通过该节点的node域找到对应的binder_node节点，这个目标binder_node当然是从属于进程2的binder_proc啦，不过不要紧，因为binder_ref和binder_node都处于binder驱动的地址空间中，所以是可以用指针直接指向的。目标binder_node节点的cookie域，记录的其实是进程2中BBinder的地址，binder驱动只需把这个值反映给应用层，应用层就可以直接拿到BBinder了。这就是Binder完成精确打击的大体过程。
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/32-Android-binder_relationship.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/32-Android-binder_relationship.jpg)
 
 ## 三、Android Binder系统驱动情景分析
 
@@ -1063,11 +1063,11 @@ int binder_thread_write(struct binder_proc *proc, struct binder_thread *thread,
 ```
 
 [已添加好打印log的binder.c文件见GitHub（注：搜索[/* print] 关键字）](https://github.com/weidongshan/DRV_0003_Binder/) 事先已经准备好打印log，现在结合log和Binder事务处理开始详细分析。注：log稍后分析再贴出。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/33-Android-binder_transaction_ipc.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/33-Android-binder_transaction_ipc.jpg)
 
 ### （1）、Binder系统驱动情景分析--服务"Hello"注册过程
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/35-Android-binder-add_service.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/35-Android-binder-add_service.png)
 
 #### 1.1、ServiceManager休眠等待
 
@@ -1220,7 +1220,7 @@ static int binder_thread_read(struct binder_proc *proc,
 可以看到驱动put_user(BR_NOOP, (uint32_t __user *)ptr)发送BR_NOOP到ServiceManager
 
 > 对于所有的读操作，数据头都是BR_NOOP，如BR_REPLY 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/36-Android-binder-BWR-read-BR_NOOP.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/36-Android-binder-BWR-read-BR_NOOP.png)
 
 > ```c
 >  ./service_manager &
@@ -1273,7 +1273,7 @@ void bio_put_obj(struct binder_io *bio, void *ptr)
 
 **数据结构示意图：**
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/37-Android-binder-Binder-io-transaction-data.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/37-Android-binder-Binder-io-transaction-data.jpg)
 
 Clent（此处为Test_server），test_server.c调用流程： ->svcmgr_publish() ->binder_call() ->ioctl(bs->fd, BINDER_WRITE_READ, &bwr) ->binder_thread_write() ->binder_transaction()
 
@@ -1614,9 +1614,9 @@ target_wait = &target_thread->wait;    // 等待队列
 首先发送BR_NOOP给TestServer，然后处理todo队列，处理完成后会发送BR_TRANSACTION_COMPLETE。
 
 现在内核已经处理完数据，我们从log看看数据发生了哪些变化： 我们发现flat_binder_object结构体的type值发生了变化，binder变成了Handle，看一下结构体，handler 和 binder是一个union，占用同一个位置；Handle为1代表第一个引用，意思是在ServiceManager进程里面根据1能找到第一个binder_ref，根据binder_ref能找到服务hello的binder_node实体。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/38-Android-binder-flat_binder_object.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/38-Android-binder-flat_binder_object.png)
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/39-Android-binder-Binder-io-transaction-data.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/39-Android-binder-Binder-io-transaction-data.jpg)
 
 接下来就等待ServiceManager处理完成后，回复消息。
 
@@ -1832,11 +1832,11 @@ void binder_send_reply(struct binder_state *bs,
 
 ### （2）、Binder系统驱动情景分析--TestClent获取"Hello"服务过程
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/40-Android-binder-binder_get_service.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/40-Android-binder-binder_get_service.png)
 
 #### 2.0、构造数据
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/41-Android-binder-getSvr-Binder-io-transaction-data.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/41-Android-binder-getSvr-Binder-io-transaction-data.jpg)
 
 #### 2.1、发送数据给ServiceManager
 
@@ -2218,7 +2218,7 @@ int binder_write(struct binder_state *bs, void *data, unsigned len)
 
 返回数据：
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/42-Android-binder-Binder-io-transaction-data.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/42-Android-binder-Binder-io-transaction-data.jpg)
 
 handle = 1 代表第一个
 
@@ -2445,12 +2445,12 @@ OK，到现在为止，还有两个待处理事务：(01) ServiceManager待处�
 
 #### 2.7\. Testclient获取handle
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/43-Android-binder-binder_use_service.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/43-Android-binder-binder_use_service.png)
 
 ### （3）、Binder系统驱动情景分析--TestClent使用"Hello"服务过程
 
 构造数据发送数据"weidongshan" 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/44-Android-binder-Binder-io-transaction-data.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/44-Android-binder-Binder-io-transaction-data.jpg)
 
 ## 四、Android Binder系统-Native层
 
@@ -2467,7 +2467,7 @@ Binder Framework的C++部分，头文件位于这个路径：/frameworks/native/
 ### (1)、ServiceManager类图(Native层)
 
 IServiceManager相关类如下图所示： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/45-Android-native_binder_framework_servicemananger.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/45-Android-native_binder_framework_servicemananger.png)
 
 IServiceManager是表示servicemanager的接口，有如下方法：
 
@@ -2503,7 +2503,7 @@ IPCThreadState | 代表了使用Binder的线程，这个类中封装了与Binder
 Parcel         | 在Binder上传递的数据的包装器
 
 下图描述了这些类之间的关系： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/46-Androi-binder_middleware.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/46-Androi-binder_middleware.png)
 
 另外说明一下，Binder服务的实现类（图中紫色部分）通常都会遵守下面的命名规则：
 
@@ -2594,7 +2594,7 @@ protected:
 ```
 
 这两个类都是模板类，它们在继承自INTERFACE的基础上各自继承了另外一个类。这里的INTERFACE便是我们Binder服务接口的基类。另外，BnInterface继承了BBinder类，由此可以通过复写onTransact方法来提供实现。BpInterface继承了BpRefBase，通过这个类的remote方法可以获取到指向服务实现方的句柄。在客户端接口的实现类中，每个接口在组装好参数之后，都会调用remote()->transact来发送请求，而这里其实就是调用的BpBinder的transact方法，这样请求便通过Binder到达了服务实现方的onTransact中。这个过程如下图所示： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/47-Android-Binder-IPCall.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/47-Android-Binder-IPCall.png)
 
 基于Binder框架开发的服务，除了满足上文提到的类名规则之外，还需要遵守其他一些共同的规约：
 
@@ -2932,7 +2932,7 @@ virtual bool threadLoop()
 
 而IPCThreadState::joinThreadPool方法中，会根据当前线程是否是主线程发送BC_ENTER_LOOPER或者BC_REGISTER_LOOPER命令告知驱动线程已经创建完毕。整个调用流程如下图所示：
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/48-Android-binder_thread_create.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/48-Android-binder_thread_create.jpg)
 
 ### （3）、Android Binder系统-Native层添加hello服务
 
@@ -2942,9 +2942,9 @@ virtual bool threadLoop()
 
 只讲数据构造过程。。
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/49-Android-addService.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/49-Android-addService.jpg)
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/50-Android-binder-BpBinder.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/50-Android-binder-BpBinder.png)
 
 构造： [-> IServiceManager.cpp ::BpServiceManager]
 
@@ -3007,9 +3007,9 @@ status_t flatten_binder(const sp<ProcessState>& /*proc*/,
 }
 ```
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/51-Android-Binder-flatten_binder.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/51-Android-Binder-flatten_binder.png)
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/52-Android-Binder-flatten_binder.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/52-Android-Binder-flatten_binder.png)
 
 将Binder对象扁平化，转换成flat_binder_object对象。 看到了吗？"打扁"的意思就是把binder对象整理成flat_binder_object变量，如果打扁的是binder实体，那么flat_binder_object用cookie域记录binder实体的指针，即BBinder指针，而如果打扁的是binder代理，那么flat_binder_object用handle域记录的binder代理的句柄值。
 
@@ -3029,7 +3029,7 @@ inline static status_t finish_flatten_binder(
 
 然后flatten_binder()调用了一个关键的finish_flatten_binder()函数。这个函数内部会记录下刚刚被扁平化的flat_binder_object在parcel中的位置。说得更详细点儿就是，parcel对象内部会有一个buffer，记录着parcel中所有扁平化的数据，有些扁平数据是普通数据，而另一些扁平数据则记录着binder对象。所以parcel中会构造另一个mObjects数组，专门记录那些binder扁平数据所在的位置，示意图如下：
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/53-Android-Binder-parcel.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/53-Android-Binder-parcel.png)
 
 一旦到了向驱动层传递数据的时候，IPCThreadState::writeTransactionData()会先把Parcel数据整理成一个binder_transaction_data数据
 
@@ -3071,7 +3071,7 @@ status_t IPCThreadState::writeTransactionData(int32_t cmd, uint32_t binderFlags,
 }
 ```
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/54-Android-binder-writeTransactionData.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/54-Android-binder-writeTransactionData.png)
 
 #### 3.2.4 、**waitForResponse()**
 
@@ -3137,7 +3137,7 @@ status_t IPCThreadState::talkWithDriver(bool doReceive)
 ```
 
 该函数的作用就是将之前打包的数据通过系统调用ioctl发送给kernel，最终发送给kernel的数据是struct binder_write_read对象。该对象已经被打包了3次，它们的包含关系如下所示。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/55-Android-binder-Transaction_data.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/55-Android-binder-Transaction_data.png)
 
 #### 3.2.6、**Client获取服务、处理回复数据过程**
 
@@ -3311,7 +3311,7 @@ sp<IBinder> ProcessState::getStrongProxyForHandle(int32_t handle)
 前文中我们看到，Binder机制在C++层已经有了完整的实现。因此Java层完全不用重复实现，而是通过JNI衔接了C++层以复用其实现。
 
 下图描述了Binder Framework Java层到C++层的衔接关系。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/56-Android-Binder_JNI.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/56-Android-Binder_JNI.png)
 
 这里对图中Java层和JNI层的几个类做一下说明( 关于C++层的讲解请看这里 )：
 
@@ -3319,11 +3319,11 @@ sp<IBinder> ProcessState::getStrongProxyForHandle(int32_t handle)
 
 除了IInterface，IBinder之外，这里Binder与BinderProxy类也是与C++的类对应的，下面列出了Java层和C++层类的对应关系：
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/57-Android-binder-Java-class.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/57-Android-binder-Java-class.png)
 
 除了IInterface，IBinder之外，这里Binder与BinderProxy类也是与C++的类对应的，下面列出了Java层和C++层类的对应关系：
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/58-Android-binder-Java-c-class.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/58-Android-binder-Java-c-class.png)
 
 ### （2）、JNI的衔接
 
@@ -3334,7 +3334,7 @@ JNI全称是Java Native Interface，这个是由Java虚拟机提供的机制。�
 实际上，在Android中很多的服务或者机制都是在C/c层实现的，想要将这些实现复用到Java层，就必须通过JNI进行衔接。AOSP源码中，/frameworks/base/core/jni/ 目录下的源码就是专门用来对接Framework层的JNI实现的。
 
 看一下Binder.java的实现就会发现，这里面有不少的方法都是用native关键字修饰的，并且没有方法实现体，这些方法其实都是在C++中android_util_Binder.cpp实现的： 那么，那么，c是如何调用Java的呢？最关键的，libbinder中的BBinder::onTransact是如何能够调用到Java中的Binder::onTransact的呢？ 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/59-Android-binder-JavaBBinder.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/59-Android-binder-JavaBBinder.png)
 
 这段逻辑就是android_util_Binder.cpp中JavaBBinder::onTransact中处理的了。JavaBBinder是BBinder子类，其类结构如下：libbinder中的BBinder::onTransact是如何能够调用到Java中的Binder::onTransact的呢？ JavaBBinder::onTransact关键代码如下：
 
@@ -3407,9 +3407,9 @@ private boolean execTransact(int code, long dataObj, long replyObj,
 
 ### （3）、Java层的ServiceManager
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/60-Android-binder-class_ServiceManager_java.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/60-Android-binder-class_ServiceManager_java.jpg)
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/61-Android-binder-ServiceManager_Java.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/61-Android-binder-ServiceManager_Java.png)
 
 通过这个类图我们看到，Java层的ServiceManager和C++层的接口是一样的。
 
@@ -3494,7 +3494,7 @@ public void addService(String name, IBinder service, boolean allowIsolated)
 
 接下来的调用流程前面已经分析过了，在此就不再分析了。 
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/62-Android-binder-binder_ipc_process.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/62-Android-binder-binder_ipc_process.jpg)
 
 ## 六、Android Binder系统-AIDL
 
@@ -3539,7 +3539,7 @@ getPid 一个无参的接口，返回值类型为int basicTypes，包含了几�
 
 针对上面这个aidl文件生成的java文件中包含的结构如下图所示：
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/63-Android-binder-aidl_java.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/63-Android-binder-aidl_java.png)
 
 在这个生成的Java文件中，包括了：
 
@@ -3666,7 +3666,7 @@ onTransact()所要做的就是：
 
 完整框架： 
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.binder/64-Android-Binder-IPCall.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.binder/64-Android-Binder-IPCall.png)
 
 
 ## 七、参考文档(特别感谢各位前辈的分析和图示)：

@@ -1,6 +1,6 @@
 ---
 title: Android P Graphics System（六）：Activity启动流程 && Surface创建分析
-cover: https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.41.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.41.jpg
 categories:
   - Graphics
 tags:
@@ -15,7 +15,7 @@ date: 2019-07-25 09:25:00
 注：文章都是通过阅读各位前辈总结的资料 Android 9.0 && Linux（Kernel 3.18）Qualcomm平台源码、加上自己的思考分析总结出来的，其中难免有理解不对的地方，欢迎大家批评指正。文章为个人学习、研究、欣赏之用，图文内容整理自互联网，如有侵权，请联系删除（◕‿◕），转载请注明出处（©Qualcomm ©Android @Linux 版权所有），谢谢。
 （==**文章基于 Kernel-3.18**==）&&（==**文章基于 Android 9.0**==）
 [【开发板 Intrinsyc Open-Q™ 820 µSOM Development Kit】](https://www.intrinsyc.com/snapdragon-embedded-development-kits/open-q-820-usom-development-kit/)
-[【开发板 Android 9.0 && Linux（Kernel 3.18）源码链接】](https://gitlab.com/zhoujinjiann/apq8096_la.um.7.5.r1-03100-8x96.0_p_v5.0)
+[【开发板 Android 9.0 && Linux（Kernel 3.18）源码链接】](https://gitlab.com/zhoujinjianzjj/apq8096_la.um.7.5.r1-03100-8x96.0_p_v5.0)
 
 正是由于前人的分析和总结，帮助我节约了大量的时间和精力，特别感谢！！！
 
@@ -49,7 +49,7 @@ Back栈管理了当你在Activity上点击Back键，当前Activity销毁后应�
 
 其实在ActivityManagerService与WindowManagerService内部管理中，在Task之外，还有一层容器，这个容器应用开发者和用户可能都不会感觉到或者用到，但它却非常重要，那就是Stack。 下文中，我们将看到，Android系统中的多窗口管理，就是建立在Stack的数据结构上的。 一个Stack中包含了多个Task，一个Task中包含了多个Activity（Window），下图描述了它们的关系：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/display.system/Android.PG6.Stack_Task.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/Android.PG6.Stack_Task.png)
 
 另外还有一点需要注意的是，ActivityManagerService和WindowManagerService中的Task和Stack结构是一一对应的，对应关系对于如下：
 

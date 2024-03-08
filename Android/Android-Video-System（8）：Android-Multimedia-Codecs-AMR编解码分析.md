@@ -1,6 +1,6 @@
 ---
 title: Android Video System（8）：Android Multimedia Codecs - AMR编解码分析
-cover: https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.30.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.30.jpg
 categories:
   - Multimedia
 tags:
@@ -52,8 +52,8 @@ kComponents[] = {
 - amrwbenc
 
 Log：
-[AMR-DEcorder-Google-Log.md](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.codecs/AMR-DEcorder-Google-Log.md)
-[AMR-Encorder-Google-Log.md](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.codecs/AMR-Encorder-Google-Log.md)
+[AMR-DEcorder-Google-Log.md](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.codecs/AMR-DEcorder-Google-Log.md)
+[AMR-Encorder-Google-Log.md](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.codecs/AMR-Encorder-Google-Log.md)
 --------------------------------------------------------------------------------
 
 #### （一）、AMR音频编码器概述及文件格式分析
@@ -73,18 +73,18 @@ AMR-WB应用于EDGE、3G可充分体现其优势。足够的传输带宽保证AM
 ##### 三、编码方式
 1. AMR-NB:
 AMR 一共有16种编码方式， 0-7对应8种不同的编码方式， 8-15 用于噪音或者保留用。
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.codecs/VS8-01-AMR-NB-Codecs-16.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.codecs/VS8-01-AMR-NB-Codecs-16.png)
 
 2. AMR-WB:
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.codecs/VS8-02-AMR-WB-Codecs-16.png.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.codecs/VS8-02-AMR-WB-Codecs-16.png.png)
 
 
 二、AMR 帧格式：
 AMR 有两种类型的帧格式：AMR IF1 和 AMR IF2
 1. AMR IF1:
  IF1 的帧格式如下图所示：
-  ![Alt text | center](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.codecs/VS8-03-AMR IF1.jpg)
+  ![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.codecs/VS8-03-AMR IF1.jpg)
 
 FrameType, Mode Indication, Mode Request 对应上面两个表格里的数。从上面的表格里我们可以看出，这三个域的值是相同的。所以在IF2中省略了Mode Indication, Mode Request 两个域。
 Frame Quality Indicator: 0表示bad frame 或者corrupted frame； 1表示 good frame
@@ -95,7 +95,7 @@ Class C：比Class B还不重要的数据。
 
 2. AMR IF2:
  IF2的帧格式如下图所示：
-  ![Alt text | center](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.codecs/VS8-04-AMR IF2.jpg)
+  ![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.codecs/VS8-04-AMR IF2.jpg)
 
 
 相对于IF1, IF2 省去了Frame Quality Indicator, Mode Indication, Mode Request 和CRC 校验。但是增加了bit 填充。因为AMR帧中数据的长度并不是字节（8bit）的整数倍，所以在有些帧的末尾需要增加bit填充，以使整个帧的长度达到字节的整数倍。
@@ -103,17 +103,17 @@ Class C：比Class B还不重要的数据。
 
 ##### 四、帧大小
 1. AMR-NB
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.codecs/VS8-05-AMR-NB-Frame.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.codecs/VS8-05-AMR-NB-Frame.png)
 
 
 Number of bits in Classes A, B, and C for each AMR codec mode
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.codecs/VS8-06-AMR-NB-Frame-Number.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.codecs/VS8-06-AMR-NB-Frame-Number.png)
 
 2. AMR-WB:
 Composition of AMR-WB IF2 Frames for all Frame Types
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.codecs/VS8-07-AMR-WB-Frame.png.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.codecs/VS8-07-AMR-WB-Frame.png.png)
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.codecs/VS8-08-AMR-WB-Frame-number.png.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.codecs/VS8-08-AMR-WB-Frame-number.png.png)
 
 
 ##### 五、PCM16和AMR之间的转换
@@ -144,7 +144,7 @@ AMR的文件格式如下图1所示：
 多声道：
 多声道的文件头包含一个magic number和32bit channle description域。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.codecs/VS8-09-AMR-magic number.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.codecs/VS8-09-AMR-magic number.jpg)
 
 
 AMR-NB 的magic number："#!AMR_MC1.0\n"
@@ -152,12 +152,12 @@ AMR-NB 的magic number："#!AMR_MC1.0\n"
 AMR-WB的magic number："#!AMR-WB_MC1.0\n"
                          (or 0x2321414d522d57425F4D43312E300a in hexadecimal).
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.codecs/VS8-10-AMR-WB-magic number.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.codecs/VS8-10-AMR-WB-magic number.jpg)
 
 
 32bit的channel description域的定义如下：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.codecs/VS8-11-AMR-channel description-.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.codecs/VS8-11-AMR-channel description-.jpg)
 
 
 其中 reserved bits必须为0， CHAN:表示当前文件中含有几个声道。
@@ -225,7 +225,7 @@ Q为帧质量指示器，如果为0表明帧被损坏。
 	Line 12388: 07-26 14:30:22.907: V/ACodec(729): [OMX.google.amrnb.encoder] onOMXEmptyBufferDone 4
 ```
 可以看到博主当前手机录制的编码格式为amrnb。先看看流程图。
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.codecs/VS8-12-AMRNB-Encorder-flow.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.codecs/VS8-12-AMRNB-Encorder-flow.png)
 
 
 ##### 1.1、 初始化AMRNB编码器 SoftAMRNBEncoder::initEncoder()
@@ -457,7 +457,7 @@ Word16 AMREncode(
 ```
 
 以上是解码初始化信息，先看看流程图
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/android.codecs/VS8-13-AMRNB-Decorder-flow.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.codecs/VS8-13-AMRNB-Decorder-flow.png)
 
 
 

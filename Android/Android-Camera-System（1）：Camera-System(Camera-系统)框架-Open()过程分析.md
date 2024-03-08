@@ -1,6 +1,6 @@
 ---
 title: Android Camera System（1）：Camera 系统 框架、Open()过程分析
-cover: https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.18.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.18.jpg
 categories:
   - Camera
 tags:
@@ -67,7 +67,7 @@ frameworks/av/camera/aidl/android/hardware/ICameraService.aidl
 ##### 1.1、Android Camera System总体框架（Qualcomm平台）
 ##### 1.1.1、首先看看Android 官方Camera总体架构：
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-01-android_ape_fwk_camera.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-01-android_ape_fwk_camera.png)
 
 **☯应用框架**
 应用代码位于应用框架级别，它利用 android.hardware.Camera API 来与相机硬件进行互动。在内部，此代码会调用相应的 JNI 粘合类，以访问与该相机互动的原生代码。
@@ -87,28 +87,28 @@ IPC binder 代理用于促进跨越进程边界的通信。调用相机服务的
 Qualcomm平台Camera 架构主要区别在于HAL层和Kernel层的变化，总体架构图如下：
 ##### 1.1.2.1、Qualcomm平台Camera总体架构
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-02-Android-Camera-Software-Architecture.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-02-Android-Camera-Software-Architecture.png)
 
 ##### 1.1.2.2、Qualcomm平台Camera的HAL、mm-camera
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-03-HAL-and-mm-camera-interface.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-03-HAL-and-mm-camera-interface.png)
 
 ##### 1.1.2.3、Qualcomm平台Camera的Kernel
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-04-Camera-Kernel-Architecture.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-04-Camera-Kernel-Architecture.png)
 
 ##### 1.2、Android Camera API 2.0 全新的HAL 子系统
 Android 7.1.2现在使用的是Camera API 2.0 和 Camera Device 3以及 HAL3。
 ##### 1.2.1、请求
 应用框架针对捕获的结果向相机子系统发出请求。一个请求对应一组结果。请求包含有关捕获和处理这些结果的所有配置信息。其中包括分辨率和像素格式；手动传感器、镜头和闪光灯控件；3A 操作模式；RAW 到 YUV 处理控件；以及统计信息的生成。这样一来，便可更好地控制结果的输出和处理。一次可发起多个请求，而且提交的请求不会出现阻塞的情况。请求始终按照接收的顺序进行处理。
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-05-camera2api.png.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-05-camera2api.png.png)
 
 ##### 1.2.2、HAL 和相机子系统
 相机子系统包括相机管道中组件的实现，例如 3A 算法和处理控件。相机 HAL 为您提供了实现您版本的这些组件所需的接口。为了保持多个设备制造商和图像信号处理器（ISP，也称为相机传感器）供应商之间的跨平台兼容性，相机管道模型是虚拟的，且不直接对应任何真正的 ISP。不过，它与真正的处理管道足够相似，因此您可以有效地将其映射到硬件。此外，它足够抽象，可支持多种不同的算法和操作顺序，而不会影响质量、效率或跨设备兼容性。
 相机管道还支持应用框架开启自动对焦等功能的触发器。它还会将通知发送回应用框架，以通知应用自动对焦锁定或错误等事件。
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-06-camera_hal_request_control.png.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-06-camera_hal_request_control.png.png)
 
 
 > RAW Bayer 输出在 ISP 内部不经过任何处理。
@@ -124,7 +124,7 @@ Android 7.1.2现在使用的是Camera API 2.0 和 Camera Device 3以及 HAL3。
 ☯ 指定请求的所有输出的时间戳必须完全相同，以便框架可以根据需要将它们匹配在一起。
 ☯ 所有捕获配置和状态（不包括 3A 例程）都包含在请求和结果中。
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-07-camera-hal-overview-oo.png.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-07-camera-hal-overview-oo.png.png)
 
 ##### 1.2.4、启动和预期操作顺序
 1、框架调用 camera_module_t->common.open()，而这会返回一个 hardware_device_t 结构。
@@ -142,14 +142,14 @@ Android 7.1.2现在使用的是Camera API 2.0 和 Camera Device 3以及 HAL3。
 13、在发生错误或其他异步事件时，HAL 必须调用 camera3_callback_ops_t->notify() 并返回相应的错误/事件消息。从严重的设备范围错误通知返回后，HAL 应表现为在其上调用了 close()。但是，HAL 必须在调用 notify() 之前取消或完成所有待处理的捕获，以便在调用 notify() 并返回严重错误时，框架不会收到来自设备的更多回调。在严重的错误消息返回 notify() 方法后，close() 之外的方法应该返回 -ENODEV 或 NULL。
 ##### 1.3、Android Graphics 学习－生产者、消费者、BufferQueue介绍
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-08-Android-graphics-SurfaceFlinger-BufferQueue.jpg.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-08-Android-graphics-SurfaceFlinger-BufferQueue.jpg.png)
 
 Graphics 系统详细分析请参考：【Android 7.1.2 (Android N) Android Graphics 系统分析】()
 
 ##### 1.4、Camera类之间的关系和作用
 ##### 1.4.1、Camera类关系总体概览
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-09-Android-Camera-class.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-09-Android-Camera-class.png)
 
 ☯ 1、ICameraClient: 这主要是一些消息发送的接口，包括帧可用通知，回调一些信息给client等消息。不过这里要注意的是，BnCameraClient对象其实是在client这端，不在CameraService端。
 ☯ 2、ICamera:camera的一些标准操作接口，比如startpreview，takepicuture,autofocus,所有的操作动作都是用的这一套接口。
@@ -157,20 +157,20 @@ Graphics 系统详细分析请参考：【Android 7.1.2 (Android N) Android Grap
 
 ##### 1.4.2、ICameraClient
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-10-ICameraClient.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-10-ICameraClient.png)
 
 ##### 1.4.3、ICamera
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-11-ICamera.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-11-ICamera.png)
 
 ##### 1.4.4、ICameraService
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-12-ICameraService.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-12-ICameraService.png)
 
 #### （二）、Android CameraService开机初始化分析
 首先看下总体时序图：
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-13-CameraService_onFirstRef.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-13-CameraService_onFirstRef.png)
 
 ##### 2.1、CameraService 初始化过程
 Android启动的时候会收集系统的.rc文件，启动对应的Native Service：
@@ -355,7 +355,7 @@ Camera HAL层的open入口其实就是camera_device_open方法：
 ##### 2.1.3、图解camera_module和camera_device_t关系
 camer module在系统中转指camera模块，camera_device_t 转指某一个camera 设备。在流程上，native framwork 先加载在hal层定义的camer_module对象，然后通过camera_module的methods open方法填充camera_device_t 结构体，并最终获取到camera ops这一整个camera最重要的操作集合。下图中我们可以看到struct hw_module_t在camera_module最上面 而camera_device_t最开始保存的是struct hw_device_t. 由此我们平时在看代码时，要注意一些指针转换。
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-14-camera_module camera_device_t.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-14-camera_module camera_device_t.png)
 
 #### （三）、Android Camera Open过程
 ##### 3.1、Camera2 HAL层Open()过程分析
@@ -1046,7 +1046,7 @@ status_t BufferQueueProducer::queueBuffer(int slot,
 ```
 由代码可知，它最后会调用Consumer的回调FrameAvailableListener的onFrameAvailable方法，到这里，就比较清晰为什么我们在写Camera应用，为其初始化Surface时，我们需要重写FrameAvailableListener了，因为在此方法里面，会进行结果的处理，至此，Camera HAL的Open流程就分析结束了。下面给出流程的时序图： 
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-15-open_camera.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-15-open_camera.png)
 
 
 #### （四）、Camera API2.0 初始化流程分析
@@ -1436,7 +1436,7 @@ public void open(
 ```
 至此，Camera的初始化流程中应用层的分析就差不多了，下一步将会调用CameraManager的openCamera方法来进入框架层，并进行Camera的初始化，下面将应用层的初始化时序图： 
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-16-camera_open_java.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-16-camera_open_java.png)
 
 ##### 4.2、Camera2 框架层（JNI & Native）Open()过程分析
 由上面的分析可知，将由应用层进入到框架层处理，将会调用CameraManager的openCamera方法，并且定义了CameraDevice的状态回调函数，具体的回调操作此处不做分析，继续跟踪openCamera()方法：
@@ -1777,7 +1777,7 @@ status_t Camera3Device::initialize(CameraModule *module)
 ```
 首先，会依赖HAL框架打开并获得相应的Device对象，具体的流程请参考android6.0源码分析之Camera2 HAL分析，然后再回调此对象的initialize方法进行初始化，最后再启动RequestThread等线程，并返回initialize成功。至此Camera API2.0下的初始化过程就分析结束了。框架层的初始化时序图如下： 
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-17-camera_open_native.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-17-camera_open_native.png)
 
 ##### 4.2、总结
 Open()过程道路艰辛，主要为了后续Camera正常工作，添砖加瓦，铺路。下面我们列举一下，主要都准备了什么。
@@ -1787,7 +1787,7 @@ Open()过程道路艰辛，主要为了后续Camera正常工作，添砖加瓦�
 4、CameraService connect过程中，根据hal硬件版本，创建对应的CameraClient对象。在后续的初始化过程中，创建6大线程。 
 最后以一个简单的工作流程图来结束博文 
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjiann/zhoujinjian.com.images/master/camera.system/01-18-Camera_open_overview.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/camera.system/01-18-Camera_open_overview.png)
 
 
 #### （五）、参考资料(特别感谢各位前辈的分析和图示)：
