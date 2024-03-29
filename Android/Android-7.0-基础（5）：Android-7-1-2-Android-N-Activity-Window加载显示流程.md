@@ -1,6 +1,6 @@
 ---
 title: Android N 基础（5）：Android 7.1.2 Activity - Window 加载显示流程（AMS && WMS）分析
-cover: https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.04.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.04.jpg
 categories: 
   - Android
 tags:
@@ -63,7 +63,7 @@ Activity-Window加载显示流程概述： Android系统中图形系统是相当
 
 
 在前面文章（Android 7.1.2(Android N) Activity启动流程分析）中详细分析了Activity启动流程，这里回顾一下总体流程。 Activity启动流程图： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N1-Android-addWindow-start_activity_process.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N1-Android-addWindow-start_activity_process.jpg)
 
 > 启动流程：
 
@@ -294,7 +294,7 @@ Activity.onCreate()会调用setContentView(),整个过程主要是Activity的布
  ● 当setContentView设置显示OK以后会回调Activity的onContentChanged方法。Activity的各种View的findViewById()方法等都可以放到该方法中，系统会帮忙回调。
 ```
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N2-Android-addWindow-DecorView.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N2-Android-addWindow-DecorView.jpg)
 
 #### 2.4、ActivityThread.handleResumeActivity()
 
@@ -446,7 +446,7 @@ public void addView(@NonNull View view, @NonNull ViewGroup.LayoutParams params) 
 (5) 构造一个AttachInfo对象；
 
 (6) 创建Surface对象，用于绘制当前视图，当然该Surface对象的真正创建是由WMS来完成的，只不过是WMS传递给应用程序进程的。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N3-Android-addWindow-ViewRootImpl.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N3-Android-addWindow-ViewRootImpl.png)
 
 #### 2.6、IWindowSession代理获取过程
 
@@ -494,7 +494,7 @@ public IWindowSession openSession(IWindowSessionCallback callback, IInputMethodC
 ```
 
 在WMS服务端构造了一个Session实例对象。ViewRootImpl 是一很重要的类，类似 ActivityThread 负责跟AmS通信一样，ViewRootImpl 的一个重要职责就是跟 WmS 通信，它通静态变量 sWindowSession（IWindowSession实例）与 WmS 进行通信。每个应用进程，仅有一个 sWindowSession 对象，它对应了 WmS 中的 Session 子类，WmS 为每一个应用进程分配一个 Session 对象。WindowState 类有一个 IWindow mClient 参数，是在构造方法中赋值的，是由 Session 调用 addWindow 传递过来了，对应了 ViewRootImpl 中的 W 类的实例。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N4-Android-addWindow-ViewRootImpl-WMS.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N4-Android-addWindow-ViewRootImpl-WMS.png)
 
 #### 2.7、AttachInfo构造过程
 
@@ -799,7 +799,7 @@ return NO_INIT;
 ```
 
 这里又通过IDisplayEventConnection接口来请求Vsync信号，IDisplayEventConnection实现了Binder通信框架，可以跨进程调用，因为Vsync信号请求进程和Vsync产生进程有可能不在同一个进程空间，因此这里就借助IDisplayEventConnection接口来实现。下面通过图来梳理Vsync请求的调用流程： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N5-Android-addWindow-requestNextVsync.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N5-Android-addWindow-requestNextVsync.png)
 
 需要说明的是/_Vsync_/之间的代码此时其实还未执行，call requestNextVsync()来告诉系统我要在下一个VSYNC需要被trigger.
 
@@ -1005,7 +1005,7 @@ return bclient;
 }
 ```
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N6-Android-addWindow-SF-Client.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N6-Android-addWindow-SF-Client.png)
 
 /**********_**_**********_**_**********_**_**********Vsync**********_**_**********_**_**********_**_**********/
 
@@ -1054,10 +1054,10 @@ void doFrame(long frameTimeNanos, int frame) {
 }
 ```
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N7-Android-addWindow-Vsync-time.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N7-Android-addWindow-Vsync-time.png)
 Choreographer类中分别定义了CallbackRecord、CallbackQueue内部类，CallbackQueue是一个按时间先后顺序保存CallbackRecord的单向循环链表。 
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N8-Android-addWindow-CallBackRecord.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N8-Android-addWindow-CallBackRecord.png)
 在Choreographer中定义了三个CallbackQueue队列，用数组mCallbackQueues表示，用于分别保存CALLBACK_INPUT、CALLBACK_ANIMATION、CALLBACK_TRAVERSAL这三种类型的Callback，当调用Choreographer类的postCallback()函数时，就是往指定类型的CallbackQueue队列中通过addCallbackLocked()函数添加一个CallbackRecord项：首先构造一个CallbackRecord对象，然后按时间先后顺序插入到CallbackQueue链表中。从代码注释中，我们可以知道CALLBACK_INPUT是指输入回调，该回调优先级最高，首先得到执行，而CALLBACK_TRAVERSAL是指处理布局和绘图的回调，只有在所有异步消息都执行完后才得到执行，CALLBACK_ANIMATION是指动画回调，比CALLBACK_TRAVERSAL优先执行，从doFrame()函数中的doCallbacks调用就能印证这点。 当Vsync事件到来时，顺序执行CALLBACK_INPUT、CALLBACK_ANIMATION、CALLBACK_TRAVERSAL 和CALLBACK_COMMIT 对应CallbackQueue队列中注册的回调。 [->Choreographer.java]
 
 ```java
@@ -1101,11 +1101,11 @@ Choreographer类中分别定义了CallbackRecord、CallbackQueue内部类，Call
 ```
 
 我们知道Choreographer对外提供了两个接口函数用于注册指定的Callback，postCallback()用于注册Runnable对象，而postFrameCallback()函数用于注册FrameCallback对象，无论注册的是Runnable对象还是FrameCallback对象，在CallbackRecord对象中统一装箱为Object类型。在执行其回调函数时，就需要区别这两种对象类型，如果注册的是Runnable对象，则调用其run()函数，如果注册的是FrameCallback对象，则调用它的doFrame()函数。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N9-Android-addWindow-Choreographer.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N9-Android-addWindow-Choreographer.png)
 
 #### 2.11、视图View添加过程
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N10-Android-addWindow-AT-WMS.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N10-Android-addWindow-AT-WMS.png)
 
 关于Choreographer的postCallback()用法在前面进行了详细的介绍，当Vsync事件到来时，mTraversalRunnable对象的run()函数将被调用。
 
@@ -1408,7 +1408,7 @@ case TRANSACTION_relayout:
 
 该函数可以看出，WMS服务在响应应用程序进程请求添加窗口时，首先在当前进程空间创建一个Surface对象，然后调用Session的relayout()函数进一步完成窗口添加过程，最后将WMS服务中创建的Surface返回给应用程序进程。
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N11-Android-addWindow-App-WMS-Surface.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N11-Android-addWindow-App-WMS-Surface.png)
 
 到目前为止，在应用程序进程和WMS服务进程分别创建了一个Surface对象，但是他们调用的都是Surface的无参构造函数，在该构造函数中并未真正初始化native层的Surface，那native层的Surface是在那里创建的呢？
 
@@ -1723,7 +1723,7 @@ return err;
 ```
 
 在SurfaceFlinger服务端为应用程序创建的Surface创建对应的Layer对象。应用程序请求创建Surface过程如下： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N12-Android-addWindow-createSurface.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N12-Android-addWindow-createSurface.png)
 
 第一次强引用Layer对象时，onFirstRef()函数被回调 [Layer.cpp]
 
@@ -1772,7 +1772,7 @@ sp<IGraphicBufferConsumer> consumer(new BufferQueueConsumer(core));
 ```
 
 [->BufferQueueCore.cpp] 所以核心都是这个BufferQueueCore，他是管理图形缓冲区的中枢。这里举一个SurfaceTexture的例子，来看看他们之间的关系： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N13-Android-addWindow-BufferQueue.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N13-Android-addWindow-BufferQueue.jpg)
 
 ```c
 BufferQueueCore::BufferQueueCore(const sp<IGraphicBufferAlloc>& allocator) :
@@ -1799,7 +1799,7 @@ for (int s = numStartingBuffers; s < BufferQueueDefs::NUM_BUFFER_SLOTS;
 ```
 
 BufferQueueCore类中定义了一个64项的数据mSlots，是一个容量大小为64的数组，因此BufferQueueCore可以管理最多64块的GraphicBuffer。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N14-Android-addWindow-slot.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N14-Android-addWindow-slot.jpg)
 
 [->ISurfaceComposer.cpp]
 
@@ -1887,7 +1887,7 @@ mTexture.init(Texture::TEXTURE_EXTERNAL, mTextureName);
 ```
 
 到此才算真正创建了一个可用于绘图的Surface (Layer)，从上面的分析我们可以看出，在WMS服务进程端，其实创建了两个Java层的Surface对象，第一个Surface使用了无参构造函数，仅仅构造一个Surface对象而已，而第二个Surface却使用了有参构造函数，参数指定了图象宽高等信息，这个Java层Surface对象还会在native层请求SurfaceFlinger创建一个真正能用于绘制图象的native层Surface。最后通过浅拷贝的方式将第二个Surface复制到第一个Surface中，最后通过writeToParcel方式写回到应用程序进程。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N15-Android-addWindow-createSurface-Layer.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N15-Android-addWindow-createSurface-Layer.png)
 
 ```java
     public void copyFrom(SurfaceControl other) {
@@ -2010,7 +2010,7 @@ return reinterpret_cast<jlong>(surface.get());
 ```
 
 每个Activity可以有一个或多个Surface，默认情况下一个Activity只有一个Surface，当Activity中使用SurfaceView时，就存在多个Surface。Activity默认surface是在relayoutWindow过程中由WMS服务创建的，然后回传给应用程序进程，我们知道一个Surface其实就是应用程序端的本地窗口，关于Surface的初始化过程这里就不在介绍。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N16-Android-addWindow-surface-create-client.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N16-Android-addWindow-surface-create-client.png)
 
 #### 应用程序本地窗口Surface创建过程
 
@@ -2258,7 +2258,7 @@ Android是怎样将View画出来的？ [->ViewRootImpl.java]
 ```
 
 关于绘制这个流程很复杂，我们后续章节再分析。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N17-Android-addWindow-Render.JPG)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N17-Android-addWindow-Render.JPG)
 
 参考博客：[Android应用程序UI硬件加速渲染技术简要介绍和学习计划](http://blog.csdn.net/luoshengyang/article/details/45601143)
 
@@ -2415,7 +2415,7 @@ if (err < 0) {
 }
 ```
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N18-Android-addWindow-LockUnlock-Surfacecycle.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N18-Android-addWindow-LockUnlock-Surfacecycle.jpg)
 
 #### Surface管理图形缓冲区
 
@@ -2619,11 +2619,11 @@ return NO_ERROR;
 总结： 1）从传入的QueueBufferInput ，解析填充一些变量； 2）改变入队Slot的状态为QUEUED，每次推进来，mFrameCounter都加1。这里的slot，上一篇讲分配缓冲区返回最老的FREE状态buffer，就是用这个mFrameCounter最小值判断，就是上一篇LRU算法的判断； 3）创建一个BufferItem来描述GraphicBuffer，用mSlots[slot]中的slot填充BufferItem； 4）将BufferItem塞进mCore的mQueue队列，依照指定规则； 5）然后通知SurfaceFlinger去消费。
 
 上述lockCanvas和unlockCanvasAndPost可以用下图来总结一下： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N19-Android-addWindow-LockUnlock.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N19-Android-addWindow-LockUnlock.jpg)
 
 ### 通知SF消费合成
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N20-Android-addWindow-SF-Composition.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N20-Android-addWindow-SF-Composition.png)
 
 当绘制完毕的GraphicBuffer入队之后，会通知SurfaceFlinger去消费，就是BufferQueueProducer的queueBuffer函数的最后几行，listener->onFrameAvailable()。 listener最终通过回调，会回到Layer当中，所以最终调用Layer的onFrameAvailable接口，我们看看它的实现： [Layer.cpp]
 
@@ -2659,7 +2659,7 @@ mEvents->requestNextVsync();
 ```
 
 贴一下SurfaceFlinger的初始化请求vsync信号流程图： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N21-Android-addWindow-vsync-surfaceflinger.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N21-Android-addWindow-vsync-surfaceflinger.png)
 
 最终结果会走到SurfaceFlinger的vsync信号接收逻辑，即SurfaceFlinger的onMessageReceived函数： [SurfaceFlinger.cpp]
 
@@ -2803,7 +2803,7 @@ return mQueuedFrames > 0 || mSidebandStreamChanged || mAutoRefresh;
 #### 1.2、绘制流程
 
 具体完整的绘制流程如图。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.addwindow/N22-Android-addWindow-SF-Composition.jpg)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.addwindow/N22-Android-addWindow-SF-Composition.jpg)
 
 ##### 二、handleTransaction handPageFlip更新Layer对象
 

@@ -1,6 +1,6 @@
 ---
 title: Android Graphics Tests 程序学习（03）：OpenGl Renderer Tests
-cover:  https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.35.jpg
+cover:  https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.35.jpg
 categories: 
   - OpenGL
 tags:
@@ -37,8 +37,8 @@ AOSP 源码（==**文章基于 Android 8.x**==）：
 
 
 ##### 1.1、Circle Props
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/others/CirclePropActivity00.png)
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/others/CirclePropActivity01.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/others/CirclePropActivity00.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/others/CirclePropActivity01.png)
 
 
 源码：
@@ -168,8 +168,8 @@ public class CirclePropActivity extends Activity {
 ```
 
 ##### 1.2、Reveal animation
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/others/RevealActivity00.png)
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/others/RevealActivity01.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/others/RevealActivity00.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/others/RevealActivity01.png)
 
 源码：
 
@@ -224,7 +224,7 @@ public class CirclePropActivity extends Activity {
 
 
 ##### 2.1、Draw Bitmaps
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/others/BitmapsActivity.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/others/BitmapsActivity.png)
 
 
 源码：
@@ -307,7 +307,7 @@ public class BitmapsActivity extends Activity {
 
 ##### 2.2、Rect
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/others/BitmapsRectActivity.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/others/BitmapsRectActivity.png)
 
 源码：
 
@@ -365,7 +365,7 @@ public class BitmapsRectActivity extends Activity {
 
 
 #### (三)、View
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/others/ViewPropertyAlphaActivity.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/others/ViewPropertyAlphaActivity.png)
 
 ``` java
 public class ViewPropertyAlphaActivity extends Activity {
@@ -481,7 +481,7 @@ public class ViewPropertyAlphaActivity extends Activity {
 
 
 ##### 4.1、ColorFilters/Mutate Filters
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/others/ColorFiltersMutateActivity.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/others/ColorFiltersMutateActivity.png)
 
 
 源码：
@@ -640,7 +640,7 @@ public class ColorFiltersMutateActivity extends Activity {
 
 
 ##### 5.1、Animated 3D transform
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/others/Animated3dActivity.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/others/Animated3dActivity.png)
 
 
 ``` java
@@ -670,7 +670,7 @@ public class Animated3dActivity extends Activity {
 
 
 ##### 5.2、Xfermodes
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/others/XfermodeActivity.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/others/XfermodeActivity.png)
 
 ``` java
 LINUX\android\frameworks\base\tests\HwAccelerationTest\src\com\android\test\hwui\XfermodeActivity.java
@@ -793,7 +793,7 @@ public class XfermodeActivity extends Activity {
 
 ##### 6.1、Gradients
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/others/GradientsActivity.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/others/GradientsActivity.png)
 
 ``` java
 \android\frameworks\base\tests\HwAccelerationTest\src\com\android\test\hwui\GradientsActivity.java
@@ -1048,7 +1048,7 @@ public class GradientsActivity extends Activity {
 
 
 ##### 7.1、Shapes
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/others/ShapesActivity.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/others/ShapesActivity.png)
 
 ``` cpp
 public class ShapesActivity extends Activity {
@@ -1190,7 +1190,7 @@ public class ShapesActivity extends Activity {
 
 
 ##### 8.1、PixelCopyWindow
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/others/PixelCopyWindow.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/others/PixelCopyWindow.png)
 
 
 ``` cpp
@@ -1277,7 +1277,7 @@ public class PixelCopyWindow extends Activity {
 
 
 ##### 9.1、Scaled
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/others/ScaledTextActivity.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/others/ScaledTextActivity.png)
 
 ``` cpp
 public class ScaledTextActivity extends Activity {

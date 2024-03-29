@@ -1,6 +1,6 @@
 ---
 title: Android N Display System（1）：Android Display System 系统分析之Android Graphics 系统分析
-cover: https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.07.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.07.jpg
 categories: 
   - Display
 tags:
@@ -94,7 +94,7 @@ Android系统图形框架由下往上主要的包括HAL(HWComposer和Gralloc两�
 ## （一）、Android Graphics 系统框架
 
 （试用限制？？？万恶的亿图(EDraw)强加水印~火~） 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/01-Android-Graphics-Architecture.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/01-Android-Graphics-Architecture.png)
 
 **App** 基于Android系统的GUI框架开发完整的Apk应用。
 
@@ -119,7 +119,7 @@ Ashmem：异步共享内存，用于在进程间共享一块内存区域，并�
 
 > frameworks/native/services/surfaceflinger/tests/Transaction_test.cpp
 
-[Disable_HWUI_GPU_HWC.patch](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/others/Android-7.1.2-Qualcomm-MSM89XX-Disable_HWUI_GPU_HWC)
+[Disable_HWUI_GPU_HWC.patch](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/others/Android-7.1.2-Qualcomm-MSM89XX-Disable_HWUI_GPU_HWC)
 
 原生SurfaceFlinger测试程序编译：
 1、编译Android 7.1.2源码-userdebug版本，烧录重启
@@ -129,7 +129,7 @@ Ashmem：异步共享内存，用于在进程间共享一块内存区域，并�
 5、adb shell、cd system/bin/、chmod 0777 SurfaceFlinger_test
 6、运行测试程序：./SurfaceFlinger_test
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/02-Android-graphics-SurfaceFlinger-Test-00.gif)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/02-Android-graphics-SurfaceFlinger-Test-00.gif)
 
 可以看到在Android 显示屏接替绘制了多个图像，并且会变换形状、位置、颜色、透明度等。 我们先看一下主要步骤： 1、 创建SurfaceComposerClient
 
@@ -151,7 +151,7 @@ mBGSurfaceControl = mComposerClient->createSurface(
 fillSurfaceRGBA8(mBGSurfaceControl, 63, 63, 195);
 ```
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/03-Android-Graphics-SF-test-color-blue.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/03-Android-Graphics-SF-test-color-blue.png)
 
 ```c
 // Foreground surface
@@ -160,7 +160,7 @@ mFGSurfaceControl = mComposerClient->createSurface(
 fillSurfaceRGBA8(mFGSurfaceControl, 195, 63, 63);
 ```
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/04-Android-Graphics-SF-test-color-red.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/04-Android-Graphics-SF-test-color-red.png)
 
 3、处理事务，将SurfaceControl（App）的变化更新到Layer（SurfaceFlinger）图层
 
@@ -180,7 +180,7 @@ fillSurfaceRGBA8(mFGSurfaceControl, 195, 63, 63);
 ```
 
 4、接受Vsync同步信号，渲染合成，推送到显示屏显示 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/05-Android-Graphics-SF-test-frame_01_delay-1s.gif)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/05-Android-Graphics-SF-test-frame_01_delay-1s.gif)
 
 接下来开始Android Graphics系统神秘探索之谜。
 
@@ -190,7 +190,7 @@ fillSurfaceRGBA8(mFGSurfaceControl, 195, 63, 63);
 
 注：基于Android 7.1.2 Qualcomm MSM89XX源码
 
-[Disable_HWUI_GPU_HWC.patch](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/others/Android-7.1.2-Qualcomm-MSM89XX-Disable_HWUI_GPU_HWC)
+[Disable_HWUI_GPU_HWC.patch](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/others/Android-7.1.2-Qualcomm-MSM89XX-Disable_HWUI_GPU_HWC)
 
 编译userdebug版本，烧录开机: 运行测试程序：./SurfaceFlinger_test 结果跟上述一致，这里不再贴图了。
 
@@ -277,12 +277,12 @@ event vsync: count=2636 16.168867 ms (61.847255 Hz)
 
 ### 4.1、APP与SurfaceFlinger的数据结构
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/06-Android-Graphics-App-SurfaceFlinger.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/06-Android-Graphics-App-SurfaceFlinger.png)
 
 #### 4.1.1、BufferQueue介绍
 
 BufferQueue 类是 Android 中所有图形处理操作的核心。它的是将生成图形数据缓冲区的一方（生产者Producer）连接到接受数据以进行显示或进一步处理的一方（消费者Consumer）。几乎所有在系统中移动图形数据缓冲区的内容都依赖于 BufferQueue。 从上图APP与SurfaceFlinger交互中可以看出，BufferQueue内部维持着64个BufferSlot，每一个BufferSlot内部有一个GraphicBuffer指向分配的Graphic Buffer。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/07-Android-Graphics-SurfaceFlinger-BufferQueue.png.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/07-Android-Graphics-SurfaceFlinger-BufferQueue.png.png)
 先来看一下图中几个状态代表的含义：
 
 ```c
@@ -322,7 +322,7 @@ BufferQueue 类是 Android 中所有图形处理操作的核心。它的是将�
 #### 4.1.2、生产者Producer
 
 生产者Producer实现IGraphicBufferProducer的接口，在实际运作过程中，应用（Client端）存在代理端BpGraphicBufferProducer，SurfaceFlinger（Server端）存在Native端BnGraphicBufferProducer。生产者代理端Bp通过Binder通信，不断的dequeueBuffer和queueBuffer操作，Native端同样响应这些操作请求，这样buffer就转了起来了。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/08-Android-Graphics-SurfaceFlinger-IGraphicsBufferProducer.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/08-Android-Graphics-SurfaceFlinger-IGraphicsBufferProducer.png)
 
 这里介绍几个非常重要的函数： **1、requestBuffer** requestBuffer为给定的索引请求一个新的Buffer。 服务器（即IGraphicBufferProducer实现）分配新创建的Buffer到给定的BufferSlot槽索引，并且客户端可以镜像slot->Buffer映射，这样就没有必要传输一个GraphicBuffer用于每个出队操作。
 
@@ -379,7 +379,7 @@ BufferQueue 类是 Android 中所有图形处理操作的核心。它的是将�
 
 #### 4.1.3、消费者Consumer
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/09-Android-Graphics-SurfaceFlinger-IGraphicsBufferConsumer.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/09-Android-Graphics-SurfaceFlinger-IGraphicsBufferConsumer.png)
 这里介绍几个非常重要的函数： **1、acquireBuffer** acquireBuffer尝试获取下一个未决缓冲区的所有权BufferQueue。 如果没有缓冲区等待，则返回NO_BUFFER_AVAILABLE。 如果缓冲区被成功获取，有关缓冲区的信息将在BufferItem中返回。
 
 ```c
@@ -618,7 +618,7 @@ public void addView(@NonNull View view, @NonNull ViewGroup.LayoutParams params) 
 (5) 构造一个AttachInfo对象；
 
 ●●●(6) 创建Surface对象，用于绘制当前视图，当然该Surface对象的真正创建是由WMS来完成的，只不过是WMS传递给应用程序进程的。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/10-Android-Graphics-App-WMS-Surface.png.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/10-Android-Graphics-App-WMS-Surface.png.png)
 
 ### 4.2.2.4、IWindowSession代理获取过程
 
@@ -854,7 +854,7 @@ return bclient;
 
 ### 4.2.3、App（c层）请求创建SurfaceFlinger客户端(client)的过程
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/11-Android-Graphics-App-Ask-SurfaceFlinger-Create-Client.png.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/11-Android-Graphics-App-Ask-SurfaceFlinger-Create-Client.png.png)
 
 继续详细分析AppApp（c层）请求创建SurfaceFlinger客户端(client)的过程
 
@@ -1251,7 +1251,7 @@ return reinterpret_cast<jlong>(surface.get());
 ```
 
 该函数首先得到前面创建好的SurfaceComposerClient对象，通过该对象向SurfaceFlinger端的Client对象发送创建Surface的请求，最后得到一个SurfaceControl对象。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/12-Android-Graphics-App-Ask-SurfaceFlinger-CreateSurface.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/12-Android-Graphics-App-Ask-SurfaceFlinger-CreateSurface.png)
 
 [->SurfaceComposerClient.cpp]
 
@@ -1423,7 +1423,7 @@ return err;
 ```
 
 在SurfaceFlinger服务端为应用程序创建的Surface创建对应的Layer对象。应用程序请求创建Surface过程如下： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/13-Android-Graphics-App-Ask-SurfaceFlinger-Create-Layer.png.png.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/13-Android-Graphics-App-Ask-SurfaceFlinger-Create-Layer.png.png.png)
 第一次强引用Layer对象时，onFirstRef()函数被回调 [Layer.cpp]
 
 ```c
@@ -1498,7 +1498,7 @@ for (int s = numStartingBuffers; s < BufferQueueDefs::NUM_BUFFER_SLOTS;
 
 BufferQueueCore类中定义了一个64项的数据mSlots，是一个容量大小为64的数组，因此BufferQueueCore可以管理最多64块的GraphicBuffer。
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/14-Android-Graphics-App-SurfaceFlinger-BufferSlot.png.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/14-Android-Graphics-App-SurfaceFlinger-BufferSlot.png.png)
 
 [->ISurfaceComposer.cpp]
 
@@ -1584,7 +1584,7 @@ mTexture.init(Texture::TEXTURE_EXTERNAL, mTextureName);
 ```
 
 到此才算真正创建了一个可用于绘图的Surface (Layer)，从上面的分析我们可以看出，在WMS服务进程端，其实创建了两个Java层的Surface对象，第一个Surface使用了无参构造函数，仅仅构造一个Surface对象而已，而第二个Surface却使用了有参构造函数，参数指定了图象宽高等信息，这个Java层Surface对象还会在native层请求SurfaceFlinger创建一个真正能用于绘制图象的native层Surface。最后通过浅拷贝的方式将第二个Surface复制到第一个Surface中，最后通过writeToParcel方式写回到应用程序进程。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/15-Android-Graphics-App-WMS-SurfaceFlinger-Surface-SurfaceControl.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/15-Android-Graphics-App-WMS-SurfaceFlinger-Surface-SurfaceControl.png)
 
 到目前为止，应用程序和WMS一共创建了3个Java层Surface（SurfaceControl）对象，如上图所示，而真正能用于绘图的Surface只有3号，那么3号Surface与2号Surface之间是什么关系呢？outSurface.copyFrom(surface)
 
@@ -1761,7 +1761,7 @@ mSurfaceFlingerConsumer->setContentsChangedListener(this);
 mSurfaceFlingerConsumer->setName(mName);
 ```
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/16-Android-Graphics-App-Ask-SurfaceFlinger-ConsumeLisener-onFrameAvailable.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/16-Android-Graphics-App-Ask-SurfaceFlinger-ConsumeLisener-onFrameAvailable.png)
 
 #### 4.2.4.5、应用程序本地窗口Surface创建过程
 
@@ -1888,7 +1888,7 @@ Android是怎样将View画出来的？由于之前我们已经关闭了HWC、GPU
 
 ## 4.3、APP申请(lock)Buffer的过程
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/17-Android-Graphics-App-SurfaceFlinger-lock-unlockpost.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/17-Android-Graphics-App-SurfaceFlinger-lock-unlockpost.png)
 
 ```java
    private boolean drawSoftware(Surface surface, AttachInfo attachInfo, int xoff, int yoff,
@@ -2233,7 +2233,7 @@ return NO_ERROR;
 ```
 
 总结： 1）从传入的QueueBufferInput ，解析填充一些变量； 2）改变入队Slot的状态为QUEUED，每次推进来，mFrameCounter都加1。这里的slot，上一篇讲分配缓冲区返回最老的FREE状态buffer，就是用这个mFrameCounter最小值判断，就是上一篇LRU算法的判断； 3）创建一个BufferItem来描述GraphicBuffer，用mSlots[slot]中的slot填充BufferItem； 4）将BufferItem塞进mCore的mQueue队列，依照指定规则； 5）然后通知SurfaceFlinger去消费。 Folw： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/18-Android-Graphics-App-WMS-SurfaceFlinger-All-Flow.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/18-Android-Graphics-App-WMS-SurfaceFlinger-All-Flow.png)
 
 ## （五）、通知SF消费合成
 
@@ -2271,7 +2271,7 @@ mEvents->requestNextVsync();
 ```
 
 贴一下SurfaceFlinger的初始化请求vsync信号流程图： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/19-Android-Graphics-vsync-surfaceflinger.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/19-Android-Graphics-vsync-surfaceflinger.png)
 
 最终结果会走到SurfaceFlinger的vsync信号接收逻辑，即SurfaceFlinger的onMessageReceived函数： [SurfaceFlinger.cpp]
 
@@ -3266,7 +3266,7 @@ return (status_t)err;
 ```
 
 合成效果图： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/20-Android-Graphics-SurfaceFlinger-composition.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/20-Android-Graphics-SurfaceFlinger-composition.png)
 
 ## （六）、Android SurfaceFlinger - VSync工作原理
 
@@ -3279,15 +3279,15 @@ VSYNC（Vertical Synchronization）是一个相当古老的概念，对于游戏
 ### 6.1.2、Android VSYNC -- 黄油计划
 
 谷歌为解决Android系统流畅性问题。在4.1版本引入了一个重大的改进--Project Butter黄油计划。 Project Butter对Android Display系统进行了重构，引入了三个核心元素，即VSYNC、Triple Buffer和Choreographer。 VSYNC最重要的作用是防止出现画面撕裂（screentearing）。所谓画面撕裂，就是指一个画面上出现了两帧画面的内容，如下图。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/21-Android-graphics-view-teaning.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/21-Android-graphics-view-teaning.png)
 
 为什么会出现这种情况呢？这种情况一般是因为显卡输出帧的速度高于显示器的刷新速度，导致显示器并不能及时处理输出的帧，而最终出现了多个帧的画面都留在了显示器上的问题。这也就是我们所说的画面撕裂。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/22-Android-Graphics-Draw-whithout-vsync.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/22-Android-Graphics-Draw-whithout-vsync.png)
 
 这个图中有三个元素，Display是显示屏幕，GPU和CPU负责渲染帧数据，每个帧以方框表示，并以数字进行编号，如0、1、2等等。VSync用于指导双缓冲区的交换。 以时间的顺序来看下将会发生的异常： Step1\. Display显示第0帧数据，此时CPU和GPU渲染第1帧画面，而且赶在Display显示下一帧前完成 Step2\. 因为渲染及时，Display在第0帧显示完成后，也就是第1个VSync后，正常显示第1帧 Step3\. 由于某些原因，比如CPU资源被占用，系统没有及时地开始处理第2帧，直到第2个VSync快来前才开始处理 Step4\. 第2个VSync来时，由于第2帧数据还没有准备就绪，显示的还是第1帧。这种情况被Android开发组命名为"Jank"。 Step5\. 当第2帧数据准备完成后，它并不会马上被显示，而是要等待下一个VSync。 所以总的来说，就是屏幕平白无故地多显示了一次第1帧。原因大家应该都看到了，就是CPU没有及时地开始着手处理第2帧的渲染工作，以致"延误军机"。
 
 其实总结上面的这个情况之所以发生，首先的原因就在于第二帧没有及时的绘制（当然即使第二帧及时绘制，也依然可能出现Jank，这就是同时引入三重缓冲的作用。我们将在三重缓冲一节中再讲解这种情况）。那么如何使得第二帧即使被绘制呢？ 这就是我们在Graphic系统中引入VSYNC的原因，考虑下面这张图： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/23-Android-Graphics-Draw-whit-vsync.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/23-Android-Graphics-Draw-whit-vsync.png)
 
 如上图所示，一旦VSync出现后，立刻就开始执行下一帧的绘制工作。这样就可以大大降低Jank出现的概率。另外，VSYNC引入后，要求绘制也只能在收到VSYNC消息之后才能进行，因此，也就杜绝了另外一种极端情况的出现---CPU（GPU）一直不停的进行绘制，帧的生成速度高于屏幕的刷新速度，导致生成的帧不能被显示，只能丢弃，这样就出现了丢帧的情况---引入VSYNC后，绘制的速度就和屏幕刷新的速度保持一致了。
 
@@ -3498,7 +3498,7 @@ mPrimaryDispSync是什么？addResyncSample有什么作用？ 要回答这三个
 ### 6.3.1、Surfaceflinger.init()
 
 先看一下总体flow： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/24-Android-Graphics-Vsync-surfaceflinger.init.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/24-Android-Graphics-Vsync-surfaceflinger.init.png)
 
 ```c
 void SurfaceFlinger::init() {
@@ -3525,13 +3525,13 @@ void SurfaceFlinger::init() {
 ```
 
 2个EventThread对象分别是mEventThread，给app用，mSFEventThread，给surfaceflinger自己用。 下面给出这4个Thread关系图。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/25-Android-Graphics-SurfaceFlinger.init.DispSyncThread.png.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/25-Android-Graphics-SurfaceFlinger.init.DispSyncThread.png.png)
 
 这两个DispSyncSource就是KK引入的重大变化。Android 4.4(KitKat)引入了VSync的虚拟化，即把硬件的VSync信号先同步到一个本地VSync模型中，再从中一分为二，引出两条VSync时间与之有固定偏移的线程。示意图如下： 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/26-Android-Graphics-SurfaceFlinger-App-Vsync-offset.png.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/26-Android-Graphics-SurfaceFlinger-App-Vsync-offset.png.png)
 
 Google这样修改的目的又是什么呢？ =在当前三重缓冲区的架构下，即对于一帧内容，先等App UI画完了，SurfaceFlinger再出场对其进行合并渲染后放入framebuffer，最后整到屏幕上。而现有的VSync模型是让大家一起开始干活。 这个架构其实会产生一个问题，因为App和SurfaceFlinger被同时唤醒，导致他们二者总是一起工作，必然导致VSync来临的时刻，这二者之间产生了CPU资源的抢占。因此，谷歌给这两个工作都加上一个小小的延迟，让这两个工作并不是同时被唤醒，这样大家就可以错开使用资源的高峰期，提高工作的效率。 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/27-Android-graphics-SurfaceFlinger-Vsync-app-sf.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/27-Android-graphics-SurfaceFlinger-Vsync-app-sf.png)
 
 这两个延迟，其实就分别对应上面代码中的vsyncSrc（绘制延迟）和sfVsyncSrc（合成延迟）。 在创建了两个DispSyncSource变量后，我们使用它们来初始化了两个EventThread。下面我们来详细看下EventThread的创建流程：
 
@@ -3623,7 +3623,7 @@ status_t EventThread::registerDisplayEventConnection(
 我们在前面一章也提到了无论是软件方式还是硬件方式，SurfaceFlinger收到VSync信号后，处理函数都是onVSyncReceived函数：
 
 **VSync消息处理----addResyncSample** 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/28-Android-Graphics-SF-Vsync-addResyncSample.png.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/28-Android-Graphics-SF-Vsync-addResyncSample.png.png)
 
 ```c
 bool DispSync::addResyncSample(nsecs_t timestamp) {  
@@ -3809,7 +3809,7 @@ ssize_t DisplayEventReceiver::sendEvents(const sp<BitTube>& dataChannel,
 }
 ```
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/29-Android-Graphics-App-SurfaceFlinger-Vsync-postEvent.png.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/29-Android-Graphics-App-SurfaceFlinger-Vsync-postEvent.png.png)
 
 其实看到这里的BitTube我们就明白了，在本文开始时候我们提到：
 
@@ -4544,7 +4544,7 @@ public void run() {
 
 总体架构： 伐木累:::终于完了，由于Android Graphics系统涉及模块代码纵横交叉复杂，其中代码图示有误的地方请见谅，也没有精力一一核对了，还请海涵~~~主要是分析Android Graphics总体的一个流程思想，有需要再一点点深挖。
 
-![Markdown](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/android.graphics/30-Android-Graphics-Arc-flow.png)
+![Markdown](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/android.graphics/30-Android-Graphics-Arc-flow.png)
 
 ## （七）、参考文档(特别感谢各位前辈的分析和图示)：
 

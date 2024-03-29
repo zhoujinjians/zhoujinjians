@@ -1,6 +1,6 @@
 ---
 title: Android 11 Display System源码分析（3）：App && Native Surface创建流程、BufferQueue机制（V1）
-cover: https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.43.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.43.jpg
 categories: 
  - Display
 tags:
@@ -13,7 +13,7 @@ date: 2022-08-16 16:16:16
 
 （==**文章基于 Android 11.0**==）
 
-[【zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianzjj) 
+[【zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianzz) 
 
 [【开发板】](https://wiki.radxa.com/Rockpi4)
 
@@ -48,25 +48,25 @@ app中Activity回调onCreate()，setContentView最终会走到ViewRootImpl的set
 
 进一步会请求system_server创建Surface（SurfaceControl）。
 
-![image-20220830135743625](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830135743625.png)
+![image-20220830135743625](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830135743625.png)
 
-![image-20220830135838170](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830135838170.png)
+![image-20220830135838170](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830135838170.png)
 
-![image-20220830135913055](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830135913055.png)
+![image-20220830135913055](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830135913055.png)
 
-![image-20220830135945276](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830135945276.png)
+![image-20220830135945276](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830135945276.png)
 
-![image-20220830140054180](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830140054180.png)
+![image-20220830140054180](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830140054180.png)
 
-![image-20220830140124481](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830140124481.png)
+![image-20220830140124481](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830140124481.png)
 
-![image-20220830140158063](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830140158063.png)
+![image-20220830140158063](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830140158063.png)
 
-![image-20220830140228359](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830140228359.png)
+![image-20220830140228359](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830140228359.png)
 
-![image-20220830140444916](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830140444916.png)
+![image-20220830140444916](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830140444916.png)
 
-![image-20220830140800891](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830140800891.png)
+![image-20220830140800891](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830140800891.png)
 
 走到这里已经到Native 创建Surface了，接下来看看Native Surface创建步骤。
 
@@ -76,48 +76,48 @@ app中Activity回调onCreate()，setContentView最终会走到ViewRootImpl的set
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\base\libs\hwui\tests\common\TestContext.cpp
 
-![image-20220830112758948](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830112758948.png)
+![image-20220830112758948](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830112758948.png)
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\native\libs\gui\SurfaceComposerClient.cpp
 
-![image-20220830111100693](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830111100693.png)
+![image-20220830111100693](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830111100693.png)
 
-![image-20220830111125226](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830111125226.png)
+![image-20220830111125226](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830111125226.png)
 
 SurfaceComposerClient将Surface创建请求转交给保存在其成员变量中的Bp SurfaceComposerClient对象来完成。
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\native\libs\gui\ISurfaceComposerClient.cpp
 
-![image-20220830111201710](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830111201710.png)
+![image-20220830111201710](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830111201710.png)
 
-![image-20220830111235170](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830111235170.png)
+![image-20220830111235170](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830111235170.png)
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\native\services\surfaceflinger\Client.cpp
 
-![image-20220830111339855](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830111339855.png)
+![image-20220830111339855](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830111339855.png)
 
-![image-20220830111827145](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830111827145.png)
+![image-20220830111827145](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830111827145.png)
 
 通过Binder通信进入SurfaceFlinger创建Layer。
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\native\services\surfaceflinger\SurfaceFlinger.cpp
 
-![image-20220830112130154](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830112130154.png)
+![image-20220830112130154](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830112130154.png)
 
   SurfaceFlinger根据标志位创建对应类型的Surface，当前系统定义了4种类型的Layer:
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\native\libs\gui\include\gui\ISurfaceComposerClient.h
 
-![image-20220830112219815](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830112219815.png)
+![image-20220830112219815](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830112219815.png)
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\native\services\surfaceflinger\SurfaceFlinger.cpp
 >
 
-![image-20220830112340263](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830112340263.png)
+![image-20220830112340263](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830112340263.png)
 
 在SurfaceFlinger服务端为应用程序创建的Surface创建对应的Layer对象。
 
-![image-20220830112416247](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830112416247.png)
+![image-20220830112416247](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830112416247.png)
 
 
 
@@ -126,11 +126,11 @@ SurfaceComposerClient将Surface创建请求转交给保存在其成员变量中�
 获取CompositionEngine创造对应layer，这个后面用于渲染作用。
 看看Log：
 
-![image-20220830112456785](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830112456785.png)
+![image-20220830112456785](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830112456785.png)
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\native\services\surfaceflinger\BufferLayer.cpp
 
-![image-20220830112644132](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830112644132.png)
+![image-20220830112644132](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830112644132.png)
 
 上面已经创建好Layer，初始化好了GraphicBufferProducer、GraphicBufferConsumer、
 
@@ -140,7 +140,7 @@ SurfaceComposerClient将Surface创建请求转交给保存在其成员变量中�
 
 BufferQueue 类是 Android 中所有图形处理操作的核心。它的是将生成图形数据缓冲区的一方（生产者Producer）连接到接受数据以进行显示或进一步处理的一方（消费者Consumer）。几乎所有在系统中移动图形数据缓冲区的内容都依赖于 BufferQueue。
 从上图APP与SurfaceFlinger交互中可以看出，BufferQueue内部维持着64个BufferSlot，每一个BufferSlot内部有一个GraphicBuffer指向分配的Graphic Buffer。
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/Android-Graphics-SurfaceFlinger-BufferQueue.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/Android-Graphics-SurfaceFlinger-BufferQueue.png)
 
 
 先来看一下图中几个状态代表的含义：
@@ -194,7 +194,7 @@ ACQUIRED表示缓冲区已被消费者（Consumer）获取。 如与QUEUED，内
 #### （2）、生产者Producer
 
 生产者Producer实现IGraphicBufferProducer的接口，在实际运作过程中，应用（Client端）存在代理端BpGraphicBufferProducer，SurfaceFlinger（Server端）存在Native端BnGraphicBufferProducer。生产者代理端Bp通过Binder通信，不断的dequeueBuffer和queueBuffer操作，Native端同样响应这些操作请求，这样buffer就转了起来了。 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/Android-Graphics-SurfaceFlinger-IGraphicsBufferProducer.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/Android-Graphics-SurfaceFlinger-IGraphicsBufferProducer.png)
 
 
 这里介绍几个非常重要的函数：
@@ -255,7 +255,7 @@ attachBuffer尝试将缓冲区的所有权转移给缓冲区队列。 如果这�
 
 #### （3）、消费者Consumer
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/Android-Graphics-SurfaceFlinger-IGraphicsBufferConsumer.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/Android-Graphics-SurfaceFlinger-IGraphicsBufferConsumer.png)
 
 
 这里介绍几个非常重要的函数：
@@ -353,26 +353,26 @@ Stack Trace:
 
 ```
 
-![image-20220830142844255](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830142844255.png)
+![image-20220830142844255](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830142844255.png)
 
-![image-20220830143243343](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830143243343.png)
+![image-20220830143243343](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830143243343.png)
 
-![image-20220830143404217](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830143404217.png)
+![image-20220830143404217](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830143404217.png)
 
-![image-20220830143427085](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830143427085.png)
+![image-20220830143427085](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830143427085.png)
 
-![image-20220830143542207](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830143542207.png)
+![image-20220830143542207](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830143542207.png)
 
 这里就衔接到《Android 11 Display System源码分析（1）：GraphicBuffer allocate流程》第五步：importBuffer了。
 
 ## （2）、Surface::queueBuffer介绍
 
-![image-20220830143952610](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830143952610.png)
+![image-20220830143952610](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830143952610.png)
 
-![image-20220830144136110](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830144136110.png)
+![image-20220830144136110](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830144136110.png)
 
-![image-20220830144212163](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830144212163.png)
+![image-20220830144212163](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830144212163.png)
 
-![image-20220830144610675](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830144610675.png)
+![image-20220830144610675](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display03/image-20220830144610675.png)
 
 frameAvailableListener->onFrameAvailable(item)：通知SurfaceFlinger去消费

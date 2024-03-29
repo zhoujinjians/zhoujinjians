@@ -1,6 +1,6 @@
 ---
 title: Android 8.1 Display System源码分析（10）： App（"com.android.testgreen"）界面显示流程源码分析（1）：Activity启动流程分析（RK3399）
-cover: https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.19.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.19.jpg
 categories: 
   - Display
 tags:

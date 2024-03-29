@@ -1,6 +1,6 @@
 ---
 title: Android Video System（3）：音视频录制Recorder、编码Encoder、混合MediaMuxer源码分析
-cover: https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.24.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.24.jpg
 categories:
   - Multimedia
 tags:
@@ -119,7 +119,7 @@ unsigned int capture_sample(FILE *file, unsigned int card, unsigned int device,
 开始分析音频录制编码合成之旅，之后分析视频录制编码合成过程。
 
 #### （一）、Audio Recorder 音频录制源码分析
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/video.system/VS-03-01-MediaRecorder-flow.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/video.system/VS-03-01-MediaRecorder-flow.png)
 
 #### （二）、Media Recorder 视频录制源码分析
 
@@ -152,7 +152,7 @@ unsigned int capture_sample(FILE *file, unsigned int card, unsigned int device,
 ```
 
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/video.system/VS-03-02-MediaRecorder-video-flow.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/video.system/VS-03-02-MediaRecorder-video-flow.png)
 
 #### （三）、音频Recorder编码Encoder
 
@@ -327,7 +327,7 @@ status_t MediaMuxer::start() {
 
   
 
-  ![Alt text](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/video.system/VS-03-03-MPEG4Writer.png)
+  ![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/video.system/VS-03-03-MPEG4Writer.png)
 
 
  其实看完上面的内容，应该对Android录制视频过程中，录制的视频的封装过程有一个大体了解，我们平时所说的视频后缀名.mp4/.mkv等等就是视频封装的各种格式。

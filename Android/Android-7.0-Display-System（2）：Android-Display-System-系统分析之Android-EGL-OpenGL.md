@@ -1,6 +1,6 @@
 ---
 title: Android N Display System（2）：Android Display System 系统分析之Android EGL && OpenGL
-cover: https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.20.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.20.jpg
 categories: 
   - Display
 tags:
@@ -102,7 +102,7 @@ AOSP 源码（文章基于 Android 7.1.2）：
 
 总体架构：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-01-Android-Graphics-Architecture-EGL.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-01-Android-Graphics-Architecture-EGL.png)
 
 [【Android Display System（1）- Android Graphics 系统 分析】](http://charlesvincent.cc/2018/02/01/Android-7-1-2-Android-N-Android-Graphics-%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90/)
 ####（一）、 Android EGL 应用实例
@@ -321,7 +321,7 @@ TEST_F(LayerTest, LayerWorks) {
 
 实现效果（保持运行，可以看到界面最顶层会绘制黑色背景和红绿蓝三个色块）：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-02-Android-graphics-surface-test.gif)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-02-Android-graphics-surface-test.gif)
 
 可以看到比较关键的代码：
 
@@ -354,7 +354,7 @@ TEST_F(LayerTest, LayerWorks) {
 我们这里主要为了引出Android底层如何利用EGL绘图。
 ##### 1.2、Android BootAnimation 开机动画(EGL在Android中应用)
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-03-Android-boot-egl.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-03-Android-boot-egl.png)
 
 
 关键代码：
@@ -413,7 +413,7 @@ bool BootAnimation::playAnimation(const Animation& animation)
 ##### 1.2、Understanding Android Graphics Internals
 要深入了解Android Graphics机制，需要了解熟悉以下知识（包括但不限于）。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-04-understand-android-graphics-internals.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-04-understand-android-graphics-internals.png)
 
 ####（二）、OpenGL ES 2.0 知识串讲
 在了解EGL之前，先来看看前人总结的知识[OPENGL ES 2.0 知识串讲](http://geekfaner.com/shineengine/index.html)：
@@ -499,7 +499,7 @@ GLSL,全称:OpenGL Shading Language,是 OpenGL ES 中使用到的着色器的 �
 
 通过我们对 EGL、GLSL、OpenGL ES 的理解,借助一张图片,从专业的角度来解释一下手机屏幕上的图片是如何生成的。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-05-OpenGL-Picture-Generate.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-05-OpenGL-Picture-Generate.png)
 
 
 首先,通过 EGL 获取手机屏幕,进而获取到手机屏幕对应的这个棋盘,同时, 在手机的 GPU 中根据手机的配置信息,生成另外一个的棋盘和一个本子,本子是用于记录这个棋盘初始颜色等信息。
@@ -522,7 +522,7 @@ GLSL,全称:OpenGL Shading Language,是 OpenGL ES 中使用到的着色器的 �
 
 #### 2.4.2、OpenGL 流水线（pipeline）
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-06-OpenGL-ES-pipeline.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-06-OpenGL-ES-pipeline.png)
 
 
 EGL 是用于与手机设备打交道,比如获取绘制 buffer,将绘制 buffer 展现到手机屏幕中。那么抛开 EGL 不说,OpenGL ES 与 GLSL 的主要功能,就是往这块 buffer 上绘制图片。
@@ -588,7 +588,7 @@ Vertex Vertex 就是图形中顶点，一系列的顶点就围成了一个图形
 Fragment Fragment 是三维空间的点、线、三角形这些基本图元映射到二维平面上的映射区域，通常一个 Fragment 对应于屏幕上的一个像素，但高分辨率的屏幕可能会用多个像素点映射到一个 Fragment，以减少 GPU 的工作。
 而光栅化是把点、线、三角形映射到屏幕上的像素点的过程。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-07-OpenGL-guangshanhua.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-07-OpenGL-guangshanhua.png)
 
 
 
@@ -600,7 +600,7 @@ Fragment Shader Fragment Shader对光栅化之后2D图像中的每个像素处�
 
 #### 3.2、EGL Overview
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-08-OpenGL-EGL-Overview.png.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-08-OpenGL-EGL-Overview.png.png)
 
 
 What is the Direction?
@@ -610,7 +610,7 @@ EGL™ is an interface between Khronos rendering APIs such as OpenGL ES or OpenV
 #### 3.2.1、什么是 EGL？
 EGL 是 OpenGL ES 渲染 API 和本地窗口系统(native platform window system)之间的一个中间接口层，它主要由系统制造商实现。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-09-eglCreateWindowSurface.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-09-eglCreateWindowSurface.png)
 
 EGL提供如下机制：
 与设备的原生窗口系统通信
@@ -622,7 +622,7 @@ EGL提供如下机制：
 
 #### 3.2.2、使用 EGL 绘图的基本步骤
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-10-egl-draw-surface.png.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-10-egl-draw-surface.png.png)
 
 ☯  Display(EGLDisplay) 是对实际显示设备的抽象。
 ☯  Surface（EGLSurface）是对用来存储图像的内存区域
@@ -654,7 +654,7 @@ OpenGL ES 定义了一个渲染图形的 API，但没有定义窗口系统。为
 
 #### 3.3.1、EGLSurface
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-11-eglsurface-anativewindwo.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-11-eglsurface-anativewindwo.png)
 
 
 EGLSurface 可以是由 EGL 分配的离屏缓冲区（称为“pbuffer”），或由操作系统分配的窗口。EGL 窗口 Surface 通过 eglCreateWindowSurface() 调用被创建。该调用将“窗口对象”作为参数，在 Android 上，该对象可以是 SurfaceView、SurfaceTexture、SurfaceHolder 或 Surface，所有这些对象下面都有一个 BufferQueue。当您进行此调用时，EGL 将创建一个新的 EGLSurface 对象，并将其连接到窗口对象的 BufferQueue 的生产方接口。此后，渲染到该 EGLSurface 会导致一个缓冲区离开队列、进行渲染，然后排队等待消耗方使用。（术语“窗口”表示预期用途，但请注意，输出内容不一定会显示在显示屏上。）
@@ -675,7 +675,7 @@ EGL 不提供锁定/解锁调用，而是由您发出绘制命令，然后调用
 
 #### 3.3.3、egl_surface_t 关系图
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-12-egl_surface_t.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-12-egl_surface_t.png)
 
 
 ``` cpp
@@ -714,18 +714,18 @@ static EGLSurface createWindowSurface(EGLDisplay dpy, EGLConfig config,
 
 ```
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-13-framebufferwindow-surface.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-13-framebufferwindow-surface.png)
 
 
 #### 3.3.4、EGLContext and Thread Local Storage
 
 #### 3.3.4.1、EGLContext
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-14-eglcontect-TLS.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-14-eglcontect-TLS.png)
 
 #### 3.3.4.2、Thread Local Storage
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-15-eglcontect-Thread-Loacal.png.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-15-eglcontect-Thread-Loacal.png.png)
 
 
 
@@ -733,12 +733,12 @@ static EGLSurface createWindowSurface(EGLDisplay dpy, EGLConfig config,
 
 #### 3.3.5.1、HWCompser 
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-16-Android-graphics-components.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-16-Android-graphics-components.png)
 
 
 #### 3.3.5.2、SurfaceFlinger
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-17-eglimp-hwrenderer-surfaceflinger.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-17-eglimp-hwrenderer-surfaceflinger.png)
 
 
 ####（四）、Android EGL：OpenGL ES 库和 EGL 库加载过程
@@ -758,7 +758,7 @@ static EGLSurface createWindowSurface(EGLDisplay dpy, EGLConfig config,
 ##### 4.2、Android 中 OpenGL ES 软件层次栈
 按照分层理念的设计，Android 中的 OpenGL ES 实现也是层次设计的，形成一个软件层次栈。最上面的是 Java 层，接着下面是 JNI 层，再调用下面的 wrapper 层，wrapper 层下面则是 OpenGL ES API 的具体软件实或者硬件实现了。整个 OpenGL 软件层次栈的调用关系如下所示：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-18-OpenGL_ES_call_graph_so.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-18-OpenGL_ES_call_graph_so.png)
 
 
 ##### 4.3、OpenGL ES/EGL Wrapper 库
@@ -902,7 +902,7 @@ static void* load_system_driver(const char* kind) {
 
 下面以 SurfaceFlinger 进程init()为例进行分析，整个 OpenGL ES/EGL 库的加载和解析流程如下所示：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-19-SF_init.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-19-SF_init.png)
 
 这里通过调用 EGL 库的 eglGetDisplay() 获得 Display。
 
@@ -1075,19 +1075,19 @@ Android 的 OpenGL ES 图形系统涉及多个库，根据设备类型的不同�
 
 对于模拟器，没有开启 OpenGL ES 的 GPU 硬件模拟的情况，Android OpenGL ES 图形库结构如下：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-20-opencl-egl-imp.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-20-opencl-egl-imp.png)
 
 
 
 当为模拟器开启了 OpenGL ES 的 GPU 硬件模拟，实际的 EGL 和 OpenGL ES 实现库会采用由 android-7.1.1_r22/device/generic/goldfish-opengl 下的源码编译出来的几个库文件，即 libGLESv2_emulation.so、libGLESv1_CM_emulation.so 和 libEGL_emulation.so。此时，OpenGL ES 图形库结构如下：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-21-opencl-egl-imp-emulate.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-21-opencl-egl-imp-emulate.png)
 
 
 对于真实的物理 Android 设备，OpenGL ES 图形库结构如下，例如高通实现（libEGL_adreno.so 
 libGLESv1_CM_adreno.so libGLESv2_adreno.so [\system\vendor\lib64\egl]）：
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzjj/zhoujinjian.com.images/master/display.system/DS-02-22-opencl-egl-imp-qcom-adreno.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/display.system/DS-02-22-opencl-egl-imp-qcom-adreno.png)
 
 ####（五）、OpenGL ES：EGL接口解析与理解
 
