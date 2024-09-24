@@ -1,6 +1,6 @@
 ---
 title: Android L Display System源码分析（1）：Display System 精彩世界（Android 5.0.2 && Kernel 3.0.86）
-cover: https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/personal.website/post.cover.pictures.00001.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/personal.website/post.cover.pictures.00001.jpg
 categories: 
   - Display
 tags:
@@ -191,9 +191,9 @@ int main()
 > 3、./FrameBufferTest
 
 ##### 1.3、显示效果
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.FBTest.png)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.FBTest.png)
 **FrameBuffer 使用**
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.FrameBuferrTest.JPG)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.FrameBuferrTest.JPG)
 
 #### 1.4、FrameBuffer 代码分析
 FrameBuffer通常作为LCD控制器或者其他显示设备的驱动，FrameBuffer驱动是一个字符设备，设备节点是/dev/fbX（Android 设备为/dev/graphics/fb0），主设备号为29，次设备号递增，用户可以将Framebuffer看成是显示内存的一个映像，将其映射到进程地址空间之后，就可以直接进行读写操作，而写操作可以立即反应在屏幕上。这种操作是抽象的，统一的。用户不必关心物理显存的位置、换页机制等等具体细节。这些都是由Framebuffer设备驱动来完成的。Framebuffer设备为上层应用程序提供系统调用，也为下一层的特定硬件驱动提供接口；那些底层硬件驱动需要用到这儿的接口来向系统内核注册它们自己。
@@ -260,7 +260,7 @@ struct fb_info {
 ```
 ##### 1.4.1.2、fb_var_screeninfo
 
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.fb_var_screeninfo.jpg)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.fb_var_screeninfo.jpg)
 
 fb_var_screeninfo：用于记录用户可修改的显示控制器参数，包括屏幕分辨率、每个像素点的比特数等
 
@@ -523,7 +523,7 @@ int main(int /*argc*/, char** /*argv*/)
 > 4、system/bin/OpenGLESTexturesRGB
 
 ##### 2.3、显示效果
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.OpenGLESTexturesRGB.JPG)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.OpenGLESTexturesRGB.JPG)
 
 
 ##### 2.4、OpenGLESTexturesRGB代码分析
@@ -542,7 +542,7 @@ int main(int /*argc*/, char** /*argv*/)
 >10、删除 EGLSurface 对象
 >11、删除 EGLContext 对象
 >12、终止与 EGLDisplay 之间的连接
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.OpenGLESUse.png)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.OpenGLESUse.png)
 
 #### (三)、SurfaceFlinger test App（Android SurfaceFlinger Native层）
 #### （3）、SurfaceFlinger合成图像
@@ -612,16 +612,16 @@ SurfaceFlingerTestsBlue，然后分别进行测试。
 
 ##### 3.3、显示效果
 **SurfaceFlingerTestsRed**
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.SurfaceFlingerTestsRed.JPG)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.SurfaceFlingerTestsRed.JPG)
 
 **SurfaceFlingerTestsGreen**
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.SurfaceFlingerTestsGreen.JPG)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.SurfaceFlingerTestsGreen.JPG)
 
 **SurfaceFlingerTestsBlue**
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.SurfaceFlingerTestsBlue.JPG)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.SurfaceFlingerTestsBlue.JPG)
 
 同时运行三个bin文件
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.SurfaceFlingerTestsX.JPG)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.SurfaceFlingerTestsX.JPG)
 
 ##### 3.4、SurfaceFlingerTest代码分析
 SurfaceFlinger涉及流程复杂，稍后另外博客再继续分析！
@@ -706,16 +706,16 @@ TestViewportBlue.apk，然后分别进行测试。
 
 ##### 4.3、显示效果
 **TestViewportRed.apk**
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.TestViewportRed.JPG)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.TestViewportRed.JPG)
 
 
 **TestViewportGreen.apk**
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.TestViewportGreen.JPG)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.TestViewportGreen.JPG)
 
 
 
 **TestViewportBlue.apk**
-![enter image description here](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.TestViewportBlue.JPG)
+![enter image description here](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/personal.website/zjj.display.sys.TestViewportBlue.JPG)
 
 
 

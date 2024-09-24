@@ -1,6 +1,6 @@
 ---
 title: Android 11 Display System源码分析（5）：HWComposer简要分析（V1）
-cover: https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.45.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.45.jpg
 categories: 
  - Display
 tags:
@@ -13,7 +13,7 @@ date: 2022-10-16 16:16:16
 
 （==**文章基于 Android 11.0**==）
 
-[【zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianzz) 
+[【zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianz) 
 
 [【开发板】](https://wiki.radxa.com/Rockpi4)
 
@@ -45,21 +45,21 @@ date: 2022-10-16 16:16:16
 
 ## （一）、DRM/KMS for Android介绍
 ### （1）、Pre-DRM world
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-pre-drm-world.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-pre-drm-world.png)
 
 **Issues：**
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-pre-drm-world-Issues.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-pre-drm-world-Issues.png)
 
 ### （2）、DRM world
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-world.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-world.png)
 
 **Objectives：**
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-world-Objectives.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-world-Objectives.png)
 
 
 ### （3）、Future
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-world-future.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-world-future.png)
 
 
 ## （二）、Android drm_hwcomposer介绍
@@ -72,7 +72,7 @@ hardware
 ○ Blit/2D engine
 ● Often device specific and written by the display hardware OEM
 #### Hardware Composer 1.x
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/Android-hardware-composer1.x.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/Android-hardware-composer1.x.png)
 
 #### Key Differences between 1.x and 2.0
 Increases API functions from 12 to 43
@@ -80,25 +80,25 @@ Increases API functions from 12 to 43
 ● Renames prepare() / set() to validate() / present()
 ● Replaces speculative fences with non-speculative fences
 #### Hardware Composer 1.x Sync Fences
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/Android-hardware-composer1.x.Sync-Fences.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/Android-hardware-composer1.x.Sync-Fences.png)
 
 #### Hardware Composer 2.0 Sync Fences
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/Android-hardware-composer2.0.Sync-Fences.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/Android-hardware-composer2.0.Sync-Fences.png)
 
 ### （2）、Android drm_hwcomposer
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-hwcomposer.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-hwcomposer.png)
 
 #### HWC1
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-hwc1.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-hwc1.png)
 
 #### HWC2
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-hwc2.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-hwc2.png)
 
 这里使用的就是HWC2。
 ### （三）、Android drm_hwcomposer Code Overview
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-hwc-code-overview1.png)
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-hwc-code-overview2.png)
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-hwc-code-overview3.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-hwc-code-overview1.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-hwc-code-overview2.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/DRM_KMS-android-drm-hwc-code-overview3.png)
 
 分析hwcomposer之前，先来分析gralloc。
 ## （四）、gralloc代码分析
@@ -155,11 +155,11 @@ ROCKCHIP_GEM_MAP_OFFSET
 
 ```
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/Android10.Display.6.Gralloc2.Hwcomposer.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/Android10.Display.6.Gralloc2.Hwcomposer.png)
 
 ## （五）、hwcomposer代码分析
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/FireFly-Rk3399-DRM-KMS-drm_hwcomposer-hwcomposer.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/FireFly-Rk3399-DRM-KMS-drm_hwcomposer-hwcomposer.png)
 #### **hwc_prepare:**
 
 ```
@@ -230,20 +230,20 @@ Stack Trace:
 
 ### （2）、adb pull /data/dump/
 >adb pull /data/dump/
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/dumplayer.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/dumplayer.png)
 
 ### （3）、抓到的bin文件可以用软件7yuv打开查看，格式设定为RGBA8888
 **Launcher：**
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/launcher.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/launcher.png)
 **Wallpaper：**
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/wallpaper.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/wallpaper.png)
 **StatusBar：**
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/statusbar.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/statusbar.png)
 **NavigationBar：**
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/navigationbar.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/navigationbar.png)
 
 **最终合成效果图：**
-![Alt text](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/composer.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Display_System/Android11_Display05/composer.png)
 
 ## （七）、参考资料(特别感谢)：
 

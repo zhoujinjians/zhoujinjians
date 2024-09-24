@@ -1,6 +1,6 @@
 ---
 title: Android 11 Gnss System源码分析（1）：Gnss流程分析
-cover: https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.51.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.51.jpg
 categories: 
  - Display
 tags:
@@ -13,7 +13,7 @@ date: 2023-05-16 16:16:16
 
 （==**文章基于 Android 11.0**==）
 
-[【zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianzz) 
+[【zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianz) 
 
 [【开发板】](https://wiki.radxa.com/Rockpi4)
 
@@ -56,43 +56,43 @@ service gnss_service  /vendor/bin/hw/android.hardware.gnss@2.0-service-unicore
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\vendor\unicore_gnss\service2_0\service.cpp
 
-![image-20221102171931273](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102171931273.png)
+![image-20221102171931273](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102171931273.png)
 
-![image-20221102172644988](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102172644988.png)
+![image-20221102172644988](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102172644988.png)
 
 ## （二）、LocationManagerService初始化（system_server）
 
 ### （1）、initializeGnss
 
-![image-20221102173007024](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102173007024.png)
+![image-20221102173007024](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102173007024.png)
 
 ![image-20221101151325709](./Android 11 Sensor System源码分析（1）：Sensor流程分析.assets/image-20221101151325709.png)
 
 ### （2）、new GnssManagerService()
 
-![image-20221102173108154](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102173108154.png)
+![image-20221102173108154](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102173108154.png)
 
 ### （3）、GnssManagerService.isGnssSupported()
 
-![image-20221102173411950](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102173411950.png)
+![image-20221102173411950](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102173411950.png)
 
-![image-20221102173452169](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102173452169.png)
+![image-20221102173452169](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102173452169.png)
 
 ### （4）、android_location_GnssLocationProvider_set_gps_service_handle()
 
-![image-20221102173620183](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102173620183.png)
+![image-20221102173620183](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102173620183.png)
 
 ### （5）、GnssLocationProvider()初始化
 
-![image-20221102180733802](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102180733802.png)
+![image-20221102180733802](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102180733802.png)
 
-![image-20221102180845843](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102180845843.png)
+![image-20221102180845843](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102180845843.png)
 
-![image-20221102180907027](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102180907027.png)
+![image-20221102180907027](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102180907027.png)
 
 ### （6）、android_location_GnssLocationProvider_init()初始化
 
-![image-20221102181204334](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102181204334.png)
+![image-20221102181204334](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102181204334.png)
 
 ```c++
 01-01 08:00:09.607   452   452 D Gnss    :   #00 pc 0000000000014ca0  /vendor/bin/hw/android.hardware.gnss@2.0-service-unicore (android::hardware::gnss::V2_0::implementation::Gnss::setCallback_2_0(android::sp<android::hardware::gnss::V2_0::IGnssCallback> const&)+120)
@@ -123,19 +123,19 @@ Stack Trace:
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\out\soong\.intermediates\hardware\interfaces\gnss\2.0\android.hardware.gnss@2.0_genc++\gen\android\hardware\gnss\2.0\GnssAll.cpp
 
-![image-20221102181850722](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102181850722.png)
+![image-20221102181850722](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102181850722.png)
 
 ### （8）、Gnss::setCallback_2_0
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\vendor\unicore_gnss\service2_0\Gnss.cpp
 
-![image-20221102181946310](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102181946310.png)
+![image-20221102181946310](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102181946310.png)
 
 ### （9）、unicore_gps_init()
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\vendor\unicore_gnss\libgps\unicore_gps.c
 
-![image-20221102182254102](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102182254102.png)
+![image-20221102182254102](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102182254102.png)
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\vendor\unicore_gnss\libgps\unicore_gps.c
 
@@ -143,52 +143,52 @@ Stack Trace:
 
 此时Gps还未Start，空转睡眠。
 
-![image-20221102190702854](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102190702854.png)
+![image-20221102190702854](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102190702854.png)
 
 ## （三）、App（Location Client）注册监听
 
 ### （1）、LocationManager.requestLocationUpdates()
 
-![image-20221102174739107](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102174739107.png)
+![image-20221102174739107](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102174739107.png)
 
-![image-20221102175145022](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102175145022.png)
+![image-20221102175145022](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102175145022.png)
 
-![image-20221102175251005](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102175251005.png)
+![image-20221102175251005](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102175251005.png)
 
 ### （2）、new Receiver(后面分发给App需要)
 
-![image-20221102195241707](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102195241707.png)
+![image-20221102195241707](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102195241707.png)
 
-![image-20221102195309422](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102195309422.png)
+![image-20221102195309422](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102195309422.png)
 
 ### （3）、LocationManagerService.requestLocationUpdates()
 
-![image-20221102175419557](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102175419557.png)
+![image-20221102175419557](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102175419557.png)
 
 
 ### （4）、LocationManagerService.requestLocationUpdatesLocked()
 
-![image-20221102175513754](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102175513754.png)
+![image-20221102175513754](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102175513754.png)
 
 ### （5）、LocationManagerService.applyRequirementsLocked()
 
-![image-20221102175700414](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102175700414.png)
+![image-20221102175700414](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102175700414.png)
 
 ### （6）、GnssLocationProvider.updateRequirements()
 
-![image-20221102175750233](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102175750233.png)
+![image-20221102175750233](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102175750233.png)
 
 ### （7）、GnssLocationProvider.startNavigating()
 
-![image-20221102175856874](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102175856874.png)
+![image-20221102175856874](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102175856874.png)
 
 ### （8）、GnssLocationProvider.native_start()
 
-![image-20221102175938886](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102175938886.png)
+![image-20221102175938886](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102175938886.png)
 
 ### （9）、android_location_GnssLocationProvider_start()
 
-![image-20221102180133378](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102180133378.png)
+![image-20221102180133378](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102180133378.png)
 
 ```c++
 11-02 17:10:33.464   452   452 D unicore_gps::unicore_gps_start: #00 pc 0000000000047054  /vendor/lib64/libgps.so (dumping_callstack+64)
@@ -223,19 +223,19 @@ Stack Trace:
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\out\soong\.intermediates\hardware\interfaces\gnss\2.0\android.hardware.gnss@2.0_genc++\gen\android\hardware\gnss\2.0\GnssAll.cpp
 
-![image-20221102182758178](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102182758178.png)
+![image-20221102182758178](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102182758178.png)
 
 ### （11）、_hidl_start(V1_0)
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\out\soong\.intermediates\hardware\interfaces\gnss\1.0\android.hardware.gnss@1.0_genc++\gen\android\hardware\gnss\1.0\GnssAll.cpp
 
-![image-20221102183003446](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102183003446.png)
+![image-20221102183003446](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102183003446.png)
 
 ### （12）、unicore_gps_start
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\vendor\unicore_gnss\libgps\unicore_gps.c
 
-![image-20221102183109723](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102183109723.png)
+![image-20221102183109723](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102183109723.png)
 
 ## （四）、、Gnss  Hal  Service运转（读取NMEA，解析并上报Location）
 
@@ -243,31 +243,31 @@ Stack Trace:
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\vendor\unicore_gnss\libgps\unicore_gps.c
 
-![image-20221102190432773](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102190432773.png)
+![image-20221102190432773](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102190432773.png)
 
 ### （2）、gps_wakeup()
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\vendor\unicore_gnss\libgps\unicore_gps.c
 
-![image-20221102190957507](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102190957507.png)
+![image-20221102190957507](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102190957507.png)
 
 ### （3）、gps_opentty()
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\vendor\unicore_gnss\libgps\unicore_gps.c
 
-![image-20221102191132758](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102191132758.png)
+![image-20221102191132758](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102191132758.png)
 
 ### （4）、gps_nmea_thread()读取NMEA并且解析
 
-![image-20221102191306070](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102191306070.png)
+![image-20221102191306070](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102191306070.png)
 
 ### （5）、nmea_reader_parse()
 
-![image-20221102191456206](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102191456206.png)
+![image-20221102191456206](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102191456206.png)
 
 会解析读取到的NMEA，由于在室内，定位不成功，我手动设置了一组NMEA。
 
-![image-20221102195515769](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102195515769.png)
+![image-20221102195515769](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102195515769.png)
 
 ```c++
 定位：江西南昌学院（南昌校区）附件
@@ -284,11 +284,11 @@ $BDGSV,3,1,11,01,43,130,38,02,40,230,37,03,55,189,48,04,31,115,36,0,4*6B\n\
 $BDGSV,3,2,11,05,18,251,42,07,67,154,44,08293,39,10,77,281,39,0,4*6D";
 ```
 
-![image-20221102191858722](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102191858722.png)
+![image-20221102191858722](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102191858722.png)
 
 ### （6）、gps_timer_thread()上报解析好了的Location和卫星数据
 
-![image-20221102192405548](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102192405548.png)
+![image-20221102192405548](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102192405548.png)
 
 ```c++
 11-02 17:10:33.851   452  2275 D Gnss    :   #00 pc 0000000000012908  /vendor/bin/hw/android.hardware.gnss@2.0-service-unicore (android::hardware::gnss::V2_0::implementation::Gnss::locationCb(GpsLocation*)+116)
@@ -307,7 +307,7 @@ $BDGSV,3,2,11,05,18,251,42,07,67,154,44,08293,39,10,77,281,39,0,4*6D";
 
 ```
 
-![image-20221102193325531](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102193325531.png)
+![image-20221102193325531](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102193325531.png)
 
 ## （五）、System_Server（Location）接收 Gnss Hal Service数据并分发
 
@@ -315,33 +315,33 @@ $BDGSV,3,2,11,05,18,251,42,07,67,154,44,08293,39,10,77,281,39,0,4*6D";
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\frameworks\base\services\core\jni\com_android_server_location_GnssLocationProvider.cpp
 
-![image-20221102194155774](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102194155774.png)
+![image-20221102194155774](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102194155774.png)
 
-![image-20221102194237721](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102194237721.png)
+![image-20221102194237721](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102194237721.png)
 
 ### （2）、GnssLocationProvider.reportLocation()
 
-![image-20221102194405639](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102194405639.png)
+![image-20221102194405639](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102194405639.png)
 
-![image-20221102194448093](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102194448093.png)
+![image-20221102194448093](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102194448093.png)
 
 ### （3）、LocationManagerService.handleLocationChangedLocked()
 
-### ![image-20221102194648736](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102194648736.png)
+### ![image-20221102194648736](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102194648736.png)
 
-![image-20221102194725717](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102194725717.png)
+![image-20221102194725717](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102194725717.png)
 
 ### （4）、Receiver.callLocationChangedLocked(location)
 
-![image-20221102195623692](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102195623692.png)
+![image-20221102195623692](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102195623692.png)
 
 ### （5）、ILocationListener.onLocationChanged(new Location(location))
 
-![image-20221102195711445](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102195711445.png)
+![image-20221102195711445](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102195711445.png)
 
 ### （6）、截图撒花
 
-![image-20221102200143027](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102200143027.png)
+![image-20221102200143027](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Gnss_System/Android11_Gnss01/image-20221102200143027.png)
 
 ## （六）、参考资料(特别感谢)：
 

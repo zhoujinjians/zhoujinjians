@@ -1,6 +1,6 @@
 ---
 title:  Android 10 Camera源码分析4：Rockchip ISP1 Driver 分析
-cover: https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.34.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.34.jpg
 categories: 
   - Camera
 tags:
@@ -12,7 +12,7 @@ date: 2022-02-15 02:15:00
 
 注：文章都是通过阅读各位前辈总结的资料 Android 10.0 && Linux（Kernel 4.19）Rockchip平台源码、加上自己的思考分析总结出来的，其中难免有理解不对的地方，欢迎大家批评指正。文章为个人学习、研究、欣赏之用，图文内容整理自互联网，如有侵权，请联系删除（◕‿◕），转载请注明出处（©Rockchip ©Android @Linux 版权所有），谢谢。
 （==**文章基于 Kernel-4.19**==）&&（==**文章基于 Android 10.0**==）
- [【zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianzz) 
+ [【zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianz) 
  [【开发板 Khadas Edge V】](https://www.khadas.cn/edge-v)
 [【开发板 Khadas Edge V Android 10.0 && Linux（Kernel 4.19）源码链接】](https://github.com/khadas/linux/tree/khadas-edge-Qt)
 
@@ -56,13 +56,13 @@ ISP comprises with:
 
 The completed block diagram can not be pasted from datasheet to here, below diagram is an abstract version:
 
-![](http://opensource.rock-chips.comhttps://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/thumb/4/48/Block.png/1200px-Block.png)
+![](http://opensource.rock-chips.comhttps://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/thumb/4/48/Block.png/1200px-Block.png)
 ](/wiki_File:Block.png "Blocks.png")
 
 #### 5、MIPI Details
 
 There are three D-PHY instances in rockchip SoC, their connection are shown as following figure:
-![](http://opensource.rock-chips.comhttps://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/thumb/a/ac/Phy.png/600px-Phy.png)
+![](http://opensource.rock-chips.comhttps://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/thumb/a/ac/Phy.png/600px-Phy.png)
 
 #### 6、Software
 
@@ -81,11 +81,11 @@ Please read below link carefully, especially if you don't have use it before.
 
 #### 10、File view
 
-![](http://opensource.rock-chips.comhttps://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/thumb/3/38/Code.png/1200px-Code.png)
+![](http://opensource.rock-chips.comhttps://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/thumb/3/38/Code.png/1200px-Code.png)
 
 #### 11、V4l2 view
 
-![](http://opensource.rock-chips.comhttps://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/thumb/7/74/Rockchip-isp1-v4l2.png/800px-Rockchip-isp1-v4l2.png)
+![](http://opensource.rock-chips.comhttps://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/thumb/7/74/Rockchip-isp1-v4l2.png/800px-Rockchip-isp1-v4l2.png)
 | Name | Type | Description |
 | --- | --- | --- |
 | rkisp1_mainpath | v4l2_vdev, capture | Format: YUV, RAW Bayer; Max resolution: 4416\*3312; Support: Crop  |
@@ -243,13 +243,13 @@ Device topology
 
 ### （1）、Camera 软件驱动目录说明
 
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android.10.Camera.04/isp1code_source.png)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android.10.Camera.04/isp1code_source.png)
 
 #### 1、框架简要说明
 
 RKISP 驱动主要是依据 v4l2 / media framework 实现硬件的配置、中断处理、控制 buffer轮转，以及控制 subdevice(如 mipi dphy 及 sensor)的上下电等功能。
 下面的框图描述了 RKISP1 驱动的拓扑结构。
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android.10.Camera.04/1624498395236.png)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android.10.Camera.04/1624498395236.png)
 
 | Name | Type | Description |
 | --- | --- | --- |
@@ -273,7 +273,7 @@ cat /sys/module/video_rkisp1/parameters/version
 #### 3、RKisp1 DTS配置
 RKisp1 的 DTS binding 也有完整的 Document 位于Documentation/devicetree/bindings/media/rockchip-isp1.txt。请首先参考该文档，它会跟驱动保持同步更新。在 RK Linux SDK 发布时， 若芯片支持 ISP，其 dtsi 中已经有定义好 rkisp1
 节点，如rk3399.dtsi 中的 rkisp1_0，rkisp1_1 节点。下表描述各芯片 ISP 的信息。
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android.10.Camera.04/RK3399_rkisp1_0.png)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android.10.Camera.04/RK3399_rkisp1_0.png)
 
 注意：
 -  RK3399.dtsi 中也注册了多个 isp 节点，请注意本章所描述的是 rkisp1_0 及 rkisp1_1
@@ -1045,7 +1045,7 @@ rk3399_Android10:/ # grep '' /sys/class/video4linux/video*/name
 /sys/class/video4linux/video9/name:rkisp1-input-params
 ```
 
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android.10.Camera.04/RK3399_dev_video.png)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android.10.Camera.04/RK3399_dev_video.png)
 Rkisp1 驱动会注册 4 个/dev/video 设备，编号连续。
 - 如 RK3399 平台的两个 isp 同时启用，共会注册 8 个/dev/video 设备。前 4 个属于一个
 isp，后 4 个属于另外一个 isp。软件上尚无法区分两个 isp

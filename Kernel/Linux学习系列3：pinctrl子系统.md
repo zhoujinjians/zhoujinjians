@@ -1,6 +1,6 @@
 ---
 title: Linux学习系列3：pinctrl子系统
-cover: https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.43.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.43.jpg
 categories:
  - Linux
 tags:
@@ -14,7 +14,7 @@ date: 2022-08-15 00:00:00
 
 （==**文章基于 Kernel-4.15**==）&&（==**文章基于 Android 10.0**==）
 
-[【me.zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianzz) 
+[【me.zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianz) 
 
 [【开发板 RockPi4bPlusV1.6】](https://shop.allnetchina.cn/collections/frontpage/products/rock-pi-4-model-b-board-only-2-4-5ghz-wlan-bluetooth-5-0)
 
@@ -28,7 +28,7 @@ date: 2022-08-15 00:00:00
 
 # 1. Pinctrl作用
 
-![image-20210430121123225](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/06_pinctrl_hardware_block.png)
+![image-20210430121123225](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/06_pinctrl_hardware_block.png)
 
 Pinctrl：Pin Controller，顾名思义，就是用来控制引脚的：
 
@@ -134,7 +134,7 @@ Pinctrl驱动由芯片厂家的BSP工程师提供，一般的驱动工程师只�
 [2021/8/30 14:49:52] [    1.021975]  ret_from_fork+0x10/0x18
 ```
 
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/09_pinctrl_really_probe.png)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/09_pinctrl_really_probe.png)
 
 # 3.Pinctrl子系统主要数据结构
 
@@ -142,13 +142,13 @@ Pinctrl驱动由芯片厂家的BSP工程师提供，一般的驱动工程师只�
 
 ### 3.1.1 理想模型
 
-![image-20210506093602409](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/12_pinctrl_dts_modules.png)
+![image-20210506093602409](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/12_pinctrl_dts_modules.png)
 
 ### 3.1.2 实际的例子
 
 * RK3399
 
-  ![image-20210831103556839](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/image-20210831103556839.png)
+  ![image-20210831103556839](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/image-20210831103556839.png)
 
 
 ## 3.2. PinController的数据结构
@@ -176,17 +176,17 @@ struct pinctrl_dev *pinctrl_register(struct pinctrl_desc *pctldesc,
 
 怎么使用pinctrl_desc、pinctrl_dev来描述一个pin controller？这两个结构体定义如下：
 
-![image-20210505153958014](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/16_pinctrl_desc_and_pinctrl_dev.png)
+![image-20210505153958014](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/16_pinctrl_desc_and_pinctrl_dev.png)
 
 pinctrl_desc示例如下：
-![image-20210831105701675](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/image-20210831105701675.png)
+![image-20210831105701675](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/image-20210831105701675.png)
 
 
 #### 2. 作用1：描述、获得引脚
 
 使用结构体pinctrl_pin_desc来描述一个引脚，一个pin controller有多个引脚：
 
-![image-20210419142714778](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/02_pinctrl_pin_desc.png)
+![image-20210419142714778](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/02_pinctrl_pin_desc.png)
 
 
 
@@ -195,15 +195,15 @@ pinctrl_desc示例如下：
 * 来取出某组的引脚：get_groups_count、get_group_pins
 * 处理设备树中pin controller中的某个节点：dt_node_to_map，把device_node转换为一系列的pinctrl_map
 
-![image-20210505155008286](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/03_pinctrl_ops.png)
+![image-20210505155008286](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/03_pinctrl_ops.png)
 
 #### 3. 作用2：引脚复用
 
-![image-20210505161910767](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/04_pinmux_ops.png)
+![image-20210505161910767](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/04_pinmux_ops.png)
 
 #### 4. 作用3：引脚配置
 
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/05_pinconf_ops.png)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/05_pinconf_ops.png)
 
 #### 5. 使用pinctrl_desc注册得到pinctrl_dev
 
@@ -252,7 +252,7 @@ device {
 
 设备节点要么被转换为platform_device，或者其他结构体(比如i2c_client)，但是里面都会有一个device结构体，比如：
 
-![image-20210505171819747](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/17_pinctrl_in_device.png)
+![image-20210505171819747](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/17_pinctrl_in_device.png)
 
 
 
@@ -260,7 +260,7 @@ device {
 
 每个device结构体里都有一个dev_pin_info结构体，用来保存设备的pinctrl信息：
 
-![image-20210505173004090](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/18_dev_pin_info.png)
+![image-20210505173004090](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/18_dev_pin_info.png)
 
 ### 3.3.2 pinctrl
 
@@ -274,7 +274,7 @@ device {
   * 这些pinctrl_map放在pinctrl.dt_maps链表中
   * 每个pinctrl_map都被转换为pinctrl_setting，放在对应的pinctrl_state.settings链表中
 
-![image-20210505182828324](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/19_pinctrl_maps.png)
+![image-20210505182828324](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/19_pinctrl_maps.png)
 
 
 
@@ -290,7 +290,7 @@ device {
   * 这一系列的pinctrl_map被转换为一系列的pinctrl_setting
   * 这些pinctrl_setting被放入pinctrl_state的settings链表
 
-![image-20210831104152437](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/image-20210831104152437.png)
+![image-20210831104152437](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/image-20210831104152437.png)
 
 3.4. 使用pinctrl_setting
 
@@ -338,13 +338,13 @@ really_probe
 -------->ops->pin_config_group_set
 ```
 
-![image-20210831104315779](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/image-20210831104315779.png)
+![image-20210831104315779](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/image-20210831104315779.png)
 
 # 4.PinController构造过程情景分析
 
 ## 4.1. 设备树
 
-![image-20210831103556839](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/image-20210831103556839.png)
+![image-20210831103556839](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/image-20210831103556839.png)
 
 ## 4.2. 驱动代码执行流程
 
@@ -615,12 +615,12 @@ static int rockchip_pinctrl_parse_groups(struct device_node *np,
 
 在设备树中，使用pinctrl时格式如下：
 
-![image-20210831103556839](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/image-20210831103556839.png)
+![image-20210831103556839](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/image-20210831103556839.png)
 
 
 设备节点要么被转换为platform_device，或者其他结构体(比如i2c_client)，但是里面都会有一个device结构体，比如：
 
-![image-20210505171819747](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/17_pinctrl_in_device-16303802580763.png)
+![image-20210505171819747](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/17_pinctrl_in_device-16303802580763.png)
 
 
 
@@ -628,7 +628,7 @@ static int rockchip_pinctrl_parse_groups(struct device_node *np,
 
 每个device结构体里都有一个dev_pin_info结构体，用来保存设备的pinctrl信息：
 
-![image-20210505173004090](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/18_dev_pin_info-16303802580764.png)
+![image-20210505173004090](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/18_dev_pin_info-16303802580764.png)
 
 ### 1.2 pinctrl
 
@@ -642,7 +642,7 @@ static int rockchip_pinctrl_parse_groups(struct device_node *np,
   * 这些pinctrl_map放在pinctrl.dt_maps链表中
   * 每个pinctrl_map都被转换为pinctrl_setting，放在对应的pinctrl_state.settings链表中
 
-![image-20210505182828324](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/19_pinctrl_maps-16303802580765.png)
+![image-20210505182828324](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/19_pinctrl_maps-16303802580765.png)
 
 
 
@@ -658,7 +658,7 @@ static int rockchip_pinctrl_parse_groups(struct device_node *np,
   * 这一系列的pinctrl_map被转换为一系列的pinctrl_setting
   * 这些pinctrl_setting被放入pinctrl_state的settings链表
 
-![image-20210831104152437](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.pinctrl/image-20210831104152437.png)
+![image-20210831104152437](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.pinctrl/image-20210831104152437.png)
 
 
 

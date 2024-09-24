@@ -1,6 +1,6 @@
 ---
 title: Android 8.1 Display System源码分析（4）：DRM/KMS分析（RK3399）
-cover: https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/personal.website/post.cover.pictures.00013.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/personal.website/post.cover.pictures.00013.jpg
 categories: 
   - Display
 tags:
@@ -26,7 +26,7 @@ https://blog.csdn.net/hexiaolong2009/article/details/83720940)
 https://events.static.linuxfound.org/sites/events/files/slides/brezillon-drm-kms.pdf) 
 
 [（3）【Anatomy of an Atomic KMS Driver】](
-https://elinux.orghttps://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/4/45/Atomic_kms_driver_pinchart.pdf) 
+https://elinux.orghttps://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/4/45/Atomic_kms_driver_pinchart.pdf) 
 
 [（4）【Why and How to use KMS】](
 https://events.static.linuxfound.org/sites/events/files/lcjpcojp13_pinchart.pdf) 
@@ -52,7 +52,7 @@ DRM 是 Linux 目前主流的图形显示框架，相比 FB 架构，DRM 更能�
 
 DRM 从模块上划分，可以简单分为 3 部分：**`libdrm`**、**`KMS`**、**`GEM`**
 
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/zjj.sys.display.8.1.drmkms/drm_user_kernel_space.svg)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/zjj.sys.display.8.1.drmkms/drm_user_kernel_space.svg)
 
 ##### 1.1、libdrm
 
@@ -70,7 +70,7 @@ DRM 框架涉及到的元素很多，大致如下：
 KMS：**`CRTC`**，**`ENCODER`**，**`CONNECTOR`**，**`PLANE`**，**`FB`**，**`VBLANK`**，**`property`**  
 GEM：**`DUMB`**、**`PRIME`**、**`fence`**
 
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/zjj.sys.display.8.1.drmkms/drm_architecture.jpg)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/zjj.sys.display.8.1.drmkms/drm_architecture.jpg)
 
 
 | 元素 | 说明 |
@@ -96,9 +96,9 @@ Kernel Mode Setting，所谓 Mode setting，其实说白了就两件事：`更�
 #### (二)、DRM/KMS驱动分析
 
 首先看看RK3399 DRM Kernel启动框图：
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/zjj.sys.display.8.1.drmkms/rockchip_drm_kernel_boot_up.png)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/zjj.sys.display.8.1.drmkms/rockchip_drm_kernel_boot_up.png)
 首先看看RK3399DRM Kernel启动UML流程图：
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/zjj.sys.display.8.1.drmkms/FireFly-Rk3399-DRM-KMS-Kernel-Boot-Up.png)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/zjj.sys.display.8.1.drmkms/FireFly-Rk3399-DRM-KMS-Kernel-Boot-Up.png)
 
 
 #### （1）、Drm device创建注册
@@ -722,7 +722,7 @@ https://blog.csdn.net/hexiaolong2009/article/details/83720940)
 https://events.static.linuxfound.org/sites/events/files/slides/brezillon-drm-kms.pdf) 
 
 [（3）【Anatomy of an Atomic KMS Driver】](
-https://elinux.orghttps://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/4/45/Atomic_kms_driver_pinchart.pdf) 
+https://elinux.orghttps://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/4/45/Atomic_kms_driver_pinchart.pdf) 
 
 [（4）【Why and How to use KMS】](
 https://events.static.linuxfound.org/sites/events/files/lcjpcojp13_pinchart.pdf) 

@@ -1,6 +1,6 @@
 ---
 title: Linux学习系列2：i2c子系统
-cover: https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.42.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.42.jpg
 categories:
  - Linux
 tags:
@@ -14,7 +14,7 @@ date: 2022-07-15 00:00:00
 
 （==**文章基于 Kernel-4.15**==）&&（==**文章基于 Android 10.0**==）
 
-[【me.zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianzz) 
+[【me.zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianz) 
 
 [【开发板 RockPi4bPlusV1.6】](https://shop.allnetchina.cn/collections/frontpage/products/rock-pi-4-model-b-board-only-2-4-5ghz-wlan-bluetooth-5-0)
 
@@ -41,7 +41,7 @@ date: 2022-07-15 00:00:00
 
 I2C在硬件上的接法如下所示，主控芯片引出两条线SCL,SDA线，在一条I2C总线上可以接很多I2C设备，我们还会放一个上拉电阻（放一个上拉电阻的原因以后我们再说）。
 
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/005_i2c_hardware_connect.png)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/005_i2c_hardware_connect.png)
 
 ## 1.2. 传输数据类比
 
@@ -49,7 +49,7 @@ I2C在硬件上的接法如下所示，主控芯片引出两条线SCL,SDA线，�
 
 举个例子：
 
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/006_teacher_and_student.png)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/006_teacher_and_student.png)
 
 体育老师：可以把球发给学生，也可以把球从学生中接过来。
 
@@ -94,7 +94,7 @@ I2C在硬件上的接法如下所示，主控芯片引出两条线SCL,SDA线，�
 
 下图：白色背景表示"主→从"，灰色背景表示"从→主"
 
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/007_i2c_write.png)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/007_i2c_write.png)
 
 ### 1.3.2 读操作
 
@@ -112,7 +112,7 @@ I2C在硬件上的接法如下所示，主控芯片引出两条线SCL,SDA线，�
 
 
 
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/008_i2c_read.png)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/008_i2c_read.png)
 
 ### 1.3.3 I2C信号
 
@@ -125,7 +125,7 @@ I2C协议中数据传输的单位是字节，也就是8位。但是要用到9个
 
 I2C协议信号如下：
 
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/009_i2c_signal.png)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/009_i2c_signal.png)
 
 ### 1.3.4 协议细节
 
@@ -138,10 +138,10 @@ I2C协议信号如下：
   前8个时钟由从设备发送数据的话，第9个时钟就由主设备发送数据。
 * 双方设备中，某个设备发送数据时，另一方怎样才能不影响SDA上的数据？
   设备的SDA中有一个三极管，使用开极/开漏电路(三极管是开极，CMOS管是开漏，作用一样)，如下图：
-  ![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/010_i2c_signal_internal.png)
+  ![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/010_i2c_signal_internal.png)
 
 真值表如下：
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/011_true_value_table.png)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/011_true_value_table.png)
 
 从真值表和电路图我们可以知道：
 
@@ -200,7 +200,7 @@ SMBus也被用来连接各种设备，包括电源相关设备，系统传感器
 SMBus 为系统和电源管理这样的任务提供了一条控制总线，使用 SMBus 的系统，设备之间发送和接收消息都是通过 SMBus，而不是使用单独的控制线，这样可以节省设备的管脚数。
 SMBus是基于I2C协议的，SMBus要求更严格，SMBus是I2C协议的子集。
 
-![image-20210224093827621](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/017_i2c_and_smbus.png)
+![image-20210224093827621](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/017_i2c_and_smbus.png)
 
 SMBus有哪些更严格的要求？跟一般的I2C协议有哪些差别？
 
@@ -232,7 +232,7 @@ SMBus有哪些更严格的要求？跟一般的I2C协议有哪些差别？
     * 读数据
   * 在写、读之间，可以不发出P信号，而是直接发出S信号：这个S信号就是`REPEATED START`
   * 如下图所示
-    ![image-20210224100056055](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/018_repeated_start.png)
+    ![image-20210224100056055](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/018_repeated_start.png)
 * SMBus Low Power Version 
   * SMBus也有低功耗的版本
 
@@ -278,7 +278,7 @@ Count (8 bits): A data byte containing the length of a block operation.
 
 ### 2.2.2 SMBus Quick Command
 
-![image-20210224105224903](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/019_smbus_quick_command.png)
+![image-20210224105224903](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/019_smbus_quick_command.png)
 
 只是用来发送一位数据：R/W#本意是用来表示读或写，但是在SMBus里可以用来表示其他含义。
 比如某些开关设备，可以根据这一位来决定是打开还是关闭。
@@ -291,7 +291,7 @@ Functionality flag: I2C_FUNC_SMBUS_QUICK
 
 ### 2.2.3 SMBus Receive Byte
 
-![image-20210224113511225](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/020_smbus_receive_byte.png)
+![image-20210224113511225](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/020_smbus_receive_byte.png)
 
 I2C-tools中的函数：i2c_smbus_read_byte()。
 读取一个字节，Host adapter接收到一个字节后不需要发出回应信号(上图中N表示不回应)。
@@ -304,7 +304,7 @@ Functionality flag: I2C_FUNC_SMBUS_READ_BYTE
 
 ### 2.2.4 SMBus Send Byte
 
-![image-20210224110638143](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/021_smbus_send_byte.png)
+![image-20210224110638143](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/021_smbus_send_byte.png)
 
 I2C-tools中的函数：i2c_smbus_write_byte()。
 发送一个字节。
@@ -317,7 +317,7 @@ Functionality flag: I2C_FUNC_SMBUS_WRITE_BYTE
 
 ### 2.2.5 SMBus Read Byte
 
-![image-20210224110812872](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/022_smbus_read_byte.png)
+![image-20210224110812872](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/022_smbus_read_byte.png)
 
 I2C-tools中的函数：i2c_smbus_read_byte_data()。
 
@@ -332,7 +332,7 @@ Functionality flag: I2C_FUNC_SMBUS_READ_BYTE_DATA
 
 ### 2.2.6 SMBus Read Word
 
-![image-20210224111404096](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/023_smbus_read_word.png)
+![image-20210224111404096](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/023_smbus_read_word.png)
 
 I2C-tools中的函数：i2c_smbus_read_word_data()。
 
@@ -346,7 +346,7 @@ Functionality flag: I2C_FUNC_SMBUS_READ_WORD_DATA
 
 ### 2.2.7 SMBus Write Byte
 
-![image-20210224111542576](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/024_smbus_write_byte.png)
+![image-20210224111542576](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/024_smbus_write_byte.png)
 
 I2C-tools中的函数：i2c_smbus_write_byte_data()。
 
@@ -360,7 +360,7 @@ Functionality flag: I2C_FUNC_SMBUS_WRITE_BYTE_DATA
 
 ### 2.2.8 SMBus Write Word
 
-![image-20210224111840257](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/025_smbus_write_word.png)
+![image-20210224111840257](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/025_smbus_write_word.png)
 
 I2C-tools中的函数：i2c_smbus_write_word_data()。
 
@@ -374,7 +374,7 @@ Functionality flag: I2C_FUNC_SMBUS_WRITE_WORD_DATA
 
 ### 2.2.9 SMBus Block Read
 
-![image-20210224112524185](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/026_smbus_block_read.png)
+![image-20210224112524185](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/026_smbus_block_read.png)
 
 I2C-tools中的函数：i2c_smbus_read_block_data()。
 
@@ -391,7 +391,7 @@ Functionality flag: I2C_FUNC_SMBUS_READ_BLOCK_DATA
 
 ### 2.2.10 SMBus Block Write
 
-![image-20210224112629201](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/027_smbus_block_write.png)
+![image-20210224112629201](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/027_smbus_block_write.png)
 
 I2C-tools中的函数：i2c_smbus_write_block_data()。
 
@@ -408,7 +408,7 @@ Functionality flag: I2C_FUNC_SMBUS_WRITE_BLOCK_DATA
 在一般的I2C协议中，也可以连续读出多个字节。
 它跟`SMBus Block Read`的差别在于设备发出的第1个数据不是长度N，如下图所示：
 
-![image-20210225094024082](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/033_i2c_block_read.png)
+![image-20210225094024082](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/033_i2c_block_read.png)
 
 I2C-tools中的函数：i2c_smbus_read_i2c_block_data()。
 
@@ -425,7 +425,7 @@ Functionality flag: I2C_FUNC_SMBUS_READ_I2C_BLOCK
 在一般的I2C协议中，也可以连续发出多个字节。
 它跟`SMBus Block Write`的差别在于发出的第1个数据不是长度N，如下图所示：
 
-![image-20210225094359443](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/034_i2c_block_write.png)
+![image-20210225094359443](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/034_i2c_block_write.png)
 
 I2C-tools中的函数：i2c_smbus_write_i2c_block_data()。
 
@@ -439,7 +439,7 @@ Functionality flag: I2C_FUNC_SMBUS_WRITE_I2C_BLOCK
 
 ### 2.2.13 SMBus Block Write - Block Read Process Call
 
-![image-20210224112940865](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/028_smbus_block_write_block_read_process_call.png)先写一块数据，再读一块数据。
+![image-20210224112940865](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/028_smbus_block_write_block_read_process_call.png)先写一块数据，再读一块数据。
 
 ```shell
 Functionality flag: I2C_FUNC_SMBUS_BLOCK_PROC_CALL
@@ -453,7 +453,7 @@ PEC是一种错误校验码，如果使用PEC，那么在P信号之前，数据�
 
 以`SMBus Send Byte`为例，下图中，一个未使用PEC，另一个使用PEC：
 
-![image-20210224113416249](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/029_smbus_pec_example.png)
+![image-20210224113416249](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/029_smbus_pec_example.png)
 
 
 
@@ -474,7 +474,7 @@ PEC是一种错误校验码，如果使用PEC，那么在P信号之前，数据�
 
 ## 3.1. I2C硬件框架
 
-![image-20210208125100022](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/001_i2c_hardware_block.png)
+![image-20210208125100022](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/001_i2c_hardware_block.png)
 
 
 
@@ -482,17 +482,17 @@ PEC是一种错误校验码，如果使用PEC，那么在P信号之前，数据�
 
 * 写操作
 
-![image-20210220150757825](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/007_i2c_write-16299579619801.png)
+![image-20210220150757825](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/007_i2c_write-16299579619801.png)
 
 * 读操作
 
-![image-20210220150954993](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/008_i2c_read-16299579619802.png)
+![image-20210220150954993](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/008_i2c_read-16299579619802.png)
 
 
 
 ## 3.3. Linux软件框架
 
-![image-20210219173436295](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/003_linux_i2c_software_block.png)
+![image-20210219173436295](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/003_linux_i2c_software_block.png)
 
 
 
@@ -518,24 +518,24 @@ PEC是一种错误校验码，如果使用PEC，那么在P信号之前，数据�
 
   * i2c_adapter
 
-  ![image-20210223103217183](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/012_i2c_adapter.png)
+  ![image-20210223103217183](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/012_i2c_adapter.png)
 
   * i2c_algorithm
-    ![image-20210223100333813](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/013_i2c_algorithm.png)
+    ![image-20210223100333813](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/013_i2c_algorithm.png)
 
 * 怎么表示I2C Device
 
   * 一个I2C Device，一定有**设备地址**
   * 它连接在哪个I2C Controller上，即对应的i2c_adapter是什么
   * 使用i2c_client来表示一个I2C Device
-    ![image-20210223100602285](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/014_i2c_client.png)
+    ![image-20210223100602285](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/014_i2c_client.png)
 
 * 怎么表示要传输的数据
 
   * 在上面的i2c_algorithm结构体中可以看到要传输的数据被称为：i2c_msg
 
   * i2c_msg
-    ![image-20210223100924756](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/015_i2c_msg.png)
+    ![image-20210223100924756](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/015_i2c_msg.png)
 
   * i2c_msg中的flags用来表示传输方向：bit 0等于I2C_M_RD表示读，bit 0等于0表示写
 
@@ -579,7 +579,7 @@ PEC是一种错误校验码，如果使用PEC，那么在P信号之前，数据�
 
   * i2c_msg里含有addr，所以这个函数里不需要i2c_client
 
-  ![image-20210223102320133](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/016_i2c_transfer.png)
+  ![image-20210223102320133](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/016_i2c_transfer.png)
 
 # 4、无需编写驱动直接访问设备\_I2C-Tools介绍
 
@@ -589,7 +589,7 @@ APP访问硬件肯定是需要驱动程序的，
 对于I2C设备，内核提供了驱动程序`drivers/i2c/i2c-dev.c`，通过它可以直接使用下面的I2C控制器驱动程序来访问I2C设备。
 框架如下：
 
-![image-20210224172517485](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/030_i2ctools_and_i2c_dev.png)
+![image-20210224172517485](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/030_i2ctools_and_i2c_dev.png)
 
 i2c-tools是一套好用的工具，也是一套示例代码。
 
@@ -735,7 +735,7 @@ f0: 69 6d 65 72 6d 69 74 69 6d 2e 77 77 77 2e 68 65    imermitim.www.he
 
 
 
-![032_i2cget_i2cset_flow](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/032_i2cget_i2cset_flow.png)
+![032_i2cget_i2cset_flow](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/032_i2cget_i2cset_flow.png)
 
 ```c
 [2021/8/23 11:40:08] [  144.059712] Hardware name: ROCKPI 4B (DT)
@@ -816,7 +816,7 @@ f0: 69 6d 65 72 6d 69 74 69 6d 2e 77 77 77 2e 68 65    imermitim.www.he
 
 ## 5.1. 回顾字符设备驱动程序
 
-![image-20210226154141671](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/045_char_driver.png)
+![image-20210226154141671](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/045_char_driver.png)
 
 怎么编写字符设备驱动程序？
 
@@ -838,13 +838,13 @@ f0: 69 6d 65 72 6d 69 74 69 6d 2e 77 77 77 2e 68 65    imermitim.www.he
 
  ### 5.2.1 register_chrdev的内部实现
 
-  ![image-20210226163844390](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/046_register_chrdev_internal.png)
+  ![image-20210226163844390](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/046_register_chrdev_internal.png)
 
 
 
 ### 5.2.2 i2c-dev驱动的注册过程
 
-![image-20210226164128588](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/047_i2c-dev_register.png)
+![image-20210226164128588](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/047_i2c-dev_register.png)
 
 
 
@@ -866,7 +866,7 @@ static const struct file_operations i2cdev_fops = {
 ```
 
 主要的系统调用：open, ioctl：
-![image-20210226165250492](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/048_i2c-dev_interface.png)
+![image-20210226165250492](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/048_i2c-dev_interface.png)
 
 
 
@@ -874,29 +874,29 @@ static const struct file_operations i2cdev_fops = {
 
 ### 3.13.1 i2cdev_open
 
-![image-20210226170350844](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/049_i2cdev_open.png)
+![image-20210226170350844](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/049_i2cdev_open.png)
 
 
 
 ### 5.3.2 i2cdev_ioctl: I2C_SLAVE/I2C_SLAVE_FORCE
 
-![image-20210226172800990](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/050_ioctl_I2C_SLAVE_FORCE.png)
+![image-20210226172800990](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/050_ioctl_I2C_SLAVE_FORCE.png)
 
 
 
 ### 5.3.3 i2cdev_ioctl: I2C_RDWR
 
-![image-20210226173625871](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/051_ioctl_I2C_RDWR.png)
+![image-20210226173625871](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/051_ioctl_I2C_RDWR.png)
 
 ### 5.3.4 i2cdev_ioctl: I2C_SMBUS
 
-![image-20210226173952800](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/052_ioctl_I2C_SMBUS.png)
+![image-20210226173952800](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/052_ioctl_I2C_SMBUS.png)
 
 
 
 ### 5.3.5 总结
 
-![image-20210226175142066](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/053_app_to_i2c_driver.png)
+![image-20210226175142066](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/053_app_to_i2c_driver.png)
 
 # 6、I2C系统驱动程序模型
 
@@ -910,7 +910,7 @@ static const struct file_operations i2cdev_fops = {
 
 ## 6.1. I2C驱动程序的层次
 
-![image-20210227143624667](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/054_i2c_driver_layers.png)
+![image-20210227143624667](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/054_i2c_driver_layers.png)
 
 I2C Core就是I2C核心层，它的作用：
 
@@ -921,7 +921,7 @@ I2C Core就是I2C核心层，它的作用：
 
 ## 6.2. I2C总线-设备-驱动模型
 
-![image-20210227151413993](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/055_i2c_bus_dev_drv.png)
+![image-20210227151413993](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/055_i2c_bus_dev_drv.png)
 
 
 
@@ -1077,14 +1077,14 @@ i2c_client表示一个I2C设备，创建i2c_client的方法有4种：
 
 ## 7.1.1 I2C总线-设备-驱动模型
 
-![image-20210227151413993](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/055_i2c_bus_dev_drv-16299605261355.png)
+![image-20210227151413993](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/055_i2c_bus_dev_drv-16299605261355.png)
 
 
 
 ## 7.1.2 示例
 
 分配、设置、注册一个i2c_driver结构体，类似`drivers/eeprom/at24.c`：
-![image-20210301095132959](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/056_i2c_driver_at24.png)
+![image-20210301095132959](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/056_i2c_driver_at24.png)
 
 在probe_new函数中，分配、设置、注册file_operations结构体。
 在file_operations的函数中，使用i2c_transfer等函数发起I2C传输。
@@ -1095,11 +1095,11 @@ i2c_client表示一个I2C设备，创建i2c_client的方法有4种：
 
 ### 8.1. i2c_adapter
 
-  ![image-20210223103217183](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/012_i2c_adapter-16299607923736.png)
+  ![image-20210223103217183](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/012_i2c_adapter-16299607923736.png)
 
 ### 8.2. i2c_algorithm
 
-![image-20210303121043020](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/058_i2c_algorithm.png)
+![image-20210303121043020](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/058_i2c_algorithm.png)
 
 * master_xfer：这是最重要的函数，它实现了一般的I2C传输，用来传输一个或多个i2c_msg
 
@@ -1168,7 +1168,7 @@ i2c_client表示一个I2C设备，创建i2c_client的方法有4种：
 
 >  F:\Rock4Plus_Android10\kernel\drivers\i2c\busses\i2c-rk3x.c
 >
-> ![image-20210826145626299](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/image-20210826145626299.png)
+> ![image-20210826145626299](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/image-20210826145626299.png)
 
 # 9、具体芯片的I2C_Adapter驱动分析
 
@@ -1178,7 +1178,7 @@ i2c_client表示一个I2C设备，创建i2c_client的方法有4种：
 
 #### 通用的简化结构
 
-![image-20210315101935654](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/069_i2c_block_general.png)
+![image-20210315101935654](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/069_i2c_block_general.png)
 
 
 
@@ -1249,7 +1249,7 @@ i2c_client表示一个I2C设备，创建i2c_client的方法有4种：
 
 #### 3.2.1 读
 
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/i2c-read.png)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/i2c-read.png)
 
 ```dtd
 Log:
@@ -1310,7 +1310,7 @@ static void rk3x_i2c_handle_read(struct rk3x_i2c *i2c, unsigned int ipd)
 
 #### 3.2.2 写
 
-![](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/kernel.i2c/i2c-write.png)
+![](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/kernel.i2c/i2c-write.png)
 
 ```dtd
 Log:

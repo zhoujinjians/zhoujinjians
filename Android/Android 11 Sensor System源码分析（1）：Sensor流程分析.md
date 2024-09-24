@@ -1,6 +1,6 @@
 ---
 title: Android 11 Sensor System源码分析（1）：Sensor流程分析
-cover: https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.50.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.50.jpg
 categories: 
  - Display
 tags:
@@ -13,7 +13,7 @@ date: 2023-04-16 16:16:16
 
 （==**文章基于 Android 11.0**==）
 
-[【zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianzz) 
+[【zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianz) 
 
 [【开发板】](https://wiki.radxa.com/Rockpi4)
 
@@ -61,7 +61,7 @@ on post-fs-data
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\hardware\interfaces\sensors\1.0\default\service.cpp
 
-![image-20221101134136382](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101134136382.png)
+![image-20221101134136382](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101134136382.png)
 
 首先看看Trace：
 
@@ -104,41 +104,41 @@ Stack Trace:
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\system\libhidl\transport\include\hidl\LegacySupport.h
 
-![image-20221101142841902](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101142841902.png)
+![image-20221101142841902](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101142841902.png)
 
 ### （4）、LegacySupport::registerPassthroughServiceImplementation
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\system\libhidl\transport\LegacySupport.cpp
 
-![image-20221101142959869](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101142959869.png)
+![image-20221101142959869](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101142959869.png)
 
 ### （5）、ServiceManagement::getRawServiceInternal()
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\system\libhidl\transport\ServiceManagement.cpp
 
-![image-20221101143428089](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101143428089.png)
+![image-20221101143428089](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101143428089.png)
 
 ### （6）、openLibs()
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\system\libhidl\transport\ServiceManagement.cpp
 
-![image-20221101143657746](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101143657746.png)
+![image-20221101143657746](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101143657746.png)
 
 ### （7）、HIDL_FETCH_ISensors
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\system\libhidl\transport\ServiceManagement.cpp
 
-![image-20221101143822142](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101143822142.png)
+![image-20221101143822142](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101143822142.png)
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\hardware\interfaces\sensors\1.0\default\Sensors.cpp
 
-![image-20221101143907080](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101143907080.png)
+![image-20221101143907080](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101143907080.png)
 
 ### （8）、nwe Sensors()
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\hardware\interfaces\sensors\1.0\default\Sensors.cpp
 
-![image-20221101145124072](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101145124072.png)
+![image-20221101145124072](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101145124072.png)
 
 ```
 01-01 08:00:04.163   459   459 D SensorsHal:   #00 pc 00000000000064d4  /vendor/lib64/hw/sensors.msmnile.so (init_nusensors+128)
@@ -184,47 +184,47 @@ Stack Trace:
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\hardware\libhardware\include\hardware\sensors.h
 
-![image-20221101145336289](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101145336289.png)
+![image-20221101145336289](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101145336289.png)
 
 ### （11）、sensors_module->common.methods->open(*it, name, &sub_hw_device)
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\hardware\libhardware\modules\sensors\multihal.cpp
 
-![image-20221101145417368](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101145417368.png)
+![image-20221101145417368](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101145417368.png)
 
 ### （12）、open_sensors()
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\hardware\omosoft\sensor\sensors_omo\sensors.c
 
-![image-20221101145734324](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101145734324.png)
+![image-20221101145734324](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101145734324.png)
 
 ### （13）、init_nusensors
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\hardware\xxxsoft\sensor\sensors_xxx\nusensor.cpp
 
-![image-20221101144312295](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101144312295.png)
+![image-20221101144312295](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101144312295.png)
 
 ### （14）、new GyroSensor
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\hardware\xxxsoft\sensor\sensors_xxx\nusensor.cpp
 
-![image-20221101144434913](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101144434913.png)
+![image-20221101144434913](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101144434913.png)
 
 ### （15）、Open内核节点初始化
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\hardware\xxxsoft\sensor\sensors_xxx\GyroSensor.cpp
 
-![image-20221101144511006](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101144511006.png)
+![image-20221101144511006](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101144511006.png)
 
 ### （16）、sensors_poll_context_t::addSubHwDevice()
 
-![image-20221101150607030](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101150607030.png)
+![image-20221101150607030](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101150607030.png)
 
 
 
-![image-20221101150640127](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101150640127.png)
+![image-20221101150640127](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101150640127.png)
 
-![image-20221101144718272](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101144718272.png)
+![image-20221101144718272](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101144718272.png)
 
 ### （18）、开始poll
 
@@ -241,23 +241,23 @@ Stack Trace:
 
 ```
 
-![image-20221101152757180](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101152757180.png)
+![image-20221101152757180](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101152757180.png)
 
-![image-20221101152850325](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101152850325.png)
+![image-20221101152850325](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101152850325.png)
 
-![image-20221101152919616](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101152919616.png)
+![image-20221101152919616](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101152919616.png)
 
 ### （18）、registerService (ISensors/default) （Hal Sensor Service注册完成）
 
-![image-20221101150451638](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101150451638.png)
+![image-20221101150451638](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101150451638.png)
 
 ## （二）、SensorService（system_server）
 
 ### （1）、startSensorService
 
-![image-20221101151144815](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101151144815.png)
+![image-20221101151144815](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101151144815.png)
 
-![image-20221101151325709](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101151325709.png)
+![image-20221101151325709](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101151325709.png)
 
 ### （2）、SensorService.publish()
 
@@ -437,62 +437,62 @@ abort();
 return false;
 }
 ```
-![SensorService android12-security-release](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/34a0f9a017644fb28f2e27139e4b2369.png)
+![SensorService android12-security-release](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/34a0f9a017644fb28f2e27139e4b2369.png)
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210501012937764.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIzNDUyMzg1,size_16,color_FFFFFF,t_70)
 
 ## （三）、App（Sensor Client）注册监听
 
-![image-20221101153232441](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101153232441.png)
+![image-20221101153232441](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101153232441.png)
 
-![image-20221101153126901](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101153126901.png)
+![image-20221101153126901](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101153126901.png)
 
 ### （1）、SystemSensorManager.registerListenerImpl()
 
-![image-20221101153449227](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101153449227.png)
+![image-20221101153449227](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101153449227.png)
 
-![image-20221101153529455](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101153529455.png)
+![image-20221101153529455](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101153529455.png)
 
 ### （2）、SensorEventQueue(BaseEventQueue)初始化
 
-![image-20221101154138885](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101154138885.png)
+![image-20221101154138885](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101154138885.png)
 
-![image-20221101154116775](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101154116775.png)
+![image-20221101154116775](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101154116775.png)
 
 
 ### （3）、SensorManager::createEventQueue()
 
-![image-20221101154230766](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101154230766.png)
+![image-20221101154230766](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101154230766.png)
 
 ### （4）、SensorService::createSensorEventConnection()
 
-![image-20221101154347418](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101154347418.png)
+![image-20221101154347418](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101154347418.png)
 
 ### （4）、new BitTube()
 
-![image-20221101154542443](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101154542443.png)
+![image-20221101154542443](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101154542443.png)
 
-![image-20221101155018854](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101155018854.png)
+![image-20221101155018854](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101155018854.png)
 
 管道封装了一层。
 
 ### （5）、new Receiver()初始化
 
-![image-20221101155518585](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101155518585.png)
+![image-20221101155518585](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101155518585.png)
 
-![image-20221101155808397](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101155808397.png)
+![image-20221101155808397](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101155808397.png)
 
 ### （6）、Receiver::onFirstRef()
 
-![image-20221101194529213](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101194529213.png)
+![image-20221101194529213](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101194529213.png)
 
-![image-20221101194915179](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101194915179.png)
+![image-20221101194915179](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101194915179.png)
 
-![image-20221101194948003](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101194948003.png)
+![image-20221101194948003](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101194948003.png)
 
 加入监听，这样管道另外一遍写入，就立即能收到回调。
 
-![image-20221101195239559](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101195239559.png)
+![image-20221101195239559](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101195239559.png)
 
 ## （四）、Sensor 数据 Server（system_server）分发
 
@@ -500,43 +500,43 @@ return false;
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\hardware\libhardware\modules\sensors\multihal.cpp
 
-![image-20221101190828179](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101190828179.png)
+![image-20221101190828179](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101190828179.png)
 
-![image-20221101190926898](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101190926898.png)
+![image-20221101190926898](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101190926898.png)
 
-![image-20221101191016932](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101191016932.png)
+![image-20221101191016932](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101191016932.png)
 
 ### （2）、SensorService（framework）poll返回
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\frameworks\native\services\sensorservice\SensorService.cpp
 
-![image-20221101191112432](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101191112432.png)
+![image-20221101191112432](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101191112432.png)
 
-![image-20221101191251916](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101191251916.png)
+![image-20221101191251916](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101191251916.png)
 
-![image-20221101191205815](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101191205815.png)
+![image-20221101191205815](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101191205815.png)
 
 ### （3）、SensorEventConnection::sendEvents()
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\frameworks\native\services\sensorservice\SensorEventConnection.cpp
 
-![image-20221101191340477](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101191340477.png)
+![image-20221101191340477](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101191340477.png)
 
-![image-20221101191432385](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101191432385.png)
+![image-20221101191432385](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101191432385.png)
 
 ### （4）、SensorEventQueue::write()
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\frameworks\native\libs\sensor\SensorEventQueue.cpp
 
-![image-20221101191606713](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101191606713.png)
+![image-20221101191606713](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101191606713.png)
 
 ### （5）、BitTube::sendObjects()
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\frameworks\native\libs\sensor\BitTube.cpp
 
-![image-20221101192011504](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101192011504.png)
+![image-20221101192011504](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101192011504.png)
 
-![image-20221101193707558](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101193707558.png)
+![image-20221101193707558](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101193707558.png)
 
 ## （五）、Sensor 数据 Client（App）接收
 
@@ -544,7 +544,7 @@ return false;
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\frameworks\base\core\java\android\hardware\SystemSensorManager.java
 
-![image-20221101193853364](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101193853364.png)
+![image-20221101193853364](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101193853364.png)
 
 ```c++
 Stack Trace:
@@ -563,23 +563,23 @@ Stack Trace:
 
 ```
 
-![image-20221101194031817](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101194031817.png)
+![image-20221101194031817](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101194031817.png)
 
-![image-20221101194054521](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101194054521.png)
+![image-20221101194054521](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101194054521.png)
 
 ### （2）、dispatchSensorEvent()
 
 > Z:\newcc\lagvm\lagvm\LINUX\android\frameworks\base\core\java\android\hardware\SystemSensorManager.java
 
-![image-20221101194147721](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101194147721.png)
+![image-20221101194147721](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101194147721.png)
 
 ### （3）、SensorEventListener.onSensorChanged()
 
-### ![image-20221101194651375](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101194651375.png)
+### ![image-20221101194651375](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/image-20221101194651375.png)
 
 ### （4）、截图撒花
 
-![img](https://raw.githubusercontent.com/zhoujinjianzz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/pvyeo-liusa.gif)
+![img](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/Android_Sensor_System/Android11_Sensor01/pvyeo-liusa.gif)
 
 ## （六）、参考资料(特别感谢)：
 
