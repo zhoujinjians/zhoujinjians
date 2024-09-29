@@ -1,6 +1,6 @@
 ---
 title: Audio System（1）：Linux && Android Audio 系统框架分析
-cover: https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.13.jpg
+cover: https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.13.jpg
 categories:
   - Audio
 tags:
@@ -41,10 +41,10 @@ AOSP 源码（Android 7.1.2）：
 同一种乐器，使用不同的材质来制作，所表现出来的音色效果是不一样的，这是由物体本身的结构特性所决定的。
 
 如何将各种媒体源数字化呢？
-![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/audio.system/11-Audio-system-1024px-A-D-A_Flow.svg.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/audio.system/11-Audio-system-1024px-A-D-A_Flow.svg.png)
 
 将声波波形信号通过ADC转换成计算机支持的二进制的过程叫做音频采样(Audio Sampling)。采样(Sampling)的核心是把连续的模拟信号转换成离散的数字信号。
-![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/audio.system/12-Audio-system-sampling.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/audio.system/12-Audio-system-sampling.png)
 
 
 ##### 1.4、样本(Sample)
@@ -63,7 +63,7 @@ AOSP 源码（Android 7.1.2）：
 
 采样就是把模拟信号数字化的过程，不仅仅是音频需要采样，所有的模拟信号都需要通过采样转换为可以用0101来表示的数字信号，示意图如下所示：
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/audio.system/13-Audio-system-sampling-rate.png.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/audio.system/13-Audio-system-sampling-rate.png.png)
 
 
 蓝色代表模拟音频信号，红色的点代表采样得到的量化数值。
@@ -121,11 +121,11 @@ MP3，AAC，OGG，WMA，Opus，FLAC，APE，M4A，AMR，等等
 
 ##### 1.15、总结（音频处理和播放过程）：
 
-![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/audio.system/14-Audio-system-how-audio-works.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/audio.system/14-Audio-system-how-audio-works.png)
 
 #### （二）、Audio 系统框架
 #####  总体Audio框架图
-![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/audio.system/15-Audio-system-Android-Linux-arc.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/audio.system/15-Audio-system-Android-Linux-arc.png)
 
 ##### 2.1、APP
 音乐播放器软件等等。
@@ -186,7 +186,7 @@ ASoC被分为Machine、Platform和Codec三大部分。其中的Machine驱动负�
 4、对音频信号做出相应的处理，例如音量控制，功率放大，EQ控制等等。
 
 ASoC对Codec的这些功能都定义好了一些列相应的接口，以方便地对Codec进行控制。ASoC对Codec驱动的一个基本要求是：驱动程序的代码必须要做到平台无关性，以方便同一个Codec的代码不经修改即可用在不同的平台上。
-![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/audio.system/16-Audio-system-asoc-pcm-control.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/audio.system/16-Audio-system-asoc-pcm-control.png)
 
 
 ASoC对于Alsa来说，就是分别注册PCM/CONTROL类型的snd_device设备，并实现相应的操作方法集。图中DAI是数字音频接口，用于配置音频数据格式等。
@@ -226,7 +226,7 @@ Widget是各个组件内部的小单元。处在活动通路上电，不在活�
 ☁ Machine - msm8996
 ☁ Userspace - tinyalsa
 ##### 3.1、Qualcomm Audio系统总体框架图
-![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/audio.system/17-MSM8996-Linux-Android-Audio-Software-Overview-Architecture.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/audio.system/17-MSM8996-Linux-Android-Audio-Software-Overview-Architecture.png)
 
 ##### 3.2、ASoC driver
 ALSA 片上系统 (ASoC) 驱动程序将音频系统分为四个组成部分Machine driver、Platform driver、CPU driver、Codec driver。
@@ -262,7 +262,7 @@ v2.c 中实现
 和多按钮检测
 
 ##### 3.3、DSP driver
-![Alt text](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/audio.system/18-MSM8996-Linux-Android-Audio-ADSP-Architecture.png)
+![Alt text](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/audio.system/18-MSM8996-Linux-Android-Audio-ADSP-Architecture.png)
 
 **ASM（Audio Stream Manager）**
  用于与 DSP ASM 模块通信的接口

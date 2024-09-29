@@ -1,6 +1,6 @@
 ---
 title: Android N Display System（4）：Android Display System 系统分析之Gralloc && HWComposer模块分析
-cover: https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.22.jpg
+cover: https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.22.jpg
 categories: 
   - Display
 tags:
@@ -297,7 +297,7 @@ typedef struct hw_module_t {
 #define GRALLOC_HARDWARE_GPU0 "gpu0"
 ```
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/display.system/DS-04-01-GRALLOC_HARDWARE_.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/display.system/DS-04-01-GRALLOC_HARDWARE_.png)
 
 设备gpu用于分配图形缓冲区，而设备fb用于渲染图形缓冲区；hw_module_t用于描述硬件抽象层Gralloc模块，而hw_device_t则用于描述硬件抽象层Gralloc设备，通过硬件抽象层设备可以找到对应的硬件抽象层模块。在Gralloc模块中，无论是定义fb设备还是gpu设备，都是用来处理图形缓冲区，以下是关于缓冲区的数据结构 定义：
 private_handle_t用来描述一块缓冲区，Android对缓冲区的定义提供了C和C++两种方式，C++：
@@ -342,13 +342,13 @@ typedef struct native_handle
 typedef const native_handle_t* buffer_handle_t;
 ```
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/display.system/DS-04-02-gralloc-hwt.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/display.system/DS-04-02-gralloc-hwt.png)
 
 
   下面就分析Gralloc模块中定义了两种设备的打开过程。
 
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/display.system/DS-04-03-GRALLOC_HARDWARE.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/display.system/DS-04-03-GRALLOC_HARDWARE.png)
 
 
 
@@ -991,12 +991,12 @@ int gpu_context_t::free_impl(private_handle_t const* hnd) {
 
  图形缓冲区可以从系统帧缓冲区分配也可以从内存中分配，分配一个图形缓冲区后还需要将该图形缓冲区映射到分配该buffer的进程地址空间来，在Android系统中，图形缓冲区的管理由SurfaceFlinger服务来负责。在系统帧缓冲区中分配的图形缓冲区是在SurfaceFlinger服务中使用，而在内存中分配的图形缓冲区既可以在SurfaceFlinger服务中使用，也可以在其它的应用程序中使用。当其它的应用程序需要使用图形缓冲区的时候，它们就会请求SurfaceFlinger服务为它们分配并将SurfaceFlinger服务返回来的图形缓冲区映射到应用程序进程地址空间。在从内存中分配buffer时，已经将分配的buffer映射到了SurfaceFlinger服务进程地址空间，如果该buffer是应用程序请求SurfaceFlinger服务为它们分配的，那么还需要将SurfaceFlinger服务返回来的图形缓冲区映射到应用程序进程地址空间。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/display.system/DS-04-04-grallocbuffer.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/display.system/DS-04-04-grallocbuffer.jpg)
 
 
 一个对象要在进程间传输必须继承于Flattenable类，并且实现flatten和unflatten方法，flatten方法用于序列化该对象，unflatten方法用于反序列化对象。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/display.system/DS-04-05-graphicbuffer-flatten.jpg)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/display.system/DS-04-05-graphicbuffer-flatten.jpg)
 
 
 GraphicBuffer类从模板类Flattenable派生，这个派生类可以通过Parcel传递，通常派生类需要重载flatten和unflatten方法，用于对象的序列化和反序列化。
@@ -1228,7 +1228,7 @@ int IonAlloc::map_buffer(void **pBase, unsigned int size, unsigned int offset,
 释放过程调用流程类似，最后会调用unmap_buffer()释放图像缓冲区。
 ##### 4.3、小结
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/display.system/DS-04-06-sf-app-dup-mmap.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/display.system/DS-04-06-sf-app-dup-mmap.png)
 
 #### （五）HWComposer模块
 前面分析HWComposer构造函数没有分析loadHwcModule()函数，

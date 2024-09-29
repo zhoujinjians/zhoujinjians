@@ -1,6 +1,6 @@
 ---
 title: Android Graphics Tests 程序学习（2）： OpenGL EGL炫彩实例Native&Java
-cover:  https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.34.jpg
+cover:  https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.34.jpg
 categories: 
   - OpenGL
 tags:
@@ -41,7 +41,7 @@ AOSP 源码（==**文章基于 Android 8.x**==）：
 --------------------------------------------------------------------------------
 #### (一)、gl2_basic
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/others/test-opengl-gl2_basic.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/others/test-opengl-gl2_basic.png)
 
 ##### 1.1、源码：
 
@@ -593,15 +593,15 @@ class GL2JavaView extends GLSurfaceView {
 }
 ```
 这个和前面例子1的界面效果是一摸一样的。
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/others/test-opengl-GL2JavaActivity.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/others/test-opengl-GL2JavaActivity.png)
 
 
 #### (三)、angeles
 首先看看效果图，可以看到丰富的多彩世界的模型啦~
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/others/test-opengl-angeles01.png)
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/others/test-opengl-angeles02.png)
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/others/test-opengl-angeles03.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/others/test-opengl-angeles01.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/others/test-opengl-angeles02.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/others/test-opengl-angeles03.png)
 
 ##### 3.1、源码1：
 

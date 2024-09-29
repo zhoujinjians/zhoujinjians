@@ -1,6 +1,6 @@
 ---
 title: Android Video System（9）：Android Multimedia Codecs - H264编解码分析
-cover: https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.31.jpg
+cover: https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.31.jpg
 categories:
   - Multimedia
 tags:
@@ -61,8 +61,8 @@ kComponents[] = {
 - mm-video-v4l2
 
 Log：
-[H264-Decorder-Google-log.md](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/H264-Decorder-Google-log.md)
-[H264-Encorder-QCom-log.md](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/H264-Encorder-QCom-log.md)
+[H264-Decorder-Google-log.md](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/H264-Decorder-Google-log.md)
+[H264-Encorder-QCom-log.md](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/H264-Encorder-QCom-log.md)
 
 
 --------------------------------------------------------------------------------
@@ -89,12 +89,12 @@ H.264原始码流(裸流)是由一个接一个NALU组成，它的功能分为两
 
 如图所示，下图中的NALU的头 + RBSP 就相当于一个NALU(Nal Unit),每个单元都按独立的NALU传送。H.264的结构全部都是以NALU为主，理解了NALU，就理解了H.264的结构。
 一个原始的H.264 NALU 单元常由 [StartCode] [NALU Header] [NALU Payload] 三部分组成，其中 Start Code 用于标示这是一个NALU 单元的开始，必须是”00 00 00 01” 或”00 00 01”
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-01-H264 NALU headerRBSP.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-01-H264 NALU headerRBSP.png)
 
 ##### 1.1.1. NAL Header
 由三部分组成，forbidden_bit(1bit)，nal_reference_bit(2bits)（优先级），nal_unit_type(5bits)（类型）。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-02-H264.NAL Header.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-02-H264.NAL Header.png)
 
 举例来说：
 
@@ -105,22 +105,22 @@ H.264原始码流(裸流)是由一个接一个NALU组成，它的功能分为两
 > 00 00 00 01 65:  0x65&0x1f = 0x05: IDR Slice
 
 ##### 1.1.2. RBSP
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-03-H264.RBSP.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-03-H264.RBSP.png)
 
 图 6.69 RBSP 序列举例
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-04-H264.RBSP.describle.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-04-H264.RBSP.describle.png)
 
 
 **SODB与RBSP**
 SODB 数据比特串 -> 是编码后的原始数据.
 RBSP 原始字节序列载荷 -> 在原始编码数据的后面添加了 结尾比特。一个 bit“1”若干比特“0”，以便字节对齐。
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-05-H264.RBSP.SODB.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-05-H264.RBSP.SODB.png)
 
 
 ##### 1.2、从NALU出发了解H.264里面的专业词语
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-06-H264.Slice.Layer.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-06-H264.Slice.Layer.png)
 
 
 > 1帧 = n个片 
@@ -141,7 +141,7 @@ RBSP 原始字节序列载荷 -> 在原始编码数据的后面添加了 结尾�
 片有一下五种类型:
 
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-07-H264.I.P.B..png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-07-H264.I.P.B..png)
 
 
 ##### 1.2.2. 宏块(Macroblock)
@@ -151,16 +151,16 @@ RBSP 原始字节序列载荷 -> 在原始编码数据的后面添加了 结尾�
 > 一个宏块 = 一个16*16的亮度像素 + 一个8×8Cb + 一个8×8Cr彩色像素块组成。(YCbCr 是属于 YUV
 > 家族的一员,在YCbCr 中 Y 是指亮度分量，Cb 指蓝色色度分量，而 Cr 指红色色度分量)
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-08-H264.Macroblock.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-08-H264.Macroblock.png)
 
 分层结构,在 H.264 中，句法元素共被组织成 序列、图像、片、宏块、子宏块五个层次。
 句法元素的分层结构有助于更有效地节省码流。例如，再一个图像中，经常会在各个片之间有相同的数据，如果每个片都同时携带这些数据，势必会造成码流的浪费。更为有效的做法是将该图像的公共信息抽取出来，形成图像一级的句法元素，而在片级只携带该片自身独有的句法元素。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-09-H264.slice.header.data.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-09-H264.slice.header.data.png)
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-10-H264.slice.header.data-detail.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-10-H264.slice.header.data-detail.png)
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-11-H264.Macroblock_type.png.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-11-H264.Macroblock_type.png.png)
 
 
 ##### 1.2.3. 图像,场和帧
@@ -168,16 +168,16 @@ RBSP 原始字节序列载荷 -> 在原始编码数据的后面添加了 结尾�
 
 视频的一场或一帧可用来产生一个编码图像。一帧通常是一个完整的图像。当采集视频信号时，如果采用隔行扫描(奇.偶数行),则扫描下来的一帧图像就被分为了两个部分,这每一部分就被称为 [场],根据次序氛围: [顶场] 和 [底场]。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-12-H264.zuoyongyu.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-12-H264.zuoyongyu.png)
 ##### 1.2.4. I,P,B帧与pts/dts
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-13-H264.PTS.DTS.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-13-H264.PTS.DTS.png)
 
 DTS与PTS的不同:
 DTS主要用户视频的解码，在解码阶段使用。PTS主要用于视频的同步和输出，在display的时候使用。再没有B frame的时候输出顺序一样。
 
 ##### 1.2.5. GOP
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-14-H264.GOP.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-14-H264.GOP.png)
 
 GOP是画面组，一个GOP是一组连续的画面。
 GOP一般有两个数字，如M=3，N=12.M制定I帧与P帧之间的距离，N指定两个I帧之间的距离。那么现在的GOP结构是
@@ -200,13 +200,13 @@ H.264 引入 IDR 图像是为了解码的重同步，当解码器解码到 IDR �
 
 ##### 1.3. 1. 帧内预测（也叫帧内压缩）
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-15-H264.zenjianyuce.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-15-H264.zenjianyuce.png)
 
 我们可以通过第 1、2、3、4、5 块的编码来推测和计算第 6 块的编码，因此就不需要对第 6 块进行编码了，从而压缩了第 6 块，节省了空间
 
 ##### 1.3. 2. 帧间预测（也叫帧间压缩）
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-16-H264.zenjianyasuo.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-16-H264.zenjianyasuo.png)
 
 可以看到前后两帧的差异其实是很小的，这时候用帧间压缩就很有意义。
 这里涉及到几个重要的概念：块匹配，残差，运动搜索(运动估计),运动补偿.
@@ -216,7 +216,7 @@ H.264 引入 IDR 图像是为了解码的重同步，当解码器解码到 IDR �
 
 #### （二）、Android  H264编码
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-17-H264-Encoder-google.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-17-H264-Encoder-google.png)
 
 由于博主的手机为Qcom平台，支持h264编解码，博主保留了Qcom h264 Encoder ，将Decoder使用Google的，但分析主要还是以Google的H264 Encoder/Decoder 为主。
 ``` xml
@@ -885,7 +885,7 @@ WORD32 ih264e_encode(iv_obj_t *ps_codec_obj, void *pv_api_ip, void *pv_api_op)
 可以看到编码过程极其复杂...精髓在libavc库里面，第四节详细分析（Todo）。
 #### （三）、Android  H264解码
 ##### 3.1、SoftAVC::initDecoder()
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjianz/zhoujinjian.com.images/master/android.codecs/VS9-18-H264-Decoder-google.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/android.codecs/VS9-18-H264-Decoder-google.png)
 
 
 ``` cpp
