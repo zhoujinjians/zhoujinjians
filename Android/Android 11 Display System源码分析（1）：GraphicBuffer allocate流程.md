@@ -1,6 +1,6 @@
 ---
 title: Android 11 Display System源码分析（1）：GraphicBuffer allocate流程（V1）
-cover: https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.41.jpg
+cover: https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/post.cover.pictures/bing-wallpaper-2018.04.41.jpg
 categories: 
  - Display
 tags:
@@ -13,7 +13,7 @@ date: 2022-06-16 16:16:16
 
 （==**文章基于 Android 11.0**==）
 
-[【zhoujinjian.com博客原图链接】](https://github.com/zhoujinjiana) 
+[【zhoujinjian.com博客原图链接】](https://github.com/zhoujinjianm) 
 
 [【开发板】](https://wiki.radxa.com/Rockpi4)
 
@@ -151,9 +151,9 @@ Binder Bp客户端就是我们的测试Demo。
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\native\libs\ui\GraphicBuffer.cpp
 
-![image-20220810195307065](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810195307065.png)
+![image-20220810195307065](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810195307065.png)
 
-![image-20220810195416705](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810195416705.png)
+![image-20220810195416705](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810195416705.png)
 
 GraphicBuffer::initWithSize首先获取GraphicBufferAllocator实例。初始化GrallocAllocator，系统优先寻找高版本，我们这里是Gralloc4Allocator。
 
@@ -189,13 +189,13 @@ Gralloc4Mapper::Gralloc4Mapper() {
 
 > Y:\home\zhoujinjian\android11_rockpi4\frameworks\native\libs\ui\Gralloc4.cpp
 
-![image-20220810202950919](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810202950919.png)
+![image-20220810202950919](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810202950919.png)
 
-![image-20220810202125640](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810202125640.png)
+![image-20220810202125640](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810202125640.png)
 
-![image-20220810202216679](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810202216679.png)
+![image-20220810202216679](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810202216679.png)
 
-![image-20220810203207268](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810203207268.png)
+![image-20220810203207268](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810203207268.png)
 
 继续看看堆栈：
 
@@ -210,9 +210,9 @@ Gralloc4Mapper::Gralloc4Mapper() {
 Y:\home\zhoujinjian\android11_rockpi4\out\soong\.intermediates\hardware\interfaces\graphics\allocator\4.0\android.hardware.graphics.allocator@4.0_genc++\gen\android\hardware\graphics\allocator\4.0\AllocatorAll.cpp
 ```
 
-![image-20220810204030541](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810204030541.png)
+![image-20220810204030541](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810204030541.png)
 
-![image-20220810204129098](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810204129098.png)
+![image-20220810204129098](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810204129098.png)
 
 这里就通过binder通信将allocate 请求发送到服务端了。
 
@@ -232,9 +232,9 @@ system          233      1 10834060 10388 binder_thread_read  0 S android.hardwa
 
 > Y:\home\zhoujinjian\android11_rockpi4\out\soong\.intermediates\hardware\interfaces\graphics\allocator\4.0\android.hardware.graphics.allocator@4.0_genc++\gen\android\hardware\graphics\allocator\4.0\AllocatorAll.cpp
 
-![image-20220810210407913](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810210407913.png)
+![image-20220810210407913](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810210407913.png)
 
-![image-20220810210518143](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810210518143.png)
+![image-20220810210518143](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220810210518143.png)
 
 
 
@@ -244,21 +244,21 @@ system          233      1 10834060 10388 binder_thread_read  0 S android.hardwa
 > hardware/rockchip/libgralloc/midgard/src/4.x/GrallocAllocator.cpp:51
 
 
-![image-20220811133017826](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220811133017826.png)
+![image-20220811133017826](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220811133017826.png)
 
 > hardware/rockchip/libgralloc/midgard/src/hidl_common/Allocator.cpp:79
 
-![image-20220811133411980](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220811133411980.png)
+![image-20220811133411980](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220811133411980.png)
 
 具体实现是通过ION分配：
 
 > Y:\home\zhoujinjian\android11_rockpi4\hardware\rockchip\libgralloc\midgard\src\core\mali_gralloc_bufferallocation.cpp
 
-![image-20220811145600644](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220811145600644.png)
+![image-20220811145600644](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220811145600644.png)
 
 > Y:\home\zhoujinjian\android11_rockpi4\hardware\rockchip\libgralloc\midgard\src\allocator\mali_gralloc_ion.cpp
 
-![image-20220811145721783](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220811145721783.png)
+![image-20220811145721783](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220811145721783.png)
 
 首先来看看allocate这段代码逻辑：
 
@@ -431,7 +431,7 @@ void allocate(const buffer_descriptor_t &bufferDescriptor, uint32_t count, IAllo
 
 
 
-![image-20220811150822101](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220811150822101.png)
+![image-20220811150822101](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220811150822101.png)
 
 可以看到通过_hidl_reply->writexxx()回调给client进程。
 
@@ -554,35 +554,35 @@ Stack Trace:
 
 ```
 
-![image-20220829152943138](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829152943138.png)
+![image-20220829152943138](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829152943138.png)
 
 > frameworks/native/libs/ui/Gralloc2.cpp:404
 
-![image-20220829153238532](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829153238532.png)
+![image-20220829153238532](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829153238532.png)
 
 > frameworks/native/libs/ui/.cpp:144
 
-![image-20220829153337875](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829153337875.png)
+![image-20220829153337875](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829153337875.png)
 
 > out/soong/.intermediates/hardware/interfaces/graphics/mapper/4.0/android.hardware.graphics.mapper@4.0_genc++_headers/gen/android/hardware/graphics/mapper/4.0/BsMapper.h:73
 
-![image-20220829155440839](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829155440839.png)
+![image-20220829155440839](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829155440839.png)
 
 > hardware/rockchip/libgralloc/midgard/src/4.x/GrallocMapper.cpp:64
 
-![image-20220829155545041](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829155545041.png)
+![image-20220829155545041](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829155545041.png)
 
 > hardware/rockchip/libgralloc/midgard/src/hidl_common/Mapper.cpp:73                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          hardware/rockchip/libgralloc/midgard/src/hidl_common/Mapper.cpp:274
 
-![image-20220829155807324](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829155807324.png)
+![image-20220829155807324](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829155807324.png)
 
 
 
-![image-20220829155715838](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829155715838.png)
+![image-20220829155715838](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829155715838.png)
 
 > hardware/rockchip/libgralloc/midgard/src/allocator/mali_gralloc_ion.cpp:987
 
-![image-20220829155932726](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829155932726.png)
+![image-20220829155932726](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829155932726.png)
 
 
 
@@ -615,8 +615,8 @@ Stack Trace:
 > hardware/rockchip/libgralloc/midgard/src/hidl_common/Mapper.cpp:97
 > hardware/rockchip/libgralloc/midgard/src/hidl_common/Mapper.cpp:335
 
-![image-20220829161307997](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829161307997.png)
+![image-20220829161307997](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829161307997.png)
 
-![image-20220829161343993](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829161343993.png)
+![image-20220829161343993](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829161343993.png)
 
-![image-20220829161432203](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829161432203.png)
+![image-20220829161432203](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/Android_Display_System/Android11_Display01/image-20220829161432203.png)

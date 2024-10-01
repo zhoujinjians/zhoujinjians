@@ -1,6 +1,6 @@
 ---
 title: Android Graphics Tests 程序学习（1）： 使用OpenGL EGL一般顺序（configdump & tritex & textures & fillrate & filter& finish）
-cover:  https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.33.jpg
+cover:  https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/hexo.themes/bing-wallpaper-2018.04.33.jpg
 categories: 
   - OpenGL
 tags:
@@ -73,7 +73,7 @@ adb shell am start -n com.android.test/.TestActivity
 ```
 整个桌面就像是一张白色的纸张了。
 
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/others/OpenGL-EGL-all-white-screen.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/others/OpenGL-EGL-all-white-screen.png)
 
 
 ##### 2、运行test-opengl-configdump
@@ -645,7 +645,7 @@ if(context == EGL_NO_CONTEXT)
 
 #### (四)、tritex 运行结果
 首先我们来看一下tritex的运行效果，左下角有一个类似矩阵的东东。
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/others/OpenGL-EGL-test-opengl-tritex.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/others/OpenGL-EGL-test-opengl-tritex.png)
 
 ##### 4.1、test-opengl-tritex源码分析
 首先从main()函数分析，
@@ -843,7 +843,7 @@ void render(int quads)
 
 #### (五)、textures实例 test-opengl-textures
 这个纹理的例子比较明确，可以先看一下效果图，使用基本一致，就不分析了。
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/others/OpenGL-EGL-test-opengl-textures.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/others/OpenGL-EGL-test-opengl-textures.png)
 
 ``` cpp
 #include <stdlib.h>
@@ -954,7 +954,7 @@ int main(int /*argc*/, char** /*argv*/)
 ```
 
 #### (六)、fillrate 运行结果
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/others/OpenGL-EGL-test-opengl-fillrate.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/others/OpenGL-EGL-test-opengl-fillrate.png)
 
 ##### 6.1、fillrate 源码
 
@@ -1110,7 +1110,7 @@ int main(int /*argc*/, char** /*argv*/)
 ```
 
 #### (七)、filter运行结果
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/others/OpenGL-EGL-test-opengl-filter.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/others/OpenGL-EGL-test-opengl-filter.png)
 
 
 ##### 7.1、filter源码
@@ -1314,7 +1314,7 @@ int main(int argc, char** argv)
 ```
 
 #### (八)、finish运行结果
-![Alt text | center](https://raw.githubusercontent.com/zhoujinjiana/zhoujinjian.com.images/master/others/OpenGL-EGL-test-opengl-finish.png)
+![Alt text | center](https://raw.githubusercontent.com/zhoujinjianm/zhoujinjian.com.images/master/others/OpenGL-EGL-test-opengl-finish.png)
 
 
 ##### 8.1、finish源码
